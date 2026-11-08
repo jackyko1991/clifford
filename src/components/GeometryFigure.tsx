@@ -39,16 +39,16 @@ export default function GeometryFigure({kind,l,onWaveChange}:{kind:string;l:numb
  const staticKind=["grades","relations","evidence","timeline","path","state"].includes(kind);
  const points=(offset:number,color:string)=>{const pts=Array.from({length:81},(_,i)=>{const z=i/80*7*Math.PI,phase=z-theta;const e=Math.sin(phase),other=circular?Math.cos(phase):0;return `${55+i*5.4+(offset?30*e:30*other)},${130+(offset?52*other-18*e:-52*e-18*other)}`;}).join(" ");return <polyline points={pts} fill="none" stroke={color} strokeWidth="2.5"/>;};
  return <figure className="geometry rounded-lg border border-violet-100 bg-violet-50/40 p-4" data-diagram={kind}>
-  <svg viewBox={kind==="path"?"0 55 550 110":kind==="product"?"30 0 480 255":"0 0 550 250"} className="w-full" role="img" aria-label={descriptions[kind]?.[l]}>
+  <svg viewBox={kind==="path"?"0 55 550 110":kind==="product"?"30 -12 480 267":"0 0 550 250"} className="w-full" role="img" aria-label={descriptions[kind]?.[l]}>
    <defs><marker id={uid} viewBox="0 0 10 10" markerWidth="4" markerHeight="4" refX="7" refY="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="context-stroke"/></marker></defs>
    {kind==="product" && <>
     <circle cx="160" cy="130" r="90" fill="none" stroke="#94a3b8" strokeOpacity=".2" strokeDasharray="3 4"/>
-    <g opacity=".35"><VectorArrow a={[160,130]} b={[160,40]} color={purple}/></g><text data-product-label="basis-e2" x="142" y="75" textAnchor="end" fill="#64748b" fontSize="12">e₂</text>
+    <g opacity=".35"><VectorArrow a={[160,130]} b={[160,40]} color={purple}/></g><text data-product-label="basis-e2" x="160" y="7" textAnchor="middle" fill="#64748b" fontSize="12">e₂</text>
     <path d={`M160 130l90 0l${bx} ${by}l-90 0Z`} fill={purple} fillOpacity={.18} stroke={purple} strokeOpacity={.35}/>
     <VectorArrow a={[160,130]} b={[250,130]} color={teal}/><VectorArrow a={[160,130]} b={[160+bx,130+by]} color={purple}/>
     <path d={`M${160+bx} ${130+by}V130`} stroke={teal} strokeDasharray="4 4"/>
     <path d={`M160 138h${bx}`} stroke={teal} strokeWidth="4" strokeLinecap="round"/>
-    <text data-product-label="a" x="207" y="155" textAnchor="middle" fill={teal} fontSize="12">a = e₁</text><text data-product-label="b" x={160+108*Math.cos(theta)} y={134-108*Math.sin(theta)} textAnchor="middle" fill={purple} fontSize="12">b</text>{label(405,90,`${l?"平行程度":"Alignment"}: ${Math.cos(theta).toFixed(3)}`,teal)}{label(405,120,`${l?"定向面積":"Oriented area"}: ${Math.sin(theta).toFixed(3)}`,purple)}
+    <text data-product-label="a" x="300" y="155" textAnchor="middle" fill={teal} fontSize="12">a = e₁</text><text data-product-label="b" x={160+108*Math.cos(theta)} y={134-108*Math.sin(theta)} textAnchor="middle" fill={purple} fontSize="12">b</text>{label(405,90,`${l?"平行程度":"Alignment"}: ${Math.cos(theta).toFixed(3)}`,teal)}{label(405,120,`${l?"定向面積":"Oriented area"}: ${Math.sin(theta).toFixed(3)}`,purple)}
    </>}
    {(kind==="rotor"||kind==="spinor") && <>
     {[145,405].map(cx=><circle key={cx} cx={cx} cy="105" r="65" stroke="#ddd6fe" fill="white"/>)}
