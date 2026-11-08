@@ -194,6 +194,31 @@
     ]
   },
   {
+    "id": "dirac",
+    "group": "physics",
+    "title": [
+      "Dirac fields: where the algebra meets fermions",
+      "狄拉克場：代數如何作用於費米子"
+    ],
+    "paragraphs": [
+      [
+        "A Dirac spinor carries a representation of the Clifford generators. In natural units the Dirac equation couples these generators to spacetime differentiation. In curved spacetime, tetrads convert between coordinate and local Lorentz indices, and the spin connection enters the covariant derivative. A change of notation does not remove this geometric information.",
+        "The bilinear current jᵘ=ψ̄γᵘψ transforms as a spacetime vector even though ψ is a spinor. Such bilinears connect spinor states to observable tensor quantities. Fermion statistics additionally requires anticommuting field operators, or Grassmann variables in a path integral; the ordinary Clifford product alone does not supply the complete quantum theory."
+      ],
+      [
+        "狄拉克旋量攜帶克利福德生成元的表示。在自然單位下，狄拉克方程把生成元與時空微分連起來。彎曲時空中，四標架轉換座標指標與局域洛侖茲指標，自旋聯絡則進入協變導數。改寫符號不會讓這些幾何資訊消失。",
+        "雙線性電流 jᵘ=ψ̄γᵘψ 依時空向量變換，儘管 ψ 本身是旋量。這類雙線性量把旋量態和可觀測的張量量連起來。費米子統計還需要反對易場算符，或路徑積分中的格拉斯曼變數；普通克利福德積本身並不包含完整量子理論。"
+      ]
+    ],
+    "equation": "(i\\gamma^\\mu D_\\mu-m)\\psi=0,\\qquad j^\\mu=\\bar\\psi\\gamma^\\mu\\psi",
+    "diagram": "spinor",
+    "code": "",
+    "sources": [
+      "spinors",
+      "sta"
+    ]
+  },
+  {
     "id": "maxwell",
     "group": "physics",
     "title": [

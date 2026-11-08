@@ -24,7 +24,7 @@ Windows PowerShell users with restricted script execution can use `npm.cmd`.
 - **Coding Skills:** bit-mask blades, geometric multiplication, reversion, rotor transforms, null fields, equivariance and performance.
 - **Extended Reading:** a reading sequence, historical attribution, research papers and a map of established and speculative ideas.
 
-22 lessons, ten diagram types, keyboard-operable sliders and animation controls. Animation starts paused and can be stopped at any time. Code is read-only; no backend, remote execution or API key is required.
+23 lessons, ten diagram types, keyboard-operable sliders and animation controls. Animation starts paused and can be stopped at any time. Code is read-only; no backend, remote execution or API key is required.
 
 Hash URLs work directly on GitHub Pages, for example `?lang=en#/concept/rotations/spinors`. Source references accompany the relevant lessons. Content lives in `src/content.json`; bibliography in `src/sources.ts`.
 
