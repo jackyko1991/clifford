@@ -17,7 +17,7 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
  useEffect(()=>{const q=matchMedia("(prefers-reduced-motion: reduce)");const stop=()=>{if(q.matches)setPlaying(false);};q.addEventListener("change",stop);return()=>q.removeEventListener("change",stop);},[]);
  const v=rotate(basis(1),theta),R=rotor(theta),bx=90*Math.cos(theta),by=-90*Math.sin(theta);
  const arrow=(x1:number,y1:number,x2:number,y2:number,color=purple)=><path d={`M${x1} ${y1}L${x2} ${y2}`} fill="none" stroke={color} strokeWidth="3" markerEnd={`url(#${uid})`}/>;
- const label=(x:number,y:number,text:string)=><text x={x} y={y} fill="#475569" fontSize="12" textAnchor="middle">{text}</text>;
+ const label=(x:number,y:number,text:string,color="#475569")=><text x={x} y={y} fill={color} fontSize="12" textAnchor="middle">{text}</text>;
  const descriptions:Record<string,string[]>={
  evidence:["A rule leads to a prediction, which can be compared with measured data.","從規則算出預測，再和實際量測比較。"],
  timeline:["Different contributors built different parts of the connected toolkit.","不同人物，建立這套互相關聯的工具中的不同部分。"],
@@ -39,10 +39,11 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
   <svg viewBox="0 0 550 250" className="w-full" role="img" aria-label={descriptions[kind]?.[l]}>
    <defs><marker id={uid} viewBox="0 0 10 10" markerWidth="4" markerHeight="4" refX="7" refY="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="context-stroke"/></marker></defs>
    {kind==="product" && <>
-    <path d={`M160 130l90 0l${bx} ${by}l-90 0Z`} fill={purple} opacity={.13}/>
+    <path d={`M160 130l90 0l${bx} ${by}l-90 0Z`} fill={purple} fillOpacity={.18} stroke={purple} strokeOpacity={.35}/>
     {arrow(160,130,250,130,teal)}{arrow(160,130,160+bx,130+by)}
-    <path d={`M${160+bx} ${130+by}V130`} stroke={muted} strokeDasharray="4 4"/>
-    {label(265,150,"a")}{label(160+bx,115+by,"b")}{label(405,90,`${l?"平行程度":"Alignment"}: ${Math.cos(theta).toFixed(3)}`)}{label(405,120,`${l?"定向面積":"Oriented area"}: ${Math.sin(theta).toFixed(3)}`)}
+    <path d={`M${160+bx} ${130+by}V130`} stroke={teal} strokeDasharray="4 4"/>
+    <path d={`M160 138h${bx}`} stroke={teal} strokeWidth="4" strokeLinecap="round"/>
+    {label(265,150,"a")}{label(160+bx,115+by,"b")}{label(405,90,`${l?"平行程度":"Alignment"}: ${Math.cos(theta).toFixed(3)}`,teal)}{label(405,120,`${l?"定向面積":"Oriented area"}: ${Math.sin(theta).toFixed(3)}`,purple)}
    </>}
    {(kind==="rotor"||kind==="spinor") && <>
     {[145,405].map(cx=><circle key={cx} cx={cx} cy="105" r="65" stroke="#ddd6fe" fill="white"/>)}

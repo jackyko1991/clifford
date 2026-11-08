@@ -67,7 +67,7 @@ function Prediction({l}:{l:number}){
    <path d="M160 130h75" stroke="#0f766e" strokeWidth="3" markerEnd={`url(#${uid})`}/><path d={`M160 130l${75*Math.cos(theta)} ${-75*Math.sin(theta)}`} stroke="#7c3aed" strokeWidth="3" markerEnd={`url(#${uid})`}/>
   </svg>
   <div className="text-center"><button className={button} onClick={()=>setRevealed(v=>!v)}>{revealed?(l?"再猜一次":"Hide answer"):(l?"我想好了，揭曉":"Reveal my check")}</button></div>
-  <div className="mt-3 min-h-10 text-center" aria-live="polite">{revealed?<Tex tex={`ab=${Math.round(Math.cos(theta))}+${Math.round(Math.sin(theta))}e_{12}`}/>:<p>{l?"同向留下多少？還圍得出面積嗎？":"How much alignment remains? Is there any area?"}</p>}</div>
+  <div className="mt-3 min-h-10 text-center" aria-live="polite">{revealed?<Tex tex={String.raw`ab=	extcolor{#0f766e}{${Math.round(Math.cos(theta))}}+	extcolor{#7c3aed}{${Math.round(Math.sin(theta))}e_{12}}`}/>:<p>{l?"同向留下多少？還圍得出面積嗎？":"How much alignment remains? Is there any area?"}</p>}</div>
  </figure>;
 }
 export default function LearningSections({l}:{l:number}){
@@ -90,7 +90,7 @@ export default function LearningSections({l}:{l:number}){
    <p>{l?"這一課先不用複數或張量的形式。只拿兩支箭頭，約定它們可以相乘。核心幾何公設很短：向量乘自己，得到它的長度平方；乘法同時遵守分配律與結合律。以下先在歐氏空間操作。":"This lesson needs no prior complex-number or tensor formalism. Begin with arrows that can multiply. The core geometric rule is short: a vector squared equals its squared length. Multiplication is also distributive and associative. We start in Euclidean space."}</p>
    <div className="rounded-lg bg-violet-50 p-3"><Tex tex={String.raw`a^2=a\cdot a=\lVert a\rVert^2`} display/></div>
    <p>{l?"兩支不同的箭頭相乘時，一次保留兩件事：它們有多同向，以及它們圍出多少有方向的面積。這就叫幾何積。":"For two different arrows, one product keeps two things: how much they align, and how much oriented area they span. This is the geometric product."}</p>
-   <div className="rounded-lg border border-violet-100 bg-violet-50/50 p-3"><Tex tex={String.raw`ab=\underbrace{a\cdot b}_{\text{${l?"同向程度":"alignment"}}}+\underbrace{a\wedge b}_{\text{${l?"定向面積":"oriented area"}}}`} display/></div>
+   <div className="rounded-lg border border-violet-100 bg-violet-50/50 p-3"><Tex tex={String.raw`ab=\textcolor{#0f766e}{\underbrace{a\cdot b}_{\text{${l?"同向程度":"alignment"}}}}+\textcolor{#7c3aed}{\underbrace{a\wedge b}_{\text{${l?"定向面積":"oriented area"}}}}`} display/></div>
    <div data-feynman="example" className="rounded-lg border-l-4 border-emerald-300 bg-emerald-50/60 p-4"><p className="mb-3">{l?"拖動第二支箭頭：從同向到垂直，數量如何流向面積？再試試反向。":"Move the second arrow: from parallel to perpendicular, how does alignment give way to area? Then try the opposite direction."}</p><GeometryFigure kind="product" l={l}/></div>
    <p>{l?"取兩個垂直單位方向，把它們的平面寫成 B。垂直方向交換次序會變號；把 B 乘自己，竟然又出現 −1。剛才 i 的故事，現在有了幾何來源。":"Take two perpendicular unit directions and call their plane B. Swapping perpendicular directions changes the sign. Square B and −1 appears again. The story of i now has a geometric home."}</p>
    <div className="flex flex-wrap justify-center gap-x-6"><Tex tex={String.raw`B=e_1e_2`} display/><Tex tex={String.raw`B^2=e_1e_2e_1e_2=-e_1^2e_2^2=-1`} display/></div>
