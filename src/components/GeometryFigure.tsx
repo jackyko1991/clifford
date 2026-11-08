@@ -26,7 +26,7 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
  relations:["Different records can describe related geometric actions.","不同的紀錄方式，可以描述互相關聯的幾何動作。"],
  motor:["A rigid shape rotates, then translates. This is a 2D slice of rigid motion.","剛體形狀先旋轉再平移：三維剛體運動的二維切片。"],
  boost:["Boost the time direction: the transformed unit timelike vector stays inside the light cone.","推進時間方向：變換後的單位類時向量仍在光錐內。"],
- wave:["A classical plane wave: E and cB are transverse and mutually perpendicular; the propagation direction is z.","經典平面波：E 與 cB 橫向且互相垂直，傳播方向為 z。"],
+ wave:["A classical plane wave: the electric and magnetic parts point across the direction of travel, at right angles to each other.","經典平面波：電場與磁場都橫向於前進方向，也互相垂直。"],
  holonomy:["Loop transport accumulates a phase around excluded flux. Schematic, not a local force diagram.","沿封閉路徑移動，繞過排除的磁通後累積相位。這是示意圖，不是局域受力圖。"],
  equivariance:["Rotate the input, then apply f; or apply f, then rotate. The outputs coincide for this norm-dependent scaling.","先旋轉再套用 f，或先套用 f 再旋轉：依長度縮放的映射讓兩者結果重合。"]};
  const staticKind=["grades","relations","evidence","timeline","path","state"].includes(kind);
@@ -38,7 +38,7 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
     <path d={`M160 130l90 0l${bx} ${by}l-90 0Z`} fill={purple} opacity={.13}/>
     {arrow(160,130,250,130,teal)}{arrow(160,130,160+bx,130+by)}
     <path d={`M${160+bx} ${130+by}V130`} stroke={muted} strokeDasharray="4 4"/>
-    {label(265,150,"a = e₁")}{label(160+bx,115+by,"b")}{label(405,90,`${l?"平行程度":"Alignment"}: ${Math.cos(theta).toFixed(3)}`)}{label(405,120,`${l?"定向面積":"Oriented area"}: ${Math.sin(theta).toFixed(3)}`)}
+    {label(265,150,"a")}{label(160+bx,115+by,"b")}{label(405,90,`${l?"平行程度":"Alignment"}: ${Math.cos(theta).toFixed(3)}`)}{label(405,120,`${l?"定向面積":"Oriented area"}: ${Math.sin(theta).toFixed(3)}`)}
    </>}
    {(kind==="rotor"||kind==="spinor") && <>
     {[145,405].map(cx=><circle key={cx} cx={cx} cy="105" r="65" stroke="#ddd6fe" fill="white"/>)}
@@ -87,7 +87,7 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
    </>}
    {kind==="wave" && <>
     {arrow(35,130,520,130,muted)}{points(0,purple)}{points(1,teal)}
-    {label(520,150,"z")}{label(90,36,l?"電場 E":"Electric field E")}{label(245,36,l?"磁場 × 光速":"Magnetic field × c")}
+    {label(520,150,"z")}{label(90,36,l?"電場 E":"Electric field E")}{label(245,36,l?"磁場（換成同尺度）":"Magnetic (same scale)")}
     <path d="M68 45h25" stroke={purple} strokeWidth="3"/><path d="M230 45h30" stroke={teal} strokeWidth="3"/>
     {label(275,230,circular?(l?"圓偏振 · 橫向旋轉":"Circular polarization · transverse rotation"):(l?"線偏振 · 透視投影":"Linear polarization · perspective projection"))}
    </>}
