@@ -227,7 +227,7 @@
     ],
     "precise": [
       "A rigid motion preserves distances. Projective geometric algebra, usually shortened to PGA, provides records for points, lines, planes and these motions. Its motion record is called a motor. Multiplying motors combines motions, with the rightmost action performed first. Rigid-motion matrices and unit dual quaternions also describe this geometry; PGA organizes it in one algebra.",
-      "保持距離不變的動作，叫剛體運動。射影幾何代數常簡稱 PGA，能記錄點、線、平面與這些動作；它的運動紀錄叫 motor。把 motor 相乘就能接起動作，右邊的先做。剛體矩陣與單位雙四元數也能描述這套幾何，PGA 則把它們整理在同一套代數裡。"
+      "保持距離不變的動作，叫剛體運動。射影幾何代數（Projective Geometric Algebra，PGA），能記錄點、線、平面與這些動作；它的運動紀錄叫 motor。把 motor 相乘就能接起動作，右邊的先做。剛體矩陣與單位雙四元數也能描述這套幾何，PGA 則把它們整理在同一套代數裡。"
     ],
     "example": [
       "On a tabletop, start at (1,0). Rotate 90° about the origin, then move right by 1: the result is (1,1). Move first and rotate afterwards: the result is (0,2). Order belongs in the motion record.",
