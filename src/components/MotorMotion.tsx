@@ -1,0 +1,46 @@
+import {useEffect,useState} from "react";
+import Arrow from "./GeometryArrow";
+import Tex from "./Tex";
+import {rigidMotionSample} from "../extendedModels";
+import {numberText} from "../foundationsModel";
+const purple="#7c3aed",teal="#0f766e",blue="#2563eb";
+const button="rounded border border-violet-200 bg-white px-3 py-1.5 text-xs text-violet-800 hover:bg-violet-50 aria-pressed:bg-violet-100 disabled:opacity-40";
+const shape=[[1,0],[2,0],[1,.9]];
+export default function MotorMotion({l}:{l:number}){
+ const [translateFirst,setTranslateFirst]=useState(false),[progress,setProgress]=useState(0),[playing,setPlaying]=useState(false),[speed,setSpeed]=useState(1),[degrees,setDegrees]=useState(90),[dx,setDx]=useState(1),[dy,setDy]=useState(0);
+ useEffect(()=>{if(!playing)return;const timer=setInterval(()=>setProgress(p=>Math.min(2,p+.02)),40/speed);return()=>clearInterval(timer);},[playing,speed]);
+ useEffect(()=>{if(progress>=2)setPlaying(false);},[progress]);
+ useEffect(()=>{const media=matchMedia('(prefers-reduced-motion: reduce)');const stop=()=>{if(media.matches)setPlaying(false);};media.addEventListener('change',stop);return()=>media.removeEventListener('change',stop);},[]);
+ const theta=degrees*Math.PI/180,translation=[dx,dy],sample=(p:number,point=[1,0],order=translateFirst)=>rigidMotionSample(theta,translation,order,p,point);
+ const all=[...Array.from({length:101},(_,i)=>[false,true].flatMap(order=>shape.map(point=>sample(i/50,point,order).point))).flat(),[0,0]];
+ const minX=Math.floor(Math.min(...all.map(p=>p[0])))-.7,maxX=Math.ceil(Math.max(...all.map(p=>p[0])))+.7,minY=Math.floor(Math.min(...all.map(p=>p[1])))-.7,maxY=Math.ceil(Math.max(...all.map(p=>p[1])))+.7;
+ const scale=Math.min(360/(maxX-minX),255/(maxY-minY)),cx=(minX+maxX)/2,cy=(minY+maxY)/2,project=(p:number[])=>[280+(p[0]-cx)*scale,156-(p[1]-cy)*scale];
+ const points=(p:number)=>shape.map(v=>project(sample(p,v).point).join(',')).join(' '),current=sample(progress),position=project(current.point),origin=project([0,0]),step=progress<1?0:1;
+ const names=translateFirst?(l?["平移","旋轉"]:["Translate","Rotate"]):(l?["旋轉","平移"]:["Rotate","Translate"]),colors=translateFirst?[teal,purple]:[purple,teal];
+ const coord=(p:number[])=>`(${p.map(numberText).join(', ')})`;
+ const pauseAt=(p:number)=>{setPlaying(false);setProgress(p);};
+ const reset=()=>{setPlaying(false);setProgress(0);};
+ return <div className="space-y-3" data-testid="motor-motion" data-diagram="motor">
+  <div className="flex flex-wrap gap-2">{[false,true].map(order=><button key={String(order)} className={button} aria-pressed={translateFirst===order} onClick={()=>{setTranslateFirst(order);reset();}}>{order?(l?"先平移，再旋轉":"Translate, then rotate"):(l?"先旋轉，再平移":"Rotate, then translate")}</button>)}</div>
+  <p className="text-sm">{l?"盯著三角形上的藍點 P：紫色弧線是繞原點 O 旋轉，綠色直線是整片一起平移。虛線預告完整路徑，實線留下已走的軌跡。":"Follow the blue point P: a purple arc rotates about the world origin O; a teal line translates the whole triangle. Dashed lines show the planned route, solid lines the route already travelled."}</p>
+  <div className="grid grid-cols-2 gap-2">{names.map((name,i)=><button key={i} className="rounded-lg border bg-white p-2 text-left text-sm" style={{borderColor:colors[i],boxShadow:step===i?`inset 0 0 0 1px ${colors[i]}`:undefined}} onClick={()=>pauseAt(i+1)}><span style={{color:colors[i]}}>{i+1}. {name}</span><span className="mt-1 block text-xs text-slate-500">{(translateFirst?i===1:i===0)?(l?`繞固定原點 ${degrees}°`:`About fixed origin: ${degrees}°`):(l?`位移 ${coord(translation)}`:`Displacement ${coord(translation)}`)}</span></button>)}</div>
+  <svg viewBox="60 0 440 325" className="mx-auto w-full max-w-2xl rounded-lg border border-violet-100 bg-white/80" role="img" aria-label={l?"三角形分兩步旋轉和平移，標記點沿弧線及直線移動":"A triangle rotates and translates in two stages, with a marked point following arc and line trajectories"}>
+   {Array.from({length:Math.ceil(maxX)-Math.floor(minX)+1},(_,i)=>Math.floor(minX)+i).map(x=><path key={`x${x}`} d={`M${project([x,minY])}L${project([x,maxY])}`} stroke="#e2e8f0" strokeWidth=".7"/>)}
+   {Array.from({length:Math.ceil(maxY)-Math.floor(minY)+1},(_,i)=>Math.floor(minY)+i).map(y=><path key={`y${y}`} d={`M${project([minX,y])}L${project([maxX,y])}`} stroke="#e2e8f0" strokeWidth=".7"/>)}
+   <Arrow a={project([minX,0])} b={project([maxX-.15,0])} color="#cbd5e1"/><Arrow a={project([0,minY])} b={project([0,maxY-.15])} color="#cbd5e1"/>
+   <text x={project([maxX-.2,0])[0]} y={project([maxX-.2,0])[1]+18} fill="#64748b" fontSize="12">x</text><text x={project([0,maxY-.2])[0]+8} y={project([0,maxY-.2])[1]} fill="#64748b" fontSize="12">y</text>
+   {[0,1].map(i=><g key={i}><polyline data-path-stage={i+1} points={Array.from({length:51},(_,k)=>project(sample(i+k/50).point).join(',')).join(' ')} fill="none" stroke={colors[i]} strokeWidth="2" strokeDasharray="5 5" opacity=".45"/><polyline data-completed-stage={i+1} points={Array.from({length:51},(_,k)=>project(sample(i+Math.max(0,Math.min(1,progress-i))*k/50).point).join(',')).join(' ')} fill="none" stroke={colors[i]} strokeWidth="3"/>{progress>i+.1&&<Arrow a={project(sample(i+Math.min(1,progress-i)*.47).point)} b={project(sample(i+Math.min(1,progress-i)*.57).point)} color={colors[i]}/>}</g>)}
+   {[0,1,2].map(p=><g key={p}><polygon points={points(p)} fill="none" stroke={p===0?"#94a3b8":colors[p-1]} strokeDasharray="4 4" strokeWidth="1.5" opacity=".65"/><circle cx={project(sample(p).point)[0]} cy={project(sample(p).point)[1]} r="3" fill={p===0?"#94a3b8":colors[p-1]}/></g>)}
+   <circle cx={origin[0]} cy={origin[1]} r="4" fill="#334155"/><text x={origin[0]-14} y={origin[1]+18} fontSize="12" fill="#334155">O</text>
+   <polygon data-moving-body="true" points={points(progress)} fill={colors[step]} fillOpacity=".18" stroke={colors[step]} strokeWidth="2.5"/>
+   <circle cx={position[0]} cy={position[1]} r="5" fill={blue} stroke="white" strokeWidth="1.5"/><text x={position[0]-12} y={position[1]-12} fontSize="13" fill={blue}>P</text>
+   <text x="280" y="311" textAnchor="middle" fontSize="12" fill={colors[step]}>{progress===2?(l?"兩步完成，形狀與大小不變":"Both steps complete; shape and size preserved"):`${step+1}. ${names[step]} · ${Math.round((progress-step)*100)}%`}</text>
+  </svg>
+  <div className="grid gap-2 sm:grid-cols-3 text-center text-xs">{[0,1,2].map(p=><button key={p} className="rounded border border-violet-100 bg-white px-2 py-2" onClick={()=>pauseAt(p)}><span className="block mb-1 text-slate-500">{p===0?(l?"起點":"Start"):`${l?'步驟':'Step'} ${p}`}</span><Tex tex={`P_${p}=${coord(sample(p).point)}`}/></button>)}</div>
+  <label className="flex items-center gap-3 text-xs"><span>{l?"沿路進度":"Route progress"}: {numberText(progress)} / 2</span><input aria-label={l?"剛體運動進度":"Rigid motion progress"} type="range" min="0" max="2" step=".01" value={progress} className="min-w-0 flex-1 accent-violet-600" onChange={e=>pauseAt(Number(e.target.value))}/></label>
+  <div className="flex flex-wrap items-center justify-center gap-2"><button className={button} disabled={progress===0} onClick={()=>pauseAt(Math.max(0,progress-.1))}>{l?"‹ 上一步":"‹ Previous"}</button><button className={button} aria-pressed={playing} onClick={()=>{if(progress>=2)setProgress(0);setPlaying(v=>!v);}}>{playing?(l?"暫停":"Pause"):(l?"▶ 播放":"▶ Play")}</button><button className={button} disabled={progress>=2} onClick={()=>pauseAt(Math.min(2,progress+.1))}>{l?"下一步 ›":"Next ›"}</button><button className={button} onClick={reset}>{l?"重新開始":"Restart"}</button><label className="flex items-center gap-2 text-xs">{l?"速度":"Speed"}<select className="rounded border border-violet-200 bg-white p-1" value={speed} onChange={e=>setSpeed(Number(e.target.value))}>{[.5,1,2].map(v=><option key={v} value={v}>{v}×</option>)}</select></label></div>
+  <div className="flex flex-wrap justify-center gap-3 rounded border border-violet-100 bg-violet-50/40 p-3 text-sm" aria-live="polite"><Tex tex={translateFirst?"M=RT":"M=TR"}/><Tex tex={`P=${coord(current.point)}`}/></div>
+  <details className="rounded border border-violet-100 p-3"><summary className="cursor-pointer text-xs text-violet-800">{l?"改變旋轉角與位移":"Change the angle and displacement"}</summary><div className="mt-3 space-y-3">{[{label:l?"旋轉角（度）":"Rotation (degrees)",value:degrees,min:0,max:180,step:5,set:setDegrees},{label:l?"水平位移":"Horizontal displacement",value:dx,min:-2,max:2,step:.1,set:setDx},{label:l?"垂直位移":"Vertical displacement",value:dy,min:-2,max:2,step:.1,set:setDy}].map(item=><label key={item.label} className="flex items-center gap-3 text-xs"><span>{item.label}: {numberText(item.value)}</span><input aria-label={item.label} className="min-w-0 flex-1 accent-violet-600" type="range" min={item.min} max={item.max} step={item.step} value={item.value} onChange={e=>{item.set(Number(e.target.value));reset();}}/></label>)}</div></details>
+  <p className="text-xs text-slate-500">{l?"這是桌面上的二維切片，兩個動作都用固定世界座標。旋轉中心始終是 O，不是三角形的中心；藍點的路徑不代表物件上每一點都走同一條路。M 依右邊先做的順序組合；這裡分段播放，方便看清楚動作，並非一般 motor 的螺旋插值。":"This tabletop example is a 2D slice using fixed world coordinates. Rotation always pivots about O, not the triangle’s centre. The blue point’s trace is not the path of every point. M composes actions rightmost first. Staged playback makes each action visible; it is not general motor screw interpolation."}</p>
+ </div>;
+}

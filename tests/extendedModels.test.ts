@@ -25,6 +25,16 @@ test("extended lessons compute reflections, projective incidence, conformal geom
   const unlocked=m.eulerControlAxes(0),locked=m.eulerControlAxes(Math.PI/2);
   assert.ok(Math.abs(m.dot3(unlocked.yaw,unlocked.roll))<1e-10);
   assert.ok(Math.abs(m.dot3(locked.yaw,locked.roll)+1)<1e-10);
+  close(m.rigidMotionSample(Math.PI/2,[1,0],false,1).point,[0,1]);
+  close(m.rigidMotionSample(Math.PI/2,[1,0],false,2).point,[1,1]);
+  close(m.rigidMotionSample(Math.PI/2,[1,0],true,1).point,[2,0]);
+  close(m.rigidMotionSample(Math.PI/2,[1,0],true,2).point,[0,2]);
+  for(const order of [false,true])for(const t of [0,.25,.75,1,1.25,1.75,2]){
+   const a=m.rigidMotionSample(1.2,[.7,-.3],order,t,[1,0]),b=m.rigidMotionSample(1.2,[.7,-.3],order,t,[1.6,0]);
+   assert.ok(Math.abs(Math.hypot(...a.point.map((x:number,i:number)=>x-b.point[i]))-.6)<1e-10);
+   const dt=1e-7,left=m.rigidMotionSample(1.2,[.7,-.3],order,1-dt),right=m.rigidMotionSample(1.2,[.7,-.3],order,1+dt);
+   assert.ok(Math.hypot(...left.point.map((x:number,i:number)=>x-right.point[i]))<1e-6);
+  }
   for(const angle of [-60,-.01,0,.01,30,60])for(const offset of [0,.4,1]){
    const r=m.lineIntersection(angle,offset);assert.ok(Math.abs(m.dot3(r.l,r.P))<1e-10);assert.ok(Math.abs(m.dot3(r.m,r.P))<1e-10);
    const lineMV=(line:number[])=>[line[2],line[0],line[1]];

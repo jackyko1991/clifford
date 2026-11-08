@@ -31,3 +31,11 @@ export function quaternionApply(q:number[],v:number[]){
  return v.map((x,i)=>x+2*w*uv[i]+2*uuv[i]);
 }
 export function eulerControlAxes(pitch:number){return {yaw:[0,0,1],roll:[Math.cos(pitch),0,-Math.sin(pitch)]};}
+// Two explicitly staged planar rigid motions, using a fixed world origin.
+export function rigidMotionSample(theta:number,translation:number[],translateFirst:boolean,progress:number,point:number[]=[1,0]){
+ const p=Math.max(0,Math.min(2,progress)),first=Math.min(1,p),second=Math.max(0,p-1);
+ const angle=theta*(translateFirst?second:first),c=Math.cos(angle),s=Math.sin(angle);
+ const rotate=(v:number[])=>[c*v[0]-s*v[1],s*v[0]+c*v[1]];
+ const offset=translateFirst?rotate(translation.map(x=>x*first)):translation.map(x=>x*second);
+ return {point:rotate(point).map((x,i)=>x+offset[i]),angle,offset};
+}
