@@ -279,8 +279,8 @@
       ],
       "drawing": "sta",
       "caption": [
-        "Spatial turns and spacetime boosts appear in one geometric framework.",
-        "空間旋轉與時空雙曲旋轉，放進共同的幾何框架。"
+        "David Hestenes at the ASU SciAPP conference, March 2019.",
+        "大衛・赫斯特尼斯，2019 年 3 月於亞利桑那州立大學 SciAPP 會議。"
       ],
       "equation": "\\gamma_0^2=1,\\qquad\\gamma_1^2=\\gamma_2^2=\\gamma_3^2=-1",
       "related": "concept/physics/sta",
@@ -289,7 +289,15 @@
           "label": "Hestenes · 1966 book and contents",
           "url": "https://davidhestenes.net/geocalc/html/STA.html"
         }
-      ]
+      ],
+      "photo": {
+        "file": "hestenes.jpg",
+        "title": "David Hestenes ASU March 2019 SciAPP conference.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:David_Hestenes_ASU_March_2019_SciAPP_conference.jpg",
+        "author": "HouseOfChange",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
     },
     {
       "id": "physics-textbook",

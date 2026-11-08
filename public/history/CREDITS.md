@@ -13,4 +13,9 @@ Portrait and hardware images are downloaded locally. Each displayed image includ
 
 | clifford-seated.jpg | Portrait of William Kingdon Clifford.jpg | Unknown photographer | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [Commons](https://commons.wikimedia.org/wiki/File:Portrait_of_William_Kingdon_Clifford.jpg) | Original image downloaded unchanged |
 
+| hestenes.jpg | David Hestenes ASU March 2019 SciAPP conference.jpg | HouseOfChange | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Commons](https://commons.wikimedia.org/wiki/File:David_Hestenes_ASU_March_2019_SciAPP_conference.jpg) | Original image downloaded unchanged |
+
 The Clifford file is an already-cropped historical portrait. The GPU photos illustrate computing hardware; the captions do not identify them as hardware used in the cited research experiments.
+
+
+The Hestenes photograph is licensed separately under CC BY-SA 4.0; the site’s source-code license does not replace the image’s license.
