@@ -85,8 +85,8 @@
       "一個數量、一支箭頭、一片面積、一塊體積，記錄不同種類的幾何。在三維空間裡，我們能把它們放進同一張清單，每種獨立的零件各有自己的位置。"
     ],
     "analogy": [
-      "A packing list separates counts, lengths, sheet areas and box volumes into labelled columns. Putting the columns in one document does not turn square metres into metres. It just keeps the different kinds of information together.",
-      "裝箱清單可以分開記件數、邊長、紙板面積和箱子體積。把欄位放在同一張紙上，不會讓平方公尺變成公尺，只是把不同資訊放在一起管理。"
+      "Arrange storage boxes in a cupboard: count the boxes, line them up, cover the floor, then stack upward. Count, direction, area and volume are different geometric records.",
+      "在儲物櫃裡擺收納箱：先數箱子，接著排成一列、鋪出底面，再往上堆。件數、排列方向、面積與體積，是不同種類的幾何紀錄。"
     ],
     "precise": [
       "Grade names the number of directions used to build a piece: 0 for scalars, 1 for vectors, 2 for bivectors and 3 for volumes. A multivector collects several grades. In three Euclidean directions, the independent slots number 1, 3, 3 and 1. Those eight slots describe the algebra; they are not eight spatial directions.",
