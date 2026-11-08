@@ -1,6 +1,7 @@
 import {useEffect,useId,useState,type ReactNode} from "react";
 import Tex from "./components/Tex";
 import CrossProductPatch from "./CrossProductPatch";
+import ComplexPlaneBridge from "./components/ComplexPlaneBridge";
 import Arrow from "./components/GeometryArrow";
 import {GeometryRecordBuilder,DimensionQuestion,ThreeDRecordTable} from "./GeometryRecords";
 import CodeBlock from "./components/CodeBlock";
@@ -85,16 +86,11 @@ function GradeMixer({l}:{l:number}){
  </div>;
 }
 function RelationsExplorer({l}:{l:number}){
- const [mode,setMode]=useState(0),[plane,setPlane]=useState("12"),[input,setInput]=useState(0);
+ const [mode,setMode]=useState(0),[input,setInput]=useState(0);
  const choices=[[1,0],[0,1],[1,1]],v=choices[input],w=[2*v[0]+v[1],v[1]];
  return <div data-interactive="foundations-relations" className="space-y-4">
   <div className="flex flex-wrap gap-2">{(l?["複數：一個平面","四元數：三個平面","張量：記錄映射"]:["Complex: one plane","Quaternions: three planes","Tensors: record a map"]).map((t,k)=><button key={k} className={btn} aria-pressed={mode===k} onClick={()=>setMode(k)}>{t}</button>)}</div>
-  {mode===0&&<div className="space-y-3"><p>{l?"挑一個單位平面 B，純量加上這個平面，就能照複數的規則相乘。i 的幾何角色是定向平面，不是另外加進來的一根空間軸。":"Choose a unit plane B. Scalars plus multiples of this plane multiply like complex numbers. The geometric role of i is an oriented plane, not an extra spatial axis."}</p>
-   <div className="flex flex-wrap items-center justify-center gap-3">{["12","13","23"].map(p=><button className={btn} key={p} aria-pressed={plane===p} onClick={()=>setPlane(p)}><Tex tex={`B=e_{${p}}`}/></button>)}</div>
-   <svg viewBox="0 0 360 120" className="mx-auto w-full max-w-sm" role="img" aria-label={l?"選擇的定向平面與純量組成複數平面":"A scalar and the selected oriented plane form a complex subalgebra"}><path d="M125 86L155 25L230 25L200 86Z" fill={purple} fillOpacity=".22" stroke={purple}/><text x="178" y="65" textAnchor="middle" fill={purple} fontSize="16">B = e<tspan baselineShift="sub" fontSize="11">{plane}</tspan></text></svg>
-   <div className="text-center" aria-live="polite"><Tex tex={`B^2=e_{${plane}}^2=-1`}/></div>
-   <p className="text-xs text-gray-600">{l?"選哪一個歐氏單位平面，平方都是 −1；這是不同的嵌入選擇，不表示三個平面是同一個幾何物件。":"Each Euclidean unit plane squares to −1. These are different embeddings, not the same geometric plane."}</p>
-  </div>}
+  {mode===0&&<ComplexPlaneBridge l={l}/>}
   {mode===1&&<div className="space-y-3"><p>{l?"三維空間有三個獨立的雙向量方向。加上純量，這四個位置對乘法封閉，能重現四元數。沿用橋上那一節的符號約定：":"Three-dimensional space has three independent bivector directions. With the scalar, these four slots are closed under multiplication and reproduce quaternions. Using the convention from the bridge lesson:"}</p>
    <div className="flex flex-wrap justify-center gap-x-5 gap-y-2">{["i=-e_{23}","j=e_{13}","k=-e_{12}"].map(tex=><Tex key={tex} tex={tex}/>)}</div><HamiltonTool l={l}/>
    <p className="text-xs text-gray-600">{l?"這裡對應的是三維幾何代數的偶子代數：0 階加 2 階，共 4 個分量；不是全部 8 個分量。":"This is the even subalgebra in three dimensions: grade 0 plus grade 2, four coefficients. It is not the full eight-component algebra."}</p>
