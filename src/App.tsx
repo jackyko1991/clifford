@@ -8,6 +8,7 @@ import HistoryPage from "./HistoryPage";
 import LearningSections from "./LearningSections";
 import FoundationsSections from "./FoundationsSections";
 import AlgebraSections from "./AlgebraSections";
+import PhysicsSections from "./PhysicsSections";
 import ExtendedSections,{extendedPages} from "./ExtendedSections";
 import {existingCount} from "./curriculum";
 const PAGE_TITLES:Record<Page,string[]>={concept:["Concepts","概念"],skills:["Coding Skills","程式技巧"],reading:["Extended Reading","延伸閱讀"]};
@@ -49,7 +50,7 @@ export default function App(){
           <PageToc scrollRoot="concept-scroll" l={l} items={selected.sections.map((s,i)=>({id:s.id,mark:i+1,label:s.title[l]}))}/>
           <article id="main-content" tabIndex={-1} className="min-w-0 max-w-4xl flex-1 space-y-10" data-testid="lesson-page">
             <header><h1 className="text-3xl font-semibold tracking-tight">{selected.title[l]}</h1><p className="mt-3 text-gray-500">{selected.intro[l]}</p></header>
-            {selected.id==="learning"?<LearningSections l={l}/>:selected.id==="foundations"?<FoundationsSections l={l}/>:selected.id==="algebra"?<AlgebraSections l={l}/>:extendedPages.includes(selected.id)?<ExtendedSections page={selected.id} l={l}/>:<LessonSections sections={selected.sections} l={l}/>}
+            {selected.id==="learning"?<LearningSections l={l}/>:selected.id==="foundations"?<FoundationsSections l={l}/>:selected.id==="algebra"?<AlgebraSections l={l}/>:selected.id==="physics"?<PhysicsSections l={l}/>:extendedPages.includes(selected.id)?<ExtendedSections page={selected.id} l={l}/>:<LessonSections sections={selected.sections} l={l}/>}
           </article>
         </div>}
       </>}

@@ -4,7 +4,7 @@ import {magneticLoop} from "../magneticLoop";
 import {geometricProductTex} from "../learningModel";
 import Tex from "./Tex";
 const purple="#7c3aed",teal="#0f766e",muted="#94a3b8";
-export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
+export default function GeometryFigure({kind,l,onWaveChange}:{kind:string;l:number;onWaveChange?:(sample:{angle:number;circular:boolean})=>void}) {
  const [angle,setAngle]=useState(kind==="holonomy"?0:60),[playing,setPlaying]=useState(false),[circular,setCircular]=useState(false),[showPlane,setShowPlane]=useState(true);
  const uid=useId().replaceAll(":", ""),theta=angle*Math.PI/180;
  useEffect(()=>{
@@ -14,6 +14,7 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
   id=requestAnimationFrame(frame);return()=>cancelAnimationFrame(id);
  },[playing,kind]);
  useEffect(()=>{if(kind==="holonomy"&&angle>=720)setPlaying(false);},[kind,angle]);
+ useEffect(()=>{if(kind==="wave")onWaveChange?.({angle,circular});},[kind,angle,circular,onWaveChange]);
  const flux=magneticLoop(angle);
  useEffect(()=>{const q=matchMedia("(prefers-reduced-motion: reduce)");const stop=()=>{if(q.matches)setPlaying(false);};q.addEventListener("change",stop);return()=>q.removeEventListener("change",stop);},[]);
  const v=rotate(basis(1),theta),R=rotor(theta),bx=90*Math.cos(theta),by=-90*Math.sin(theta);

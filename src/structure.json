@@ -369,36 +369,36 @@
         "時空與場"
       ],
       "intro": [
-        "Follow the existing path from boosts to fermions, electromagnetism and light.",
-        "沿既有內容，從雙曲旋轉走向費米子、電磁場與光。"
+        "Start with a flash on a train, detector dots, a pushed charge and flashlight light. Look at what happens before naming the state, field or spacetime algebra.",
+        "從火車上的閃光、量測器的點，到電荷受力與手電筒的光。先看發生什麼，再問怎麼記錄與計算。"
       ],
       "sections": [
         {
           "id": "sta",
           "title": [
-            "Spacetime algebra and hyperbolic rotations",
-            "時空代數與雙曲旋轉"
+            "One flash, two observers",
+            "同一閃光，兩個觀察者"
           ]
         },
         {
           "id": "dirac",
           "title": [
-            "Dirac fields: where the algebra meets fermions",
-            "狄拉克場：代數如何作用於費米子"
+            "Electron measurement dots",
+            "電子量測器上的點"
           ]
         },
         {
           "id": "maxwell",
           "title": [
-            "One electromagnetic bivector, observer-dependent E and B",
-            "同一個電磁雙向量，不同觀測者的 E 與 B"
+            "How fields push a charge",
+            "電場與磁場怎麼推電荷"
           ]
         },
         {
           "id": "light",
           "title": [
-            "A plane wave as a null bivector",
-            "平面光波：零範雙向量"
+            "From a flashlight to a light wave",
+            "從手電筒走到光波"
           ]
         }
       ]
