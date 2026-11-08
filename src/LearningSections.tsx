@@ -110,7 +110,7 @@ export default function LearningSections({l}:{l:number}){
    <button className={button} aria-expanded={check} onClick={()=>setCheck(v=>!v)}>{l?"打開自我檢查":"Open the self-check"}</button>
    {check&&<div className="rounded-lg border-l-4 border-amber-300 bg-amber-50 p-4"><p>{l?"有沒有提到兩個垂直方向？有沒有說明交換順序會變號？最後能否把四個方向重新配成兩對，留下 −1？這是自我檢查，文字不會被自動評分。":"Did you mention two perpendicular directions? Explain the sign change when their order swaps? Then pair the four vectors to leave −1? This is a self-check; your writing is not automatically graded."}</p></div>}
    <CodeBlock code={"# Perpendicular Euclidean unit directions\ne1 * e1 == 1\ne2 * e2 == 1\ne2 * e1 == -(e1 * e2)\n# Therefore (e1 * e2) * (e1 * e2) == -1"} title={l?"把幾何規則寫成可檢查的敘述（偽程式碼）":"Geometry as checkable statements (pseudocode)"}/>
-   <div className="flex flex-wrap gap-3 border-t border-gray-100 pt-4"><a className={button} href="#/concept/foundations">{l?"補齊基礎：階數與多重向量":"Complete the foundations: grades"} →</a><a className={button} href="#/concept/algebra">{l?"下一站：代數工具箱":"Next: the algebra toolbox"} →</a><a className={button} href="#/concept/rotations">{l?"接著：轉子與旋量":"Then: rotors and spinors"} →</a></div>
+   <div className="flex flex-wrap gap-3 border-t border-gray-100 pt-4"><a className={button} href="#/concept/foundations">{l?"補齊基礎：幾何積及多重向量":"Complete the foundations: geometric products and multivectors"} →</a><a className={button} href="#/concept/algebra">{l?"下一站：代數工具箱":"Next: the algebra toolbox"} →</a><a className={button} href="#/concept/rotations">{l?"接著：轉子與旋量":"Then: rotors and spinors"} →</a></div>
   </Card>
  </>;
 }
