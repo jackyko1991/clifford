@@ -79,6 +79,11 @@ test("restored Clifford lessons and the reading catalog render with one global f
      }
     }
    }
+   if(hash==="#/concept/calculus"){
+    const extension=html.match(/<details[^>]*data-testid="hodge-pinn-extension"[^>]*>/)?.[0];
+    assert.ok(extension,"calculus card 1 needs its Hodge/PINN extension");
+    assert.doesNotMatch(extension,/\sopen(?:[=>\s])/);
+   }
    assert.ok(html.replace(/<[^>]+>/g, "").includes("Clifford Algebra"));
    assert.ok(!html.includes("undefined"),hash);
   }
