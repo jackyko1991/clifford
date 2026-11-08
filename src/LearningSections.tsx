@@ -1,5 +1,6 @@
 import {useEffect,useId,useState,type ReactNode} from "react";
 import Tex from "./components/Tex";
+import FermionPurpose from "./components/FermionPurpose";
 import GeometryFigure from "./components/GeometryFigure";
 import CodeBlock from "./components/CodeBlock";
 import {geometricProductTex,quarterTurn,quaternionProduct,quaternionUnits,type QuaternionUnit} from "./learningModel";
@@ -69,6 +70,7 @@ function Prediction({l}:{l:number}){
 export default function LearningSections({l}:{l:number}){
  const [check,setCheck]=useState(false);
  return <>
+  <FermionPurpose l={l}/>
   <Card id="imaginary-turn" n={1} title={l?"i 的故事：找不到的數，還是看得見的轉向？":"The story of i: a missing number, or a visible turn?"}>
    <p>{l?"在實數線上，不論正數還是負數，平方都不會是負數。那麼，什麼東西乘自己會得到 −1？先別背「虛數」這個名字，把乘法想成一個動作。":"On the real number line, neither positive nor negative numbers square to a negative number. What could square to −1? Before learning the name ‘imaginary’, think of multiplication as an action."}</p>
    <QuarterTurns l={l}/>

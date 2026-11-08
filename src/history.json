@@ -225,6 +225,10 @@
           "狄拉克的相對論性電子方程使用滿足反對易關係的矩陣。它們給出克利福德代數的一種矩陣表示；電子狀態則是這些矩陣作用的旋量。"
         ],
         [
+          "The concrete goal was a first-order electron equation whose square recovers relativistic energy. Clifford anticommutation cancels the unwanted cross terms; the spinor supplies the spin-½ rotation rule. This is a physical application, and the physics lesson works through a small numerical version.",
+          "具體目標是讓一階電子方程平方後符合相對論能量。Clifford 的反對易乘法消掉多餘交叉項，旋量則保留自旋 1/2 的旋轉規則。這是能走到電子預測的實際用途；物理頁用一個小型數值例子把問題算出來。"
+        ],
+        [
           "The algebra, its representation and the quantum state have different jobs. Keeping them separate explains the connection without turning a useful mathematical structure into a complete physical theory by itself.",
           "代數、它的表示，以及量子態，各有不同工作。分清三者，既能理解它們的連結，也不會把一種數學結構本身當成完整物理理論。"
         ]

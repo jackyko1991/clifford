@@ -7,8 +7,8 @@
         "用幾何學會學習"
       ],
       "intro": [
-        "Why does i squared equal −1? From the intuition of a simple turn to the formula Hamilton carved on a bridge, discover how the geometric product connects directions, areas and rotations.",
-        "為什麼 i 的平方是 −1？從一次轉向的直覺，到漢密爾頓刻在橋上的公式，一步步看見幾何積如何把方向、面積與旋轉連在一起。"
+        "Start with the electron’s spin problem. Connect complex turns and geometric products to the rotors, spinors and Clifford operators in the Dirac equation.",
+        "從電子自旋這個物理問題出發，把複數的轉向與幾何積，接到狄拉克方程中的轉子、旋量與 Clifford 算子。"
       ],
       "sections": [
         {
@@ -369,8 +369,8 @@
         "時空與場"
       ],
       "intro": [
-        "Start with a flash on a train, detector dots, a pushed charge and flashlight light. Look at what happens before naming the state, field or spacetime algebra.",
-        "從火車上的閃光、量測器的點，到電荷受力與手電筒的光。先看發生什麼，再問怎麼記錄與計算。"
+        "Use physical pictures to reach a concrete answer: how do spinors and Clifford operators make a relativistic electron equation possible?",
+        "從物理圖像走到具體答案：旋量與 Clifford 算子，如何讓電子方程同時符合自旋與相對論？"
       ],
       "sections": [
         {
