@@ -5,9 +5,9 @@ import {createServer} from "vite";
 import {createElement} from "react";
 import {renderToStaticMarkup} from "react-dom/server";
 const structure=JSON.parse(readFileSync(new URL("../src/structure.json",import.meta.url),"utf8"));
-test("all placeholder tabs and the reading catalog render with one global footer",async()=>{
- assert.deepEqual(structure.concept.map(t=>t.id),["laws","feynman","maths","dataflow","limitations","history"]);
- assert.deepEqual(structure.skills.map(t=>t.id),["techniques","loops","blas","nvlink","cpuml"]);
+test("restored Clifford lessons and the reading catalog render with one global footer",async()=>{
+ assert.deepEqual(structure.concept.map(t=>t.id),["foundations","rotations","physics"]);
+ assert.deepEqual(structure.skills.map(t=>t.id),["implementation","applications"]);
  const routes=[...structure.concept.map(t=>`#/concept/${t.id}`),...structure.skills.map(t=>`#/skills/${t.id}`),"#/reading"];
  const server=await createServer({server:{middlewareMode:true},appType:"custom"});
  try{
@@ -19,15 +19,20 @@ test("all placeholder tabs and the reading catalog render with one global footer
    assert.ok(html.indexOf('</main>')<html.indexOf('data-testid="site-footer"'),hash);
    assert.ok(html.includes('https://buymeacoffee.com/jackyko1991'),hash);
    assert.ok(html.includes('https://github.com/jackyko1991/clifford/blob/main/LICENSE'),hash);
-   assert.ok(!html.includes('data-diagram='),"draft animations must not render");
-   assert.ok(!html.includes('data-feynman='),"draft teaching content must not render");
+   assert.ok(html.includes('data-diagram='),"existing diagrams must remain visible");
+   assert.ok(html.includes('data-feynman='),"existing explanations must remain visible");
    if(hash==="#/reading"){
     assert.ok(html.includes('md:grid-cols-2'));
     assert.equal([...html.matchAll(/data-testid="book-/g)].length,14);
     assert.ok(html.includes('sponsored noopener noreferrer'));
     assert.ok(html.includes('reading-disclosure'));
     assert.ok(!html.includes('data-placeholder='));
-   }else assert.ok(html.includes('data-placeholder="true"'),hash);
+   }
+   assert.ok(!html.includes('data-placeholder="true"'),hash);
+   const group=hash==="#/reading"?"reading":hash.split("/")[2];
+   const cards=JSON.parse(readFileSync(new URL("../src/content.json",import.meta.url),"utf8"));
+   for(const c of cards.filter(c=>c.group===group))assert.ok(html.includes(`id="${c.id}"`),`missing lesson ${c.id}`);
+   assert.ok(html.replace(/<[^>]+>/g, "").includes("Clifford Algebra"));
    assert.ok(!html.includes("undefined"),hash);
   }
  }finally{await server.close();delete (globalThis as any).location;}

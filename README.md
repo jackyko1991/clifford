@@ -1,17 +1,17 @@
-# Clifford · 幾何代數
+# Clifford Algebra
 
-A bilingual Clifford algebra site scaffold using Tensorizer's layout with a violet theme and bivector icon.
+A bilingual Clifford algebra learning site using Tensorizer's layout with a violet theme and bivector icon.
 
 [Website](https://jackyko1991.github.io/clifford/) · [Tensorizer](https://jackyko1991.github.io/tensorizer/)
 
 ## Current scope
 
-- **Concepts:** six Tensorizer-matching tabs with section placeholders.
-- **Coding Skills:** five Tensorizer-matching tabs with section placeholders.
-- **Extended Reading:** grouped, two-column resource cards with author/publication metadata, primary or free links, related-section links, and a quiet Amazon UK link where applicable.
-- **Global footer:** Buy Me a Coffee, Apache-2.0 and GitHub, matching Tensorizer's footer placement and styling.
+- **Concepts:** foundations, rotations and spinors, spacetime and fields.
+- **Coding Skills:** algebra implementation and geometric learning, including read-only code examples.
+- **Extended Reading:** four existing reading guides plus grouped, two-column resource cards with metadata and source links.
+- **Global footer:** Buy Me a Coffee, Apache-2.0 and GitHub.
 
-Lesson development is deferred to the next agent. Existing source components remain available for reuse, while the current lesson content is archived locally and is not rendered by the site.
+All 23 existing bilingual lessons, diagrams, equations and code explanations are retained. Future placeholders should describe relevant Clifford material that is still missing; do not replace existing lessons or mirror Tensorizer's subject matter.
 
 ## Development
 
@@ -29,7 +29,8 @@ Use `npm.cmd` in Windows PowerShell when script execution is restricted.
 
 ## Files
 
-- `src/structure.json`: mirrored Concept and Coding Skills tabs and section headings.
+- `src/structure.json`: Clifford topic tabs and lesson headings.
+- `src/content.json` and `src/LessonSections.tsx`: existing lessons and their renderer.
 - `src/reading.json`: resource-card metadata.
 - `src/ReadingPage.tsx`: Tensorizer-style reading layout.
 - `src/components/SiteFooter.tsx`: global footer.

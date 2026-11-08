@@ -10,3 +10,14 @@ test("reading metadata has valid external links and book ISBNs",()=>{
   if(b.isbn10){const sum=[...b.isbn10].reduce((s,c,i)=>s+(10-i)*(c==="X"?10:Number(c)),0);assert.equal(sum%11,0,b.id);}
  }
 });
+
+const cards=JSON.parse(readFileSync(new URL("../src/content.json",import.meta.url),"utf8"));
+test("all 23 existing lessons retain bilingual explanations and valid equations",async()=>{
+ const {default:katex}=await import("katex");
+ assert.equal(cards.length,23);
+ assert.equal(new Set(cards.map(c=>c.id)).size,23);
+ for(const c of cards){
+  for(const step of ["plain","analogy","precise","example"])assert.ok(c[step][0]&&c[step][1],`${c.id}: ${step}`);
+  if(c.equation)assert.doesNotThrow(()=>katex.renderToString(c.equation,{throwOnError:true}),c.id);
+ }
+});

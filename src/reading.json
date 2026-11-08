@@ -10,7 +10,7 @@
       "把幾何積、旋轉、時空與物理連起來的完整教材。"
     ],
     "href": "https://www.cambridge.org/core/books/geometric-algebra-for-physicists/FB8D3ACB76AB3AB10BA7F27505925091",
-    "related": "concept/maths",
+    "related": "concept/foundations",
     "top": true,
     "isbn10": "0521715954",
     "free": "https://lambda.gsfc.nasa.gov/product/websites/AMI/mrao.cam.ac.uk/~clifford/introduction/intro/intro.html",
@@ -30,7 +30,7 @@
       "用點、線、面與剛體運動進入射影幾何代數。"
     ],
     "href": "https://arxiv.org/abs/2002.04509",
-    "related": "concept/maths"
+    "related": "concept/foundations"
   },
   {
     "id": "clifford",
@@ -43,7 +43,7 @@
       "查閱多重向量、號差與幾何積的程式範例。"
     ],
     "href": "https://clifford.readthedocs.io/en/stable/",
-    "related": "skills/techniques"
+    "related": "skills/implementation"
   },
   {
     "id": "sta",
@@ -56,7 +56,7 @@
       "作者以時空代數介紹電磁學的幾何解讀。"
     ],
     "href": "https://lambda.gsfc.nasa.gov/product/websites/AMI/mrao.cam.ac.uk/~clifford/introduction/intro/node11.html",
-    "related": "concept/laws"
+    "related": "concept/physics"
   },
   {
     "id": "dirac",
@@ -69,7 +69,7 @@
       "在場論脈絡下閱讀旋量、洛侖茲群與克利福德關係。"
     ],
     "href": "https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S4.html",
-    "related": "concept/laws"
+    "related": "concept/physics"
   },
   {
     "id": "gauge",
@@ -82,7 +82,7 @@
       "補上聯絡、曲率與規範場的幾何意義。"
     ],
     "href": "https://www.damtp.cam.ac.uk/user/tong/gaugetheory.html",
-    "related": "concept/limitations"
+    "related": "concept/physics"
   },
   {
     "id": "cpt",
@@ -95,7 +95,7 @@
       "查核離散對稱與 CPT 定理所依賴的假設。"
     ],
     "href": "https://www.damtp.cam.ac.uk/user/tong/sm/standardmodel1.pdf",
-    "related": "concept/limitations"
+    "related": "concept/physics"
   },
   {
     "id": "null",
@@ -108,7 +108,7 @@
       "零範電磁場幾何的研究論文。"
     ],
     "href": "https://arxiv.org/abs/1308.2323",
-    "related": "concept/laws"
+    "related": "concept/physics"
   },
   {
     "id": "gatr",
@@ -121,7 +121,7 @@
       "把射影幾何代數放進 Transformer 的架構。"
     ],
     "href": "https://arxiv.org/abs/2305.18415",
-    "related": "skills/cpuml"
+    "related": "skills/applications"
   },
   {
     "id": "cgnn",
@@ -134,7 +134,7 @@
       "閱讀克利福德群等變網絡層的構造與證明。"
     ],
     "href": "https://arxiv.org/abs/2305.11141",
-    "related": "skills/cpuml"
+    "related": "skills/applications"
   },
   {
     "id": "choose",
@@ -147,7 +147,7 @@
       "比較幾何 Transformer 採用不同代數的取捨。"
     ],
     "href": "https://proceedings.mlr.press/v238/haan24a.html",
-    "related": "skills/cpuml"
+    "related": "skills/applications"
   },
   {
     "id": "original",
@@ -160,7 +160,7 @@
       "直接閱讀克利福德的幾何推想，分清原文與後來的詮釋。"
     ],
     "href": "https://en.wikisource.org/wiki/On_the_Space-Theory_of_Matter",
-    "related": "concept/history"
+    "related": "concept/foundations"
   },
   {
     "id": "1878",
@@ -173,7 +173,7 @@
       "結合格拉斯曼代數與度規乘法的原始論文。"
     ],
     "href": "https://doi.org/10.2307/2369379",
-    "related": "concept/history",
+    "related": "concept/foundations",
     "freeLabel": [
       "Original paper",
       "原始論文"
@@ -190,6 +190,6 @@
       "用原書扉頁核對露西・克利福德的作者身分。"
     ],
     "href": "https://archive.org/details/anyhowstoriesmo00clifgoog",
-    "related": "concept/history"
+    "related": "concept/foundations"
   }
 ]
