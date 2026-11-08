@@ -27,3 +27,13 @@ export function rotationExample(theta:number){
  const v=basis(1),R=rotor(theta),sandwich=gp(gp(R,v),reverse(R));
  return {R,sandwich,matrix:[Math.cos(theta),Math.sin(theta)]};
 }
+
+// A path in the even subalgebra span{1,e12}; this is not a spatial rotor sandwich.
+export function inverseMotion(scale:number,theta:number,progress:number,invert=false){
+ const p=Math.max(0,Math.min(2,progress));
+ if(p>1&&invert&&scale===0)return null;
+ const t=Math.max(0,p-1);
+ const radius=p<=1?1+p*(scale-1):invert?scale+t*(1-scale):scale*(1+t*(scale-1));
+ const phase=-theta/2*(p<=1?p:2-p);
+ return [radius*Math.cos(phase),radius*Math.sin(phase)];
+}

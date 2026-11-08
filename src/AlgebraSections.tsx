@@ -1,6 +1,7 @@
 import {useEffect,useState,type ReactNode} from "react";
 import Tex from "./components/Tex";
 import VectorPlaneProduct from "./components/VectorPlaneProduct";
+import InverseMotion from "./components/InverseMotion";
 import CodeBlock from "./components/CodeBlock";
 import Arrow from "./components/GeometryArrow";
 import {basis,gp} from "./algebra";
@@ -42,6 +43,7 @@ function Undo({l}:{l:number}){
   <p>{l?"再試一個帶倍率的轉子 Q=sR。拖動 s：反轉後乘回去，還會等於 1 嗎？":"Now try a scaled rotor Q=sR. Change s: does multiplying by its reverse still give 1?"}</p>
   <label className="flex items-center gap-3 text-xs"><span>s = {numberText(scale)}</span><input className="min-w-0 flex-1 accent-violet-600" aria-label={l?"轉子倍率":"Rotor scale"} type="range" min="0" max="2" step=".1" value={scale} onChange={e=>setScale(Number(e.target.value))}/></label>
   <Formula><Tex tex={`Q\\approx ${multivectorTex(r.q)}`}/><Tex tex={`Q\\widetilde Q=${numberText(r.norm)}`}/></Formula>
+  <InverseMotion l={l} scale={scale}/>
   <div className="grid gap-2 sm:grid-cols-2"><div className="rounded-lg border border-amber-200 bg-white p-3 text-center"><p className="text-xs text-gray-500">{l?"只倒序":"Reverse only"}</p><Tex tex={`\\widetilde Q\\approx ${multivectorTex(r.reversed)}`}/><p className="mt-1 text-xs text-amber-800">{r.norm===1?(l?"s=1 時，剛好撤銷":"At s=1, this undoes Q"):(l?"尚未除掉倍率平方":"The squared scale remains")}</p></div><div className="rounded-lg border border-emerald-200 bg-white p-3 text-center" aria-live="polite"><p className="text-xs text-gray-500">{l?"真正乘回 1":"Actually multiply back to 1"}</p>{r.inverse?<><Tex tex={`Q^{-1}\\approx ${multivectorTex(r.inverse)}`}/><p><Tex tex={"QQ^{-1}=1"}/></p></>:<p className="text-amber-800">{l?"Q=0：沒有反元素":"Q=0: no inverse"}</p>}</div></div>
   <p className="text-xs text-gray-600">{l?"此處 Q 的乘積 Q Q̃ 是非零純量時，才可用 Q⁻¹=Q̃/(Q Q̃)。一般多重向量不保證滿足這個條件。下一頁的單位轉子滿足 R R̃=1。":"Here Q⁻¹=Q̃/(Q Q̃) is valid when Q Q̃ is a nonzero scalar. An arbitrary multivector need not satisfy that condition. The unit rotors on the next page satisfy R R̃=1."}</p>
  </Example>;

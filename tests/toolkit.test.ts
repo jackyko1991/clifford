@@ -22,6 +22,17 @@ test("toolkit models preserve metric, grade, inverse and duality conventions",as
   const vp=m.productExample(1,0);assert.equal(vp.inner[2],1);assert.equal(vp.outer[7],1);
   for(const scale of [0,.1,.7,1,2]){
    const r=m.inverseExample(scale,.7);assert.ok(Math.abs(r.norm-scale*scale)<1e-12);
+   for(const invert of [false,true]){
+    close(m.inverseMotion(scale,.7,0,invert),[1,0]);
+    close(m.inverseMotion(scale,.7,1,invert),[r.q[0],r.q[3]]);
+    close(m.inverseMotion(scale,.7,1-1e-12,invert),m.inverseMotion(scale,.7,1,invert));
+    if(invert&&scale===0)assert.equal(m.inverseMotion(scale,.7,2,true),null);
+    else{
+     const actual=a.gp(r.q,invert?r.inverse:r.reversed);
+     close(m.inverseMotion(scale,.7,2,invert),[actual[0],actual[3]]);
+     close(m.inverseMotion(scale,.7,1+1e-12,invert),m.inverseMotion(scale,.7,1,invert));
+    }
+   }
    if(scale===0)assert.equal(r.inverse,null);else{close(a.gp(r.q,r.inverse),a.basis(0));close(a.gp(r.inverse,r.q),a.basis(0));}
   }
   for(let plane=0;plane<3;plane++)for(const sign of [-1,1]){
