@@ -57,3 +57,5 @@ The history tab uses Tensorizer’s alternating timeline layout, with three eras
 Chapter I now shows Hamilton and Grassmann on parallel rails that merge at the 1878 product. The 1870/1876 curvature proposal remains a separately labeled contemporary question. On phones, two selectable tabs show one full-width origin branch at a time, then both paths merge into the shared timeline; desktop retains parallel columns. Layout was checked in an isolated browser at widths 1440, 390 and 320 px, including overlap and horizontal-overflow measurements.
 
 Phone origin tabs were checked at 320 and 390 px for switching, Home/End keyboard navigation, direct links and horizontal overflow. Desktop at 1440 px continues to show both branches.
+
+Merge connectors use exactly the same amber and teal as their incoming rails, followed by one continuous violet track. Browser measurements at 1440, 390 and 320 px checked the shared junction, incoming seams, outgoing seams and computed colors. Phone merge inputs have labeled terminal nodes.

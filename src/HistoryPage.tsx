@@ -3,6 +3,7 @@ import {historyEvents,historyEras,historyIntro,type HistoryEvent} from "./histor
 import HistoryDrawing from "./components/HistoryDrawing";
 import Tex from "./components/Tex";
 const LG="(min-width:1024px)",GAP=24,BADGE=24;
+const track={hamilton:"#f59e0b",grassmann:"#0d9488",joined:"#7c3aed"};
 const theme=[
  {dot:"bg-amber-500",text:"text-amber-800",band:"border-amber-200 bg-amber-50 text-amber-900"},
  {dot:"bg-teal-600",text:"text-teal-800",band:"border-teal-200 bg-teal-50 text-teal-900"},
@@ -137,8 +138,8 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
       className={`min-w-0 rounded-lg border px-2 py-3 text-xs font-semibold leading-relaxed ${origin===c.id?(i===0?"border-amber-400 bg-amber-50 text-amber-900":"border-teal-400 bg-teal-50 text-teal-900"):"border-gray-200 bg-white text-gray-500"}`}>{i===0?(l?"哈密頓 · 四元數":"Hamilton · quaternions"):(l?"格拉斯曼 · 外代數":"Grassmann · exterior algebra")}</button>)}
     </div>
     <div className="relative" data-history-parallel="true">
-     <div aria-hidden className="absolute inset-y-0 hidden w-0.5 bg-amber-300 lg:left-1/4 lg:block lg:-translate-x-1/2"/>
-     <div aria-hidden className="absolute inset-y-0 hidden w-0.5 bg-teal-300 lg:left-3/4 lg:block lg:-translate-x-1/2"/>
+     <div aria-hidden data-track="hamilton" style={{backgroundColor:track.hamilton}} className="absolute inset-y-0 hidden w-0.5 lg:left-1/4 lg:block lg:-translate-x-1/2"/>
+     <div aria-hidden data-track="grassmann" style={{backgroundColor:track.grassmann}} className="absolute inset-y-0 hidden w-0.5 lg:left-3/4 lg:block lg:-translate-x-1/2"/>
      <div className="grid gap-y-8 lg:grid-cols-2">
       {historyEvents.slice(0,2).map((c,i)=><div key={c.id} data-history-branch={c.id} data-history-card={c.id} id={`origin-panel-${c.id}`} role="tabpanel" aria-labelledby={`origin-tab-${c.id}`} className={`relative min-w-0 pb-5 lg:px-3 ${origin===c.id?"":"hidden lg:block"}`}>
        <span aria-hidden className={`absolute top-3 hidden h-2.5 w-2.5 lg:block -translate-x-1/2 rounded-full ring-4 ring-gray-50 lg:left-1/2 ${i===0?"-left-11 bg-amber-500":"-left-6 bg-teal-600"}`}/>
@@ -152,19 +153,20 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
      </aside>
     </div>
     <div aria-hidden data-history-merge="true">
-     <svg viewBox="0 0 1000 64" preserveAspectRatio="none" className="hidden h-16 w-full lg:block"><path d="M250 0V12Q250 40 500 40" stroke="#f59e0b" strokeWidth="2" fill="none" vectorEffect="non-scaling-stroke"/><path d="M750 0V12Q750 40 500 40" stroke="#0d9488" strokeWidth="2" fill="none" vectorEffect="non-scaling-stroke"/><path d="M500 40V64" stroke="#7c3aed" strokeWidth="2" vectorEffect="non-scaling-stroke"/></svg>
-     <svg className="h-16 w-full lg:hidden"><line x1="25%" y1="0" x2="25%" y2="12" stroke="#f59e0b" strokeWidth="2"/><line x1="75%" y1="0" x2="75%" y2="12" stroke="#0d9488" strokeWidth="2"/><line x1="25%" y1="12" x2="16" y2="42" stroke="#f59e0b" strokeWidth="2"/><line x1="75%" y1="12" x2="16" y2="42" stroke="#0d9488" strokeWidth="2"/><line x1="16" y1="42" x2="16" y2="64" stroke="#7c3aed" strokeWidth="2"/><circle cx="16" cy="42" r="3" fill="#7c3aed"/></svg>
+     <div className="mb-1 grid grid-cols-2 text-center text-[11px] font-medium lg:hidden"><span style={{color:track.hamilton}}>{l?"哈密頓":"Hamilton"}</span><span style={{color:track.grassmann}}>{l?"格拉斯曼":"Grassmann"}</span></div>
+     <svg viewBox="0 0 1000 64" preserveAspectRatio="none" className="hidden h-16 w-full overflow-visible lg:block"><path d="M250-1V12Q250 40 500 40" stroke={track.hamilton} strokeWidth="2" fill="none" vectorEffect="non-scaling-stroke"/><path d="M750-1V12Q750 40 500 40" stroke={track.grassmann} strokeWidth="2" fill="none" vectorEffect="non-scaling-stroke"/><circle cx="500" cy="40" r="3" fill={track.joined}/><path d="M500 40V65" stroke={track.joined} strokeWidth="2" vectorEffect="non-scaling-stroke"/></svg>
+     <svg className="h-16 w-full overflow-visible lg:hidden"><circle cx="25%" cy="0" r="3" fill={track.hamilton}/><circle cx="75%" cy="0" r="3" fill={track.grassmann}/><line x1="25%" y1="0" x2="25%" y2="12" stroke={track.hamilton} strokeWidth="2"/><line x1="75%" y1="0" x2="75%" y2="12" stroke={track.grassmann} strokeWidth="2"/><line x1="25%" y1="12" x2="16" y2="42" stroke={track.hamilton} strokeWidth="2"/><line x1="75%" y1="12" x2="16" y2="42" stroke={track.grassmann} strokeWidth="2"/><line x1="16" y1="42" x2="16" y2="65" stroke={track.joined} strokeWidth="2"/><circle cx="16" cy="42" r="3" fill={track.joined}/></svg>
     </div>
     <div className="relative pb-8 pl-10 lg:pl-0" data-history-joined="true" data-history-card="clifford-product">
-     <div aria-hidden className="absolute inset-y-0 left-4 w-0.5 -translate-x-1/2 bg-violet-300 lg:left-1/2"/>
+     <div aria-hidden data-track="joined" style={{backgroundColor:track.joined}} className="absolute inset-y-0 left-4 w-0.5 -translate-x-1/2 lg:left-1/2"/>
      <div className="relative mx-auto min-w-0 lg:w-[calc(50%-3rem)]">
-      <p className="mb-3 text-sm font-semibold text-violet-800">1878 · {l?"兩條脈絡，在幾何積匯合":"The two strands meet in one product"}</p>
+      <p className="mb-3 w-fit bg-gray-50 pr-2 text-sm font-semibold text-violet-800">1878 · {l?"兩條脈絡，在幾何積匯合":"The two strands meet in one product"}</p>
       {cardContent(historyEvents.find(c=>c.id==="clifford-product")!)}
      </div>
     </div>
    </section>
    <div className="relative">
-    <div aria-hidden className="absolute top-0 bottom-0 left-4 w-0.5 -translate-x-1/2 bg-gray-200 lg:left-1/2"/>
+    <div aria-hidden data-track="continuation" style={{backgroundColor:track.joined}} className="absolute top-0 bottom-0 left-4 w-0.5 -translate-x-1/2 lg:left-1/2"/>
     <ol ref={list} className={`relative space-y-8 ${layout?"lg:space-y-0":""}`} style={layout?{height:layout.height}:undefined}>
      {continuation.map((c,i)=>{
       const st=theme[c.part-1],left=i%2===0,first=starts.has(c.id);
