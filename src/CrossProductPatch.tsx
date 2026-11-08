@@ -1,7 +1,7 @@
 import {useState} from "react";
 import Tex from "./components/Tex";
 import Arrow from "./components/GeometryArrow";
-import {crossProductAsDual} from "./foundationsModel";
+import {crossProductAsDual,crossProductView} from "./foundationsModel";
 const purple="#7c3aed",teal="#0f766e",gray="#64748b";
 const btn="rounded-md border border-violet-200 bg-white px-3 py-1.5 text-xs text-violet-800 hover:bg-violet-50";
 export default function CrossProductPatch({l}:{l:number}){
@@ -9,7 +9,7 @@ export default function CrossProductPatch({l}:{l:number}){
  const [i,j,k]=[[0,1,2],[1,2,0],[2,0,1]][plane],first=swapped?j:i,second=swapped?i:j;
  const unit=(axis:number)=>[0,1,2].map(n=>n===axis?1:0);
  const result=crossProductAsDual(unit(first),unit(second));
- const axes:number[][]=[[0,0],[0,0],[0,0]];axes[i]=[85,25];axes[j]=[-60,25];axes[k]=[0,-80];
+ const {axes}=crossProductView(plane);
  const o=[160,130],u=axes[i],v=axes[j];
  const point=(d:number[])=>[o[0]+d[0],o[1]+d[1]];
  const normal=axes.reduce((p,e,n)=>[p[0]+result.normal[n]*e[0],p[1]+result.normal[n]*e[1]],[0,0]);
@@ -25,14 +25,14 @@ export default function CrossProductPatch({l}:{l:number}){
     <p className="text-xs text-gray-600">{l?"固定右手正交單位座標。右手食指沿 a，中指沿 b，拇指就是 a × b。先猜交換順序後，拇指會朝哪裡。":"Use a fixed right-handed orthonormal frame. Point the right index finger along a, middle finger along b: the thumb gives a × b. Predict where it points after swapping."}</p>
     <div className="mt-3 flex flex-wrap justify-center gap-2">{[[1,2],[2,3],[3,1]].map((pair,n)=><button key={n} className={btn} aria-pressed={plane===n} onClick={()=>{setPlane(n);setSwapped(false);}}><Tex tex={`e_${pair[0]},\\ e_${pair[1]}`}/></button>)}</div>
     <svg viewBox="15 0 310 240" className="mx-auto max-h-64 w-full max-w-md" role="img" aria-label={l?"紫色定向面積對應綠色法向箭頭，交換順序後箭頭反向":"The purple oriented area corresponds to a teal normal arrow, which reverses when the order swaps"}>
-     {axes.map((axis,n)=><g key={n}><path d={`M${o}L${point(axis.map(x=>x*1.15))}`} stroke="#cbd5e1" strokeDasharray="3 4"/>{n!==k&&<text data-diagram-label={`input-${n}`} x={n===i?258:72} y="169" textAnchor={n===i?"start":"end"} fontSize="13" fill={gray}>{n===first?"a":"b"} = e<tspan baselineShift="sub" fontSize="9">{n+1}</tspan></text>}{n===k&&swapped&&<text data-diagram-label="positive-reference" x="160" y="24" textAnchor="middle" fontSize="12" fill="#94a3b8">+e<tspan baselineShift="sub" fontSize="9">{n+1}</tspan></text>}</g>)}
+     {axes.map((axis,n)=><g key={n}><path d={`M${o}L${point(axis.map(x=>x*1.15))}`} stroke="#cbd5e1" strokeDasharray="3 4"/>{n!==k&&<text data-diagram-label={`input-${n}`} x={n===i?74:246} y="184" textAnchor={n===i?"end":"start"} fontSize="13" fill={gray}>{n===first?"a":"b"} = e<tspan baselineShift="sub" fontSize="9">{n+1}</tspan></text>}{n===k&&swapped&&<text data-diagram-label="positive-reference" x="160" y="24" textAnchor="middle" fontSize="12" fill="#94a3b8">+e<tspan baselineShift="sub" fontSize="9">{n+1}</tspan></text>}</g>)}
      <path d={`M${o}L${point(u)}L${point(u.map((x,n)=>x+v[n]))}L${point(v)}Z`} fill={purple} fillOpacity=".2" stroke={purple} strokeOpacity=".5"/>
      <Arrow a={o} b={point(start)} color={gray}/><Arrow a={o} b={point(finish)} color={gray}/>
 
      <path d={`M${arcStart}Q${arcControl} ${arcEnd}`} stroke={purple} strokeWidth="2" fill="none"/><Arrow a={arcTail} b={arcEnd} color={purple}/>
-     <Arrow a={o} b={point(normal)} color={teal}/><text data-diagram-label="normal" x="177" y={swapped?218:45} textAnchor="start" fontSize="13" fill={teal}>a×b = {swapped?"−":"+"}e<tspan baselineShift="sub" fontSize="9">{k+1}</tspan></text>
+     <g data-normal-facing={swapped?"back":"front"}>{swapped?<><path d={`M${o}L${point(normal)}`} stroke={teal} strokeWidth="3" strokeDasharray="4 4" fill="none"/><Arrow a={point(normal.map(x=>x*.84))} b={point(normal)} color={teal}/></>:<Arrow a={o} b={point(normal)} color={teal}/>}</g><text data-diagram-label="normal" x="177" y={swapped?218:45} textAnchor="start" fontSize="13" fill={teal}>a×b = {swapped?"−":"+"}e<tspan baselineShift="sub" fontSize="9">{k+1}</tspan></text>
     </svg>
-    <p className="mb-3 text-center text-xs text-gray-500">{l?"紫色記面積，綠色記法向；切換平面時，視角也跟著轉動。":"Purple records area; teal records its normal. The view turns with the selected plane."}</p>
+    <p className="mb-3 text-center text-xs text-gray-500">{swapped?(l?"從正法向側看：a→b 順時針，法向指向平面背面（綠色虛線）。":"Seen from the positive-normal side: a→b is clockwise; the normal points behind the plane (teal dashes)."):(l?"從正法向側看：a→b 逆時針，法向指向平面正面。":"Seen from the positive-normal side: a→b is anticlockwise; the normal points out of the front of the plane.")}</p>
     <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 rounded-lg bg-white p-3" aria-live="polite"><span style={{color:purple}}><Tex tex={`e_${first+1}\\wedge e_${second+1}=${swapped?"-":""}e_{${i+1}${j+1}}`}/></span><span style={{color:teal}}><Tex tex={`e_${first+1}\\times e_${second+1}=${swapped?"-":""}e_${k+1}`}/></span></div>
     <div className="mt-3 text-center"><button className={btn} aria-pressed={swapped} onClick={()=>setSwapped(s=>!s)}>{l?"交換 a、b，看拇指反向":"Swap a and b: reverse the thumb"}</button></div>
    </div>

@@ -32,3 +32,13 @@ export function crossProductAsDual(a:readonly number[],b:readonly number[]){
  const dual=gp(negativeI,bivector);
  return {bivector,normal:[dual[1],dual[2],dual[4]]};
 }
+// A proper orthographic camera looking at the chosen plane from its positive side.
+// right × up = towardViewer; cyclic relabelling preserves handedness.
+export function crossProductView(plane:number){
+ const [i,j,k]=[[0,1,2],[1,2,0],[2,0,1]][plane];
+ const right=[0,0,0],up=[0,0,0],toward=[0,0,0];
+ right[i]=-1/Math.sqrt(2);right[j]=1/Math.sqrt(2);
+ up[i]=up[j]=-1/Math.sqrt(6);up[k]=2/Math.sqrt(6);
+ toward[i]=toward[j]=toward[k]=1/Math.sqrt(3);
+ return {right,up,toward,axes:[0,1,2].map(n=>[100*right[n],-100*up[n]])};
+}
