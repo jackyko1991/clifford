@@ -63,8 +63,8 @@ test("history milestones have bilingual text, valid mathematics and source links
 
 test("history photos are local, credited and use the recorded reuse terms",()=>{
  const credits=readFileSync(new URL("../public/history/CREDITS.md",import.meta.url),"utf8");
- assert.equal(timeline.events.filter(c=>c.photo).length,8);
- assert.equal(new Set(timeline.events.filter(c=>c.photo).map(c=>c.photo.file)).size,8,"do not repeat the same history image");
+ assert.equal(timeline.events.filter(c=>c.photo).length,7);
+ assert.equal(new Set(timeline.events.filter(c=>c.photo).map(c=>c.photo.file)).size,7,"do not repeat the same history image");
  for(const c of timeline.events)if(c.photo){
   const p=c.photo;
   assert.ok(readFileSync(new URL(`../public/history/${p.file}`,import.meta.url)).length>1000,p.file);
@@ -76,12 +76,23 @@ test("history photos are local, credited and use the recorded reuse terms",()=>{
 
 test("the textbook card has two identified portraits in one split image",()=>{
  const card=timeline.events.find(c=>c.id==="physics-textbook");
- assert.equal(card.pair.sources.length,2);
- assert.deepEqual(card.pair.sources.map(s=>s.name),["Chris Doran","Anthony Lasenby"]);
- const svg=readFileSync(new URL(`../public/history/${card.pair.file}`,import.meta.url),"utf8");
+ assert.equal(card.portraits.sources.length,2);
+ assert.deepEqual(card.portraits.sources.map(s=>s.name),["Chris Doran","Anthony Lasenby"]);
+ const svg=readFileSync(new URL(`../public/history/${card.portraits.file}`,import.meta.url),"utf8");
  assert.equal([...svg.matchAll(/<image /g)].length,2);
- for(const source of card.pair.sources){
+ for(const source of card.portraits.sources){
   assert.equal(new URL(source.url).protocol,"https:");
+  assert.ok(readFileSync(new URL(`../public/history/${source.file}`,import.meta.url)).length>1000);
+ }
+});
+
+test("the graphics book card shows its three correctly named authors",()=>{
+ const card=timeline.events.find(c=>c.id==="graphics");
+ assert.deepEqual(card.portraits.sources.map(s=>s.name),["Leo Dorst","Daniel Fontijne","Stephen Mann"]);
+ const svg=readFileSync(new URL(`../public/history/${card.portraits.file}`,import.meta.url),"utf8");
+ assert.equal([...svg.matchAll(/<image /g)].length,3);
+ for(const source of card.portraits.sources){
+  assert.equal(source.url,"https://geometricalgebra.org/authors.html");
   assert.ok(readFileSync(new URL(`../public/history/${source.file}`,import.meta.url)).length>1000);
  }
 });

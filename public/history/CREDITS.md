@@ -27,3 +27,11 @@ The Hestenes photograph is licensed separately under CC BY-SA 4.0; the site’s 
 - `doran-lasenby.svg`: original SVG layout combining those two source photographs with clipping windows, name labels and a diagonal divider. The photographs themselves are embedded unchanged.
 
 The profile pages do not state an open reuse license for these photographs. Copyright in the source photographs remains with their respective owners; the site’s code license does not cover them. Both original profile pages are credited directly beneath the displayed composite.
+
+## Dorst / Fontijne / Mann split portrait
+
+- `dorst.jpg`, `fontijne.png` and `mann.jpg`: the portraits explicitly labeled Leo Dorst, Daniel Fontijne and Stephen Mann on the [book authors’ own page](https://geometricalgebra.org/authors.html), downloaded from `images/leo.jpg`, `images/daniel.png` and `images/stephen.jpg` respectively.
+- `dorst-fontijne-mann.svg`: original SVG composition with three clipping windows, two diagonal dividers and name labels. Embedded photographs are unchanged; only their displayed windows are cropped.
+- The companion site states Copyright 2007–2009 Leo Dorst, Daniel Fontijne and Stephen Mann. It does not state an open reuse license for the portraits. Source-image copyright remains with its respective owners and is not covered by the code license.
+
+The authors’ page is credited beneath the displayed composite.

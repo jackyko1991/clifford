@@ -330,7 +330,7 @@
           "url": "https://www.cambridge.org/core/books/geometric-algebra-for-physicists/FB8D3ACB76AB3AB10BA7F27505925091"
         }
       ],
-      "pair": {
+      "portraits": {
         "file": "doran-lasenby.svg",
         "sources": [
           {
@@ -368,8 +368,8 @@
       ],
       "drawing": "graphics",
       "caption": [
-        "NVIDIA GeForce 8800 GTX, an example of graphics hardware from that era.",
-        "NVIDIA GeForce 8800 GTX，作為當時圖形運算硬體的例子。"
+        "Leo Dorst / Daniel Fontijne / Stephen Mann, left to right.",
+        "由左至右：李奧・多斯特／丹尼爾・豐泰恩／史蒂芬・曼恩。"
       ],
       "equation": "",
       "related": "skills/implementation/basis-code",
@@ -383,13 +383,28 @@
           "url": "https://www.educate.elsevier.com/book/details/9780123694652"
         }
       ],
-      "photo": {
-        "file": "graphics-gpu.webp",
-        "title": "NVIDIA GeForce 8800 GTX Board.jpg",
-        "source": "https://commons.wikimedia.org/wiki/File:NVIDIA_GeForce_8800_GTX_Board.jpg",
-        "author": "Hyins",
-        "license": "Public domain",
-        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+      "portraits": {
+        "file": "dorst-fontijne-mann.svg",
+        "sources": [
+          {
+            "file": "dorst.jpg",
+            "name": "Leo Dorst",
+            "author": "Geometric Algebra for Computer Science · authors’ site",
+            "url": "https://geometricalgebra.org/authors.html"
+          },
+          {
+            "file": "fontijne.png",
+            "name": "Daniel Fontijne",
+            "author": "Geometric Algebra for Computer Science · authors’ site",
+            "url": "https://geometricalgebra.org/authors.html"
+          },
+          {
+            "file": "mann.jpg",
+            "name": "Stephen Mann",
+            "author": "Geometric Algebra for Computer Science · authors’ site",
+            "url": "https://geometricalgebra.org/authors.html"
+          }
+        ]
       }
     },
     {
