@@ -39,3 +39,7 @@ export function rigidMotionSample(theta:number,translation:number[],translateFir
  const offset=translateFirst?rotate(translation.map(x=>x*first)):translation.map(x=>x*second);
  return {point:rotate(point).map((x,i)=>x+offset[i]),angle,offset};
 }
+export function boostEvent(t:number,x:number,beta:number){
+ const gamma=1/Math.sqrt(1-beta*beta),time=gamma*(t-beta*x),position=gamma*(x-beta*t);
+ return {time,position,interval:time*time-position*position};
+}

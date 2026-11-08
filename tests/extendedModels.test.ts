@@ -61,6 +61,10 @@ test("extended lessons compute reflections, projective incidence, conformal geom
    const flux=sides.reduce((s,e)=>s+m.dot3(m.fieldAt(...e.p,a,b),e.n)*L,0),circ=sides.reduce((s,e)=>s+m.dot3(m.fieldAt(...e.p,a,b),e.t)*L,0);
    assert.ok(Math.abs(flux-r.flux)<1e-10);assert.ok(Math.abs(circ-r.circulation)<1e-10);
   }
+  for(const beta of [-.6,-.2,0,.2,.6]){
+   const b=m.boostEvent(2,.8,beta),back=m.boostEvent(b.time,b.position,-beta);
+   assert.ok(Math.abs(b.interval-3.36)<1e-10);close([back.time,back.position],[2,.8]);
+  }
   for(const model of m.geometricModels)assert.equal(model.slots,2**model.n);
   for(let n=2;n<=10;n++){const r=m.storageCost(n);assert.equal(r.products,r.slots*r.slots);assert.equal(r.float32Bytes,4*r.slots);}
  }finally{await server.close();}
