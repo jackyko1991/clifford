@@ -3,13 +3,12 @@ import Tex from "./components/Tex";
 import Arrow from "./components/GeometryArrow";
 import {dimensionCounts,gradeColors} from "./foundationsModel";
 const btn="rounded-md border border-violet-200 bg-white px-3 py-1.5 text-xs text-violet-800 hover:bg-violet-50";
-function OpenTopBin({x,y,width,depth,height,color}:{x:number;y:number;width:number;depth:number;height:number;color:string}){
+function OpenTopBin({x,y,width,depth,height,color,hideSide=false}:{x:number;y:number;width:number;depth:number;height:number;color:string;hideSide?:boolean}){
  const top=y-height,back=top-depth*.78;
  return <g stroke={color} fill={color}>
   <path d={`M${x} ${y}h${width}v${-height}h${-width}Z`} fillOpacity=".14"/>
-  <path d={`M${x+width} ${y}l${depth} ${-depth*.78}V${back}l${-depth} ${depth*.78}Z`} fillOpacity=".24"/>
+  {!hideSide&&<path d={`M${x+width} ${y}l${depth} ${-depth*.78}V${back}l${-depth} ${depth*.78}Z`} fillOpacity=".24"/>}
   <path d={`M${x} ${top}l${depth} ${-depth*.78}h${width}l${-depth} ${depth*.78}Z`} fill="white" strokeWidth="1.5"/>
-  <path d={`M${x+5} ${top-2}L${x+width-3} ${top-2}L${x+width+depth-6} ${back+2}H${x+depth+2}Z`} fillOpacity=".4" strokeWidth=".7"/>
  </g>;
 }
 export function GeometryRecordBuilder({l}:{l:number}){
@@ -39,11 +38,10 @@ export function GeometryRecordBuilder({l}:{l:number}){
      <path d={`M${o}L${x}L${xz}L${z}Z`}/><path d={`M${x}L${xy}L${xyz}L${xz}Z`}/><path d={`M${z}L${xz}L${xyz}L${yz}Z`}/>
      <path d="M120 150V65M70 107.5H170M192.5 132.5V47.5M170 107.5L215 72.5M120 65L165 30M92.5 47.5H192.5" fill="none"/>
      <path d={`M${o}L${y}L${yz}M${y}L${xy}`} fill="none" strokeDasharray="3 4"/>
-     {[0,1].flatMap(row=>[0,1].map(col=>{const px=70+50*col+22.5*row,py=65-17.5*row;return <path key={`${row}-${col}`} d={`M${px+5} ${py-2}H${px+46}L${px+67} ${py-15.5}H${px+26}Z`} fillOpacity=".4" strokeWidth=".7"/>;}))}
 
     </g>}
     {stage===2&&<g fill={gradeColors[2]} stroke={gradeColors[2]}><path d={`M${o}L${x}L${xy}L${y}Z`} fillOpacity=".2"/><path d="M120 150L165 115M92.5 132.5H192.5" fill="none"/><path d="M70 150v-12l45-35h100v12M170 150v-12l45-35" fill="none" strokeOpacity=".45"/></g>}
-    {stage===1&&<g>{[70,120].map(x=><OpenTopBin key={x} x={x} y={140} width={50} depth={22} height={28} color={gradeColors[1]}/>)}</g>}
+    {stage===1&&<g>{[70,120].map(x=><OpenTopBin key={x} x={x} y={140} width={50} depth={22} height={28} color={gradeColors[1]} hideSide={x===70}/>)}</g>}
     <Arrow a={stage===1?[70,156]:o} b={stage===1?[170,156]:x} color={gradeColors[1]}/><text x="182" y="164" fontSize="14" fill={gradeColors[1]}>e₁</text>
     {stage>=2&&<><Arrow a={o} b={y} color={gradeColors[1]}/><text x="112" y="108" fontSize="14" fill={gradeColors[1]}>e₂</text></>}
     {stage===3&&<><Arrow a={o} b={z} color={gradeColors[1]}/><text x="54" y="56" fontSize="14" fill={gradeColors[1]}>e₃</text></>}
