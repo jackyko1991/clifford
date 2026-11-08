@@ -36,6 +36,7 @@ Use `npm.cmd` in Windows PowerShell when script execution is restricted.
 - `src/content.json` and `src/LessonSections.tsx`: existing lessons and their renderer.
 - `src/AlgebraSections.tsx`, `src/toolkitModel.ts`: bilingual interactive algebra toolkit; the diagrams use the shared Clifford product kernel. Tests cover metric changes, grade selection, inverses, duality and rotor/matrix agreement.
 - `src/history.json`, `src/HistoryPage.tsx`: sourced history timeline; original SVG illustrations in `src/components/HistoryDrawing.tsx`.
+- `src/ExtendedSections.tsx`, `src/extendedModels.ts`: rotations, geometric models, calculus and scope lessons. Ten interactive additions retain the six existing lessons; numerical tests cover reflection composition, PGA incidence, CGA null points, sphere transport and integral theorems.
 - `src/reading.json`: resource-card metadata.
 - `src/ReadingPage.tsx`: Tensorizer-style reading layout.
 - `src/components/SiteFooter.tsx`: global footer.
