@@ -40,6 +40,8 @@ function ProductExplorer({l}:{l:number}){
 function OrientationWalk({l}:{l:number}){
  const angleHeadId=useId().replaceAll(":","")+"-angle-head";
  const [swapped,setSwapped]=useState(false),[step,setStep]=useState(2);const o=[110,140],a=[210,140],b=[160,140-50*Math.sqrt(3)],end=[260,140-50*Math.sqrt(3)],first=swapped?b:a;
+ const heading=swapped?[.5,-Math.sqrt(3)/2]:[1,0],nextHeading=swapped?[1,0]:[.5,-Math.sqrt(3)/2];
+ const turnStart=first.map((x,i)=>x+30*heading[i]),turnEnd=first.map((x,i)=>x+30*nextHeading[i]),forward=first.map((x,i)=>x+37*heading[i]);
  return <figure data-interactive="orientation-walk" className="space-y-3">
   <svg viewBox="75 15 240 155" className="mx-auto w-full max-w-md" role="img" aria-label={l?"同一平行四邊形，依序走兩條邊；交換次序反轉定向":"Walk two edges of the same parallelogram; swapping their order reverses orientation"}>
    <path d="M95 140H285M110 155V35" stroke="#cbd5e1" fill="none"/>
@@ -48,15 +50,15 @@ function OrientationWalk({l}:{l:number}){
    <path d={`M${o}L${a}L${end}L${b}Z`} fill={purple} fillOpacity={step===2?.2:.05} stroke="#c4b5fd"/>
    <path d={`M${o}L${b}`} stroke="#a78bfa" strokeDasharray="3 4" fill="none"/>
    <defs><marker id={angleHeadId} viewBox="0 -3 6 6" refX="6" refY="0" markerWidth="6" markerHeight="6" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 -3L6 0L0 3Z" fill={purple}/></marker></defs>
-   {step===2&&<path data-angle-direction={swapped?"clockwise":"anticlockwise"} d={swapped?`M125 ${140-15*Math.sqrt(3)}A30 30 0 0 1 140 140`:`M140 140A30 30 0 0 0 125 ${140-15*Math.sqrt(3)}`} stroke={purple} strokeWidth="2" fill="none" markerEnd={`url(#${angleHeadId})`}/>}
+   {step===2&&<><path data-turn-forward="true" d={`M${first}L${forward}`} stroke={teal} strokeWidth="1.4" strokeDasharray="3 3" fill="none"/><path data-angle-direction={swapped?"clockwise":"anticlockwise"} data-turn-center={first.join(',')} d={`M${turnStart}A30 30 0 0 ${swapped?1:0} ${turnEnd}`} stroke={purple} strokeWidth="2" fill="none" markerEnd={`url(#${angleHeadId})`}/></>}
 
    {step>=1&&<Arrow a={o} b={first} color={teal}/>} {step>=2&&<Arrow a={first} b={end}/>}
-   <text x="215" y="160" fontSize="13" fill={teal}>a</text><text x="140" y="50" fontSize="13" fill={purple}>b</text>
+   <text x={swapped?118:160} y={swapped?97:158} textAnchor="middle" fontSize="13" fill={teal}>{swapped?"b":"a"}</text><text x={swapped?210:250} y={swapped?41:100} textAnchor="middle" fontSize="13" fill={purple}>{swapped?"a":"b"}</text>
    <text x="190" y="110" textAnchor="middle" fontSize="22" fill={purple}>{step===2?(swapped?"−":"+"):"?"}</text>
   </svg>
   <figcaption className="space-y-1 text-center text-xs">
    {step===2&&<p style={{color:purple}} aria-live="polite"><Tex tex={`${swapped?"b\\to a":"a\\to b"}:\\quad ${swapped?"-":"+"}60^\\circ`}/></p>}
-   <p className="text-gray-500">{l?"交換後變負的是轉向角；座標軸與兩支箭頭的分量沒有反轉。":"Swapping makes the turn angle negative; the axes and vector components do not reverse."}</p>
+   <p className="text-gray-500">{l?"先走完綠色第一段，再從它的前進方向（綠色虛線）轉向紫色第二段。交換先後後，轉向角變負，座標軸與向量分量保持相同。":"Finish the green first segment, then turn from its forward direction (green dashes) toward the purple second segment. Swapping the order reverses the turn sign while axes and vector components stay the same."}</p>
   </figcaption>
   <div className="text-center" aria-live="polite"><Tex tex={`${swapped?"b\\wedge a":"a\\wedge b"}=\\textcolor{#7c3aed}{${swapped?"-":""}\\frac{\\sqrt{3}}{2}e_{12}}`}/></div>
   <div className="flex flex-wrap justify-center gap-2"><button className={btn} onClick={()=>setStep(0)}>{l?"回到起點":"Start again"}</button><button className={btn} disabled={step===2} onClick={()=>setStep(s=>Math.min(2,s+1))}>{l?"走下一條邊":"Walk next edge"}</button><button className={btn} aria-pressed={swapped} onClick={()=>{setSwapped(s=>!s);setStep(2);}}>{l?"交換先後次序":"Reverse the order"}</button></div>
