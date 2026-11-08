@@ -54,6 +54,7 @@ function useInterlock(listRef: RefObject<HTMLOListElement | null>, ids: string[]
 
 export default function HistoryPage({l,section}:{l:number;section:string|null}){
  const [active,setActive]=useState(section||historyEvents[0].id),[menu,setMenu]=useState(false),[notes,setNotes]=useState<Set<string>>(()=>new Set());
+ const [origin,setOrigin]=useState(section==="grassmann"?"grassmann":"hamilton");
  const list=useRef<HTMLOListElement>(null);
  const continuation=historyEvents.filter(c=>c.part>1);
  const ids=continuation.map(c=>c.id);
@@ -62,7 +63,14 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
  const noteIds=historyEvents.filter(c=>c.note).map(c=>c.id);
  const allOpen=noteIds.every(id=>notes.has(id));
  const linkedAt=useRef(0),clickedAt=useRef(0);
- useEffect(()=>{linkedAt.current=Date.now();},[section]);
+ useEffect(()=>{
+  linkedAt.current=Date.now();
+  if(section==="hamilton"||section==="grassmann"){
+   setOrigin(section);
+   const frame=requestAnimationFrame(()=>document.getElementById(section)?.scrollIntoView({block:"start"}));
+   return()=>cancelAnimationFrame(frame);
+  }
+ },[section]);
  useEffect(()=>{
   if(layout&&section&&Date.now()-linkedAt.current<2500)document.getElementById(section)?.scrollIntoView({block:"start"});
  },[layout,section]);
@@ -70,7 +78,7 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
   const root=document.getElementById("concept-scroll");if(!root)return;
   let frame=0;
   const update=()=>{frame=0;if(Date.now()-clickedAt.current<1200)return;let id=historyEvents[0].id;const line=root.getBoundingClientRect().top+130;
-   for(const c of historyEvents)if((document.getElementById(c.id)?.getBoundingClientRect().top??Infinity)<=line)id=c.id;
+   for(const c of historyEvents){const el=document.getElementById(c.id);if(el&&el.getClientRects().length&&el.getBoundingClientRect().top<=line)id=c.id;}
    if(root.scrollTop+root.clientHeight>=root.scrollHeight-4)id=historyEvents.at(-1)!.id;
    setActive(id);
   };
@@ -81,7 +89,8 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
  const jump=(id:string)=>{
   clickedAt.current=Date.now();
   setActive(id);setMenu(false);
-  document.getElementById(id)?.scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+  if(id==="hamilton"||id==="grassmann")setOrigin(id);
+  requestAnimationFrame(()=>document.getElementById(id)?.scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}));
   history.replaceState(null,"",`#/concept/history/${id}`);
  };
  const toggle=(id:string)=>setNotes(s=>{const next=new Set(s);if(!next.delete(id))next.add(id);return next;});
@@ -121,24 +130,30 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
    </div>
    <section className="mt-8" aria-labelledby="origins-title" data-history-branches="true">
     <header className="mb-5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3"><h2 id="origins-title" className="font-semibold text-amber-900">{historyEras[0].title[l]}</h2><p className="mt-1 text-xs text-amber-800">{l?"兩條獨立發展的代數脈絡，在 1878 年的幾何積中匯合。":"Two independently developed algebraic strands meet in the geometric product in 1878."}</p></header>
+    <div role="tablist" aria-label={l?"兩條思想脈絡":"Two strands of ideas"} className="mb-4 grid grid-cols-2 gap-2 lg:hidden" data-origin-tabs="true">
+     {historyEvents.slice(0,2).map((c,i)=><button key={c.id} id={`origin-tab-${c.id}`} role="tab" type="button" aria-selected={origin===c.id} aria-controls={`origin-panel-${c.id}`} tabIndex={origin===c.id?0:-1}
+      onClick={()=>{setOrigin(c.id);setActive(c.id);clickedAt.current=Date.now();}}
+      onKeyDown={e=>{if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;e.preventDefault();const next=e.key==="Home"?"hamilton":e.key==="End"?"grassmann":c.id==="hamilton"?"grassmann":"hamilton";setOrigin(next);setActive(next);clickedAt.current=Date.now();document.getElementById(`origin-tab-${next}`)?.focus();}}
+      className={`min-w-0 rounded-lg border px-2 py-3 text-xs font-semibold leading-relaxed ${origin===c.id?(i===0?"border-amber-400 bg-amber-50 text-amber-900":"border-teal-400 bg-teal-50 text-teal-900"):"border-gray-200 bg-white text-gray-500"}`}>{i===0?(l?"哈密頓 · 四元數":"Hamilton · quaternions"):(l?"格拉斯曼 · 外代數":"Grassmann · exterior algebra")}</button>)}
+    </div>
     <div className="relative" data-history-parallel="true">
-     <div aria-hidden className="absolute inset-y-0 left-3 w-0.5 bg-amber-300 lg:left-1/4 lg:-translate-x-1/2"/>
-     <div aria-hidden className="absolute inset-y-0 left-8 w-0.5 bg-teal-300 lg:left-3/4 lg:-translate-x-1/2"/>
-     <div className="grid gap-y-8 pl-14 lg:grid-cols-2 lg:pl-0">
-      {historyEvents.slice(0,2).map((c,i)=><div key={c.id} data-history-branch={c.id} data-history-card={c.id} className="relative min-w-0 pb-5 lg:px-3">
-       <span aria-hidden className={`absolute top-3 h-2.5 w-2.5 -translate-x-1/2 rounded-full ring-4 ring-gray-50 lg:left-1/2 ${i===0?"-left-11 bg-amber-500":"-left-6 bg-teal-600"}`}/>
+     <div aria-hidden className="absolute inset-y-0 hidden w-0.5 bg-amber-300 lg:left-1/4 lg:block lg:-translate-x-1/2"/>
+     <div aria-hidden className="absolute inset-y-0 hidden w-0.5 bg-teal-300 lg:left-3/4 lg:block lg:-translate-x-1/2"/>
+     <div className="grid gap-y-8 lg:grid-cols-2">
+      {historyEvents.slice(0,2).map((c,i)=><div key={c.id} data-history-branch={c.id} data-history-card={c.id} id={`origin-panel-${c.id}`} role="tabpanel" aria-labelledby={`origin-tab-${c.id}`} className={`relative min-w-0 pb-5 lg:px-3 ${origin===c.id?"":"hidden lg:block"}`}>
+       <span aria-hidden className={`absolute top-3 hidden h-2.5 w-2.5 lg:block -translate-x-1/2 rounded-full ring-4 ring-gray-50 lg:left-1/2 ${i===0?"-left-11 bg-amber-500":"-left-6 bg-teal-600"}`}/>
        <p className={`relative mb-3 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-xs font-semibold ${i===0?"text-amber-800":"text-teal-800"}`}><span className="tabular-nums">{c.year}</span><span>{i===0?(l?"旋轉 · 四元數":"Rotations · quaternions"):(l?"延伸 · 定向面積":"Extension · oriented area")}</span></p>
        {cardContent(c)}
       </div>)}
      </div>
-     <aside data-history-card="clifford-space" className="relative mt-4 pb-6 pl-14 lg:mx-auto lg:w-[calc(50%-3rem)] lg:pl-0" aria-label={l?"同時期的另一個問題":"A separate question of the period"}>
+     <aside data-history-card="clifford-space" className="relative mt-4 pb-6 lg:mx-auto lg:w-[calc(50%-3rem)]" aria-label={l?"同時期的另一個問題":"A separate question of the period"}>
       <p className="mb-3 text-xs font-medium leading-relaxed text-gray-500">{l?"同時期的另一個問題：空間與物質":"A separate question of the period: space and matter"} · 1870 / 1876</p>
       {cardContent(historyEvents.find(c=>c.id==="clifford-space")!)}
      </aside>
     </div>
     <div aria-hidden data-history-merge="true">
      <svg viewBox="0 0 1000 64" preserveAspectRatio="none" className="hidden h-16 w-full lg:block"><path d="M250 0V12Q250 40 500 40" stroke="#f59e0b" strokeWidth="2" fill="none" vectorEffect="non-scaling-stroke"/><path d="M750 0V12Q750 40 500 40" stroke="#0d9488" strokeWidth="2" fill="none" vectorEffect="non-scaling-stroke"/><path d="M500 40V64" stroke="#7c3aed" strokeWidth="2" vectorEffect="non-scaling-stroke"/></svg>
-     <svg viewBox="0 0 48 64" className="h-16 w-12 lg:hidden"><path d="M12 0V12Q12 38 16 38" stroke="#f59e0b" strokeWidth="2" fill="none"/><path d="M32 0V12Q32 38 16 38" stroke="#0d9488" strokeWidth="2" fill="none"/><path d="M16 38V64" stroke="#7c3aed" strokeWidth="2"/><circle cx="16" cy="38" r="3" fill="#7c3aed"/></svg>
+     <svg className="h-16 w-full lg:hidden"><line x1="25%" y1="0" x2="25%" y2="12" stroke="#f59e0b" strokeWidth="2"/><line x1="75%" y1="0" x2="75%" y2="12" stroke="#0d9488" strokeWidth="2"/><line x1="25%" y1="12" x2="16" y2="42" stroke="#f59e0b" strokeWidth="2"/><line x1="75%" y1="12" x2="16" y2="42" stroke="#0d9488" strokeWidth="2"/><line x1="16" y1="42" x2="16" y2="64" stroke="#7c3aed" strokeWidth="2"/><circle cx="16" cy="42" r="3" fill="#7c3aed"/></svg>
     </div>
     <div className="relative pb-8 pl-10 lg:pl-0" data-history-joined="true" data-history-card="clifford-product">
      <div aria-hidden className="absolute inset-y-0 left-4 w-0.5 -translate-x-1/2 bg-violet-300 lg:left-1/2"/>
