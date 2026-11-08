@@ -5,9 +5,9 @@ import Tex from "./components/Tex";
 const LG="(min-width:1024px)",GAP=24,BADGE=24;
 const track={hamilton:"#f59e0b",grassmann:"#0d9488",joined:"#7c3aed"};
 const theme=[
- {dot:"bg-amber-500",text:"text-amber-800",band:"border-amber-200 bg-amber-50 text-amber-900"},
- {dot:"bg-teal-600",text:"text-teal-800",band:"border-teal-200 bg-teal-50 text-teal-900"},
- {dot:"bg-violet-600",text:"text-violet-800",band:"border-violet-200 bg-violet-50 text-violet-900"},
+ {dot:"bg-amber-500",text:"text-amber-800",badge:"bg-amber-50 text-amber-800 ring-amber-200",band:"border-amber-200 bg-amber-50 text-amber-900"},
+ {dot:"bg-teal-600",text:"text-teal-800",badge:"bg-teal-50 text-teal-800 ring-teal-200",band:"border-teal-200 bg-teal-50 text-teal-900"},
+ {dot:"bg-violet-600",text:"text-violet-800",badge:"bg-violet-50 text-violet-800 ring-violet-200",band:"border-violet-200 bg-violet-50 text-violet-900"},
 ];
 function useInterlock(listRef: RefObject<HTMLOListElement | null>, ids: string[], partStarts: Set<string>) {
   const [layout, setLayout] = useState<{ tops: Record<string, number>; height: number } | null>(null);
@@ -101,7 +101,7 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
    <button onClick={()=>jump(c.id)} aria-current={active===c.id?"location":undefined} className={`-ml-px flex w-full gap-2 border-l-2 px-3 py-1 text-left text-sm ${active===c.id?"border-violet-600 font-medium text-violet-800":"border-transparent text-gray-600 hover:border-gray-300"}`}><span className="w-16 shrink-0 text-[11px] text-gray-400">{c.year}</span><span>{c.title[l]}</span></button>
   </li>)}</ol>
  </div>)}
- <button role="switch" aria-checked={allOpen} onClick={()=>setNotes(allOpen?new Set():new Set(noteIds))} className="w-full rounded-lg border border-dashed border-amber-300 bg-amber-50 px-3 py-2 text-left text-xs text-amber-900">💡 {l?"顯示所有小故事":"Show all side notes"}<span className="float-right">{allOpen?"●":"○"}</span></button>
+ <button type="button" role="switch" aria-checked={allOpen} onClick={()=>setNotes(allOpen?new Set():new Set(noteIds))} data-history-fun-all className="mt-3 flex w-full items-center gap-2 rounded-lg border border-dashed border-amber-300 bg-amber-50/60 px-3 py-2 text-left text-sm text-amber-900 hover:bg-amber-50"><span className="min-w-0 flex-1">{l?"顯示所有趣聞":"Show all fun facts"}</span><span aria-hidden className={`relative h-5 w-9 shrink-0 rounded-full transition-colors ${allOpen?"bg-amber-500":"bg-gray-300"}`}><span className={`absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${allOpen?"translate-x-4":""}`}/></span></button>
  </>;
  const cardContent=(c:HistoryEvent,first=false)=>{
   const st=theme[c.part-1],era=historyEras.find(e=>e.id===c.part)!;
@@ -112,10 +112,17 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
          <figcaption className="px-4 pb-3 text-[11px] leading-relaxed text-gray-500">{c.caption[l]}{c.photo&&<span className="mt-1 block">{c.photo.author} · <a href={c.photo.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline">{c.photo.license}</a> · <a href={c.photo.source} target="_blank" rel="noopener noreferrer" className="underline">{l?"圖片來源":"Image source"}</a></span>}</figcaption>
         </figure>
         <div className="space-y-3 p-4 sm:p-5">
+         <p className="flex flex-wrap items-center gap-2">
+          <span className={`rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums ring-1 ${st.badge}`}>{c.year}</span>
+          {c.note&&<button type="button" aria-expanded={notes.has(c.id)} aria-controls={`history-fun-${c.id}`} aria-label={l?"你知道嗎？":"Did you know?"} title={l?"你知道嗎？":"Did you know?"} data-history-fun-badge={c.id} onClick={()=>toggle(c.id)} className={`rounded-full border border-dashed px-1.5 py-0.5 text-xs leading-none transition-colors ${notes.has(c.id)?"border-amber-500 bg-amber-100":"border-amber-300 bg-amber-50 hover:bg-amber-100"}`}><span aria-hidden>💡</span></button>}
+         </p>
+         {c.note&&notes.has(c.id)&&<aside id={`history-fun-${c.id}`} data-history-fun={c.id} className="mt-3 rounded-lg border-2 border-dashed border-amber-300 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-gray-800">
+          <p className="text-xs font-semibold text-amber-900">💡 {l?"你知道嗎？":"Did you know?"}</p>
+          <div className="mt-1.5 break-words"><p>{c.note[l]}</p><p className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs">{c.sources.map(source=><a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:underline">{source.label} ↗</a>)}</p></div>
+         </aside>}
          <h2 className="text-lg font-semibold leading-snug">{c.title[l]}</h2>
          {c.paragraphs.map((p,i)=><p key={i} className="text-sm leading-relaxed text-gray-600">{p[l]}</p>)}
          {c.equation&&<div className="rounded-lg bg-violet-50/70 px-2 py-1 text-sm"><Tex tex={c.equation} display/></div>}
-         {c.note&&<><button aria-expanded={notes.has(c.id)} aria-controls={`note-${c.id}`} onClick={()=>toggle(c.id)} className="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-900">💡 {l?"小故事":"Side note"} {notes.has(c.id)?"−":"+"}</button>{notes.has(c.id)&&<p id={`note-${c.id}`} className="rounded-lg border border-amber-100 bg-amber-50/60 p-3 text-xs leading-relaxed text-amber-950">{c.note[l]}</p>}</>}
          <a href={`#/${c.related}`} className="inline-block text-xs font-medium text-violet-700 hover:underline">{l?"到相關概念或例子 →":"Explore the related lesson →"}</a>
          <ul className="space-y-1 border-t border-gray-100 pt-3 text-[11px] text-gray-500">{c.sources.map(s=><li key={s.url}><a href={s.url} target="_blank" rel="noopener noreferrer" className="hover:text-violet-700 hover:underline">{s.label} ↗</a></li>)}</ul>
         </div>
