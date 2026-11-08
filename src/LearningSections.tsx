@@ -13,19 +13,20 @@ function Card({id,n,title,children}:{id:string;n:number;title:string;children:Re
 function QuarterTurns({l}:{l:number}){
  const [turns,setTurns]=useState(0),[playing,setPlaying]=useState(false);
  const id=useId().replaceAll(":","");const v=quarterTurn(turns);
+ const from=quarterTurn(Math.max(0,turns-1)),to=quarterTurn(Math.max(1,turns));
  useEffect(()=>{if(!playing)return;const timer=setInterval(()=>setTurns(n=>{if(n>=3)setPlaying(false);return Math.min(4,n+1);}),700);return()=>clearInterval(timer);},[playing]);
  return <figure className="rounded-lg border border-emerald-100 bg-emerald-50/60 p-4" data-interactive="quarter-turns">
   <svg viewBox="0 0 360 230" className="mx-auto w-full max-w-md" role="img" aria-label={l?"在數線的平面上，每乘一次 i 就逆時針轉九十度":"Each multiplication by i turns the arrow anticlockwise by ninety degrees"}>
-   <defs><marker id={id} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#7c3aed"/></marker></defs>
+   <defs><marker id={id} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#7c3aed"/></marker><marker id={`${id}-turn`} viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0f766e"/></marker></defs>
    <path d="M35 115H325M180 20V210" stroke="#cbd5e1"/><circle cx="180" cy="115" r="75" fill="white" stroke="#ddd6fe"/>
-   <path d="M255 115A75 75 0 0 0 180 40" fill="none" stroke="#0f766e" strokeDasharray="4 4"/>
+   <path data-quarter-turn={turns} d={`M${180+75*from.x} ${115-75*from.y}A75 75 0 0 0 ${180+75*to.x} ${115-75*to.y}`} fill="none" stroke="#0f766e" strokeWidth="1.5" strokeDasharray="4 4" markerEnd={`url(#${id}-turn)`}/>
    <g style={{transform:`rotate(${-turns*90}deg)`,transformOrigin:"180px 115px",transition:"transform 400ms ease"}}><path d="M180 115H253" stroke="#7c3aed" strokeWidth="3" markerEnd={`url(#${id})`}/></g>
    {[[270,120,"1"],[180,29,"i"],[89,120,"−1"],[180,213,"−i"]].map(([x,y,t])=><text key={t} x={x} y={y} textAnchor="middle" fontSize="14" fill="#475569">{t}</text>)}
-   <circle cx={180+75*v.x} cy={115-75*v.y} r="4" fill="#0f766e"/>
+   <circle cx={180+75*v.x} cy={115-75*v.y} r="2.5" fill="#0f766e"/>
   </svg>
   <div className="text-center text-lg" aria-live="polite"><Tex tex={String.raw`i^{${turns}}=${quarterTurn(turns).tex}`}/></div>
   <div className="mt-3 flex flex-wrap justify-center gap-2"><button className={button} disabled={turns===4||playing} onClick={()=>setTurns(n=>n+1)}>{l?"再乘一次 i":"Multiply by i"}</button><button className={button} disabled={playing} onClick={()=>{setTurns(0);setPlaying(true);}}>{l?"▶ 播放四次轉向":"▶ Play four turns"}</button><button className={button} onClick={()=>{setPlaying(false);setTurns(0);}}>{l?"重設":"Reset"}</button></div>
-  <figcaption className="mt-3 text-center text-xs text-emerald-900">{l?"先看轉向，再看平方：兩個四分之一圈，就是半圈。":"Watch the turn before the square: two quarter turns make a half turn."}</figcaption>
+  <figcaption className="mt-3 space-y-2 text-center text-xs text-emerald-900"><p aria-live="polite">{turns===0?(l?"綠色虛線預告下一步：":"The dotted green arrow previews the next step: "):(l?"綠色虛線標出這一步：":"The dotted green arrow traces this step: ")}<Tex tex={`${from.tex.startsWith("-")?`(${from.tex})`:from.tex}\\times i=${to.tex}`}/></p><p>{l?"先看轉向，再看平方：兩個四分之一圈，就是半圈。":"Watch the turn before the square: two quarter turns make a half turn."}</p></figcaption>
  </figure>;
 }
 function BridgePhotos({l}:{l:number}){
