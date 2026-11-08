@@ -33,7 +33,7 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
  const points=(offset:number,color:string)=>{const pts=Array.from({length:81},(_,i)=>{const z=i/80*7*Math.PI,phase=z-theta;const e=Math.sin(phase),other=circular?Math.cos(phase):0;return `${55+i*5.4+(offset?30*e:30*other)},${130+(offset?52*other-18*e:-52*e-18*other)}`;}).join(" ");return <polyline points={pts} fill="none" stroke={color} strokeWidth="2.5"/>;};
  return <figure className="geometry rounded-lg border border-violet-100 bg-violet-50/40 p-4" data-diagram={kind}>
   <svg viewBox="0 0 550 250" className="w-full" role="img" aria-label={descriptions[kind]?.[l]}>
-   <defs><marker id={uid} markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto-start-reverse"><path d="M0 0L6 3L0 6" fill="none" stroke="context-stroke" strokeWidth="1.4"/></marker></defs>
+   <defs><marker id={uid} viewBox="0 0 10 10" markerWidth="4" markerHeight="4" refX="7" refY="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="context-stroke"/></marker></defs>
    {kind==="product" && <>
     <path d={`M160 130l90 0l${bx} ${by}l-90 0Z`} fill={purple} opacity={.13}/>
     {arrow(160,130,250,130,teal)}{arrow(160,130,160+bx,130+by)}
