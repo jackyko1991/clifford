@@ -45,7 +45,7 @@ export default function App(){
         {selected.id==="history"?<HistoryPage l={l} section={route.section}/>:<div className="mx-auto flex max-w-6xl gap-8 px-5 pt-6 pb-10">
           <PageToc scrollRoot="concept-scroll" l={l} items={selected.sections.map((s,i)=>({id:s.id,mark:i+1,label:s.title[l]}))}/>
           <article id="main-content" tabIndex={-1} className="min-w-0 max-w-4xl flex-1 space-y-10" data-testid="lesson-page">
-            <header><h1 className="text-3xl font-semibold tracking-tight">{selected.title[l]}</h1><p className="mt-3 text-gray-500">{selected.intro[l]}</p><p className="mt-3 text-xs text-gray-500">{l?`已有 ${existingCount(selected.sections)} 節內容 · ${selected.sections.length-existingCount(selected.sections)} 節待補`:`${existingCount(selected.sections)} existing lessons · ${selected.sections.length-existingCount(selected.sections)} planned`}</p></header>
+            <header><h1 className="text-3xl font-semibold tracking-tight">{selected.title[l]}</h1><p className="mt-3 text-gray-500">{selected.intro[l]}</p></header>
             {selected.id==="learning"?<LearningSections l={l}/>:<LessonSections sections={selected.sections} l={l}/>}
           </article>
         </div>}
