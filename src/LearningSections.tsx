@@ -2,7 +2,7 @@ import {useEffect,useId,useState,type ReactNode} from "react";
 import Tex from "./components/Tex";
 import GeometryFigure from "./components/GeometryFigure";
 import CodeBlock from "./components/CodeBlock";
-import {quarterTurn,quaternionProduct,quaternionUnits,type QuaternionUnit} from "./learningModel";
+import {geometricProductTex,quarterTurn,quaternionProduct,quaternionUnits,type QuaternionUnit} from "./learningModel";
 const button="rounded-md border border-violet-200 bg-white px-3 py-1.5 text-sm text-violet-800 hover:bg-violet-50 disabled:opacity-40";
 function Card({id,n,title,children}:{id:string;n:number;title:string;children:ReactNode}){
  return <section id={id} data-learning-section={id} data-lesson={id} className="scroll-mt-20 rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
@@ -67,7 +67,7 @@ function Prediction({l}:{l:number}){
    <path d="M160 130h75" stroke="#0f766e" strokeWidth="3" markerEnd={`url(#${uid})`}/><path d={`M160 130l${75*Math.cos(theta)} ${-75*Math.sin(theta)}`} stroke="#7c3aed" strokeWidth="3" markerEnd={`url(#${uid})`}/>
   </svg>
   <div className="text-center"><button className={button} onClick={()=>setRevealed(v=>!v)}>{revealed?(l?"再猜一次":"Hide answer"):(l?"我想好了，揭曉":"Reveal my check")}</button></div>
-  <div className="mt-3 min-h-10 text-center" aria-live="polite">{revealed?<Tex tex={String.raw`ab=	extcolor{#0f766e}{${Math.round(Math.cos(theta))}}+	extcolor{#7c3aed}{${Math.round(Math.sin(theta))}e_{12}}`}/>:<p>{l?"同向留下多少？還圍得出面積嗎？":"How much alignment remains? Is there any area?"}</p>}</div>
+  <div className="mt-3 min-h-10 text-center" aria-live="polite">{revealed?<Tex tex={geometricProductTex(angle,0)}/>:<p>{l?"同向留下多少？還圍得出面積嗎？":"How much alignment remains? Is there any area?"}</p>}</div>
  </figure>;
 }
 export default function LearningSections({l}:{l:number}){

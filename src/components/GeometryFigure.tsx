@@ -1,6 +1,7 @@
 import {useEffect,useId,useState} from "react";
 import {basis,rotate,rotor} from "../algebra";
 import {magneticLoop} from "../magneticLoop";
+import {geometricProductTex} from "../learningModel";
 import Tex from "./Tex";
 const purple="#7c3aed",teal="#0f766e",muted="#94a3b8";
 export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
@@ -133,7 +134,7 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
   </svg>
   {kind==="product"&&<div className="mb-4 rounded-lg border border-violet-100 bg-white px-3 py-3 text-center" data-testid="geometric-product-value">
    <p className="mb-1 text-xs text-gray-500">{l?"幾何積（兩支單位箭頭）":"Geometric product (two unit arrows)"}</p>
-   <Tex tex={String.raw`ab=\textcolor{#0f766e}{${(Math.abs(Math.cos(theta))<.0005?0:Math.cos(theta)).toFixed(3)}}${Math.sin(theta)<-.0005?"-":"+"}\textcolor{#7c3aed}{${(Math.abs(Math.sin(theta))<.0005?0:Math.abs(Math.sin(theta))).toFixed(3)}\,e_{12}}`}/>
+   <Tex tex={geometricProductTex(angle)}/>
   </div>}
   {kind==="holonomy"&&<div className="mb-4 grid gap-3 text-center text-xs sm:grid-cols-2">
    <div className="rounded-lg border border-violet-100 bg-white px-3 py-2"><p className="mb-1 text-gray-500">{l?"固定磁通":"Fixed magnetic flux"}</p><Tex tex={String.raw`\Phi\simeq${(flux.fluxWebers/1e-15).toFixed(2)}\times10^{-15}\,\mathrm{Wb}`}/></div>

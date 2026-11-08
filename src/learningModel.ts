@@ -13,3 +13,10 @@ export function quaternionProduct(a:QuaternionUnit,b:QuaternionUnit):string {
  throw new Error("Product must be a quaternion basis unit");
 }
 export function quarterTurn(turns:number){const n=((turns%4)+4)%4;return {x:[1,0,-1,0][n],y:[0,1,0,-1][n],tex:["1","i","-1","-i"][n]};}
+
+export function geometricProductTex(degrees:number,precision=3):string {
+ const theta=degrees*Math.PI/180,c=Math.cos(theta),s=Math.sin(theta);
+ const format=(value:number)=>(Math.abs(value)<.0005?0:value).toFixed(precision);
+ return ["ab=", "\\textcolor{#0f766e}{",format(c),"}",s<-.0005?"-":"+",
+  "\\textcolor{#7c3aed}{",format(Math.abs(s)),"\\,e_{12}}"].join("");
+}
