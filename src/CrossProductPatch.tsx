@@ -24,13 +24,13 @@ export default function CrossProductPatch({l}:{l:number}){
    <div className="rounded-lg border-l-4 border-emerald-300 bg-emerald-50/60 p-3" data-interactive="right-hand-cross-product">
     <p className="text-xs text-gray-600">{l?"固定右手正交單位座標。右手食指沿 a，中指沿 b，拇指就是 a × b。先猜交換順序後，拇指會朝哪裡。":"Use a fixed right-handed orthonormal frame. Point the right index finger along a, middle finger along b: the thumb gives a × b. Predict where it points after swapping."}</p>
     <div className="mt-3 flex flex-wrap justify-center gap-2">{[[1,2],[2,3],[3,1]].map((pair,n)=><button key={n} className={btn} aria-pressed={plane===n} onClick={()=>{setPlane(n);setSwapped(false);}}><Tex tex={`e_${pair[0]},\\ e_${pair[1]}`}/></button>)}</div>
-    <svg viewBox="35 10 260 225" className="mx-auto max-h-64 w-full max-w-md" role="img" aria-label={l?"紫色定向面積對應綠色法向箭頭，交換順序後箭頭反向":"The purple oriented area corresponds to a teal normal arrow, which reverses when the order swaps"}>
-     {axes.map((axis,n)=><g key={n}><path d={`M${o}L${point(axis.map(x=>x*1.15))}`} stroke="#cbd5e1" strokeDasharray="3 4"/><text x={point(axis.map(x=>x*1.3))[0]} y={point(axis.map(x=>x*1.3))[1]+4} textAnchor="middle" fontSize="12" fill="#94a3b8">+e{n+1}</text></g>)}
+    <svg viewBox="15 0 310 240" className="mx-auto max-h-64 w-full max-w-md" role="img" aria-label={l?"紫色定向面積對應綠色法向箭頭，交換順序後箭頭反向":"The purple oriented area corresponds to a teal normal arrow, which reverses when the order swaps"}>
+     {axes.map((axis,n)=><g key={n}><path d={`M${o}L${point(axis.map(x=>x*1.15))}`} stroke="#cbd5e1" strokeDasharray="3 4"/>{n!==k&&<text data-diagram-label={`input-${n}`} x={n===i?258:72} y="169" textAnchor={n===i?"start":"end"} fontSize="13" fill={gray}>{n===first?"a":"b"} = e<tspan baselineShift="sub" fontSize="9">{n+1}</tspan></text>}{n===k&&swapped&&<text data-diagram-label="positive-reference" x="160" y="24" textAnchor="middle" fontSize="12" fill="#94a3b8">+e<tspan baselineShift="sub" fontSize="9">{n+1}</tspan></text>}</g>)}
      <path d={`M${o}L${point(u)}L${point(u.map((x,n)=>x+v[n]))}L${point(v)}Z`} fill={purple} fillOpacity=".2" stroke={purple} strokeOpacity=".5"/>
      <Arrow a={o} b={point(start)} color={gray}/><Arrow a={o} b={point(finish)} color={gray}/>
-     <text x={point(start.map(x=>x*.8))[0]+7} y={point(start.map(x=>x*.8))[1]-7} fontSize="13" fill={gray}>a</text><text x={point(finish.map(x=>x*.8))[0]-10} y={point(finish.map(x=>x*.8))[1]+13} fontSize="13" fill={gray}>b</text>
+
      <path d={`M${arcStart}Q${arcControl} ${arcEnd}`} stroke={purple} strokeWidth="2" fill="none"/><Arrow a={arcTail} b={arcEnd} color={purple}/>
-     <Arrow a={o} b={point(normal)} color={teal}/><text x={point(normal)[0]+10} y={point(normal)[1]+(normal[1]>0?14:-10)} fontSize="13" fill={teal}>a×b</text>
+     <Arrow a={o} b={point(normal)} color={teal}/><text data-diagram-label="normal" x="177" y={swapped?218:45} textAnchor="start" fontSize="13" fill={teal}>a×b = {swapped?"−":"+"}e<tspan baselineShift="sub" fontSize="9">{k+1}</tspan></text>
     </svg>
     <p className="mb-3 text-center text-xs text-gray-500">{l?"紫色記面積，綠色記法向；切換平面時，視角也跟著轉動。":"Purple records area; teal records its normal. The view turns with the selected plane."}</p>
     <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 rounded-lg bg-white p-3" aria-live="polite"><span style={{color:purple}}><Tex tex={`e_${first+1}\\wedge e_${second+1}=${swapped?"-":""}e_{${i+1}${j+1}}`}/></span><span style={{color:teal}}><Tex tex={`e_${first+1}\\times e_${second+1}=${swapped?"-":""}e_${k+1}`}/></span></div>
