@@ -51,7 +51,9 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
     {[1,3,3,1].map((count,k)=><g key={k}>
      <rect x={30+k*132} y="32" width="110" height="164" rx="12" fill="white" stroke="#ddd6fe"/>
      {label(85+k*132,58,(l?["數量","箭頭","平面","體積"]:["Number","Arrow","Plane","Volume"])[k])}
-     {k===0?<circle cx="85" cy="112" r="6" fill={purple}/>:k===1?arrow(187,140,224,90):k===2?<path d="M308 140L325 90L365 110L348 160Z" fill={purple} opacity=".4"/>:<path d="M443 100l35-18l33 20v45l-35 17l-33-19Z M443 100l33 18l35-16 M476 118v46" fill="#ddd6fe" stroke={purple}/>}
+     <g transform={`translate(${85+k*132} 114)`}>
+      {k===0?<circle r="6" fill={purple}/>:k===1?arrow(-18.5,25,18.5,-25):k===2?<path d="M-28.5 15L-11.5-35L28.5-15L11.5 35Z" fill={purple} opacity=".4"/>:<path d="M-34-23l35-18l33 20v45l-35 17l-33-19Z M-34-23l33 18l35-16 M-1-5v46" fill="#ddd6fe" stroke={purple}/>}
+     </g>
      {label(85+k*132,181,`${count} ${l?"分量":"coefficients"}`)}
     </g>)}{label(275,229,"1 + 3 + 3 + 1 = 8")}
    </>}
