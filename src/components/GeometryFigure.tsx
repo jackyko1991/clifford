@@ -2,7 +2,7 @@ import {useEffect,useId,useState} from "react";
 import {basis,rotate,rotor} from "../algebra";
 const purple="#7c3aed",teal="#0f766e",muted="#94a3b8";
 export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
- const [angle,setAngle]=useState(60),[playing,setPlaying]=useState(false),[circular,setCircular]=useState(false);
+ const [angle,setAngle]=useState(60),[playing,setPlaying]=useState(false),[circular,setCircular]=useState(false),[showPlane,setShowPlane]=useState(true);
  const uid=useId().replaceAll(":", ""),theta=angle*Math.PI/180;
  useEffect(()=>{
   if(!playing)return;
@@ -26,7 +26,7 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
  relations:["Different records can describe related geometric actions.","不同的紀錄方式，可以描述互相關聯的幾何動作。"],
  motor:["A rigid shape rotates, then translates. This is a 2D slice of rigid motion.","剛體形狀先旋轉再平移：三維剛體運動的二維切片。"],
  boost:["Boost the time direction: the transformed unit timelike vector stays inside the light cone.","推進時間方向：變換後的單位類時向量仍在光錐內。"],
- wave:["A classical plane wave: the electric and magnetic parts point across the direction of travel, at right angles to each other.","經典平面波：電場與磁場都橫向於前進方向，也互相垂直。"],
+ wave:["The shaded sheet is the spatial E–B plane at one sample position, perpendicular to propagation. Purple E and teal cB change together in that plane; perspective makes the right angle look oblique. This spatial sheet is not the spacetime bivector F itself.","陰影是取樣位置的空間 E–B 橫向平面，垂直於傳播方向。紫色 E 與青色 cB 在平面內一起變化；透視投影讓直角看起來傾斜。這張空間平面不是時空雙向量 F 本身。"],
  holonomy:["Loop transport accumulates a phase around excluded flux. Schematic, not a local force diagram.","沿封閉路徑移動，繞過排除的磁通後累積相位。這是示意圖，不是局域受力圖。"],
  equivariance:["Rotate the input, then apply f; or apply f, then rotate. The outputs coincide for this norm-dependent scaling.","先旋轉再套用 f，或先套用 f 再旋轉：依長度縮放的映射讓兩者結果重合。"]};
  const staticKind=["grades","relations","evidence","timeline","path","state"].includes(kind);
@@ -88,8 +88,27 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
     {label(400,160,l?"光錐的邊界不變":"Light-cone boundary preserved")}
    </>}
    {kind==="wave" && <>
+    {showPlane&&<g data-em-plane="transverse">
+     <path d="M241 96L301 60L301 164L241 200Z" fill="#c4b5fd" fillOpacity=".22" stroke="#a78bfa" strokeWidth="1.3"/>
+     <path d="M241 148L301 112M271 78V182" stroke="#c4b5fd" strokeDasharray="3 4"/>
+     <path d="M271 118L278 113.8L278 125.8" fill="none" stroke="#94a3b8" strokeWidth="1"/>
+    </g>}
     {arrow(35,130,520,130,muted)}{points(0,purple)}{points(1,teal)}
-    {label(520,150,"z")}{label(90,36,l?"電場 E":"Electric field E")}{label(245,36,l?"磁場（換成同尺度）":"Magnetic (same scale)")}
+    {showPlane&&(()=>{
+     // The sample is at the midpoint of the same wave used by points().
+     const phase=3.5*Math.PI-theta,e=Math.sin(phase),other=circular?Math.cos(phase):0;
+     const ex=271+30*other,ey=130-52*e-18*other;
+     const bx=271+30*e,by=130+52*other-18*e;
+     return <g>
+      <circle cx="271" cy="130" r="3" fill="#64748b"/>
+      {arrow(271,130,ex,ey,purple)}{arrow(271,130,bx,by,teal)}
+      <circle cx={ex} cy={ey} r="3" fill={purple}/><circle cx={bx} cy={by} r="3" fill={teal}/>
+      <text x={ex-12} y={ey+(e<0?16:-8)} fill={purple} fontSize="12">E</text>
+      <text x={bx+(e<0?-25:8)} y={by+(other<0?-8:16)} fill={teal} fontSize="12">cB</text>
+      {label(275,211,l?"E–B 橫向平面 · k 垂直穿過":"E–B transverse plane · k is normal")}
+     </g>;
+    })()}
+    {label(510,150,"k · z")}{label(90,36,l?"電場 E":"Electric field E")}{label(245,36,l?"磁場 cB（同尺度）":"Magnetic cB (same scale)")}
     <path d="M68 45h25" stroke={purple} strokeWidth="3"/><path d="M230 45h30" stroke={teal} strokeWidth="3"/>
     {label(275,230,circular?(l?"圓偏振 · 橫向旋轉":"Circular polarization · transverse rotation"):(l?"線偏振 · 透視投影":"Linear polarization · perspective projection"))}
    </>}
@@ -114,7 +133,10 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
    <div className="flex flex-wrap gap-2">
     <button className="control" onClick={()=>setPlaying(p=>!p)}>{playing?(l?"暫停":"Pause"):(l?"播放動畫":"Play animation")}</button>
     {[0,90,360,720].map(a=><button key={a} className="control" onClick={()=>{setPlaying(false);setAngle(a);}}>{kind==="boost"?`${Math.round(Math.tanh(a/720*1.1)*100)}%`:`${a}°`}</button>)}
-    {kind==="wave"&&<button className="control" aria-pressed={circular} onClick={()=>setCircular(c=>!c)}>{circular?(l?"圓偏振":"Circular"):(l?"線偏振":"Linear")}</button>}
+    {kind==="wave"&&<>
+     <button className="control" aria-pressed={circular} onClick={()=>setCircular(c=>!c)}>{circular?(l?"圓偏振":"Circular"):(l?"線偏振":"Linear")}</button>
+     <button className="control" aria-pressed={showPlane} onClick={()=>setShowPlane(p=>!p)}>{showPlane?(l?"隱藏 E–B 平面":"Hide E–B plane"):(l?"顯示 E–B 平面":"Show E–B plane")}</button>
+    </>}
    </div>
   </div>}
   <figcaption className="mt-3 text-xs leading-relaxed text-gray-600">{descriptions[kind]?.[l]}</figcaption>
