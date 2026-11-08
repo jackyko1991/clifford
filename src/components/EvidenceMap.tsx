@@ -1,0 +1,18 @@
+import Arrow from "./GeometryArrow";
+const purple="#7c3aed",teal="#0f766e",orange="#d97706";
+export default function EvidenceMap({l}:{l:number}){
+ const cards=[
+  {title:l?"數學規則":"Mathematical rule",status:l?"靠定義與證明":"Check the proof",color:purple,text:l?"箭頭與定向面積放在同一個乘積，靠定義與證明核對。":"Arrows and oriented areas share one product. Check it by proof."},
+  {title:l?"物理理論":"Physical theory",status:l?"要和量測比較":"Test predictions",color:teal,text:l?"曲線先作預測，再和量測點比較。":"Compare the predicted curve with measured points."},
+  {title:l?"候選模型":"Candidate model",status:l?"多加的假設待檢驗":"Awaiting evidence",color:orange,text:l?"捲縮的額外維度，需要額外的觀測證據。":"A curled extra dimension needs its own observational evidence."}
+ ];
+ return <figure data-diagram="evidence" className="space-y-2">
+  <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs text-slate-500"><span>{l?"檢驗物理模型：":"Testing a physical model:"}</span>{(l?["規則","可量測的預測","比較資料"]:["Rule","Measurable prediction","Compare data"]).map((text,i)=><span key={i} className="inline-flex items-center gap-2">{i>0&&<span className="text-violet-500" aria-hidden="true">→</span>}{text}</span>)}</div>
+  <div className="grid gap-2 sm:grid-cols-3">{cards.map((card,i)=><div key={i} className="grid grid-cols-[64px_1fr] items-center gap-x-3 gap-y-1 rounded-lg border bg-white p-3 sm:block" style={{borderColor:`${card.color}30`}}>
+   <svg viewBox="0 0 180 100" role="img" aria-label={(l?["兩支箭頭圍出一片定向面積","示意的理論預測曲線與量測資料點","平面加上一個假設捲縮維度的圓圈"]:["Two arrows span an oriented area","An illustrative prediction curve compared with measurement points","A plane with a hypothetical curled extra dimension"])[i]} className="h-auto w-16 sm:mx-auto sm:h-20 sm:w-full">
+    {i===0?<><polygon points="35,78 104,78 138,24 69,24" fill={purple} fillOpacity=".12" stroke={purple} strokeOpacity=".35"/><Arrow a={[35,78]} b={[104,78]} color={teal}/><Arrow a={[35,78]} b={[69,24]} color={purple}/><text x="110" y="91" fontSize="12" fill={teal}>a</text><text x="61" y="20" fontSize="12" fill={purple}>b</text><path d="M60 75Q94 74 98 47" fill="none" stroke={purple} strokeWidth="1.5"/><Arrow a={[96,54]} b={[98,47]} color={purple}/></>:i===1?<><path d="M25 13V79H161" fill="none" stroke="#94a3b8"/><path d="M29 72C65 72 100 27 154 20" fill="none" stroke={teal} strokeWidth="2.5"/>{[[40,69],[62,62],[85,44],[109,33],[137,22]].map(([x,y],k)=><g key={k}><path d={`M${x} ${y-6}V${y+6}`} stroke={purple} strokeWidth="1"/><circle cx={x} cy={y} r="3" fill="white" stroke={purple} strokeWidth="1.5"/></g>)}<path d="M30 93H44" stroke={teal} strokeWidth="2"/><text x="48" y="96" fontSize="10" fill={teal}>{l?"預測":"Prediction"}</text><circle cx="101" cy="93" r="2.5" fill="white" stroke={purple}/><text x="108" y="96" fontSize="10" fill={purple}>{l?"資料（示意）":"Data (sketch)"}</text></>:<><polygon points="29,72 119,72 151,47 61,47" fill={orange} fillOpacity=".07" stroke={orange} strokeOpacity=".35"/><path d="M42 59H139" stroke="#94a3b8" strokeDasharray="3 3"/>{[52,78,104,130].map((x,k)=><ellipse key={k} cx={x} cy="52" rx="8" ry="18" fill="white" fillOpacity=".65" stroke={orange} strokeDasharray="3 3"/>)}<text x="88" y="22" textAnchor="middle" fontSize="19" fill={orange}>?</text><text x="90" y="94" textAnchor="middle" fontSize="11" fill={orange}>{l?"多一個維度？":"An extra dimension?"}</text></>}
+   </svg>
+   <div className="min-w-0"><h3 className="text-sm font-semibold" style={{color:card.color}}>{card.title}</h3><p className="mt-0.5 text-xs font-medium" style={{color:card.color}}>{card.status}</p></div><p className="col-span-2 text-xs leading-relaxed text-slate-600 sm:mt-1">{card.text}</p>
+  </div>)}</div>
+ </figure>;
+}
