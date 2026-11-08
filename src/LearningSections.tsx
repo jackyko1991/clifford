@@ -28,6 +28,16 @@ function QuarterTurns({l}:{l:number}){
   <figcaption className="mt-3 text-center text-xs text-emerald-900">{l?"先看轉向，再看平方：兩個四分之一圈，就是半圈。":"Watch the turn before the square: two quarter turns make a half turn."}</figcaption>
  </figure>;
 }
+function BridgePhotos({l}:{l:number}){
+ const photos=[
+  {file:"broom-bridge.jpg",title:l?"都柏林皇家運河上的 Broom Bridge":"Broom Bridge over Dublin’s Royal Canal",author:"Johnflan",source:"https://commons.wikimedia.org/wiki/File:Broom_Bridge.jpg",license:"CC BY-SA 4.0",licenseUrl:"https://creativecommons.org/licenses/by-sa/4.0/"},
+  {file:"broom-bridge-plaque.jpg",title:l?"橋上的紀念牌：記載 1843 年的四元數發現":"The commemorative plaque recalling the 1843 discovery",author:"Brendan Ward",source:"https://commons.wikimedia.org/wiki/File:Broombridge_Hamilton_Plaque.jpg",license:"CC0 1.0",licenseUrl:"https://creativecommons.org/publicdomain/zero/1.0/"}
+ ];
+ return <div className="grid gap-4 sm:grid-cols-2" data-testid="hamilton-bridge-photos">{photos.map(photo=><figure key={photo.file} className="overflow-hidden rounded-lg border border-gray-200 bg-gray-50">
+  <a href={photo.source} target="_blank" rel="noreferrer" aria-label={`${photo.title} · ${l?"開啟圖片來源與大圖":"Open source and larger image"}`}><img src={`${import.meta.env.BASE_URL}history/${photo.file}`} alt={photo.title} width="960" height={photo.file==="broom-bridge.jpg"?640:720} loading="lazy" className="aspect-[4/3] w-full object-contain"/></a>
+  <figcaption className="space-y-1 border-t border-gray-200 p-3 text-xs leading-relaxed text-gray-500"><p className="text-gray-700">{photo.title}</p><p>{photo.author} · <a className="text-violet-700 underline" href={photo.licenseUrl} target="_blank" rel="noreferrer">{photo.license}</a> · <a className="text-violet-700 underline" href={photo.source} target="_blank" rel="noreferrer">{l?"圖片來源／大圖":"Source / larger image"} ↗</a></p></figcaption>
+ </figure>)}</div>;
+}
 function HamiltonTool({l}:{l:number}){
  const [a,setA]=useState<QuaternionUnit>("i"),[b,setB]=useState<QuaternionUnit>("j");
  const result=quaternionProduct(a,b);
@@ -70,6 +80,7 @@ export default function LearningSections({l}:{l:number}){
   </Card>
   <Card id="hamilton-bridge" n={2} title={l?"漢密爾頓在橋上刻下的乘法":"The multiplication Hamilton carved on a bridge"}>
    <p>{l?"平面上的轉向有了語言，三維呢？1843 年 10 月 16 日，漢密爾頓與妻子沿都柏林的運河散步。他在 Broom Bridge 想通了四元數，並把這組關係刻在橋石上。":"What about three dimensions? On 16 October 1843, while walking beside Dublin’s canal with his wife, Hamilton found the quaternion relations and carved them into a stone of Broom Bridge."}</p>
+   <BridgePhotos l={l}/>
    <div className="rounded-lg bg-violet-50 p-3"><Tex tex={String.raw`i^2=j^2=k^2=ijk=-1`} display/></div>
    <HamiltonTool l={l}/>
    <p>{l?"三個符號不只是三根箭頭。在幾何代數裡，我們可以把它們對應到三個定向平面。交換兩個不同的單位，結果會變號；三維的轉向順序從此留在算式裡。":"These three symbols can be identified with three oriented planes in geometric algebra. Swap two distinct units and the sign changes: the order of spatial turns stays in the calculation."}</p>

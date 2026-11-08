@@ -35,3 +35,11 @@ The profile pages do not state an open reuse license for these photographs. Copy
 - The companion site states Copyright 2007–2009 Leo Dorst, Daniel Fontijne and Stephen Mann. It does not state an open reuse license for the portraits. Source-image copyright remains with its respective owners and is not covered by the code license.
 
 The authors’ page is credited beneath the displayed composite.
+
+
+## Hamilton’s bridge in the learning page
+
+- `broom-bridge.jpg`: [Broom Bridge.jpg](https://commons.wikimedia.org/wiki/File:Broom_Bridge.jpg), photographed by Johnflan, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Commons 960px preview, no cropping or other edits.
+- `broom-bridge-plaque.jpg`: [Broombridge Hamilton Plaque.jpg](https://commons.wikimedia.org/wiki/File:Broombridge_Hamilton_Plaque.jpg), photographed by Brendan Ward on 27 July 2022, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). Commons 960px preview, no cropping or other edits. The photograph shows the later commemorative plaque, not an original 1843 inscription.
+
+Both photographs are displayed with author, license and source links; larger source images open from the photographs.

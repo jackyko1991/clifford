@@ -62,5 +62,21 @@
     "author": "HouseOfChange",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "file": "broom-bridge.jpg",
+    "title": "Broom Bridge.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Broom_Bridge.jpg",
+    "author": "Johnflan",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+  },
+  {
+    "file": "broom-bridge-plaque.jpg",
+    "title": "Broombridge Hamilton Plaque.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Broombridge_Hamilton_Plaque.jpg",
+    "author": "Brendan Ward",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
   }
 ]
