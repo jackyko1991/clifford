@@ -1,0 +1,195 @@
+[
+  {
+    "id": "doran",
+    "group": "foundations",
+    "title": "Geometric Algebra for Physicists",
+    "authors": "Chris Doran; Anthony Lasenby",
+    "publication": "Cambridge University Press, 2003",
+    "why": [
+      "A full textbook connecting geometric products, rotations, spacetime and physics.",
+      "把幾何積、旋轉、時空與物理連起來的完整教材。"
+    ],
+    "href": "https://www.cambridge.org/core/books/geometric-algebra-for-physicists/FB8D3ACB76AB3AB10BA7F27505925091",
+    "related": "concept/maths",
+    "top": true,
+    "isbn10": "0521715954",
+    "free": "https://lambda.gsfc.nasa.gov/product/websites/AMI/mrao.cam.ac.uk/~clifford/introduction/intro/intro.html",
+    "freeLabel": [
+      "Author’s introduction",
+      "免費作者導讀"
+    ]
+  },
+  {
+    "id": "pga",
+    "group": "foundations",
+    "title": "Geometric Algebra for Computer Graphics",
+    "authors": "Charles G. Gunn",
+    "publication": "SIGGRAPH 2019 course notes; arXiv, 2020",
+    "why": [
+      "A practical introduction to points, lines, planes and rigid motions in PGA.",
+      "用點、線、面與剛體運動進入射影幾何代數。"
+    ],
+    "href": "https://arxiv.org/abs/2002.04509",
+    "related": "concept/maths"
+  },
+  {
+    "id": "clifford",
+    "group": "foundations",
+    "title": "clifford Documentation",
+    "authors": "The clifford contributors",
+    "publication": "Project documentation",
+    "why": [
+      "Reference examples for multivectors, signatures and geometric products.",
+      "查閱多重向量、號差與幾何積的程式範例。"
+    ],
+    "href": "https://clifford.readthedocs.io/en/stable/",
+    "related": "skills/techniques"
+  },
+  {
+    "id": "sta",
+    "group": "spacetime",
+    "title": "The Algebra of Spacetime",
+    "authors": "Chris Doran; Anthony Lasenby; Stephen Gull",
+    "publication": "Cambridge Geometric Algebra Research Group",
+    "why": [
+      "The authors introduce spacetime algebra and its electromagnetic interpretation.",
+      "作者以時空代數介紹電磁學的幾何解讀。"
+    ],
+    "href": "https://lambda.gsfc.nasa.gov/product/websites/AMI/mrao.cam.ac.uk/~clifford/introduction/intro/node11.html",
+    "related": "concept/laws"
+  },
+  {
+    "id": "dirac",
+    "group": "spacetime",
+    "title": "The Dirac Equation",
+    "authors": "David Tong",
+    "publication": "University of Cambridge, Quantum Field Theory lecture notes",
+    "why": [
+      "Spinors, the Lorentz group and Clifford relations in their field-theory setting.",
+      "在場論脈絡下閱讀旋量、洛侖茲群與克利福德關係。"
+    ],
+    "href": "https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S4.html",
+    "related": "concept/laws"
+  },
+  {
+    "id": "gauge",
+    "group": "spacetime",
+    "title": "Gauge Theory",
+    "authors": "David Tong",
+    "publication": "University of Cambridge lecture notes",
+    "why": [
+      "Connections, curvature and the geometric meaning of gauge fields.",
+      "補上聯絡、曲率與規範場的幾何意義。"
+    ],
+    "href": "https://www.damtp.cam.ac.uk/user/tong/gaugetheory.html",
+    "related": "concept/limitations"
+  },
+  {
+    "id": "cpt",
+    "group": "spacetime",
+    "title": "The Standard Model: Chapter 1",
+    "authors": "David Tong",
+    "publication": "University of Cambridge lecture notes",
+    "why": [
+      "A source for discrete symmetries and the assumptions behind CPT.",
+      "查核離散對稱與 CPT 定理所依賴的假設。"
+    ],
+    "href": "https://www.damtp.cam.ac.uk/user/tong/sm/standardmodel1.pdf",
+    "related": "concept/limitations"
+  },
+  {
+    "id": "null",
+    "group": "spacetime",
+    "title": "The Spacetime Geometry of a Null Electromagnetic Field",
+    "authors": "C. G. Torre",
+    "publication": "arXiv:1308.2323, 2013",
+    "why": [
+      "A research-level treatment of null electromagnetic geometry.",
+      "零範電磁場幾何的研究論文。"
+    ],
+    "href": "https://arxiv.org/abs/1308.2323",
+    "related": "concept/laws"
+  },
+  {
+    "id": "gatr",
+    "group": "computing",
+    "title": "Geometric Algebra Transformer",
+    "authors": "Brehmer et al.",
+    "publication": "NeurIPS, 2023",
+    "why": [
+      "Projective geometric algebra inside a transformer architecture.",
+      "把射影幾何代數放進 Transformer 的架構。"
+    ],
+    "href": "https://arxiv.org/abs/2305.18415",
+    "related": "skills/cpuml"
+  },
+  {
+    "id": "cgnn",
+    "group": "computing",
+    "title": "Clifford Group Equivariant Neural Networks",
+    "authors": "Ruhe; Brandstetter; Forré",
+    "publication": "NeurIPS, 2023",
+    "why": [
+      "Read the construction and proof of Clifford-group equivariant layers.",
+      "閱讀克利福德群等變網絡層的構造與證明。"
+    ],
+    "href": "https://arxiv.org/abs/2305.11141",
+    "related": "skills/cpuml"
+  },
+  {
+    "id": "choose",
+    "group": "computing",
+    "title": "Euclidean, Projective, Conformal: Choosing a Geometric Algebra for Equivariant Transformers",
+    "authors": "Pim de Haan; Taco Cohen; Johann Brehmer",
+    "publication": "AISTATS / PMLR 238, 2024",
+    "why": [
+      "Compare different algebra choices for geometric transformers.",
+      "比較幾何 Transformer 採用不同代數的取捨。"
+    ],
+    "href": "https://proceedings.mlr.press/v238/haan24a.html",
+    "related": "skills/cpuml"
+  },
+  {
+    "id": "original",
+    "group": "history",
+    "title": "On the Space-Theory of Matter",
+    "authors": "William Kingdon Clifford",
+    "publication": "Talk, 1870; published 1876",
+    "why": [
+      "Read Clifford’s own geometric speculation in its original historical form.",
+      "直接閱讀克利福德的幾何推想，分清原文與後來的詮釋。"
+    ],
+    "href": "https://en.wikisource.org/wiki/On_the_Space-Theory_of_Matter",
+    "related": "concept/history"
+  },
+  {
+    "id": "1878",
+    "group": "history",
+    "title": "Applications of Grassmann’s Extensive Algebra",
+    "authors": "William Kingdon Clifford",
+    "publication": "American Journal of Mathematics 1, 1878",
+    "why": [
+      "The original paper connecting Grassmann’s algebra with metric multiplication.",
+      "結合格拉斯曼代數與度規乘法的原始論文。"
+    ],
+    "href": "https://doi.org/10.2307/2369379",
+    "related": "concept/history",
+    "freeLabel": [
+      "Original paper",
+      "原始論文"
+    ]
+  },
+  {
+    "id": "lucy",
+    "group": "history",
+    "title": "Anyhow Stories, Moral and Otherwise",
+    "authors": "Lucy Clifford",
+    "publication": "Macmillan, 1882",
+    "why": [
+      "A primary title-page source for the authorship attribution.",
+      "用原書扉頁核對露西・克利福德的作者身分。"
+    ],
+    "href": "https://archive.org/details/anyhowstoriesmo00clifgoog",
+    "related": "concept/history"
+  }
+]

@@ -3,3 +3,6 @@ dist/
 *.tsbuildinfo
 .DS_Store
 *.log
+
+# Local context and drafts for the next agent; never publish.
+/handoff/

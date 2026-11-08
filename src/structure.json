@@ -1,0 +1,672 @@
+{
+  "concept": [
+    {
+      "id": "laws",
+      "title": [
+        "From law to simulation",
+        "從定律到模擬"
+      ],
+      "sections": [
+        {
+          "id": "s0",
+          "title": [
+            "Step 0: write the tests first",
+            "第 0 步：先寫測試"
+          ]
+        },
+        {
+          "id": "s1",
+          "title": [
+            "Start from the physical picture",
+            "從物理圖像出發"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": [
+            "Write the law in vector form",
+            "以向量形式寫出定律"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": [
+            "Rewrite it in index (tensor) form",
+            "改寫成指標（張量）形式"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": [
+            "Turn the quantities into tensors",
+            "把物理量變成張量"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": [
+            "Write the law as a function",
+            "把定律寫成函式"
+          ]
+        },
+        {
+          "id": "s6",
+          "title": [
+            "Solve: march forward in time",
+            "求解：沿著時間向前推進"
+          ]
+        },
+        {
+          "id": "s7",
+          "title": [
+            "Look at the result, and check it",
+            "觀察結果，並加以檢驗"
+          ]
+        },
+        {
+          "id": "turn",
+          "title": [
+            "Your turn",
+            "換你試試"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feynman",
+      "title": [
+        "The Feynman technique",
+        "費曼學習法"
+      ],
+      "sections": [
+        {
+          "id": "steps",
+          "title": [
+            "The four steps",
+            "四個步驟"
+          ]
+        },
+        {
+          "id": "roots",
+          "title": [
+            "What Feynman actually said and did",
+            "費曼真正說過和做過的事"
+          ]
+        },
+        {
+          "id": "life",
+          "title": [
+            "Feynman's own story, as an explainer",
+            "費曼自己的故事：一位解釋者"
+          ]
+        },
+        {
+          "id": "site",
+          "title": [
+            "How this site uses the technique",
+            "本站如何使用這個方法"
+          ]
+        },
+        {
+          "id": "example",
+          "title": [
+            "Worked example: contraction and einsum",
+            "範例：縮並與 einsum"
+          ]
+        },
+        {
+          "id": "pitfalls",
+          "title": [
+            "Common pitfalls and a self-check",
+            "常見陷阱與自我檢查"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "maths",
+      "title": [
+        "Tensor maths & roofline",
+        "張量數學與屋頂線模型"
+      ],
+      "sections": [
+        {
+          "id": "tensor",
+          "title": [
+            "What a tensor is",
+            "張量是什麼"
+          ]
+        },
+        {
+          "id": "einsum",
+          "title": [
+            "Einstein summation and contraction",
+            "愛因斯坦求和約定與縮並"
+          ]
+        },
+        {
+          "id": "penrose",
+          "title": [
+            "Penrose graphical notation",
+            "彭羅斯圖形記法"
+          ]
+        },
+        {
+          "id": "topo",
+          "title": [
+            "Operator topology: the order of the work",
+            "運算子拓樸：工作的先後順序"
+          ]
+        },
+        {
+          "id": "roof",
+          "title": [
+            "Arithmetic intensity and the roofline model",
+            "算術強度與屋頂線模型"
+          ]
+        },
+        {
+          "id": "recap",
+          "title": [
+            "Recap, and common misconceptions",
+            "重點回顧與常見誤解"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dataflow",
+      "title": [
+        "Tensor dataflow",
+        "張量資料流"
+      ],
+      "sections": [
+        {
+          "id": "s1",
+          "title": [
+            "A tensor is a block of memory with a shape",
+            "張量是一塊有形狀的記憶體"
+          ]
+        },
+        {
+          "id": "s2",
+          "title": [
+            "Vectorise: one kernel instead of a loop",
+            "向量化：用一個核心函式取代迴圈"
+          ]
+        },
+        {
+          "id": "mem",
+          "title": [
+            "Broadcasting saves the inputs, not the output",
+            "廣播省下的是輸入，不是輸出"
+          ]
+        },
+        {
+          "id": "s3",
+          "title": [
+            "What a GPU does differently",
+            "GPU 有何不同"
+          ]
+        },
+        {
+          "id": "s4",
+          "title": [
+            "Contractions become matrix products",
+            "縮併變成矩陣乘積"
+          ]
+        },
+        {
+          "id": "s5",
+          "title": [
+            "The dataflow graph: gradients and speed",
+            "資料流圖：梯度與速度"
+          ]
+        },
+        {
+          "id": "s6",
+          "title": [
+            "Same ideas, different frameworks",
+            "同樣的概念，不同的框架"
+          ]
+        },
+        {
+          "id": "s7",
+          "title": [
+            "What Tensorizer does with all this",
+            "Tensorizer 如何運用這一切"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "limitations",
+      "title": [
+        "Limits of tensors",
+        "張量的適用範圍與限制"
+      ],
+      "sections": [
+        {
+          "id": "scope",
+          "title": [
+            "A box of numbers needs a meaning",
+            "一盒數字，還需要一份說明書"
+          ]
+        },
+        {
+          "id": "spinors",
+          "title": [
+            "Why an electron needs a different record",
+            "為什麼電子需要另一種紀錄"
+          ]
+        },
+        {
+          "id": "connections",
+          "title": [
+            "A round trip can leave a wave out of step",
+            "走回起點，波也可能沒對上"
+          ]
+        },
+        {
+          "id": "topology",
+          "title": [
+            "A tiny patch does not tell you about a hole",
+            "只看一小塊，看不出整體有沒有洞"
+          ]
+        },
+        {
+          "id": "entanglement",
+          "title": [
+            "Two particles need one shared record",
+            "兩顆粒子，可能需要一份共同紀錄"
+          ]
+        },
+        {
+          "id": "frontiers",
+          "title": [
+            "A proposed model is not yet a measured fact",
+            "提出一種模型，還不等於已經量到"
+          ]
+        },
+        {
+          "id": "bridge",
+          "title": [
+            "The next tool: multiply arrows and keep the area",
+            "下一件工具：箭頭相乘，也把面積留下"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "title": [
+        "Tensor history",
+        "張量史"
+      ],
+      "sections": [
+        {
+          "id": "part1",
+          "title": [
+            "Maths: the language of curved space",
+            "數學：彎曲空間的語言"
+          ]
+        },
+        {
+          "id": "part2",
+          "title": [
+            "Physics: geometry becomes gravity",
+            "物理：幾何變成引力"
+          ]
+        },
+        {
+          "id": "part3",
+          "title": [
+            "AI and silicon: tensors become hardware",
+            "AI 與晶片：張量變成硬體"
+          ]
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "id": "techniques",
+      "title": [
+        "Techniques",
+        "技巧"
+      ],
+      "sections": [
+        {
+          "id": "tdd",
+          "title": [
+            "Test first (TDD): physics as tests",
+            "測試先行（TDD）：把物理寫成測試"
+          ]
+        },
+        {
+          "id": "tensors",
+          "title": [
+            "Tensors, shapes and devices",
+            "張量、形狀與裝置"
+          ]
+        },
+        {
+          "id": "broadcasting",
+          "title": [
+            "Broadcasting",
+            "廣播"
+          ]
+        },
+        {
+          "id": "einsum",
+          "title": [
+            "einsum = index notation",
+            "einsum = 指標記號"
+          ]
+        },
+        {
+          "id": "batching",
+          "title": [
+            "Batching many simulations",
+            "批次執行大量模擬"
+          ]
+        },
+        {
+          "id": "rk4",
+          "title": [
+            "Time stepping (RK4)",
+            "時間步進（RK4）"
+          ]
+        },
+        {
+          "id": "linalg",
+          "title": [
+            "Linear algebra: solve and eigh",
+            "線性代數：solve 與 eigh"
+          ]
+        },
+        {
+          "id": "stencils",
+          "title": [
+            "Finite differences, stencils and conv2d",
+            "有限差分、模板與 conv2d"
+          ]
+        },
+        {
+          "id": "fft",
+          "title": [
+            "Spectral methods with FFT",
+            "以 FFT 實作譜方法"
+          ]
+        },
+        {
+          "id": "autograd",
+          "title": [
+            "Autograd for physics",
+            "物理中的自動微分"
+          ]
+        },
+        {
+          "id": "complex",
+          "title": [
+            "Complex tensors and quantum states",
+            "複數張量與量子態"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "loops",
+      "title": [
+        "For loop vs tensor",
+        "for 迴圈 vs 張量"
+      ],
+      "sections": [
+        {
+          "id": "why",
+          "title": [
+            "Why the loop is slow",
+            "迴圈為什麼慢"
+          ]
+        },
+        {
+          "id": "dot",
+          "title": [
+            "Sum of squares / dot product",
+            "平方和 / 內積"
+          ]
+        },
+        {
+          "id": "pairwise",
+          "title": [
+            "Pairwise distances of $N$ particles",
+            "$N$ 個粒子的兩兩距離"
+          ]
+        },
+        {
+          "id": "matmul",
+          "title": [
+            "Matrix multiply",
+            "矩陣乘法"
+          ]
+        },
+        {
+          "id": "pendulum",
+          "title": [
+            "One RK4 step for $B$ pendulums",
+            "$B$ 個擺的一步 RK4"
+          ]
+        },
+        {
+          "id": "diffusion",
+          "title": [
+            "A diffusion step on an $n \\times n$ grid",
+            "$n \\times n$ 網格上的一步擴散"
+          ]
+        },
+        {
+          "id": "mc_pi",
+          "title": [
+            "Monte Carlo $\\pi$",
+            "蒙地卡羅求 $\\pi$"
+          ]
+        },
+        {
+          "id": "fine",
+          "title": [
+            "When a loop is fine",
+            "什麼時候用迴圈沒問題"
+          ]
+        },
+        {
+          "id": "bench",
+          "title": [
+            "How the numbers were measured",
+            "這些數字是怎麼測的"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "blas",
+      "title": [
+        "BLAS",
+        "BLAS"
+      ],
+      "sections": [
+        {
+          "id": "what",
+          "title": [
+            "What BLAS is",
+            "BLAS 是什麼"
+          ]
+        },
+        {
+          "id": "libs",
+          "title": [
+            "BLAS libraries",
+            "BLAS 函式庫"
+          ]
+        },
+        {
+          "id": "which",
+          "title": [
+            "Which BLAS am I using?",
+            "我用的是哪個 BLAS？"
+          ]
+        },
+        {
+          "id": "repro",
+          "title": [
+            "Same code, slightly different numbers",
+            "同樣的程式碼，略有不同的數字"
+          ]
+        },
+        {
+          "id": "bench",
+          "title": [
+            "Measured: matrix-multiply throughput",
+            "實測：矩陣乘法吞吐量"
+          ]
+        },
+        {
+          "id": "method",
+          "title": [
+            "How the numbers were measured",
+            "這些數字是怎麼測的"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nvlink",
+      "title": [
+        "NVLink & NVSwitch",
+        "NVLink 與 NVSwitch"
+      ],
+      "sections": [
+        {
+          "id": "why",
+          "title": [
+            "Why GPUs need a fast interconnect",
+            "為什麼 GPU 需要高速互連"
+          ]
+        },
+        {
+          "id": "gens",
+          "title": [
+            "NVLink generations",
+            "NVLink 各代"
+          ]
+        },
+        {
+          "id": "topo",
+          "title": [
+            "Topologies: mesh, switch and rack",
+            "拓撲：網狀、交換器與機櫃"
+          ]
+        },
+        {
+          "id": "coll",
+          "title": [
+            "Collectives: what happens to the tensors",
+            "集合通訊：張量發生了什麼"
+          ]
+        },
+        {
+          "id": "code",
+          "title": [
+            "Programming: PyTorch, NCCL and the tools",
+            "程式設計：PyTorch、NCCL 與工具"
+          ]
+        },
+        {
+          "id": "practice",
+          "title": [
+            "When NVLink matters, and a worked example",
+            "NVLink 何時重要，以及一個計算範例"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cpuml",
+      "title": [
+        "CPU-only ML to tensors",
+        "純 CPU 機器學習轉張量"
+      ],
+      "sections": [
+        {
+          "id": "why",
+          "title": [
+            "Why and how to migrate",
+            "為什麼遷移，以及如何遷移"
+          ]
+        },
+        {
+          "id": "pca",
+          "title": [
+            "PCA: centring by broadcasting, one SVD",
+            "PCA：以廣播做中心化，一次 SVD"
+          ]
+        },
+        {
+          "id": "linsvm",
+          "title": [
+            "Linear SVM: liblinear's objective, minimised by L-BFGS",
+            "線性 SVM：liblinear 的目標函數，以 L-BFGS 最小化"
+          ]
+        },
+        {
+          "id": "ksvm",
+          "title": [
+            "Kernel SVM: a broadcast kernel matrix and the dual problem",
+            "核 SVM：廣播出的核矩陣與對偶問題"
+          ]
+        },
+        {
+          "id": "logreg",
+          "title": [
+            "Logistic regression: autograd, and $C = 1/\\lambda$",
+            "邏輯斯迴歸：autograd，以及 $C = 1/\\lambda$"
+          ]
+        },
+        {
+          "id": "knn",
+          "title": [
+            "k nearest neighbours: cdist and topk",
+            "k 近鄰：cdist 與 topk"
+          ]
+        },
+        {
+          "id": "kmeans",
+          "title": [
+            "k-means: argmin and scatter-add",
+            "k-means：argmin 與 scatter-add"
+          ]
+        },
+        {
+          "id": "umap",
+          "title": [
+            "UMAP: the full case study",
+            "UMAP：完整案例研究"
+          ]
+        },
+        {
+          "id": "cuml",
+          "title": [
+            "RAPIDS cuML: scikit-learn on the GPU, ready-made",
+            "RAPIDS cuML：現成的 GPU 版 scikit-learn"
+          ]
+        },
+        {
+          "id": "bench",
+          "title": [
+            "How it was measured",
+            "量測方法"
+          ]
+        }
+      ]
+    }
+  ]
+}

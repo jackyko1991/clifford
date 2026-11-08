@@ -1,8 +1,12 @@
 import {test} from "node:test";
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
-import katex from "katex";
-const cards=JSON.parse(readFileSync(new URL("../src/content.json",import.meta.url),"utf8"));
-test("published equations parse with KaTeX",()=>{
- for(const card of cards)if(card.equation)assert.doesNotThrow(()=>katex.renderToString(card.equation,{throwOnError:true}),card.id);
+const books=JSON.parse(readFileSync(new URL("../src/reading.json",import.meta.url),"utf8"));
+test("reading metadata has valid external links and book ISBNs",()=>{
+ for(const b of books){
+  assert.equal(new URL(b.href).protocol,"https:");
+  if(b.free)assert.equal(new URL(b.free).protocol,"https:");
+  assert.ok(b.authors&&b.publication&&b.why[0]&&b.why[1],b.id);
+  if(b.isbn10){const sum=[...b.isbn10].reduce((s,c,i)=>s+(10-i)*(c==="X"?10:Number(c)),0);assert.equal(sum%11,0,b.id);}
+ }
 });

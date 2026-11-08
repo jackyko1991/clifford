@@ -1,8 +1,17 @@
 # Clifford · 幾何代數
 
-Geometric algebra through diagrams, animation, equations and read-only Python explanations. English and Traditional Chinese.
+A bilingual Clifford algebra site scaffold using Tensorizer's layout with a violet theme and bivector icon.
 
 [Website](https://jackyko1991.github.io/clifford/) · [Tensorizer](https://jackyko1991.github.io/tensorizer/)
+
+## Current scope
+
+- **Concepts:** six Tensorizer-matching tabs with section placeholders.
+- **Coding Skills:** five Tensorizer-matching tabs with section placeholders.
+- **Extended Reading:** grouped, two-column resource cards with author/publication metadata, primary or free links, related-section links, and a quiet Amazon UK link where applicable.
+- **Global footer:** Buy Me a Coffee, Apache-2.0 and GitHub, matching Tensorizer's footer placement and styling.
+
+Lesson development is deferred to the next agent. Existing source components remain available for reuse, while the current lesson content is archived locally and is not rendered by the site.
 
 ## Development
 
@@ -16,32 +25,20 @@ npm run build
 npm run preview
 ```
 
-Windows PowerShell users with restricted script execution can use `npm.cmd`.
+Use `npm.cmd` in Windows PowerShell when script execution is restricted.
 
-## Learning path
+## Files
 
-- **Concepts:** foundations; plane rotations, spinors and motors; spacetime, electromagnetism, light, holonomy and CPT.
-- **Coding Skills:** bit-mask blades, geometric multiplication, reversion, rotor transforms, null fields, equivariance and performance.
-- **Extended Reading:** a reading sequence, historical attribution, research papers and a map of established and speculative ideas.
-
-23 lessons, fourteen diagram types, keyboard-operable sliders and animation controls. Animation starts paused and can be stopped at any time. Code is read-only; no backend, remote execution or API key is required.
-
-Hash URLs work directly on GitHub Pages, for example `?lang=en#/concept/rotations/spinors`. Source references accompany the relevant lessons. Content lives in `src/content.json`; bibliography in `src/sources.ts`.
-
-## Teaching format
-
-Every lesson follows the Tensorizer Tensor Maths pattern: **In plain words → Picture it → Precisely → Tiny example**. Diagrams follow the familiar analogy. A symbol guide introduces each formula after the worked example; code panels follow the explanation. Both English and Traditional Chinese use this order.
-
-## Mathematical conventions
-
-Euclidean examples use Cl(3,0), bit-mask coefficient order `[1,e1,e2,e12,e3,e13,e23,e123]`, positive rotation from e1 toward e2, `R=exp(-e12 theta/2)`, and `v'=R v reverse(R)`. Spacetime examples use signature (+---), c=1 and explicitly stated natural units. Classical plane-wave diagrams do not depict photon trajectories. Spinor phase dials are schematic.
-
-Ordinary spacetime tensors do not represent spinors; tensor products and tensor computation remain central to quantum mechanics. Clifford algebra is associative and does not by itself establish extra dimensions, unification, conservation laws or equivariance of arbitrary learned layers.
+- `src/structure.json`: mirrored Concept and Coding Skills tabs and section headings.
+- `src/reading.json`: resource-card metadata.
+- `src/ReadingPage.tsx`: Tensorizer-style reading layout.
+- `src/components/SiteFooter.tsx`: global footer.
+- `handoff/README.md`: local-only next-agent brief and source-context inventory. The whole `handoff/` directory is gitignored and never included in the site build. Copy it separately if handing over to another machine.
 
 ## CI/CD
 
-`.github/workflows/site.yml` runs algebra and equation-rendering tests plus a TypeScript/Vite production build on pushes and pull requests. Only pushes to main and manual main-branch runs publish to GitHub Pages; PRs cannot deploy. Enable Pages with GitHub Actions as its build source. The workflow publishes the exact artifact that passed the build job.
+GitHub Actions tests and builds every push and pull request. Successful main-branch pushes deploy to GitHub Pages. No backend or live coding service is required.
 
 ## Attribution
 
-The header, tab/card/contents layout and read-only `CodeBlock` component are adapted from Tensorizer under Apache-2.0. The violet bivector icon and lesson illustrations are native SVG. See LICENSE and NOTICE.
+Layout, contents navigation, code component and footer adapted from Tensorizer under Apache-2.0. The violet icon is native SVG. See LICENSE and NOTICE.
