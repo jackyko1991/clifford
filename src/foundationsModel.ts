@@ -24,3 +24,11 @@ export function dimensionCounts(n:number):number[]{
  if(!Number.isInteger(n)||n<0||n>20)throw new Error("Dimension must be an integer from 0 to 20");
  const counts=[1];for(let k=0;k<n;k++)counts.push(Math.round(counts[k]*(n-k)/(k+1)));return counts;
 }
+
+export function crossProductAsDual(a:readonly number[],b:readonly number[]){
+ const vector=(v:readonly number[])=>{const m=Array(8).fill(0);for(let i=0;i<3;i++)m[1<<i]=v[i];return m;};
+ const ab=gp(vector(a),vector(b)),ba=gp(vector(b),vector(a));
+ const bivector=ab.map((v,i)=>(v-ba[i])/2),negativeI=Array(8).fill(0);negativeI[7]=-1;
+ const dual=gp(negativeI,bivector);
+ return {bivector,normal:[dual[1],dual[2],dual[4]]};
+}

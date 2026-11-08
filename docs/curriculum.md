@@ -74,3 +74,8 @@ The learning page now has six implemented narrative cards: imaginary-turn, hamil
 ### Revised entry to multivectors
 
 The grades card now starts with `GeometryRecordBuilder` in `GeometryRecords.tsx`: no direction (scalar), one direction (arrow), two independent directions (area), and three independent directions (volume). The 3D 1/3/3/1 coefficient count comes afterwards, and the existing eight-coefficient editor is retained in a collapsible exercise. The card ends with `DimensionQuestion`, a revealable 1D–6D explorer that explains binomial grade counts, the total 2^n, and selection of basis directions, including the empty scalar selection. It explicitly distinguishes higher-dimensional sums of elements from a single simple element.
+
+
+### Right-hand-rule extension
+
+The orientation card now includes `CrossProductPatch.tsx`, an expandable three-dimensional example linking a purple oriented plane to a teal right-hand normal vector. Cyclic basis-pair choices and order reversal are interactive. `crossProductAsDual` uses the existing geometric product and the selected right-handed Euclidean volume element, with numerical regression checks. Text calls the conventional 3D cross product a special shortcut and explains why a plane in 4D has no unique normal line.

@@ -1,5 +1,6 @@
 import {useEffect,useState,type ReactNode} from "react";
 import Tex from "./components/Tex";
+import CrossProductPatch from "./CrossProductPatch";
 import Arrow from "./components/GeometryArrow";
 import {GeometryRecordBuilder,DimensionQuestion,ThreeDRecordTable} from "./GeometryRecords";
 import CodeBlock from "./components/CodeBlock";
@@ -124,6 +125,7 @@ export default function FoundationsSections({l}:{l:number}){
    <p>{l?"交換次序，同向程度不變，面積項變號。所以把兩種次序相加，面積消掉；相減，同向的部分消掉。這能從完整乘積取回熟悉的兩個工具。":"Swapping order preserves alignment and reverses the area term. Add the two products and area cancels; subtract them and alignment cancels. This recovers the two familiar operations from the full product."}</p>
    <div className="grid gap-3 text-center sm:grid-cols-2"><div className="rounded-lg border border-teal-100 bg-teal-50/40 p-3"><Tex tex={"\\textcolor{#0f766e}{a\\cdot b=\\frac{ab+ba}{2}}"}/></div><div className="rounded-lg border border-violet-100 bg-violet-50/40 p-3"><Tex tex={"\\textcolor{#7c3aed}{a\\wedge b=\\frac{ab-ba}{2}}"}/></div></div>
    <p>{l?"若兩支箭頭平行，就圍不出面積；特別是向量乘自己時，只剩下長度平方。這也把幾何積接回最初的公設。":"Parallel arrows enclose no area. In particular, a vector multiplied by itself leaves only its squared length, returning us to the starting rule."}</p><Tex tex={"a\\wedge a=0,\\quad a^2=a\\cdot a=|a|^2"} display/>
+   <CrossProductPatch l={l}/>
   </Card>
   <Card id="grades" n={3} title={l?"從擺放收納箱，認識多重向量":"Arrange storage boxes, then discover multivectors"}>
    <p>{l?"想把幾個收納箱放進儲物櫃。你會先數有幾箱，再決定往哪裡排、底面占多大，最後看看能往上堆多高。同樣是在擺箱子，這四個問題需要記住的資訊卻不同。先動手擺一擺，再替這些紀錄取名字。":"Imagine fitting storage boxes into a cupboard. First count them, choose which way to line them up, check the floor area they cover, then see how high they can stack. One everyday task asks for four different kinds of information. Arrange the boxes first; name the records afterwards."}</p>

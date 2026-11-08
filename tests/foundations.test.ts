@@ -4,7 +4,7 @@ import {createServer} from "vite";
 test("foundation products preserve lengths, signs and grade components",async()=>{
  const server=await createServer({server:{middlewareMode:true},appType:"custom"});
  try{
-  const {vectorProduct2D,projectGrade,productTex,gradeTex,numberText,dimensionCounts}=await server.ssrLoadModule("/src/foundationsModel.ts");
+  const {vectorProduct2D,projectGrade,productTex,gradeTex,numberText,dimensionCounts,crossProductAsDual}=await server.ssrLoadModule("/src/foundationsModel.ts");
   const {default:katex}=await import("katex");
   for(const [a,b] of [[[1,0],[0,1]],[[2,0],[0,3]],[[1,2],[-3,4]],[[0,0],[1,1]],[[1,0],[-1,0]]]){
    const ab=vectorProduct2D(a,b),ba=vectorProduct2D(b,a);
@@ -12,6 +12,10 @@ test("foundation products preserve lengths, signs and grade components",async()=
    assert.ok(Math.abs(ab.scalar**2+ab.area**2-(a[0]**2+a[1]**2)*(b[0]**2+b[1]**2))<1e-9);
    assert.doesNotThrow(()=>katex.renderToString(productTex(ab.scalar,ab.area),{throwOnError:true}));
   }
+  assert.deepEqual(crossProductAsDual([1,0,0],[0,1,0]).normal,[0,0,1]);
+  assert.deepEqual(crossProductAsDual([0,1,0],[1,0,0]).normal,[0,0,-1]);
+  assert.deepEqual(crossProductAsDual([1,2,3],[4,-1,2]).normal,[7,10,-9]);
+  assert.deepEqual(crossProductAsDual([1,0,0],[2,0,0]).normal,[0,0,0]);
   assert.deepEqual(dimensionCounts(3),[1,3,3,1]);
   assert.deepEqual(dimensionCounts(4),[1,4,6,4,1]);
   for(let n=1;n<=6;n++){
