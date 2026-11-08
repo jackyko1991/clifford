@@ -34,6 +34,7 @@ Use `npm.cmd` in Windows PowerShell when script execution is restricted.
 - `src/structure.json`: curriculum order, topic introductions and planned lesson briefs.
 - `src/curriculum.ts`: typed curriculum and existing lesson lookup.
 - `src/content.json` and `src/LessonSections.tsx`: existing lessons and their renderer.
+- `src/AlgebraSections.tsx`, `src/toolkitModel.ts`: bilingual interactive algebra toolkit; the diagrams use the shared Clifford product kernel. Tests cover metric changes, grade selection, inverses, duality and rotor/matrix agreement.
 - `src/history.json`, `src/HistoryPage.tsx`: sourced history timeline; original SVG illustrations in `src/components/HistoryDrawing.tsx`.
 - `src/reading.json`: resource-card metadata.
 - `src/ReadingPage.tsx`: Tensorizer-style reading layout.

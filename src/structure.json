@@ -159,8 +159,8 @@
         "代數工具箱"
       ],
       "intro": [
-        "Separate the product, grade, metric and duality operations before combining them.",
-        "先分清乘積、階數、度規與對偶，再把工具接起來。"
+        "What changes when we change the multiplication rules? Try metrics, grade selection, reversing and duality, then compare two descriptions of the same rotation.",
+        "換一套乘法規則，結果會怎樣？從度規、階數篩選、反轉與對偶，走到同一個旋轉的兩種描述。"
       ],
       "sections": [
         {
@@ -174,8 +174,8 @@
             "基底平方為正、負或零，會怎樣改變乘法規則？"
           ],
           "visual": [
-            "Switch between Euclidean, spacetime and projective multiplication tables.",
-            "切換歐氏、時空與射影模型的乘法表。"
+            "Compare three two-direction multiplication tables with positive, negative and zero basis squares.",
+            "比較三套兩方向的乘法表，看看正、負、零平方如何改變結果。"
           ]
         },
         {

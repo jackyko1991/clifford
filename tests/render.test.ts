@@ -48,6 +48,10 @@ test("restored Clifford lessons and the reading catalog render with one global f
      }else if(tab==="foundations"){
       assert.ok(html.includes(`data-foundation-section="${section.id}"`));
       assert.ok(!html.includes('data-placeholder="true"'));
+     }else if(tab==="algebra"){
+      assert.ok(html.includes(`data-lesson="${section.id}"`));
+      assert.ok(!html.includes('data-placeholder="true"'));
+      assert.ok(!html.includes('The algebra toolkit (coming)'));
      }else if(c){
       assert.ok(html.includes(`data-lesson="${c.id}"`),`missing existing lesson ${c.id}`);
       assert.ok(html.includes('data-feynman='));
