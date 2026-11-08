@@ -73,3 +73,15 @@ test("history photos are local, credited and use the recorded reuse terms",()=>{
   assert.ok(["Public domain","CC0 1.0","CC BY-SA 4.0"].includes(p.license),p.file);
  }
 });
+
+test("the textbook card has two identified portraits in one split image",()=>{
+ const card=timeline.events.find(c=>c.id==="physics-textbook");
+ assert.equal(card.pair.sources.length,2);
+ assert.deepEqual(card.pair.sources.map(s=>s.name),["Chris Doran","Anthony Lasenby"]);
+ const svg=readFileSync(new URL(`../public/history/${card.pair.file}`,import.meta.url),"utf8");
+ assert.equal([...svg.matchAll(/<image /g)].length,2);
+ for(const source of card.pair.sources){
+  assert.equal(new URL(source.url).protocol,"https:");
+  assert.ok(readFileSync(new URL(`../public/history/${source.file}`,import.meta.url)).length>1000);
+ }
+});

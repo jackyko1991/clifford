@@ -19,3 +19,11 @@ The Clifford file is an already-cropped historical portrait. The GPU photos illu
 
 
 The Hestenes photograph is licensed separately under CC BY-SA 4.0; the site’s source-code license does not replace the image’s license.
+
+## Doran / Lasenby split portrait
+
+- `doran.jpg`: portrait from [Chris Doran’s official Sidney Sussex College profile](https://www.sid.cam.ac.uk/people/dr-chris-doran). Photographer not named on that page.
+- `lasenby.jpg`: portrait from [Anthony Lasenby’s own homepage](https://www.anthonylasenby.com/). Photographer not named on that page.
+- `doran-lasenby.svg`: original SVG layout combining those two source photographs with clipping windows, name labels and a diagonal divider. The photographs themselves are embedded unchanged.
+
+The profile pages do not state an open reuse license for these photographs. Copyright in the source photographs remains with their respective owners; the site’s code license does not cover them. Both original profile pages are credited directly beneath the displayed composite.

@@ -319,8 +319,8 @@
       ],
       "drawing": "book",
       "caption": [
-        "A learning route from products to rotations and fields.",
-        "從乘積走向旋轉與場的學習路線。"
+        "Chris Doran (left) / Anthony Lasenby (right).",
+        "克里斯・多蘭（左）／安東尼・拉森比（右）。"
       ],
       "equation": "",
       "related": "concept/learning/learning",
@@ -329,7 +329,24 @@
           "label": "Cambridge University Press · book record",
           "url": "https://www.cambridge.org/core/books/geometric-algebra-for-physicists/FB8D3ACB76AB3AB10BA7F27505925091"
         }
-      ]
+      ],
+      "pair": {
+        "file": "doran-lasenby.svg",
+        "sources": [
+          {
+            "file": "doran.jpg",
+            "name": "Chris Doran",
+            "author": "Sidney Sussex College, Cambridge",
+            "url": "https://www.sid.cam.ac.uk/people/dr-chris-doran"
+          },
+          {
+            "file": "lasenby.jpg",
+            "name": "Anthony Lasenby",
+            "author": "Anthony Lasenby’s website",
+            "url": "https://www.anthonylasenby.com/"
+          }
+        ]
+      }
     },
     {
       "id": "graphics",
