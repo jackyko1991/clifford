@@ -1,6 +1,7 @@
 import {useId,useState} from "react";
 import Tex from "./Tex";
 import Arrow from "./GeometryArrow";
+import Gimbal3D from "./Gimbal3D";
 import CodeBlock from "./CodeBlock";
 import {quaternionComposition,eulerControlAxes} from "../extendedModels";
 import {numberText} from "../foundationsModel";
@@ -51,11 +52,11 @@ export default function RotationRepresentations({degrees,l}:{degrees:number;l:nu
    </>}
   </div>
   <details className="rounded-lg border border-violet-100 p-3" data-testid="gimbal-lock-extension"><summary className="cursor-pointer text-sm text-violet-800">{l?"為什麼不一直用三個角？試試萬向節鎖":"Why not always use three angles? Try gimbal lock"}</summary><div className="mt-3 space-y-3">
-   <p>{l?"想像相機一路抬頭到正上方：原本兩種不同的轉動控制，可能變成繞同一條軸。不是相機不能動了，而是這組三角度記法，在這個姿態無法分開辨認兩個控制。":"Tilt a camera until it points straight up. Two different turning controls can end up acting about the same line. The camera can still move; this three-angle description cannot distinguish those two controls at that pose."}</p>
-   <div className="rounded-lg border-l-4 border-emerald-300 bg-emerald-50/60 p-3"><svg viewBox="35 15 230 200" role="img" aria-label={l?"俯仰增加時，偏航與滾轉控制軸逐漸共線":"Yaw and roll control axes become collinear as pitch increases"} className="mx-auto max-h-52 w-full max-w-sm"><ellipse cx="150" cy="115" rx="75" ry="25" fill="white" stroke="#cbd5e1" strokeDasharray="3 3"/><Arrow a={[150,115]} b={project(axes.yaw)} color="#2563eb"/><Arrow a={[150,115]} b={project(axes.roll)} color="#7c3aed"/><circle cx="150" cy="115" r="3" fill="#334155"/><text x="158" y="42" fontSize="12" fill="#2563eb">{l?"偏航":"Yaw"}</text><text x={project(axes.roll)[0]+8} y={project(axes.roll)[1]+16} fontSize="12" fill="#7c3aed">{l?"滾轉":"Roll"}</text></svg>
+   <p>{l?"想像把相機的俯仰角轉到 90°：原本兩種不同的轉動控制，可能變成繞同一條軸。不是相機不能動了，而是這組三角度記法，在這個姿態無法分開辨認兩個控制。":"Tilt a camera to a pitch of 90°. Two different turning controls can end up acting about the same line. The camera can still move; this three-angle description cannot distinguish those two controls at that pose."}</p>
+   <div className="rounded-lg border-l-4 border-emerald-300 bg-emerald-50/60 p-3"><Gimbal3D pitch={pitch} l={l}><svg viewBox="35 15 230 200" role="img" aria-label={l?"俯仰增加時，偏航與滾轉控制軸逐漸共線":"Yaw and roll control axes become collinear as pitch increases"} className="mx-auto max-h-52 w-full max-w-sm"><ellipse cx="150" cy="115" rx="75" ry="25" fill="white" stroke="#cbd5e1" strokeDasharray="3 3"/><Arrow a={[150,115]} b={project(axes.yaw)} color="#2563eb"/><Arrow a={[150,115]} b={project(axes.roll)} color="#7c3aed"/><circle cx="150" cy="115" r="3" fill="#334155"/><text x="158" y="42" fontSize="12" fill="#2563eb">{l?"偏航":"Yaw"}</text><text x={project(axes.roll)[0]+8} y={project(axes.roll)[1]+16} fontSize="12" fill="#7c3aed">{l?"滾轉":"Roll"}</text></svg></Gimbal3D>
     <label className="flex items-center gap-3 text-xs"><span>{l?"俯仰":"Pitch"}: {pitch}°</span><input className="min-w-0 flex-1 accent-violet-600" aria-label={l?"萬向節鎖俯仰角":"Gimbal lock pitch"} type="range" min="0" max="90" value={pitch} onChange={e=>setPitch(Number(e.target.value))}/></label>
     <div className="mt-3 flex justify-center gap-2">{[0,45,90].map(v=><button key={v} className={button} onClick={()=>setPitch(v)}>{v}°</button>)}</div>
-    <p className="mt-2 text-center text-sm" aria-live="polite">{pitch===90?(l?"兩支箭頭反向共線：兩個控制只剩同一條旋轉軸。":"The arrows are oppositely collinear: both controls act about one rotation axis."):(l?"抬到 90°，比較藍色與紫色的控制軸。":"Raise pitch to 90° and compare the blue and purple control axes.")}</p>
+    <p className="mt-2 text-center text-sm" aria-live="polite">{pitch===90?(l?"兩支箭頭反向共線：兩個控制只剩同一條旋轉軸。":"The arrows are oppositely collinear: both controls act about one rotation axis."):(l?"調到 90°，比較藍色與紫色的控制軸。":"Set pitch to 90° and compare the blue and purple control axes.")}</p>
    </div>
    <p className="text-xs text-slate-500">{l?"此圖採內在 Z–Y′–X″（偏航／俯仰／滾轉），固定偏航為零；俯仰 90° 時，第一與第三個控制軸共線。這與上圖固定軸的兩步旋轉是不同的示例。把四元數再轉回歐拉角，仍會遇到這個角度表示的奇點。":"This example uses intrinsic Z–Y′–X″ yaw/pitch/roll with yaw fixed at zero. At pitch 90°, the first and third control axes are collinear. It is separate from the fixed-axis two-step example above. Converting a quaternion back to Euler angles still encounters the Euler representation’s singularity."}</p>
   </div></details>
