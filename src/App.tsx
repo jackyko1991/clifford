@@ -12,7 +12,7 @@ export default function App(){
   const selected=tabs.find(t=>t.id===route.tab)||tabs[0];
   useEffect(()=>{const onHash=()=>setRoute(parseRoute(location.hash));window.addEventListener("hashchange",onHash);return()=>window.removeEventListener("hashchange",onHash);},[]);
   useEffect(()=>{
-    document.documentElement.lang=lang;document.title="Clifford";
+    document.documentElement.lang=lang;document.title="Clifford Algebra";
     const url=new URL(location.href);url.searchParams.set("lang",lang);history.replaceState(null,"",url);
   },[lang,l]);
   useEffect(()=>{
@@ -26,7 +26,7 @@ export default function App(){
   return <div className="flex h-dvh flex-col overflow-hidden bg-white">
     <a className="skip" href="#main-content" onClick={e=>{e.preventDefault();document.getElementById("main-content")?.focus();}}>{l?"跳到內容":"Skip to content"}</a>
     <header className="flex shrink-0 flex-wrap items-center gap-x-4 gap-y-2 bg-violet-800 px-4 py-2 text-white shadow-sm sm:px-6 lg:h-[52px] lg:flex-nowrap lg:py-0">
-      <a href="#/concept/laws" className="flex items-center gap-3"><img className="h-8 w-8" src={`${import.meta.env.BASE_URL}icon.svg?v=basis`} alt=""/><span className="text-lg font-semibold tracking-tight">Cliff<span className="text-violet-200">ord</span></span></a>
+      <a href="#/concept/laws" className="flex items-center gap-3"><img className="h-8 w-8" src={`${import.meta.env.BASE_URL}icon.svg?v=basis`} alt=""/><span className="text-lg font-semibold tracking-tight">Cliff<span className="text-violet-200">ord Algebra</span></span></a>
       <span className="hidden text-sm text-violet-100 xl:inline">{l?"幾何代數學習筆記":"Geometric algebra learning notes"}</span>
       <nav aria-label={l?"主導覽":"Main navigation"} className="order-last flex w-full gap-1 overflow-x-auto lg:order-none lg:ml-auto lg:w-auto">
         {(Object.keys(PAGE_TITLES) as Page[]).map(page=><a key={page} href={page==="reading"?"#/reading":`#/${page}/${structure[page][0].id}`} aria-current={route.page===page?"page":undefined} className={`flex h-8 shrink-0 items-center rounded-md px-3 text-sm font-medium ${route.page===page?"bg-white text-violet-800 shadow-sm":"text-violet-100 hover:bg-violet-700"}`}>{PAGE_TITLES[page][l]}</a>)}
