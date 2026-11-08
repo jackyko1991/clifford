@@ -7,52 +7,98 @@
         "用幾何學會學習"
       ],
       "intro": [
-        "Predict a picture, explain it in your own words, then check it with algebra.",
-        "先預測圖形，用自己的話說明，再用代數檢查。"
+        "From i’s quarter turn and Hamilton’s bridge to one geometric product. Build the foundations, test how you learn, then continue to the toolbox and rotations.",
+        "從 i 的四分之一圈、漢密爾頓的橋，走到同一個幾何積。先建立基礎，再練習怎麼學，接著走進工具箱與旋轉。"
       ],
       "sections": [
         {
+          "id": "imaginary-turn",
+          "title": [
+            "The story of i",
+            "i 的故事：看得見的轉向"
+          ],
+          "summary": [
+            "The story of i",
+            "i 的故事：看得見的轉向"
+          ],
+          "visual": [
+            "The story of i",
+            "i 的故事：看得見的轉向"
+          ]
+        },
+        {
+          "id": "hamilton-bridge",
+          "title": [
+            "Hamilton’s bridge",
+            "漢密爾頓在橋上刻下的乘法"
+          ],
+          "summary": [
+            "Hamilton’s bridge",
+            "漢密爾頓在橋上刻下的乘法"
+          ],
+          "visual": [
+            "Hamilton’s bridge",
+            "漢密爾頓在橋上刻下的乘法"
+          ]
+        },
+        {
           "id": "welcome",
           "title": [
-            "One language for geometric relationships",
-            "讓幾何關係回到同一種語言"
+            "Start with the geometric product",
+            "虛數？張量？從幾何積開始"
+          ],
+          "summary": [
+            "Start with the geometric product",
+            "虛數？張量？從幾何積開始"
+          ],
+          "visual": [
+            "Start with the geometric product",
+            "虛數？張量？從幾何積開始"
           ]
         },
         {
           "id": "learning",
           "title": [
-            "A reading path, not another wall of prerequisites",
-            "一條閱讀路徑，不再堆一堵先修牆"
+            "Learn how to learn",
+            "有了例子，再學會如何學習"
+          ],
+          "summary": [
+            "Learn how to learn",
+            "有了例子，再學會如何學習"
+          ],
+          "visual": [
+            "Learn how to learn",
+            "有了例子，再學會如何學習"
           ]
         },
         {
           "id": "predict-before-symbols",
           "title": [
-            "Predict before using symbols",
-            "先預測，再寫符號"
+            "Predict before revealing",
+            "先猜，再揭曉"
           ],
           "summary": [
-            "What should happen when two arrows become parallel, perpendicular, or reversed?",
-            "兩支箭頭平行、垂直或反向時，結果應該怎麼變？"
+            "Predict before revealing",
+            "先猜，再揭曉"
           ],
           "visual": [
-            "A two-arrow prediction game with hidden alignment and area readouts.",
-            "兩支可轉動箭頭，先隱藏平行程度與面積，再揭示答案。"
+            "Predict before revealing",
+            "先猜，再揭曉"
           ]
         },
         {
           "id": "explain-and-check",
           "title": [
-            "Explain, sketch, check",
-            "說清楚、畫出來、驗算"
+            "Explain, check, continue",
+            "說清楚，再走進工具箱"
           ],
           "summary": [
-            "Turn one geometric claim into a sketch, a small calculation, and a testable prediction.",
-            "把一個幾何主張拆成圖、小算例和可檢查的預測。"
+            "Explain, check, continue",
+            "說清楚，再走進工具箱"
           ],
           "visual": [
-            "Compare a verbal explanation, a sketch and one numerical counterexample.",
-            "對照一句解釋、一張草圖與一個數值反例。"
+            "Explain, check, continue",
+            "說清楚，再走進工具箱"
           ]
         }
       ]

@@ -42,7 +42,10 @@ test("restored Clifford lessons and the reading catalog render with one global f
     for(const section of outline.sections){
      assert.ok(html.includes(`id="${section.id}"`),`missing section ${section.id}`);
      const c=cards.find(c=>c.id===section.id);
-     if(c){
+     if(tab==="learning"){
+      assert.ok(html.includes(`data-learning-section="${section.id}"`));
+      assert.ok(!html.includes('data-placeholder="true"'));
+     }else if(c){
       assert.ok(html.includes(`data-lesson="${c.id}"`),`missing existing lesson ${c.id}`);
       assert.ok(html.includes('data-feynman='));
       if(c.diagram)assert.ok(html.includes(`data-diagram="${c.diagram}"`),`missing diagram ${c.id}`);

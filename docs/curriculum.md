@@ -59,3 +59,8 @@ Chapter I now shows Hamilton and Grassmann on parallel rails that merge at the 1
 The user preferred the non-tab phone layout; both origin cards are visible without switching. Desktop at 1440 px continues to show both branches side by side.
 
 Merge connectors use exactly the same amber and teal as their incoming rails, followed by one continuous violet track. Browser measurements at 1440, 390 and 320 px checked the shared junction, incoming seams, outgoing seams and computed colors. Phone rails connect directly to the merge curves.
+
+
+## Learning page opening
+
+The learning page now has six implemented narrative cards: imaginary-turn, hamilton-bridge, welcome, learning, predict-before-symbols, and explain-and-check. `LearningSections.tsx` renders them with quarter-turn, quaternion-order, and prediction tools; `learningModel.ts` computes the first two tools. It starts with foundations, then the learning method, and links onward through the algebra toolbox to rotations. Existing source lessons remain archived in content.json. Hamilton’s bridge account links to Trinity College Dublin.
