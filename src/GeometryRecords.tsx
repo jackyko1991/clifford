@@ -3,6 +3,15 @@ import Tex from "./components/Tex";
 import Arrow from "./components/GeometryArrow";
 import {dimensionCounts,gradeColors} from "./foundationsModel";
 const btn="rounded-md border border-violet-200 bg-white px-3 py-1.5 text-xs text-violet-800 hover:bg-violet-50";
+function OpenTopBin({x,y,width,depth,height,color}:{x:number;y:number;width:number;depth:number;height:number;color:string}){
+ const top=y-height,back=top-depth*.78;
+ return <g stroke={color} fill={color}>
+  <path d={`M${x} ${y}h${width}v${-height}h${-width}Z`} fillOpacity=".14"/>
+  <path d={`M${x+width} ${y}l${depth} ${-depth*.78}V${back}l${-depth} ${depth*.78}Z`} fillOpacity=".24"/>
+  <path d={`M${x} ${top}l${depth} ${-depth*.78}h${width}l${-depth} ${depth*.78}Z`} fill="white" strokeWidth="1.5"/>
+  <path d={`M${x+5} ${top-2}L${x+width-3} ${top-2}L${x+width+depth-6} ${back+2}H${x+depth+2}Z`} fillOpacity=".4" strokeWidth=".7"/>
+ </g>;
+}
 export function GeometryRecordBuilder({l}:{l:number}){
  const [stage,setStage]=useState(0);
  const titles=l?["有幾箱？","往哪裡排？","底面占多大？","往上堆多高？"]:["How many boxes?","Which way to line up?","How much floor area?","How high to stack?"];
@@ -23,16 +32,18 @@ export function GeometryRecordBuilder({l}:{l:number}){
   <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">{titles.map((title,k)=><button key={k} className={btn} aria-pressed={stage===k} onClick={()=>setStage(k)} style={{color:gradeColors[k],background:stage===k?"#f5f3ff":"white"}}>{title}</button>)}</div>
   <svg viewBox="0 0 290 190" className="mx-auto max-h-52 w-full max-w-sm" role="img" aria-label={titles[stage]}>
    {stage===0?<>
-    {[65,145].map(px=><g key={px} fill={gradeColors[0]} stroke={gradeColors[0]}><path d={`M${px} 140h40v-36h-40Z`} fillOpacity=".14"/><path d={`M${px} 104l18-14h40l-18 14Z`} fillOpacity=".08"/><path d={`M${px+40} 140l18-14V90l-18 14Z`} fillOpacity=".24"/><path d={`M${px+20} 104v36`} strokeOpacity=".5"/></g>)}
+    {[65,145].map(x=><OpenTopBin key={x} x={x} y={140} width={40} depth={18} height={36} color={gradeColors[0]}/>)}
     <text x="145" y="65" textAnchor="middle" fontSize="20" fill={gradeColors[0]}>{l?"兩個收納箱":"Two storage boxes"}</text>
    </>:<>
     {stage===3&&<g fill={gradeColors[3]} fillOpacity=".16" stroke={gradeColors[3]}>
      <path d={`M${o}L${x}L${xz}L${z}Z`}/><path d={`M${x}L${xy}L${xyz}L${xz}Z`}/><path d={`M${z}L${xz}L${xyz}L${yz}Z`}/>
      <path d="M120 150V65M70 107.5H170M192.5 132.5V47.5M170 107.5L215 72.5M120 65L165 30M92.5 47.5H192.5" fill="none"/>
      <path d={`M${o}L${y}L${yz}M${y}L${xy}`} fill="none" strokeDasharray="3 4"/>
+     {[0,1].flatMap(row=>[0,1].map(col=>{const px=70+50*col+22.5*row,py=65-17.5*row;return <path key={`${row}-${col}`} d={`M${px+5} ${py-2}H${px+46}L${px+67} ${py-15.5}H${px+26}Z`} fillOpacity=".4" strokeWidth=".7"/>;}))}
+
     </g>}
     {stage===2&&<g fill={gradeColors[2]} stroke={gradeColors[2]}><path d={`M${o}L${x}L${xy}L${y}Z`} fillOpacity=".2"/><path d="M120 150L165 115M92.5 132.5H192.5" fill="none"/><path d="M70 150v-12l45-35h100v12M170 150v-12l45-35" fill="none" strokeOpacity=".45"/></g>}
-    {stage===1&&<g fill={gradeColors[1]} stroke={gradeColors[1]}>{[70,120].map(px=><g key={px}><path d={`M${px} 140h50v-28h-50Z`} fillOpacity=".13"/><path d={`M${px} 112l22-17h50l-22 17Z`} fillOpacity=".07"/><path d={`M${px+50} 140l22-17V95l-22 17Z`} fillOpacity=".2"/></g>)}</g>}
+    {stage===1&&<g>{[70,120].map(x=><OpenTopBin key={x} x={x} y={140} width={50} depth={22} height={28} color={gradeColors[1]}/>)}</g>}
     <Arrow a={stage===1?[70,156]:o} b={stage===1?[170,156]:x} color={gradeColors[1]}/><text x="182" y="164" fontSize="14" fill={gradeColors[1]}>e₁</text>
     {stage>=2&&<><Arrow a={o} b={y} color={gradeColors[1]}/><text x="112" y="108" fontSize="14" fill={gradeColors[1]}>e₂</text></>}
     {stage===3&&<><Arrow a={o} b={z} color={gradeColors[1]}/><text x="54" y="56" fontSize="14" fill={gradeColors[1]}>e₃</text></>}
