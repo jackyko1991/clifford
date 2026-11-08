@@ -131,6 +131,10 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
     {label(110,224,l?"旋轉輸入":"Rotate input")}{label(380,224,l?"兩條計算路線，答案重合":"Both calculation routes agree")}
    </>}
   </svg>
+  {kind==="product"&&<div className="mb-4 rounded-lg border border-violet-100 bg-white px-3 py-3 text-center" data-testid="geometric-product-value">
+   <p className="mb-1 text-xs text-gray-500">{l?"幾何積（兩支單位箭頭）":"Geometric product (two unit arrows)"}</p>
+   <Tex tex={String.raw`ab=\textcolor{#0f766e}{${(Math.abs(Math.cos(theta))<.0005?0:Math.cos(theta)).toFixed(3)}}${Math.sin(theta)<-.0005?"-":"+"}\textcolor{#7c3aed}{${(Math.abs(Math.sin(theta))<.0005?0:Math.abs(Math.sin(theta))).toFixed(3)}\,e_{12}}`}/>
+  </div>}
   {kind==="holonomy"&&<div className="mb-4 grid gap-3 text-center text-xs sm:grid-cols-2">
    <div className="rounded-lg border border-violet-100 bg-white px-3 py-2"><p className="mb-1 text-gray-500">{l?"固定磁通":"Fixed magnetic flux"}</p><Tex tex={String.raw`\Phi\simeq${(flux.fluxWebers/1e-15).toFixed(2)}\times10^{-15}\,\mathrm{Wb}`}/></div>
    <div className="rounded-lg border border-violet-100 bg-white px-3 py-2"><p className="mb-1 text-gray-500">{l?"電子累積相位":"Electron phase"}</p><Tex tex={String.raw`\Delta\varphi=${flux.phaseDegrees.toFixed(1)}^\circ`}/></div>
