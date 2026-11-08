@@ -12,6 +12,19 @@ test("extended lessons compute reflections, projective incidence, conformal geom
   }
   const order=m.composedRotations(Math.PI/2);close(order.ab,[0,0,1]);close(order.ba,[0,1,0]);
   for(const angle of [0,20,90,135,180]){const r=m.composedRotations(angle*Math.PI/180);assert.ok(Math.abs(m.dot3(r.ab,r.ab)-1)<1e-10);assert.ok(Math.abs(m.dot3(r.ba,r.ba)-1)<1e-10);}
+  for(const degrees of [0,20,45,90,135,180]){
+   const theta=degrees*Math.PI/180,q=m.quaternionComposition(theta),r=m.composedRotations(theta);
+   close(m.quaternionApply(q.zThenX,[1,0,0]),r.ab);close(m.quaternionApply(q.xThenZ,[1,0,0]),r.ba);
+   for(const quat of [q.zThenX,q.xThenZ]){
+    assert.ok(Math.abs(m.dot3(quat,quat)-1)<1e-10);
+    close(m.quaternionApply(quat,[.2,-.7,1.1]),m.quaternionApply(quat.map((x:number)=>-x),[.2,-.7,1.1]));
+   }
+   const R=algebra.gp(m.planeRotor(6,theta),m.planeRotor(3,theta));
+   close([R[0],-R[6],R[5],-R[3]],q.zThenX);
+  }
+  const unlocked=m.eulerControlAxes(0),locked=m.eulerControlAxes(Math.PI/2);
+  assert.ok(Math.abs(m.dot3(unlocked.yaw,unlocked.roll))<1e-10);
+  assert.ok(Math.abs(m.dot3(locked.yaw,locked.roll)+1)<1e-10);
   for(const angle of [-60,-.01,0,.01,30,60])for(const offset of [0,.4,1]){
    const r=m.lineIntersection(angle,offset);assert.ok(Math.abs(m.dot3(r.l,r.P))<1e-10);assert.ok(Math.abs(m.dot3(r.m,r.P))<1e-10);
    const lineMV=(line:number[])=>[line[2],line[0],line[1]];

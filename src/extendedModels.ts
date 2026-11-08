@@ -20,3 +20,14 @@ export const geometricModels=[
  {id:"sta",name:"Spacetime algebra",signature:"(1,3)",n:4,slots:16,task:["Relativistic spacetime","相對論時空"]},
 ];
 export function storageCost(n:number){return {slots:2**n,products:4**n,vector:n,float32Bytes:4*2**n};}
+
+// Scalar-first Hamilton quaternions; active, right-handed rotations.
+export function quaternionComposition(theta:number){
+ const c=Math.cos(theta/2),s=Math.sin(theta/2);
+ return {zThenX:[c*c,c*s,-s*s,c*s],xThenZ:[c*c,c*s,s*s,c*s]};
+}
+export function quaternionApply(q:number[],v:number[]){
+ const w=q[0],u=q.slice(1),uv=cross3(u,v),uuv=cross3(u,uv);
+ return v.map((x,i)=>x+2*w*uv[i]+2*uuv[i]);
+}
+export function eulerControlAxes(pitch:number){return {yaw:[0,0,1],roll:[Math.cos(pitch),0,-Math.sin(pitch)]};}
