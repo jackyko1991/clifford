@@ -39,13 +39,27 @@ function ProductExplorer({l}:{l:number}){
 function OrientationWalk({l}:{l:number}){
  const [swapped,setSwapped]=useState(false),[step,setStep]=useState(2);const o=[110,140],a=[210,140],b=[160,140-50*Math.sqrt(3)],end=[260,140-50*Math.sqrt(3)],first=swapped?b:a;
  return <figure data-interactive="orientation-walk" className="space-y-3">
-  <svg viewBox="0 0 380 190" className="mx-auto w-full max-w-md" role="img" aria-label={l?"同一平行四邊形，依序走兩條邊；交換次序反轉定向":"Walk two edges of the same parallelogram; swapping their order reverses orientation"}>
+  <svg viewBox="75 15 240 155" className="mx-auto w-full max-w-md" role="img" aria-label={l?"同一平行四邊形，依序走兩條邊；交換次序反轉定向":"Walk two edges of the same parallelogram; swapping their order reverses orientation"}>
+   <path d="M95 140H285M110 155V35" stroke="#cbd5e1" fill="none"/>
+   <Arrow a={[277,140]} b={[285,140]} color="#94a3b8"/><Arrow a={[110,43]} b={[110,35]} color="#94a3b8"/>
+   <text x="289" y="145" fontSize="12" fill="#64748b">+x</text><text x="110" y="27" textAnchor="middle" fontSize="12" fill="#64748b">+y</text>
    <path d={`M${o}L${a}L${end}L${b}Z`} fill={purple} fillOpacity={step===2?.2:.05} stroke="#c4b5fd"/>
+   <path d={`M${o}L${b}`} stroke="#a78bfa" strokeDasharray="3 4" fill="none"/>
+   <path d={`M156 140A46 46 0 0 0 133 ${140-23*Math.sqrt(3)}`} stroke={teal} strokeWidth="1.5" strokeDasharray="3 3" fill="none"/>
+   <Arrow a={[140,104]} b={[133,140-23*Math.sqrt(3)]} color={teal}/>
+   <text x="149" y="96" fontSize="13" fill={teal}>+</text>
+   <path d={swapped?`M125 ${140-15*Math.sqrt(3)}A30 30 0 0 1 140 140`:`M140 140A30 30 0 0 0 125 ${140-15*Math.sqrt(3)}`} stroke={purple} strokeWidth="2" fill="none"/>
+   <Arrow a={swapped?[140,132]:[132,118]} b={swapped?[140,140]:[125,140-15*Math.sqrt(3)]}/>
+
    {step>=1&&<Arrow a={o} b={first} color={teal}/>} {step>=2&&<Arrow a={first} b={end}/>}
    <text x="215" y="160" fontSize="13" fill={teal}>a</text><text x="140" y="50" fontSize="13" fill={purple}>b</text>
    <text x="190" y="110" textAnchor="middle" fontSize="22" fill={purple}>{step===2?(swapped?"−":"+"):"?"}</text>
-   <text x="190" y="183" textAnchor="middle" fontSize="12" fill="#64748b">{l?"同一塊面積，同一個終點，不同的定向。":"Same patch and endpoint; opposite orientation."}</text>
   </svg>
+  <figcaption className="space-y-1 text-center text-xs">
+   <p style={{color:teal}}>{l?"虛線弧：座標正向固定為逆時針（＋）":"Dashed arc: the positive reference stays anticlockwise (+)"}</p>
+   <p style={{color:purple}} aria-live="polite"><Tex tex={`${swapped?"b\\to a":"a\\to b"}:\\quad ${swapped?"-":"+"}60^\\circ`}/></p>
+   <p className="text-gray-500">{l?"交換後變負的是轉向角；座標軸與兩支箭頭的分量沒有反轉。":"Swapping makes the turn angle negative; the axes and vector components do not reverse."}</p>
+  </figcaption>
   <div className="text-center" aria-live="polite"><Tex tex={`${swapped?"b\\wedge a":"a\\wedge b"}=\\textcolor{#7c3aed}{${swapped?"-":""}\\frac{\\sqrt{3}}{2}e_{12}}`}/></div>
   <div className="flex flex-wrap justify-center gap-2"><button className={btn} onClick={()=>setStep(0)}>{l?"回到起點":"Start again"}</button><button className={btn} disabled={step===2} onClick={()=>setStep(s=>Math.min(2,s+1))}>{l?"走下一條邊":"Walk next edge"}</button><button className={btn} aria-pressed={swapped} onClick={()=>{setSwapped(s=>!s);setStep(2);}}>{l?"交換先後次序":"Reverse the order"}</button></div>
  </figure>;
