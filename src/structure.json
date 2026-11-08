@@ -333,8 +333,8 @@
         {
           "id": "conformal",
           "title": [
-            "Circles and spheres in CGA",
-            "CGA 中的圓與球"
+            "Conformal Geometric Algebra (CGA): circles and spheres",
+            "共形幾何代數（CGA）：圓與球"
           ],
           "summary": [
             "Why embed ordinary points in a larger space to manipulate circles and spheres?",
