@@ -4,8 +4,8 @@ Portrait and hardware images are downloaded locally. Each displayed image includ
 
 | Local file | Subject / Commons file | Credit | Reuse terms | Source | Changes |
 | --- | --- | --- | --- | --- | --- |
-| hamilton.png | William Rowan Hamilton portrait oval 2.png | Unknown authorUnknown author | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [Commons](https://commons.wikimedia.org/wiki/File:William_Rowan_Hamilton_portrait_oval_2.png) | Original image downloaded unchanged |
-| grassmann.jpg | Hermann Graßmann.jpg | Unknown authorUnknown author | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [Commons](https://commons.wikimedia.org/wiki/File:Hermann_Gra%C3%9Fmann.jpg) | Original image downloaded unchanged |
+| hamilton.png | William Rowan Hamilton portrait oval 2.png | Unknown photographer | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [Commons](https://commons.wikimedia.org/wiki/File:William_Rowan_Hamilton_portrait_oval_2.png) | Original image downloaded unchanged |
+| grassmann.jpg | Hermann Graßmann.jpg | Unknown photographer | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [Commons](https://commons.wikimedia.org/wiki/File:Hermann_Gra%C3%9Fmann.jpg) | Original image downloaded unchanged |
 | clifford.jpg | Clifford William Kingdon (cropped portrait).jpg | Unknown photographer | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [Commons](https://commons.wikimedia.org/wiki/File:Clifford_William_Kingdon_(cropped_portrait).jpg) | Original image downloaded unchanged |
 | dirac.jpg | Paul Dirac, 1933.jpg | Nobel Foundation | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [Commons](https://commons.wikimedia.org/wiki/File:Paul_Dirac,_1933.jpg) | Original image downloaded unchanged |
 | graphics-gpu.webp | NVIDIA GeForce 8800 GTX Board.jpg | Hyins | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [Commons](https://commons.wikimedia.org/wiki/File:NVIDIA_GeForce_8800_GTX_Board.jpg) | Resized to WebP (same credited asset used by Tensorizer) |

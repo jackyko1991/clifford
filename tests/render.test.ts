@@ -47,8 +47,11 @@ test("restored Clifford lessons and the reading catalog render with one global f
       assert.ok(html.includes('data-feynman='));
       if(c.diagram)assert.ok(html.includes(`data-diagram="${c.diagram}"`),`missing diagram ${c.id}`);
      }else if(tab==="history"){
-      assert.ok(html.includes(`data-history-card="${section.id}"`));
+      assert.equal([...html.matchAll(new RegExp(`data-history-card="${section.id}"`,"g"))].length,1,`duplicate history event ${section.id}`);
       assert.ok(html.includes('data-testid="history"'));
+      assert.ok(html.includes('data-history-branches="true"'));
+      assert.ok(html.includes('data-history-merge="true"'));
+      assert.equal([...html.matchAll(/data-history-branch="/g)].length,2);
       assert.ok(!html.includes('data-placeholder="true"'));
       assert.ok(!html.includes('id="people"'));
       assert.ok(!html.includes("Keep a guide to people and attribution"));

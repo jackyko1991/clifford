@@ -53,3 +53,5 @@ The page coverage was checked against these teaching resources; they inform the 
 ## History page
 
 The history tab uses Tensorizer’s alternating timeline layout, with three eras, a sticky navigation, original SVG illustrations, side-note controls and per-card source links. Ten milestones cover 1843–2023. The people/attribution addendum has been removed at the user’s request. Portraits and relevant hardware photos take priority over original drawings; see public/history/CREDITS.md for image provenance. Dates identify selected publications or teaching events; the page does not claim a single continuous invention or an institutional suppression story.
+
+Chapter I now shows Hamilton and Grassmann on parallel rails that merge at the 1878 product. The 1870/1876 curvature proposal remains a separately labeled contemporary question. On phones, cards stack at readable widths beside two compact rails; later eras continue on one timeline. Layout was checked in an isolated browser at widths 1440, 390 and 320 px, including overlap and horizontal-overflow measurements.

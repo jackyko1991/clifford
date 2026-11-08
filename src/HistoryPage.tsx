@@ -1,5 +1,5 @@
 import {useEffect,useLayoutEffect,useRef,useState,type RefObject} from "react";
-import {historyEvents,historyEras,historyIntro} from "./history";
+import {historyEvents,historyEras,historyIntro,type HistoryEvent} from "./history";
 import HistoryDrawing from "./components/HistoryDrawing";
 import Tex from "./components/Tex";
 const LG="(min-width:1024px)",GAP=24,BADGE=24;
@@ -55,7 +55,8 @@ function useInterlock(listRef: RefObject<HTMLOListElement | null>, ids: string[]
 export default function HistoryPage({l,section}:{l:number;section:string|null}){
  const [active,setActive]=useState(section||historyEvents[0].id),[menu,setMenu]=useState(false),[notes,setNotes]=useState<Set<string>>(()=>new Set());
  const list=useRef<HTMLOListElement>(null);
- const ids=historyEvents.map(c=>c.id);
+ const continuation=historyEvents.filter(c=>c.part>1);
+ const ids=continuation.map(c=>c.id);
  const starts=new Set(historyEras.map(e=>historyEvents.find(c=>c.part===e.id)!.id));
  const layout=useInterlock(list,ids,starts);
  const noteIds=historyEvents.filter(c=>c.note).map(c=>c.id);
@@ -92,24 +93,9 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
  </div>)}
  <button role="switch" aria-checked={allOpen} onClick={()=>setNotes(allOpen?new Set():new Set(noteIds))} className="w-full rounded-lg border border-dashed border-amber-300 bg-amber-50 px-3 py-2 text-left text-xs text-amber-900">💡 {l?"顯示所有小故事":"Show all side notes"}<span className="float-right">{allOpen?"●":"○"}</span></button>
  </>;
- return <div className="mx-auto flex max-w-6xl gap-8 px-5 pt-6 pb-12" data-testid="history">
-  <nav aria-label={l?"歷史時間軸":"History timeline"} className="sticky top-20 hidden max-h-[calc(100dvh-11rem)] w-60 shrink-0 self-start overflow-y-auto lg:block">{navigation}</nav>
-  <article id="main-content" tabIndex={-1} className="min-w-0 flex-1">
-   <header><p className="text-sm font-medium text-violet-700">{l?"概念 · 回到思想的起點":"Concepts · where the ideas began"}</p><h1 className="mt-1 text-3xl font-semibold tracking-tight">{l?"克利福德代數史":"A history of Clifford algebra"}</h1><p className="mt-3 text-sm leading-relaxed text-gray-600">{historyIntro[l]}</p></header>
-   <div className="sticky top-12 z-20 -mx-5 mt-5 border-y border-gray-200 bg-white/95 px-5 py-2 backdrop-blur lg:hidden">
-    <button aria-expanded={menu} className="flex w-full items-center gap-2 text-left text-sm" onClick={()=>setMenu(v=>!v)}><span className="h-2 w-2 rounded-full bg-violet-600"/><span className="min-w-0 flex-1 truncate">{historyEvents.find(c=>c.id===active)?.title[l]||(l?"歷史時間軸":"History timeline")}</span><span>{menu?"▴":"▾"}</span></button>
-    {menu&&<div className="max-h-[60dvh] overflow-y-auto pt-4">{navigation}</div>}
-   </div>
-   <div className="relative mt-8">
-    <div aria-hidden className="absolute top-0 bottom-0 left-4 w-0.5 -translate-x-1/2 bg-gray-200 lg:left-1/2"/>
-    <ol ref={list} className={`relative space-y-8 ${layout?"lg:space-y-0":""}`} style={layout?{height:layout.height}:undefined}>
-     {historyEvents.map((c,i)=>{
-      const st=theme[c.part-1],left=i%2===0,first=starts.has(c.id),era=historyEras.find(e=>e.id===c.part)!;
-      return <li key={c.id} data-history-card={c.id} className={`pt-8 pl-10 lg:pt-0 ${layout?"absolute lg:w-[calc(50%-3rem)] lg:pl-0":"relative"}`} style={layout?{top:layout.tops[c.id],...(left?{left:0}:{right:0})}:undefined}>
-       <span aria-hidden className={`absolute top-[64px] left-4 h-0.5 w-6 lg:top-[34px] ${st.dot} ${left?"lg:left-auto lg:right-[-3rem] lg:w-12":"lg:left-[-3rem] lg:w-12"}`}/>
-       <span aria-hidden className={`absolute top-[58px] left-4 z-10 h-3.5 w-3.5 -translate-x-1/2 rounded-full ring-4 ring-gray-50 lg:top-7 ${st.dot} ${left?"lg:left-auto lg:right-[-3rem] lg:translate-x-1/2":"lg:left-[-3rem]"}`}/>
-       <span className={`absolute top-0 left-10 whitespace-nowrap text-sm font-bold tabular-nums lg:-top-1 lg:rounded lg:bg-gray-50 lg:px-1 ${st.text} ${left?"lg:left-auto lg:right-[-3rem] lg:translate-x-1/2":"lg:left-[-3rem] lg:-translate-x-1/2"}`}>{c.year}</span>
-       <section id={c.id} className={`scroll-mt-24 overflow-hidden rounded-xl border bg-white shadow-sm ${active===c.id?"border-violet-300 ring-1 ring-violet-100":"border-gray-200"}`}>
+ const cardContent=(c:HistoryEvent,first=false)=>{
+  const st=theme[c.part-1],era=historyEras.find(e=>e.id===c.part)!;
+  return <section id={c.id} className={`scroll-mt-24 overflow-hidden rounded-xl border bg-white shadow-sm ${active===c.id?"border-violet-300 ring-1 ring-violet-100":"border-gray-200"}`}>
         {first&&<div className={`border-b px-4 py-3 ${st.band}`}><p className="text-sm font-semibold">{era.title[l]}</p><p className="mt-1 text-xs opacity-80">{era.subtitle[l]}</p></div>}
         <figure className="border-b border-gray-100 bg-gray-50">
          <div className="flex h-52 items-center justify-center p-3">{c.photo?<img src={`${import.meta.env.BASE_URL}history/${c.photo.file}`} alt={c.caption[l]} loading="lazy" decoding="async" className="max-h-full max-w-full rounded object-contain"/>:<HistoryDrawing kind={c.drawing} label={c.caption[l]} l={l}/>}</div>
@@ -123,7 +109,55 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
          <a href={`#/${c.related}`} className="inline-block text-xs font-medium text-violet-700 hover:underline">{l?"到相關概念或例子 →":"Explore the related lesson →"}</a>
          <ul className="space-y-1 border-t border-gray-100 pt-3 text-[11px] text-gray-500">{c.sources.map(s=><li key={s.url}><a href={s.url} target="_blank" rel="noopener noreferrer" className="hover:text-violet-700 hover:underline">{s.label} ↗</a></li>)}</ul>
         </div>
-       </section>
+       </section>;
+ };
+ return <div className="mx-auto flex max-w-6xl gap-8 px-5 pt-6 pb-12" data-testid="history">
+  <nav aria-label={l?"歷史時間軸":"History timeline"} className="sticky top-20 hidden max-h-[calc(100dvh-11rem)] w-60 shrink-0 self-start overflow-y-auto lg:block">{navigation}</nav>
+  <article id="main-content" tabIndex={-1} className="min-w-0 flex-1">
+   <header><p className="text-sm font-medium text-violet-700">{l?"概念 · 回到思想的起點":"Concepts · where the ideas began"}</p><h1 className="mt-1 text-3xl font-semibold tracking-tight">{l?"克利福德代數史":"A history of Clifford algebra"}</h1><p className="mt-3 text-sm leading-relaxed text-gray-600">{historyIntro[l]}</p></header>
+   <div className="sticky top-12 z-20 -mx-5 mt-5 border-y border-gray-200 bg-white/95 px-5 py-2 backdrop-blur lg:hidden">
+    <button aria-expanded={menu} className="flex w-full items-center gap-2 text-left text-sm" onClick={()=>setMenu(v=>!v)}><span className="h-2 w-2 rounded-full bg-violet-600"/><span className="min-w-0 flex-1 truncate">{historyEvents.find(c=>c.id===active)?.title[l]||(l?"歷史時間軸":"History timeline")}</span><span>{menu?"▴":"▾"}</span></button>
+    {menu&&<div className="max-h-[60dvh] overflow-y-auto pt-4">{navigation}</div>}
+   </div>
+   <section className="mt-8" aria-labelledby="origins-title" data-history-branches="true">
+    <header className="mb-5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3"><h2 id="origins-title" className="font-semibold text-amber-900">{historyEras[0].title[l]}</h2><p className="mt-1 text-xs text-amber-800">{l?"兩條獨立發展的代數脈絡，在 1878 年的幾何積中匯合。":"Two independently developed algebraic strands meet in the geometric product in 1878."}</p></header>
+    <div className="relative" data-history-parallel="true">
+     <div aria-hidden className="absolute inset-y-0 left-3 w-0.5 bg-amber-300 lg:left-1/4 lg:-translate-x-1/2"/>
+     <div aria-hidden className="absolute inset-y-0 left-8 w-0.5 bg-teal-300 lg:left-3/4 lg:-translate-x-1/2"/>
+     <div className="grid gap-y-8 pl-14 lg:grid-cols-2 lg:pl-0">
+      {historyEvents.slice(0,2).map((c,i)=><div key={c.id} data-history-branch={c.id} data-history-card={c.id} className="relative min-w-0 pb-5 lg:px-3">
+       <span aria-hidden className={`absolute top-3 h-2.5 w-2.5 -translate-x-1/2 rounded-full ring-4 ring-gray-50 lg:left-1/2 ${i===0?"-left-11 bg-amber-500":"-left-6 bg-teal-600"}`}/>
+       <p className={`relative mb-3 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-xs font-semibold ${i===0?"text-amber-800":"text-teal-800"}`}><span className="tabular-nums">{c.year}</span><span>{i===0?(l?"旋轉 · 四元數":"Rotations · quaternions"):(l?"延伸 · 定向面積":"Extension · oriented area")}</span></p>
+       {cardContent(c)}
+      </div>)}
+     </div>
+     <aside data-history-card="clifford-space" className="relative mt-4 pb-6 pl-14 lg:mx-auto lg:w-[calc(50%-3rem)] lg:pl-0" aria-label={l?"同時期的另一個問題":"A separate question of the period"}>
+      <p className="mb-3 text-xs font-medium leading-relaxed text-gray-500">{l?"同時期的另一個問題：空間與物質":"A separate question of the period: space and matter"} · 1870 / 1876</p>
+      {cardContent(historyEvents.find(c=>c.id==="clifford-space")!)}
+     </aside>
+    </div>
+    <div aria-hidden data-history-merge="true">
+     <svg viewBox="0 0 1000 64" preserveAspectRatio="none" className="hidden h-16 w-full lg:block"><path d="M250 0V12Q250 40 500 40" stroke="#f59e0b" strokeWidth="2" fill="none" vectorEffect="non-scaling-stroke"/><path d="M750 0V12Q750 40 500 40" stroke="#0d9488" strokeWidth="2" fill="none" vectorEffect="non-scaling-stroke"/><path d="M500 40V64" stroke="#7c3aed" strokeWidth="2" vectorEffect="non-scaling-stroke"/></svg>
+     <svg viewBox="0 0 48 64" className="h-16 w-12 lg:hidden"><path d="M12 0V12Q12 38 16 38" stroke="#f59e0b" strokeWidth="2" fill="none"/><path d="M32 0V12Q32 38 16 38" stroke="#0d9488" strokeWidth="2" fill="none"/><path d="M16 38V64" stroke="#7c3aed" strokeWidth="2"/><circle cx="16" cy="38" r="3" fill="#7c3aed"/></svg>
+    </div>
+    <div className="relative pb-8 pl-10 lg:pl-0" data-history-joined="true" data-history-card="clifford-product">
+     <div aria-hidden className="absolute inset-y-0 left-4 w-0.5 -translate-x-1/2 bg-violet-300 lg:left-1/2"/>
+     <div className="relative mx-auto min-w-0 lg:w-[calc(50%-3rem)]">
+      <p className="mb-3 text-sm font-semibold text-violet-800">1878 · {l?"兩條脈絡，在幾何積匯合":"The two strands meet in one product"}</p>
+      {cardContent(historyEvents.find(c=>c.id==="clifford-product")!)}
+     </div>
+    </div>
+   </section>
+   <div className="relative">
+    <div aria-hidden className="absolute top-0 bottom-0 left-4 w-0.5 -translate-x-1/2 bg-gray-200 lg:left-1/2"/>
+    <ol ref={list} className={`relative space-y-8 ${layout?"lg:space-y-0":""}`} style={layout?{height:layout.height}:undefined}>
+     {continuation.map((c,i)=>{
+      const st=theme[c.part-1],left=i%2===0,first=starts.has(c.id);
+      return <li key={c.id} data-history-card={c.id} className={`pt-8 pl-10 lg:pt-0 ${layout?"absolute lg:w-[calc(50%-3rem)] lg:pl-0":"relative"}`} style={layout?{top:layout.tops[c.id],...(left?{left:0}:{right:0})}:undefined}>
+       <span aria-hidden className={`absolute top-[64px] left-4 h-0.5 w-6 lg:top-[34px] ${st.dot} ${left?"lg:left-auto lg:right-[-3rem] lg:w-12":"lg:left-[-3rem] lg:w-12"}`}/>
+       <span aria-hidden className={`absolute top-[58px] left-4 z-10 h-3.5 w-3.5 -translate-x-1/2 rounded-full ring-4 ring-gray-50 lg:top-7 ${st.dot} ${left?"lg:left-auto lg:right-[-3rem] lg:translate-x-1/2":"lg:left-[-3rem]"}`}/>
+       <span className={`absolute top-0 left-10 whitespace-nowrap text-sm font-bold tabular-nums lg:-top-1 lg:rounded lg:bg-gray-50 lg:px-1 ${st.text} ${left?"lg:left-auto lg:right-[-3rem] lg:translate-x-1/2":"lg:left-[-3rem] lg:-translate-x-1/2"}`}>{c.year}</span>
+       {cardContent(c,first)}
       </li>;
      })}
     </ol>
