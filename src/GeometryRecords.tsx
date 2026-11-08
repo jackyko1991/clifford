@@ -4,13 +4,31 @@ import Arrow from "./components/GeometryArrow";
 import {dimensionCounts,gradeColors} from "./foundationsModel";
 const btn="rounded-md border border-violet-200 bg-white px-3 py-1.5 text-xs text-violet-800 hover:bg-violet-50";
 const binDimensions={width:50,depth:22.5,height:42.5};
-function OpenTopBin({x,y,color,hideSide=false}:{x:number;y:number;color:string;hideSide?:boolean}){
+function StorageBoxAssembly({x,y,columns=1,rows=1,layers=1,color}:{x:number;y:number;columns?:number;rows?:number;layers?:number;color:string}){
  const {width,depth,height}=binDimensions;
- const top=y-height,back=top-depth*.78;
- return <g data-storage-bin="true" data-width={width} data-depth={depth} data-height={height} stroke={color} fill={color}>
-  <path d={`M${x} ${y}h${width}v${-height}h${-width}Z`} fill="white"/><path d={`M${x} ${y}h${width}v${-height}h${-width}Z`} fillOpacity=".14"/>
-  {!hideSide&&<><path d={`M${x+width} ${y}l${depth} ${-depth*.78}V${back}l${-depth} ${depth*.78}Z`} fill="white"/><path d={`M${x+width} ${y}l${depth} ${-depth*.78}V${back}l${-depth} ${depth*.78}Z`} fillOpacity=".24"/></>}
-  <path d={`M${x} ${top}l${depth} ${-depth*.78}h${width}l${-depth} ${depth*.78}Z`} fill="white" strokeWidth="1.5"/>
+ const at=(col:number,row:number,layer:number)=>[x+col*width+row*depth,y-row*depth*.78-layer*height];
+ const front=`M${at(0,0,0)}L${at(columns,0,0)}L${at(columns,0,layers)}L${at(0,0,layers)}Z`;
+ const side=`M${at(columns,0,0)}L${at(columns,rows,0)}L${at(columns,rows,layers)}L${at(columns,0,layers)}Z`;
+ const top=`M${at(0,0,layers)}L${at(columns,0,layers)}L${at(columns,rows,layers)}L${at(0,rows,layers)}Z`;
+ const visible:string[]=[],hidden:string[]=[`M${at(0,0,0)}L${at(0,rows,0)}L${at(0,rows,layers)} M${at(0,rows,0)}L${at(columns,rows,0)}`];
+ for(let col=1;col<columns;col++){
+  visible.push(`M${at(col,0,0)}L${at(col,0,layers)}L${at(col,rows,layers)}`);
+  hidden.push(`M${at(col,0,0)}L${at(col,rows,0)}L${at(col,rows,layers)}`);
+ }
+ for(let row=1;row<rows;row++){
+  visible.push(`M${at(columns,row,0)}L${at(columns,row,layers)}L${at(0,row,layers)}`);
+  hidden.push(`M${at(0,row,layers)}L${at(0,row,0)}L${at(columns,row,0)}`);
+ }
+ for(let layer=1;layer<layers;layer++){
+  visible.push(`M${at(0,0,layer)}L${at(columns,0,layer)}L${at(columns,rows,layer)}`);
+  hidden.push(`M${at(0,0,layer)}L${at(0,rows,layer)}L${at(columns,rows,layer)}`);
+ }
+ return <g data-storage-style="shared-open-box" data-bin-grid={`${columns},${rows},${layers}`} data-box-count={columns*rows*layers} data-cell-width={width} data-cell-depth={depth} data-cell-height={height} stroke={color} strokeWidth="1.2" strokeLinejoin="round" strokeLinecap="round">
+  <path d={front} fill="white"/><path data-box-face="front" d={front} fill={color} fillOpacity=".14"/>
+  <path d={side} fill="white"/><path data-box-face="side" d={side} fill={color} fillOpacity=".24"/>
+  <path data-box-face="opening" d={top} fill="white"/>
+  <path d={visible.join(' ')} fill="none"/>
+  <path data-diagram={layers>1?"hidden-volume-edges":"hidden-box-edges"} d={hidden.join(' ')} fill="none" strokeDasharray="3 4" strokeOpacity=".45"/>
  </g>;
 }
 export function GeometryRecordBuilder({l}:{l:number}){
@@ -29,25 +47,18 @@ export function GeometryRecordBuilder({l}:{l:number}){
  ];
  const formulas=["s=2","v=e_1","A=e_1\\wedge e_2=e_{12}","V=e_1\\wedge e_2\\wedge e_3=e_{123}"];
  const corner=(col:number,row:number,layer:number)=>[70+col*binDimensions.width+row*binDimensions.depth,150-row*binDimensions.depth*.78-layer*binDimensions.height];
- const o=corner(0,0,0),x=corner(2,0,0),y=corner(0,2,0),xy=corner(2,2,0),z=corner(0,0,2),xz=corner(2,0,2),yz=corner(0,2,2),xyz=corner(2,2,2);
+ const o=corner(0,0,0),x=corner(2,0,0),y=corner(0,2,0),z=corner(0,0,2);
  return <figure data-interactive="geometry-record-builder" className="space-y-3">
   <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">{titles.map((title,k)=><button key={k} className={btn} aria-pressed={stage===k} onClick={()=>setStage(k)} style={{color:gradeColors[k],background:stage===k?"#f5f3ff":"white"}}>{title}</button>)}</div>
   <svg viewBox="0 0 290 190" className="mx-auto max-h-52 w-full max-w-sm" role="img" aria-label={titles[stage]}>
    {stage===0?<>
-    {[55,150].map(x=><OpenTopBin key={x} x={x} y={150} color={gradeColors[0]}/>)}
-    <text x="145" y="65" textAnchor="middle" fontSize="20" fill={gradeColors[0]}>{l?"兩個收納箱":"Two storage boxes"}</text>
+    {[55,162.5].map(x=><StorageBoxAssembly key={x} x={x} y={150} color={gradeColors[0]}/>)}
+    <text x="145" y="65" textAnchor="middle" fontSize="14" fill={gradeColors[0]}>{l?"兩個收納箱":"Two storage boxes"}</text>
    </>:<>
-    {stage===3&&<g data-bin-grid="2,2,2" data-cell-width={binDimensions.width} data-cell-depth={binDimensions.depth} data-cell-height={binDimensions.height} fill={gradeColors[3]} fillOpacity=".16" stroke={gradeColors[3]}>
-     <path d={`M${o}L${x}L${xz}L${z}Z`}/><path d={`M${x}L${xy}L${xyz}L${xz}Z`}/><path d={`M${z}L${xz}L${xyz}L${yz}Z`}/>
-     <path d={`M${corner(1,0,0)}L${corner(1,0,2)} M${corner(0,0,1)}L${corner(2,0,1)} M${corner(2,1,0)}L${corner(2,1,2)} M${corner(2,0,1)}L${corner(2,2,1)} M${corner(1,0,2)}L${corner(1,2,2)} M${corner(0,1,2)}L${corner(2,1,2)}`} fill="none"/>
-     <path data-diagram="hidden-volume-edges" d={`M${o}L${y}L${yz}M${y}L${xy} M${corner(0,1,0)}L${corner(0,1,2)} M${corner(0,0,1)}L${corner(0,2,1)}L${corner(2,2,1)} M${corner(1,2,0)}L${corner(1,2,2)} M${corner(1,0,0)}L${corner(1,2,0)} M${corner(0,1,0)}L${corner(2,1,0)}`} fill="none" strokeDasharray="3 4"/>
-
-    </g>}
-    {stage===2&&<g data-bin-grid="2,2,1">{[1,0].flatMap(row=>[0,1].map(col=><OpenTopBin key={`${row}-${col}`} x={70+col*binDimensions.width+row*binDimensions.depth} y={150-row*binDimensions.depth*.78} color={gradeColors[2]} hideSide={col===0}/>))}</g>}
-    {stage===1&&<g>{[70,120].map(x=><OpenTopBin key={x} x={x} y={150} color={gradeColors[1]} hideSide={x===70}/>)}</g>}
-    <Arrow a={stage===1?[70,166]:o} b={stage===1?[170,166]:x} color={gradeColors[1]}/><text x="182" y={stage===1?174:164} fontSize="14" fill={gradeColors[1]}>e₁</text>
-    {stage>=2&&<><Arrow a={o} b={y} color={gradeColors[1]}/><text x="112" y="108" fontSize="14" fill={gradeColors[1]}>e₂</text></>}
-    {stage===3&&<><Arrow a={o} b={z} color={gradeColors[1]}/><text x="54" y="56" fontSize="14" fill={gradeColors[1]}>e₃</text></>}
+    <StorageBoxAssembly x={o[0]} y={o[1]} columns={2} rows={stage>=2?2:1} layers={stage===3?2:1} color={gradeColors[stage]}/>
+    <Arrow a={o} b={x} color={gradeColors[1]}/><text x="182" y="164" fontSize="13" fill={gradeColors[1]}>e₁</text>
+    {stage>=2&&<><Arrow a={o} b={y} color={gradeColors[1]}/><text x="124" y="111" fontSize="13" stroke="white" strokeWidth="3" paintOrder="stroke" fill={gradeColors[1]}>e₂</text></>}
+    {stage===3&&<><Arrow a={o} b={z} color={gradeColors[1]}/><text x="54" y="56" fontSize="13" fill={gradeColors[1]}>e₃</text></>}
    </>}
 
   </svg>
