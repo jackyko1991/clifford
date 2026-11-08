@@ -37,7 +37,7 @@ export function GeometryRecordBuilder({l}:{l:number}){
     {stage===3&&<g fill={gradeColors[3]} fillOpacity=".16" stroke={gradeColors[3]}>
      <path d={`M${o}L${x}L${xz}L${z}Z`}/><path d={`M${x}L${xy}L${xyz}L${xz}Z`}/><path d={`M${z}L${xz}L${xyz}L${yz}Z`}/>
      <path d="M120 150V65M70 107.5H170M192.5 132.5V47.5M170 107.5L215 72.5M120 65L165 30M92.5 47.5H192.5" fill="none"/>
-     <path d={`M${o}L${y}L${yz}M${y}L${xy}`} fill="none" strokeDasharray="3 4"/>
+     <path data-diagram="hidden-volume-edges" d={`M${o}L${y}L${yz}M${y}L${xy} M92.5 132.5V47.5 M70 107.5L115 72.5H215 M165 115V30 M120 150L165 115 M92.5 132.5H192.5`} fill="none" strokeDasharray="3 4"/>
 
     </g>}
     {stage===2&&<g fill={gradeColors[2]} stroke={gradeColors[2]}><path d={`M${o}L${x}L${xy}L${y}Z`} fillOpacity=".2"/><path d="M120 150L165 115M92.5 132.5H192.5" fill="none"/><path d="M70 150v-12l45-35h100v12M170 150v-12l45-35" fill="none" strokeOpacity=".45"/></g>}
