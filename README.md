@@ -24,9 +24,13 @@ Windows PowerShell users with restricted script execution can use `npm.cmd`.
 - **Coding Skills:** bit-mask blades, geometric multiplication, reversion, rotor transforms, null fields, equivariance and performance.
 - **Extended Reading:** a reading sequence, historical attribution, research papers and a map of established and speculative ideas.
 
-23 lessons, ten diagram types, keyboard-operable sliders and animation controls. Animation starts paused and can be stopped at any time. Code is read-only; no backend, remote execution or API key is required.
+23 lessons, fourteen diagram types, keyboard-operable sliders and animation controls. Animation starts paused and can be stopped at any time. Code is read-only; no backend, remote execution or API key is required.
 
 Hash URLs work directly on GitHub Pages, for example `?lang=en#/concept/rotations/spinors`. Source references accompany the relevant lessons. Content lives in `src/content.json`; bibliography in `src/sources.ts`.
+
+## Teaching format
+
+Every lesson follows the Tensorizer Tensor Maths pattern: **In plain words → Picture it → Precisely → Tiny example**. Diagrams follow the familiar analogy. A symbol guide introduces each formula after the worked example; code panels follow the explanation. Both English and Traditional Chinese use this order.
 
 ## Mathematical conventions
 

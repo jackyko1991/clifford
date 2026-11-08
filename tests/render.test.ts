@@ -15,6 +15,12 @@ test("all pages render in both languages with valid diagrams, formulas and sourc
    assert.ok(html.includes('data-diagram='),hash);
    assert.ok(!html.includes("katex-error"),hash);
    assert.ok(!html.includes("undefined"),hash);
+   for (const section of html.matchAll(/<section\b[\s\S]*?<\/section>/g)) {
+    const steps=[...section[0].matchAll(/data-feynman="([^"]+)"/g)].map(m=>m[1]);
+    assert.deepEqual(steps,["plain","analogy","precise","example"],`${lang} ${hash}`);
+    const formula=section[0].indexOf('class="math-block"');
+    if(formula>=0) assert.ok(formula>section[0].indexOf('data-feynman="example"'),"formula follows the explained example");
+   }
   }
  }finally{await server.close();delete (globalThis as any).location;}
 });

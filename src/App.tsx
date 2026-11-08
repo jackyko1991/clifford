@@ -4,6 +4,7 @@ import {sources} from "./sources";
 import GeometryFigure from "./components/GeometryFigure";
 import Tex from "./components/Tex";
 import CodeBlock from "./components/CodeBlock";
+import TeachingBlock, {TEACHING_STEPS} from "./components/TeachingBlock";
 const groups={concept:["foundations","rotations","physics"],skills:["implementation","applications"],reading:["reading"]} as const;
 type Page=keyof typeof groups;
 const titles:Record<string,string[]>={concept:["Concepts","概念"],skills:["Coding Skills","程式技巧"],reading:["Extended Reading","延伸閱讀"],foundations:["Foundations","基礎"],rotations:["Rotations & spinors","旋轉與旋量"],physics:["Spacetime & fields","時空與場"],implementation:["Algebra in code","代數實作"],applications:["Geometric learning","幾何學習"]};
@@ -37,17 +38,21 @@ export default function App(){
     <article id="main-content" className="min-w-0 max-w-4xl flex-1 space-y-10" tabIndex={-1}>
      <header><p className="text-sm font-medium text-violet-700">{titles[r.page][l]} · {l?"圖解 → 方程 → 程式":"Picture → equation → code"}</p>
       <h1 className="mt-1 text-3xl font-semibold tracking-tight">{titles[r.group]?.[l]||titles.reading[l]}</h1>
-      <p className="mt-3 leading-relaxed text-gray-600">{l?"把分散的工具連起來：以定向幾何理解乘法、旋轉與物理。":"Connect familiar tools through oriented geometry: multiplication, rotations and physics."}</p>
-      <p className="mt-4 rounded-lg border border-violet-100 bg-violet-50/60 px-4 py-3 text-sm leading-relaxed text-violet-950">{l?"不必一次學完。先操作圖解，說出你看見的關係，再讓公式與程式把直覺變精確。":"Take one relationship at a time. Explore the diagram, explain what you see, then use the equation and code to make it precise."}</p>
+      <p className="mt-3 leading-relaxed text-gray-600">{l?"從桌上兩根棍子開始，一次學會一個關係，再走到旋轉、電子與光。":"Start with two sticks on a table. Build one relationship at a time, then use it to understand rotations, electrons and light."}</p>
+      <p className="mt-4 rounded-lg border border-violet-100 bg-violet-50/60 px-4 py-3 text-sm leading-relaxed text-violet-950">{l?"每節都依序走過：白話說明、想像一下、精確地說、小例子。先看懂圖，再認識名字；看公式以前，先弄清楚每個符號指的是什麼。":"Every lesson follows: plain words, a familiar picture, a precise explanation, and a tiny example. Explore the diagram before meeting the terms; learn what each symbol means before the formula."}</p>
      </header>
      {visible.map((c,i)=><section key={c.id} id={c.id} className="scroll-mt-6 rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
       <h2 className="flex items-baseline gap-3 text-lg font-semibold"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-600 text-sm text-white">{i+1}</span>{c.title[l]}</h2>
       <div className="mt-4 space-y-4 text-sm leading-relaxed text-gray-700">
-       <p>{c.paragraphs[l][0]}</p>
-       {c.diagram&&<GeometryFigure key={c.id} kind={c.diagram} l={l}/>}
-       {c.equation&&<div className="rounded-lg bg-gray-50 px-2 py-2"><Tex tex={c.equation} display/></div>}
-       {c.paragraphs[l].slice(1).map((p,j)=><p key={j}>{p}</p>)}
-       {c.code&&<CodeBlock code={c.code} title={`${c.id.replaceAll("-","_")}.py`}/>}
+       {TEACHING_STEPS.map(step=><div key={step} className="space-y-4">
+        <TeachingBlock kind={step} text={c[step][l]} l={l}/>
+        {step==="analogy"&&c.diagram&&<GeometryFigure key={c.id} kind={c.diagram} l={l}/>}
+        {step==="example"&&c.equation&&<figure className="overflow-hidden rounded-lg border border-gray-200 bg-gray-50">
+         <figcaption className="px-4 pt-3 text-sm text-gray-600">{c.legend[l]}</figcaption>
+         <div className="px-3 py-2"><Tex tex={c.equation} display/></div>
+        </figure>}
+        {step==="example"&&c.code&&<CodeBlock code={c.code} title={`${c.id.replaceAll("-","_")}.py`}/>}
+       </div>)}
        {c.sources.length>0&&<details className="rounded-lg border border-gray-100 bg-gray-50/50 p-3"><summary className="cursor-pointer text-xs font-medium text-violet-800">{l?"來源與延伸閱讀":"Sources and further reading"} ({c.sources.length})</summary><ul className="mt-3 space-y-3">{c.sources.map(id=><li key={id}><a href={sources[id].url} target="_blank" rel="noreferrer" className="text-violet-700 underline underline-offset-2">{sources[id].title} ↗</a><p className="mt-1 text-xs text-gray-500">{sources[id].note}</p></li>)}</ul></details>}
       </div>
      </section>)}
