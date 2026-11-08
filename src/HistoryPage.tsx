@@ -122,7 +122,7 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
  return <div className="mx-auto flex max-w-6xl gap-8 px-5 pt-6 pb-12" data-testid="history">
   <nav aria-label={l?"歷史時間軸":"History timeline"} className="sticky top-20 hidden max-h-[calc(100dvh-11rem)] w-60 shrink-0 self-start overflow-y-auto lg:block">{navigation}</nav>
   <article id="main-content" tabIndex={-1} className="min-w-0 flex-1">
-   <header><p className="text-sm font-medium text-violet-700">{l?"概念 · 回到思想的起點":"Concepts · where the ideas began"}</p><h1 className="mt-1 text-3xl font-semibold tracking-tight">{l?"克利福德代數史":"A history of Clifford algebra"}</h1><p className="mt-3 text-sm leading-relaxed text-gray-600">{historyIntro[l]}</p></header>
+   <header><h1 className="text-3xl font-semibold tracking-tight">{l?"克利福德代數史":"A history of Clifford algebra"}</h1><p className="mt-3 text-sm leading-relaxed text-gray-600">{historyIntro[l]}</p></header>
    <div className="sticky top-12 z-20 -mx-5 mt-5 border-y border-gray-200 bg-white/95 px-5 py-2 backdrop-blur lg:hidden">
     <button aria-expanded={menu} className="flex w-full items-center gap-2 text-left text-sm" onClick={()=>setMenu(v=>!v)}><span className="h-2 w-2 rounded-full bg-violet-600"/><span className="min-w-0 flex-1 truncate">{historyEvents.find(c=>c.id===active)?.title[l]||(l?"歷史時間軸":"History timeline")}</span><span>{menu?"▴":"▾"}</span></button>
     {menu&&<div className="max-h-[60dvh] overflow-y-auto pt-4">{navigation}</div>}
