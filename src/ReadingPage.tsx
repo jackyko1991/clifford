@@ -9,9 +9,10 @@ export const READING_GROUPS = [
 ];
 export const AMAZON_TAG = "tensorizer-21";
 export const amazonUrl = (isbn:string) => `https://www.amazon.co.uk/dp/${isbn}?tag=${AMAZON_TAG}`;
+export const amazonSearchUrl = (query:string) => `https://www.amazon.co.uk/s?${new URLSearchParams({k:query,tag:AMAZON_TAG})}`;
 interface Resource {
   id:string;group:string;title:string;authors:string;publication:string;why:string[];href:string;related:string;
-  top?:boolean;isbn10?:string;free?:string;freeLabel?:string[];
+  top?:boolean;isbn10?:string;amazonSearch?:string;free?:string;freeLabel?:string[];
 }
 export default function ReadingPage({l}:{l:number}) {
   return <div className="mx-auto flex max-w-6xl gap-8 px-5 pt-6 pb-10">
@@ -41,7 +42,7 @@ function ResourceCard({book:b,l}:{book:Resource;l:number}) {
     <p className="mt-3 flex-1 text-sm leading-relaxed text-gray-700">{b.why[l]}</p>
     <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
       <a href={b.free||b.href} target="_blank" rel="noopener noreferrer" className="font-medium text-violet-700 hover:underline">{b.freeLabel?.[l]||(l?"免費閱讀":"Read free")} ↗</a>
-      {b.isbn10&&<a href={amazonUrl(b.isbn10)} target="_blank" rel="sponsored noopener noreferrer" className="text-gray-500 hover:text-violet-700 hover:underline">Amazon UK ↗</a>}
+      {(b.isbn10||b.amazonSearch)&&<a href={b.isbn10?amazonUrl(b.isbn10):amazonSearchUrl(b.amazonSearch!)} target="_blank" rel="sponsored noopener noreferrer" className="font-medium text-amber-800 hover:text-amber-900 hover:underline">{b.isbn10?"Amazon UK ↗":(l?"Amazon UK · 搜尋版本 ↗":"Amazon UK · editions ↗")}</a>}
     </div>
     <p className="mt-3 border-t border-gray-100 pt-2 text-xs text-gray-500">{l?"本網站對應：":"On this site: "}<a href={`#/${b.related}`} className="font-medium text-violet-700 hover:underline">{related?.title[l]}</a></p>
   </div>;

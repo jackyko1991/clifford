@@ -29,6 +29,8 @@ test("restored Clifford lessons and the reading catalog render with one global f
     assert.equal([...html.matchAll(/data-testid="book-/g)].length,14);
     assert.ok(html.includes('sponsored noopener noreferrer'));
     assert.ok(html.includes('reading-disclosure'));
+    assert.ok(html.includes('https://www.amazon.co.uk/dp/0521715954?tag=tensorizer-21'));
+    assert.ok(html.includes('https://www.amazon.co.uk/s?k=Anyhow+Stories+Moral+and+Otherwise+Lucy+Clifford&amp;tag=tensorizer-21'));
     assert.ok(!html.includes('data-placeholder='));
    }
    if(hash!=="#/reading"){
