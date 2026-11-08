@@ -64,3 +64,8 @@ Merge connectors use exactly the same amber and teal as their incoming rails, fo
 ## Learning page opening
 
 The learning page now has six implemented narrative cards: imaginary-turn, hamilton-bridge, welcome, learning, predict-before-symbols, and explain-and-check. `LearningSections.tsx` renders them with quarter-turn, quaternion-order, and prediction tools; `learningModel.ts` computes the first two tools. It starts with foundations, then the learning method, and links onward through the algebra toolbox to rotations. Existing source lessons remain archived in content.json. Hamilton’s bridge account links to Trinity College Dublin.
+
+
+## Completed foundations page
+
+`FoundationsSections.tsx` now renders four implemented sections in the order product, orientation, grades, relations. Original lesson records remain in content.json. Interactive tools cover length/angle/order changes with a complete product readout, a two-edge orientation walk, all eight editable multivector coefficients and grade projections, and complex/quaternion/linear-map comparisons. The grade preview uses a responsive 2-by-2 layout on phones. `foundationsModel.ts` computes products using the existing Clifford multiplication kernel and extracts grades without altering the stored coefficients. All examples use Euclidean orthonormal bases.

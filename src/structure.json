@@ -106,40 +106,26 @@
     {
       "id": "foundations",
       "title": [
-        "Geometric products",
-        "幾何積與多重向量"
+        "Geometric products and multivectors",
+        "幾何積及多重向量"
       ],
       "intro": [
-        "Build the language from arrows, oriented areas and volumes.",
-        "從箭頭、定向面積與體積建立語言。"
+        "Change lengths, reverse the order, and separate the grades. Build a usable geometric language from four small experiments.",
+        "改變長度、交換順序、拆開階數。用四個小實驗，把幾何積變成能操作、能檢查的語言。"
       ],
       "sections": [
         {
           "id": "product",
           "title": [
-            "The geometric product: alignment plus oriented area",
-            "幾何積：平行程度，加上定向面積"
-          ]
-        },
-        {
-          "id": "grades",
-          "title": [
-            "Eight coefficients, four grades",
-            "八個分量，四種階數"
-          ]
-        },
-        {
-          "id": "relations",
-          "title": [
-            "Complex numbers, quaternions and tensors",
-            "複數、四元數與張量的關係"
+            "What survives when arrows multiply?",
+            "兩支箭頭相乘，留下什麼？"
           ]
         },
         {
           "id": "orientation",
           "title": [
-            "Why orientation matters",
-            "為什麼面積還有方向"
+            "Same area, opposite orientation",
+            "面積一樣，定向相反"
           ],
           "summary": [
             "Why does swapping two arrows reverse their wedge product?",
@@ -148,6 +134,20 @@
           "visual": [
             "Swap the edges of the same parallelogram and reverse its orientation marker.",
             "交換同一平行四邊形的兩條邊，觀察定向標記反轉。"
+          ]
+        },
+        {
+          "id": "grades",
+          "title": [
+            "Eight slots, four grades",
+            "八個位置，四種階數"
+          ]
+        },
+        {
+          "id": "relations",
+          "title": [
+            "Complex numbers, quaternions and tensors",
+            "複數、四元數與張量的關係"
           ]
         }
       ]

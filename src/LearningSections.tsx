@@ -38,7 +38,7 @@ function BridgePhotos({l}:{l:number}){
   <figcaption className="space-y-1 border-t border-gray-200 p-3 text-xs leading-relaxed text-gray-500"><p className="text-gray-700">{photo.title}</p><p>{photo.author} · <a className="text-violet-700 underline" href={photo.licenseUrl} target="_blank" rel="noreferrer">{photo.license}</a> · <a className="text-violet-700 underline" href={photo.source} target="_blank" rel="noreferrer">{l?"圖片來源／大圖":"Source / larger image"} ↗</a></p></figcaption>
  </figure>)}</div>;
 }
-function HamiltonTool({l}:{l:number}){
+export function HamiltonTool({l}:{l:number}){
  const [a,setA]=useState<QuaternionUnit>("i"),[b,setB]=useState<QuaternionUnit>("j");
  const result=quaternionProduct(a,b);
  return <figure className="space-y-3 py-2" data-interactive="quaternion-order">

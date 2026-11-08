@@ -45,6 +45,9 @@ test("restored Clifford lessons and the reading catalog render with one global f
      if(tab==="learning"){
       assert.ok(html.includes(`data-learning-section="${section.id}"`));
       assert.ok(!html.includes('data-placeholder="true"'));
+     }else if(tab==="foundations"){
+      assert.ok(html.includes(`data-foundation-section="${section.id}"`));
+      assert.ok(!html.includes('data-placeholder="true"'));
      }else if(c){
       assert.ok(html.includes(`data-lesson="${c.id}"`),`missing existing lesson ${c.id}`);
       assert.ok(html.includes('data-feynman='));

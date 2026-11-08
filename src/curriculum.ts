@@ -6,4 +6,5 @@ export interface CurriculumPage {id:string;title:string[];intro:string[];section
 export const structure:Record<"concept"|"skills",CurriculumPage[]>=outline;
 export const lessonById=new Map(lessons.map(c=>[c.id,c]));
 export const learningSections=new Set(outline.concept.find(p=>p.id==="learning")!.sections.map(s=>s.id));
-export function existingCount(sections:CurriculumSection[]){return sections.filter(s=>learningSections.has(s.id)||lessonById.has(s.id)||historyEvents.some(c=>c.id===s.id)).length;}
+export const foundationSections=new Set(outline.concept.find(p=>p.id==="foundations")!.sections.map(s=>s.id));
+export function existingCount(sections:CurriculumSection[]){return sections.filter(s=>foundationSections.has(s.id)||learningSections.has(s.id)||lessonById.has(s.id)||historyEvents.some(c=>c.id===s.id)).length;}
