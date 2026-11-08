@@ -134,8 +134,8 @@ export default function FoundationsSections({l}:{l:number}){
    <h3 className="font-semibold">{l?"現在只看三維：每一種幾何，各需要幾格？":"Now restrict to 3D: how many slots does each kind need?"}</h3>
    <p>{l?"在三維，選定三個基底方向。箭頭可以沿其中任一個方向；面可以選任意一對方向。別把「一片面有兩個方向」和「三維裡有三種獨立平面基底」混在一起。":"Fix three basis directions. An arrow can use any one; a plane can use any pair. Distinguish ‘two directions span a plane’ from ‘three independent plane basis elements exist in 3D’."}</p>
    <ThreeDRecordTable l={l}/>
-   <Tex tex={"1+3+3+1=8\\quad\\text{(3D)}"} display/>
    <details className="rounded-lg border border-violet-100 bg-white p-3"><summary className="cursor-pointer font-medium text-violet-800">{l?"打開一份 3D 紀錄，試著改分量":"Open a 3D record and edit its coefficients"}</summary><div className="mt-4 space-y-3"><p>{l?"每個數字都放在一個基底位置前面。選「雙向量」，只讀出三個面積位置；其他資訊仍保留著。":"Each number belongs to a basis slot. Select ‘Bivector’ to read only the three plane slots; the other information stays stored."}</p><GradeMixer l={l}/><CodeBlock code={"# The eight slots below belong specifically to 3D\nM = {\"1\": 2, \"e1\": 1, \"e2\": -1, \"e3\": 0,\n     \"e12\": 0.5, \"e13\": 0, \"e23\": 0, \"e123\": 1}"} title="a_3d_record.py"/></div></details>
+   <Tex tex={"1+3+3+1=2^3=8"} display/>
    <DimensionQuestion l={l}/>
   </Card>
   <Card id="relations" n={4} title={l?"複數、四元數、張量，各自在記什麼？":"What do complex numbers, quaternions and tensors record?"}>
