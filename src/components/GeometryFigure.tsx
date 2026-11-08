@@ -1,15 +1,19 @@
 import {useEffect,useId,useState} from "react";
 import {basis,rotate,rotor} from "../algebra";
+import {magneticLoop} from "../magneticLoop";
+import Tex from "./Tex";
 const purple="#7c3aed",teal="#0f766e",muted="#94a3b8";
 export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
- const [angle,setAngle]=useState(60),[playing,setPlaying]=useState(false),[circular,setCircular]=useState(false),[showPlane,setShowPlane]=useState(true);
+ const [angle,setAngle]=useState(kind==="holonomy"?0:60),[playing,setPlaying]=useState(false),[circular,setCircular]=useState(false),[showPlane,setShowPlane]=useState(true);
  const uid=useId().replaceAll(":", ""),theta=angle*Math.PI/180;
  useEffect(()=>{
   if(!playing)return;
   let id:number,last=0;
-  const frame=(now:number)=>{if(last)setAngle(a=>(a+Math.min(now-last,60)*.035)%720);last=now;id=requestAnimationFrame(frame);};
+  const frame=(now:number)=>{if(last)setAngle(a=>kind==="holonomy"?Math.min(720,a+Math.min(now-last,60)*.035):(a+Math.min(now-last,60)*.035)%720);last=now;id=requestAnimationFrame(frame);};
   id=requestAnimationFrame(frame);return()=>cancelAnimationFrame(id);
- },[playing]);
+ },[playing,kind]);
+ useEffect(()=>{if(kind==="holonomy"&&angle>=720)setPlaying(false);},[kind,angle]);
+ const flux=magneticLoop(angle);
  useEffect(()=>{const q=matchMedia("(prefers-reduced-motion: reduce)");const stop=()=>{if(q.matches)setPlaying(false);};q.addEventListener("change",stop);return()=>q.removeEventListener("change",stop);},[]);
  const v=rotate(basis(1),theta),R=rotor(theta),bx=90*Math.cos(theta),by=-90*Math.sin(theta);
  const arrow=(x1:number,y1:number,x2:number,y2:number,color=purple)=><path d={`M${x1} ${y1}L${x2} ${y2}`} fill="none" stroke={color} strokeWidth="3" markerEnd={`url(#${uid})`}/>;
@@ -27,7 +31,7 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
  motor:["A rigid shape rotates, then translates. This is a 2D slice of rigid motion.","剛體形狀先旋轉再平移：三維剛體運動的二維切片。"],
  boost:["Boost the time direction: the transformed unit timelike vector stays inside the light cone.","推進時間方向：變換後的單位類時向量仍在光錐內。"],
  wave:["The shaded sheet is the spatial E–B plane at one sample position, perpendicular to propagation. Purple E and teal cB change together in that plane; perspective makes the right angle look oblique. This spatial sheet is not the spacetime bivector F itself.","陰影是取樣位置的空間 E–B 橫向平面，垂直於傳播方向。紫色 E 與青色 cB 在平面內一起變化；透視投影讓直角看起來傾斜。這張空間平面不是時空雙向量 F 本身。"],
- holonomy:["Loop transport accumulates a phase around excluded flux. Schematic, not a local force diagram.","沿封閉路徑移動，繞過排除的磁通後累積相位。這是示意圖，不是局域受力圖。"],
+ holonomy:["Flux stays fixed at 0.25 h/e while the electron travels: one turn gives −90°, two give −180°. The partial-path phase uses a circularly symmetric gauge; the full-loop phase is gauge invariant. This is not a local force diagram.","電子移動時，磁通固定為 0.25 h/e：繞一圈為 −90°，兩圈為 −180°。沿途相位採圓對稱規範；繞完整圈的相位是規範不變的結果。這不是局域受力圖。"],
  equivariance:["Rotate the input, then apply f; or apply f, then rotate. The outputs coincide for this norm-dependent scaling.","先旋轉再套用 f，或先套用 f 再旋轉：依長度縮放的映射讓兩者結果重合。"]};
  const staticKind=["grades","relations","evidence","timeline","path","state"].includes(kind);
  const points=(offset:number,color:string)=>{const pts=Array.from({length:81},(_,i)=>{const z=i/80*7*Math.PI,phase=z-theta;const e=Math.sin(phase),other=circular?Math.cos(phase):0;return `${55+i*5.4+(offset?30*e:30*other)},${130+(offset?52*other-18*e:-52*e-18*other)}`;}).join(" ");return <polyline points={pts} fill="none" stroke={color} strokeWidth="2.5"/>;};
@@ -116,8 +120,8 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
     <circle cx="210" cy="120" r="76" fill="none" stroke="#c4b5fd" strokeWidth="2" strokeDasharray="5 4"/>
     <circle cx="210" cy="120" r="30" fill="#7c3aed" opacity=".18"/>{label(210,125,l?"磁通":"Flux")}
     <circle cx={210+76*Math.cos(theta)} cy={120-76*Math.sin(theta)} r="7" fill={teal}/>
-    <circle cx="430" cy="120" r="45" fill="white" stroke="#ddd6fe"/>{arrow(430,120,430+38*Math.cos(theta/3),120-38*Math.sin(theta/3))}
-    {label(430,195,l?"累積相位 · 示意":"Accumulated phase · schematic")}
+    <circle cx="430" cy="120" r="45" fill="white" stroke="#ddd6fe"/>{arrow(430,120,430+38*Math.cos(flux.phaseRadians),120-38*Math.sin(flux.phaseRadians))}
+    {label(430,195,l?"電子累積相位":"Electron phase")}
    </>}
    {kind==="equivariance" && <>
     {arrow(70,170,120,170,muted)}{arrow(70,170,70+80*Math.cos(theta),170-80*Math.sin(theta),teal)}
@@ -126,12 +130,16 @@ export default function GeometryFigure({kind,l}:{kind:string;l:number}) {
     {label(110,224,l?"旋轉輸入":"Rotate input")}{label(380,224,l?"兩條計算路線，答案重合":"Both calculation routes agree")}
    </>}
   </svg>
+  {kind==="holonomy"&&<div className="mb-4 grid gap-3 text-center text-xs sm:grid-cols-2">
+   <div className="rounded-lg border border-violet-100 bg-white px-3 py-2"><p className="mb-1 text-gray-500">{l?"固定磁通":"Fixed magnetic flux"}</p><Tex tex={String.raw`\Phi\simeq${(flux.fluxWebers/1e-15).toFixed(2)}\times10^{-15}\,\mathrm{Wb}`}/></div>
+   <div className="rounded-lg border border-violet-100 bg-white px-3 py-2"><p className="mb-1 text-gray-500">{l?"電子累積相位":"Electron phase"}</p><Tex tex={String.raw`\Delta\varphi=${flux.phaseDegrees.toFixed(1)}^\circ`}/></div>
+  </div>}
   {!staticKind && <div className="mt-2 space-y-3">
    <label className="flex items-center gap-3 text-xs font-medium text-violet-900"><span className="w-20 shrink-0">{kind==="boost"?(l?"速度 / 光速":"Speed / c"):kind==="wave"?(l?"週期位置":"Cycle position"):(l?"角度":"Angle")} {kind==="boost"?Math.tanh(angle/720*1.1).toFixed(2):`${Math.round(angle)}°`}</span>
     <input aria-label={l?"圖解參數":"Diagram parameter"} className="min-w-0 flex-1 accent-violet-600" type="range" min="0" max="720" value={angle} onChange={e=>{setPlaying(false);setAngle(Number(e.target.value));}}/>
    </label>
    <div className="flex flex-wrap gap-2">
-    <button className="control" onClick={()=>setPlaying(p=>!p)}>{playing?(l?"暫停":"Pause"):(l?"播放動畫":"Play animation")}</button>
+    <button className="control" onClick={()=>{if(kind==="holonomy"&&angle>=720)setAngle(0);setPlaying(p=>!p);}}>{playing?(l?"暫停":"Pause"):(l?"播放動畫":"Play animation")}</button>
     {[0,90,360,720].map(a=><button key={a} className="control" onClick={()=>{setPlaying(false);setAngle(a);}}>{kind==="boost"?`${Math.round(Math.tanh(a/720*1.1)*100)}%`:`${a}°`}</button>)}
     {kind==="wave"&&<>
      <button className="control" aria-pressed={circular} onClick={()=>setCircular(c=>!c)}>{circular?(l?"圓偏振":"Circular"):(l?"線偏振":"Linear")}</button>
