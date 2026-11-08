@@ -3,11 +3,13 @@ import Tex from "./components/Tex";
 import Arrow from "./components/GeometryArrow";
 import {dimensionCounts,gradeColors} from "./foundationsModel";
 const btn="rounded-md border border-violet-200 bg-white px-3 py-1.5 text-xs text-violet-800 hover:bg-violet-50";
-function OpenTopBin({x,y,width,depth,height,color,hideSide=false}:{x:number;y:number;width:number;depth:number;height:number;color:string;hideSide?:boolean}){
+const binDimensions={width:50,depth:22.5,height:42.5};
+function OpenTopBin({x,y,color,hideSide=false}:{x:number;y:number;color:string;hideSide?:boolean}){
+ const {width,depth,height}=binDimensions;
  const top=y-height,back=top-depth*.78;
- return <g stroke={color} fill={color}>
-  <path d={`M${x} ${y}h${width}v${-height}h${-width}Z`} fillOpacity=".14"/>
-  {!hideSide&&<path d={`M${x+width} ${y}l${depth} ${-depth*.78}V${back}l${-depth} ${depth*.78}Z`} fillOpacity=".24"/>}
+ return <g data-storage-bin="true" data-width={width} data-depth={depth} data-height={height} stroke={color} fill={color}>
+  <path d={`M${x} ${y}h${width}v${-height}h${-width}Z`} fill="white"/><path d={`M${x} ${y}h${width}v${-height}h${-width}Z`} fillOpacity=".14"/>
+  {!hideSide&&<><path d={`M${x+width} ${y}l${depth} ${-depth*.78}V${back}l${-depth} ${depth*.78}Z`} fill="white"/><path d={`M${x+width} ${y}l${depth} ${-depth*.78}V${back}l${-depth} ${depth*.78}Z`} fillOpacity=".24"/></>}
   <path d={`M${x} ${top}l${depth} ${-depth*.78}h${width}l${-depth} ${depth*.78}Z`} fill="white" strokeWidth="1.5"/>
  </g>;
 }
@@ -26,23 +28,24 @@ export function GeometryRecordBuilder({l}:{l:number}){
   "Stack upward and the boxes occupy a volume. A trivector records its magnitude and orientation. The position of each individual box belongs to a separate arrangement record."
  ];
  const formulas=["s=2","v=e_1","A=e_1\\wedge e_2=e_{12}","V=e_1\\wedge e_2\\wedge e_3=e_{123}"];
- const o=[70,150],x=[170,150],y=[115,115],xy=[215,115],z=[70,65],xz=[170,65],yz=[115,30],xyz=[215,30];
+ const corner=(col:number,row:number,layer:number)=>[70+col*binDimensions.width+row*binDimensions.depth,150-row*binDimensions.depth*.78-layer*binDimensions.height];
+ const o=corner(0,0,0),x=corner(2,0,0),y=corner(0,2,0),xy=corner(2,2,0),z=corner(0,0,2),xz=corner(2,0,2),yz=corner(0,2,2),xyz=corner(2,2,2);
  return <figure data-interactive="geometry-record-builder" className="space-y-3">
   <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">{titles.map((title,k)=><button key={k} className={btn} aria-pressed={stage===k} onClick={()=>setStage(k)} style={{color:gradeColors[k],background:stage===k?"#f5f3ff":"white"}}>{title}</button>)}</div>
   <svg viewBox="0 0 290 190" className="mx-auto max-h-52 w-full max-w-sm" role="img" aria-label={titles[stage]}>
    {stage===0?<>
-    {[65,145].map(x=><OpenTopBin key={x} x={x} y={140} width={40} depth={18} height={36} color={gradeColors[0]}/>)}
+    {[55,150].map(x=><OpenTopBin key={x} x={x} y={150} color={gradeColors[0]}/>)}
     <text x="145" y="65" textAnchor="middle" fontSize="20" fill={gradeColors[0]}>{l?"兩個收納箱":"Two storage boxes"}</text>
    </>:<>
-    {stage===3&&<g fill={gradeColors[3]} fillOpacity=".16" stroke={gradeColors[3]}>
+    {stage===3&&<g data-bin-grid="2,2,2" data-cell-width={binDimensions.width} data-cell-depth={binDimensions.depth} data-cell-height={binDimensions.height} fill={gradeColors[3]} fillOpacity=".16" stroke={gradeColors[3]}>
      <path d={`M${o}L${x}L${xz}L${z}Z`}/><path d={`M${x}L${xy}L${xyz}L${xz}Z`}/><path d={`M${z}L${xz}L${xyz}L${yz}Z`}/>
-     <path d="M120 150V65M70 107.5H170M192.5 132.5V47.5M170 107.5L215 72.5M120 65L165 30M92.5 47.5H192.5" fill="none"/>
-     <path data-diagram="hidden-volume-edges" d={`M${o}L${y}L${yz}M${y}L${xy} M92.5 132.5V47.5 M70 107.5L115 72.5H215 M165 115V30 M120 150L165 115 M92.5 132.5H192.5`} fill="none" strokeDasharray="3 4"/>
+     <path d={`M${corner(1,0,0)}L${corner(1,0,2)} M${corner(0,0,1)}L${corner(2,0,1)} M${corner(2,1,0)}L${corner(2,1,2)} M${corner(2,0,1)}L${corner(2,2,1)} M${corner(1,0,2)}L${corner(1,2,2)} M${corner(0,1,2)}L${corner(2,1,2)}`} fill="none"/>
+     <path data-diagram="hidden-volume-edges" d={`M${o}L${y}L${yz}M${y}L${xy} M${corner(0,1,0)}L${corner(0,1,2)} M${corner(0,0,1)}L${corner(0,2,1)}L${corner(2,2,1)} M${corner(1,2,0)}L${corner(1,2,2)} M${corner(1,0,0)}L${corner(1,2,0)} M${corner(0,1,0)}L${corner(2,1,0)}`} fill="none" strokeDasharray="3 4"/>
 
     </g>}
-    {stage===2&&<g fill={gradeColors[2]} stroke={gradeColors[2]}><path d={`M${o}L${x}L${xy}L${y}Z`} fillOpacity=".2"/><path d="M120 150L165 115M92.5 132.5H192.5" fill="none"/><path d="M70 150v-12l45-35h100v12M170 150v-12l45-35" fill="none" strokeOpacity=".45"/></g>}
-    {stage===1&&<g>{[70,120].map(x=><OpenTopBin key={x} x={x} y={140} width={50} depth={22} height={28} color={gradeColors[1]} hideSide={x===70}/>)}</g>}
-    <Arrow a={stage===1?[70,156]:o} b={stage===1?[170,156]:x} color={gradeColors[1]}/><text x="182" y="164" fontSize="14" fill={gradeColors[1]}>e₁</text>
+    {stage===2&&<g data-bin-grid="2,2,1">{[1,0].flatMap(row=>[0,1].map(col=><OpenTopBin key={`${row}-${col}`} x={70+col*binDimensions.width+row*binDimensions.depth} y={150-row*binDimensions.depth*.78} color={gradeColors[2]} hideSide={col===0}/>))}</g>}
+    {stage===1&&<g>{[70,120].map(x=><OpenTopBin key={x} x={x} y={150} color={gradeColors[1]} hideSide={x===70}/>)}</g>}
+    <Arrow a={stage===1?[70,166]:o} b={stage===1?[170,166]:x} color={gradeColors[1]}/><text x="182" y={stage===1?174:164} fontSize="14" fill={gradeColors[1]}>e₁</text>
     {stage>=2&&<><Arrow a={o} b={y} color={gradeColors[1]}/><text x="112" y="108" fontSize="14" fill={gradeColors[1]}>e₂</text></>}
     {stage===3&&<><Arrow a={o} b={z} color={gradeColors[1]}/><text x="54" y="56" fontSize="14" fill={gradeColors[1]}>e₃</text></>}
    </>}
