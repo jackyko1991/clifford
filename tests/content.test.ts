@@ -64,6 +64,7 @@ test("history milestones have bilingual text, valid mathematics and source links
 test("history photos are local, credited and use the recorded reuse terms",()=>{
  const credits=readFileSync(new URL("../public/history/CREDITS.md",import.meta.url),"utf8");
  assert.equal(timeline.events.filter(c=>c.photo).length,7);
+ assert.equal(new Set(timeline.events.filter(c=>c.photo).map(c=>c.photo.file)).size,7,"do not repeat the same history image");
  for(const c of timeline.events)if(c.photo){
   const p=c.photo;
   assert.ok(readFileSync(new URL(`../public/history/${p.file}`,import.meta.url)).length>1000,p.file);

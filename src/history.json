@@ -147,8 +147,8 @@
       ],
       "drawing": "curvature",
       "caption": [
-        "William Kingdon Clifford.",
-        "威廉・金頓・克利福德。"
+        "William Kingdon Clifford, seated with an open book.",
+        "威廉・金頓・克利福德，坐在打開的書本旁。"
       ],
       "equation": "",
       "related": "concept/limitations/frontiers",
@@ -163,9 +163,9 @@
         "短文最後，克利福德明確說，他嘗試以此解釋雙折射，但還沒有足夠確定的結果可以發表。"
       ],
       "photo": {
-        "file": "clifford.jpg",
-        "title": "Clifford William Kingdon (cropped portrait).jpg",
-        "source": "https://commons.wikimedia.org/wiki/File:Clifford_William_Kingdon_(cropped_portrait).jpg",
+        "file": "clifford-seated.jpg",
+        "title": "Portrait of William Kingdon Clifford.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Portrait_of_William_Kingdon_Clifford.jpg",
         "author": "Unknown photographer",
         "license": "Public domain",
         "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
