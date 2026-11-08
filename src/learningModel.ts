@@ -20,3 +20,8 @@ export function geometricProductTex(degrees:number,precision=3):string {
  return ["ab=", "\\textcolor{#0f766e}{",format(c),"}",s<-.0005?"-":"+",
   "\\textcolor{#7c3aed}{",format(Math.abs(s)),"\\,e_{12}}"].join("");
 }
+export function vectorBasisTex(degrees:number,precision=3):string {
+ const theta=degrees*Math.PI/180,c=Math.cos(theta),s=Math.sin(theta);
+ const format=(v:number)=>(Math.abs(v)<.0005?0:v).toFixed(precision);
+ return `b=\\textcolor{#0f766e}{${format(c)}\\,e_1}${s<-.0005?'-':'+'}\\textcolor{#7c3aed}{${format(Math.abs(s))}\\,e_2}`;
+}

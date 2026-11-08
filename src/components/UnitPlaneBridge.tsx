@@ -1,0 +1,12 @@
+import Tex from "./Tex";
+import Arrow from "./GeometryArrow";
+export default function UnitPlaneBridge({l}:{l:number}){return <div data-testid="unit-plane-name-bridge" className="space-y-3 rounded-lg border-l-4 border-emerald-300 bg-emerald-50/60 p-3 sm:p-4">
+ <h3 className="font-semibold">{l?"箭頭先相乘，再替同一片面取個短名":"Multiply the directions, then give that same plane a short name"}</h3>
+ <div className="grid items-center gap-3 sm:grid-cols-[160px_1fr]"><svg viewBox="0 0 160 130" className="mx-auto h-32 w-40" role="img" aria-label={l?"垂直單位箭頭 e1、e2 張成固定的單位定向平面 e12，也記作 B":"Perpendicular unit directions e1 and e2 span the same oriented unit plane called e12 or B"}><path d="M35 100H115V20H35Z" fill="#7c3aed" fillOpacity=".12" stroke="#c4b5fd"/><Arrow a={[35,100]} b={[115,100]} color="#0f766e"/><Arrow a={[35,100]} b={[35,20]} color="#7c3aed"/><text x="122" y="115" fontSize="13" fill="#0f766e">e₁</text><text x="15" y="17" fontSize="13" fill="#7c3aed">e₂</text><text x="77" y="45" textAnchor="middle" fontSize="14" fill="#7c3aed">B = e₁₂</text><path d="M60 88Q90 88 99 54" stroke="#7c3aed" fill="none" strokeWidth="1.5"/><Arrow a={[97,63]} b={[99,54]} color="#7c3aed"/></svg>
+  <div className="space-y-2 text-sm"><p><Tex tex="e_1"/>{l?" 與 ":" and "}<Tex tex="e_2"/>{l?" 是固定、垂直而且長度為 1 的箭頭。相鄰寫成 ":" are fixed perpendicular arrows of length 1. Writing "}<Tex tex="e_1e_2"/>{l?"，表示把它們做幾何積。":" means taking their geometric product."}</p>
+   <p>{l?"兩者垂直，內積為零，所以乘積只留下它們張出的單位定向面。":"Their dot product is zero, so the product contains only their oriented unit area."}<Tex tex="e_{12}"/>{l?" 是這片面的簡寫，12 記住先 ":" abbreviates that plane: 12 remembers "}<Tex tex="e_1"/>{l?" 再 ":" followed by "}<Tex tex="e_2"/>。{l?"在本例中，我們再把這個固定單位面命名為大寫 B。":"Here we also name this fixed unit plane capital B."}</p></div>
+ </div>
+ <div className="flex flex-wrap items-center justify-center gap-2 rounded bg-white p-3 text-violet-700"><Tex tex="e_1e_2"/><Tex tex="=e_1\wedge e_2"/><Tex tex="=e_{12}"/><Tex tex="=B"/></div>
+ <div className="grid gap-2 text-xs sm:grid-cols-2"><p className="rounded bg-white p-2"><Tex tex="b"/>：{l?"會轉動的單位箭頭。":"the unit arrow that turns."}</p><p className="rounded bg-white p-2 text-violet-700"><Tex tex="B"/>：{l?"固定的單位定向面。":"the fixed oriented unit plane."}</p></div>
+ <p className="text-sm">{l?"所以拖動上圖時，改變的是面積係數，並沒有每次換一個單位面：":"Dragging the arrow changes the area coefficient while the unit plane stays fixed: "}<Tex tex="a\wedge b=(\sin\theta)B"/>。{l?"係數為負，就記錄相反定向。":"A negative coefficient records the opposite orientation."}</p>
+</div>;}

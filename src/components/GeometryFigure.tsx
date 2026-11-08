@@ -1,8 +1,9 @@
 import {useEffect,useId,useState} from "react";
 import {basis,rotate,rotor} from "../algebra";
 import {magneticLoop} from "../magneticLoop";
-import {geometricProductTex} from "../learningModel";
+import {geometricProductTex,vectorBasisTex} from "../learningModel";
 import Tex from "./Tex";
+import VectorArrow from "./GeometryArrow";
 const purple="#7c3aed",teal="#0f766e",muted="#94a3b8";
 export default function GeometryFigure({kind,l,onWaveChange}:{kind:string;l:number;onWaveChange?:(sample:{angle:number;circular:boolean})=>void}) {
  const [angle,setAngle]=useState(kind==="holonomy"?0:60),[playing,setPlaying]=useState(false),[circular,setCircular]=useState(false),[showPlane,setShowPlane]=useState(true);
@@ -38,14 +39,16 @@ export default function GeometryFigure({kind,l,onWaveChange}:{kind:string;l:numb
  const staticKind=["grades","relations","evidence","timeline","path","state"].includes(kind);
  const points=(offset:number,color:string)=>{const pts=Array.from({length:81},(_,i)=>{const z=i/80*7*Math.PI,phase=z-theta;const e=Math.sin(phase),other=circular?Math.cos(phase):0;return `${55+i*5.4+(offset?30*e:30*other)},${130+(offset?52*other-18*e:-52*e-18*other)}`;}).join(" ");return <polyline points={pts} fill="none" stroke={color} strokeWidth="2.5"/>;};
  return <figure className="geometry rounded-lg border border-violet-100 bg-violet-50/40 p-4" data-diagram={kind}>
-  <svg viewBox={kind==="path"?"0 55 550 110":"0 0 550 250"} className="w-full" role="img" aria-label={descriptions[kind]?.[l]}>
+  <svg viewBox={kind==="path"?"0 55 550 110":kind==="product"?"30 0 480 255":"0 0 550 250"} className="w-full" role="img" aria-label={descriptions[kind]?.[l]}>
    <defs><marker id={uid} viewBox="0 0 10 10" markerWidth="4" markerHeight="4" refX="7" refY="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="context-stroke"/></marker></defs>
    {kind==="product" && <>
+    <circle cx="160" cy="130" r="90" fill="none" stroke="#94a3b8" strokeOpacity=".2" strokeDasharray="3 4"/>
+    <g opacity=".35"><VectorArrow a={[160,130]} b={[160,40]} color={purple}/></g><text data-product-label="basis-e2" x="142" y="75" textAnchor="end" fill="#64748b" fontSize="12">e₂</text>
     <path d={`M160 130l90 0l${bx} ${by}l-90 0Z`} fill={purple} fillOpacity={.18} stroke={purple} strokeOpacity={.35}/>
-    {arrow(160,130,250,130,teal)}{arrow(160,130,160+bx,130+by)}
+    <VectorArrow a={[160,130]} b={[250,130]} color={teal}/><VectorArrow a={[160,130]} b={[160+bx,130+by]} color={purple}/>
     <path d={`M${160+bx} ${130+by}V130`} stroke={teal} strokeDasharray="4 4"/>
     <path d={`M160 138h${bx}`} stroke={teal} strokeWidth="4" strokeLinecap="round"/>
-    {label(265,150,"a")}{label(160+bx,115+by,"b")}{label(405,90,`${l?"平行程度":"Alignment"}: ${Math.cos(theta).toFixed(3)}`,teal)}{label(405,120,`${l?"定向面積":"Oriented area"}: ${Math.sin(theta).toFixed(3)}`,purple)}
+    <text data-product-label="a" x="207" y="155" textAnchor="middle" fill={teal} fontSize="12">a = e₁</text><text data-product-label="b" x={160+108*Math.cos(theta)} y={134-108*Math.sin(theta)} textAnchor="middle" fill={purple} fontSize="12">b</text>{label(405,90,`${l?"平行程度":"Alignment"}: ${Math.cos(theta).toFixed(3)}`,teal)}{label(405,120,`${l?"定向面積":"Oriented area"}: ${Math.sin(theta).toFixed(3)}`,purple)}
    </>}
    {(kind==="rotor"||kind==="spinor") && <>
     {[145,405].map(cx=><circle key={cx} cx={cx} cy="105" r="65" stroke="#ddd6fe" fill="white"/>)}
@@ -133,6 +136,12 @@ export default function GeometryFigure({kind,l,onWaveChange}:{kind:string;l:numb
     {label(110,224,l?"旋轉輸入":"Rotate input")}{label(380,224,l?"兩條計算路線，答案重合":"Both calculation routes agree")}
    </>}
   </svg>
+  {kind==="product"&&<div data-testid="product-basis-link" className="mb-3 space-y-2 rounded-lg border border-violet-100 bg-white p-3 text-xs">
+   <p>{l?"先固定兩個方向：e₁ 向右、e₂ 向上，兩支都是單位箭頭。圖中 a 固定不動，b 沿這兩個方向的分量會改變。":"Fix two unit directions: e₁ right and e₂ up. In the picture a stays fixed, while b’s components along those directions change."}</p>
+   <div className="flex flex-wrap justify-center gap-x-4 gap-y-2"><Tex tex="a=e_1"/><Tex tex={vectorBasisTex(angle)}/></div>
+   <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1"><Tex tex="ab=e_1b="/><Tex tex={"\\textcolor{#0f766e}{(\\cos\\theta)e_1^2}"}/><Tex tex={"+\\textcolor{#7c3aed}{(\\sin\\theta)e_1e_2}"}/></div>
+   <p><Tex tex="e_1^2=1"/>；<Tex tex="e_1\wedge e_2=e_{12}"/>。{l?"把 a 乘進去：平行分量留下數，垂直分量留下這片單位面 e₁₂。下面的 0.866 這類數字是面積係數，e₁₂ 記平面與定向。":"Multiply by a: the parallel component gives a number; the perpendicular component gives the unit plane e₁₂. Numbers such as 0.866 below are area coefficients, while e₁₂ records the plane and orientation."}</p>
+  </div>}
   {kind==="product"&&<div className="mb-4 rounded-lg border border-violet-100 bg-white px-3 py-3 text-center" data-testid="geometric-product-value">
    <p className="mb-1 text-xs text-gray-500">{l?"幾何積（兩支單位箭頭）":"Geometric product (two unit arrows)"}</p>
    <Tex tex={geometricProductTex(angle)}/>

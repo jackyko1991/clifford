@@ -1,6 +1,7 @@
 import {useEffect,useId,useState,type ReactNode} from "react";
 import Tex from "./components/Tex";
 import FermionPurpose from "./components/FermionPurpose";
+import UnitPlaneBridge from "./components/UnitPlaneBridge";
 import GeometryFigure from "./components/GeometryFigure";
 import CodeBlock from "./components/CodeBlock";
 import {geometricProductTex,quarterTurn,quaternionProduct,quaternionUnits,type QuaternionUnit} from "./learningModel";
@@ -90,8 +91,10 @@ export default function LearningSections({l}:{l:number}){
    <p>{l?"兩支不同的箭頭相乘時，一次保留兩件事：它們有多同向，以及它們圍出多少有方向的面積。這就叫幾何積。":"For two different arrows, one product keeps two things: how much they align, and how much oriented area they span. This is the geometric product."}</p>
    <div className="rounded-lg border border-violet-100 bg-violet-50/50 p-3"><Tex tex={String.raw`ab=\textcolor{#0f766e}{\underbrace{a\cdot b}_{\text{${l?"同向程度":"alignment"}}}}+\textcolor{#7c3aed}{\underbrace{a\wedge b}_{\text{${l?"定向面積":"oriented area"}}}}`} display/></div>
    <div data-feynman="example" className="rounded-lg border-l-4 border-emerald-300 bg-emerald-50/60 p-4"><p className="mb-3">{l?"拖動第二支箭頭：從同向到垂直，數量如何流向面積？再試試反向。":"Move the second arrow: from parallel to perpendicular, how does alignment give way to area? Then try the opposite direction."}</p><GeometryFigure kind="product" l={l}/></div>
-   <p>{l?"取兩個垂直單位方向，把它們的平面寫成 B。垂直方向交換次序會變號；把 B 乘自己，竟然又出現 −1。剛才 i 的故事，現在有了幾何來源。":"Take two perpendicular unit directions and call their plane B. Swapping perpendicular directions changes the sign. Square B and −1 appears again. The story of i now has a geometric home."}</p>
-   <div className="flex flex-wrap justify-center gap-x-6"><Tex tex={String.raw`B=e_1e_2`} display/><Tex tex={String.raw`B^2=e_1e_2e_1e_2=-e_1^2e_2^2=-1`} display/></div>
+   <UnitPlaneBridge l={l}/>
+   <p>{l?"現在才把這片單位面乘自己：中間的兩支垂直箭頭交換順序會變號，再用各自的平方等於 1。":"Now square the unit plane itself: swapping the two middle perpendicular directions introduces a minus sign, and each unit direction squares to 1."}</p>
+   <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-lg bg-violet-50/40 p-3"><Tex tex={String.raw`B^2=(e_1e_2)(e_1e_2)`}/><Tex tex={String.raw`=e_1(-e_1e_2)e_2`}/><Tex tex={String.raw`=-e_1^2e_2^2=-1`}/></div>
+   <p>{l?"在這個平面裡，複數 i 的角色就可以由 B 擔當：兩者平方都是 −1。這樣從箭頭、單位面，到複數的轉向，才是同一條連續的線。":"Within this plane, B can play the role of the complex i: both square to −1. The path from arrows to a unit plane to complex turns is now continuous."}</p>
    <p className="text-xs text-gray-500">{l?"複數、四元數與張量仍各有用途。這裡先用一個乘法建立幾何直覺；時空的正負號與其他結構，會在後面的工具箱補上。":"Complex numbers, quaternions and tensors retain their uses. Here one product builds the intuition first; spacetime signatures and other structures come later in the toolbox."}</p>
   </Card>
   <Card id="learning" n={4} title={l?"有了第一個例子，才開始學會如何學習":"With one example in hand, learn how to learn"}>
