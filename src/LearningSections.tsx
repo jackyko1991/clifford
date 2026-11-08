@@ -41,19 +41,14 @@ function BridgePhotos({l}:{l:number}){
 function HamiltonTool({l}:{l:number}){
  const [a,setA]=useState<QuaternionUnit>("i"),[b,setB]=useState<QuaternionUnit>("j");
  const result=quaternionProduct(a,b);
- return <figure className="rounded-lg border border-emerald-100 bg-emerald-50/60 p-4" data-interactive="quaternion-order">
-  <svg viewBox="0 0 560 160" className="mx-auto w-full max-w-xl" role="img" aria-label={l?"橋上刻著漢密爾頓的四元數關係式；三種顏色代表三個定向平面":"A drawing of Hamilton’s bridge with three oriented planes"}>
-   <path d="M20 126Q140 106 280 126T540 126M20 140Q140 120 280 140T540 140" fill="none" stroke="#99d5d0"/>
-   <path d="M35 101V60Q280-5 525 60V101H360Q280 25 200 101Z" fill="#ede9fe" stroke="#a78bfa" strokeWidth="2"/>
-   <path d="M35 52Q280-13 525 52" fill="none" stroke="#7c3aed" strokeWidth="5"/>
-   {["i","j","k"].map((q,n)=><g key={q} transform={`translate(${180+n*100} 65)`}><path d="M-22 8L-6-14L22-8L6 14Z" fill={["#7c3aed","#0f766e","#d97706"][n]} opacity=".65"/><text y="36" textAnchor="middle" fontSize="14" fill="#334155">{q}</text></g>)}
-  </svg>
+ return <figure className="space-y-3 py-2" data-interactive="quaternion-order">
+
   <div className="flex flex-wrap items-center justify-center gap-3">
    {[a,b].map((value,index)=><span className="flex items-center gap-3" key={index}>{index===1&&<Tex tex={String.raw`\times`}/>}<select aria-label={l?(index?"右邊的四元數單位":"左邊的四元數單位"):(index?"Right quaternion unit":"Left quaternion unit")} value={value} onChange={e=>(index?setB:setA)(e.target.value as QuaternionUnit)} className="rounded border border-violet-200 bg-white px-3 py-2">{quaternionUnits.map(q=><option key={q}>{q}</option>)}</select></span>)}
    <span aria-live="polite"><Tex tex={`=${result}`}/></span><button className={button} onClick={()=>{setA(b);setB(a);}}>{l?"交換順序":"Swap order"}</button>
   </div>
   <p className="mt-3 text-center" aria-live="polite"><Tex tex={`${a}${b}=${result},\\qquad ${b}${a}=${quaternionProduct(b,a)}`}/></p>
-  <figcaption className="mt-3 text-center text-xs text-emerald-900">{l?"試試 i × j，再交換。方向的順序，也要被乘法記住。":"Try i × j, then swap. Multiplication must remember the order of directions."}</figcaption>
+  <figcaption className="mt-3 text-center text-xs text-gray-600">{l?"試試 i × j，再交換。方向的順序，也要被乘法記住。":"Try i × j, then swap. Multiplication must remember the order of directions."}</figcaption>
  </figure>;
 }
 function Prediction({l}:{l:number}){
