@@ -1,6 +1,5 @@
 import {useEffect,useLayoutEffect,useRef,useState,type RefObject} from "react";
 import {historyEvents,historyEras,historyIntro} from "./history";
-import LessonSections from "./LessonSections";
 import HistoryDrawing from "./components/HistoryDrawing";
 import Tex from "./components/Tex";
 const LG="(min-width:1024px)",GAP=24,BADGE=24;
@@ -92,7 +91,7 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
   </li>)}</ol>
  </div>)}
  <button role="switch" aria-checked={allOpen} onClick={()=>setNotes(allOpen?new Set():new Set(noteIds))} className="w-full rounded-lg border border-dashed border-amber-300 bg-amber-50 px-3 py-2 text-left text-xs text-amber-900">💡 {l?"顯示所有小故事":"Show all side notes"}<span className="float-right">{allOpen?"●":"○"}</span></button>
- <button onClick={()=>jump("people")} className="mt-3 px-3 text-xs text-violet-700 hover:underline">{l?"人物與出處小抄 →":"People and attribution guide →"}</button></>;
+ </>;
  return <div className="mx-auto flex max-w-6xl gap-8 px-5 pt-6 pb-12" data-testid="history">
   <nav aria-label={l?"歷史時間軸":"History timeline"} className="sticky top-20 hidden max-h-[calc(100dvh-11rem)] w-60 shrink-0 self-start overflow-y-auto lg:block">{navigation}</nav>
   <article id="main-content" tabIndex={-1} className="min-w-0 flex-1">
@@ -112,7 +111,10 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
        <span className={`absolute top-0 left-10 whitespace-nowrap text-sm font-bold tabular-nums lg:-top-1 lg:rounded lg:bg-gray-50 lg:px-1 ${st.text} ${left?"lg:left-auto lg:right-[-3rem] lg:translate-x-1/2":"lg:left-[-3rem] lg:-translate-x-1/2"}`}>{c.year}</span>
        <section id={c.id} className={`scroll-mt-24 overflow-hidden rounded-xl border bg-white shadow-sm ${active===c.id?"border-violet-300 ring-1 ring-violet-100":"border-gray-200"}`}>
         {first&&<div className={`border-b px-4 py-3 ${st.band}`}><p className="text-sm font-semibold">{era.title[l]}</p><p className="mt-1 text-xs opacity-80">{era.subtitle[l]}</p></div>}
-        <figure className="border-b border-gray-100 bg-gray-50"><div className="h-44 px-3 pt-3"><HistoryDrawing kind={c.drawing} label={c.caption[l]} l={l}/></div><figcaption className="px-4 pb-3 text-[11px] leading-relaxed text-gray-500">{c.caption[l]}</figcaption></figure>
+        <figure className="border-b border-gray-100 bg-gray-50">
+         <div className="flex h-52 items-center justify-center p-3">{c.photo?<img src={`${import.meta.env.BASE_URL}history/${c.photo.file}`} alt={c.caption[l]} loading="lazy" decoding="async" className="max-h-full max-w-full rounded object-contain"/>:<HistoryDrawing kind={c.drawing} label={c.caption[l]} l={l}/>}</div>
+         <figcaption className="px-4 pb-3 text-[11px] leading-relaxed text-gray-500">{c.caption[l]}{c.photo&&<span className="mt-1 block">{c.photo.author} · <a href={c.photo.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline">{c.photo.license}</a> · <a href={c.photo.source} target="_blank" rel="noopener noreferrer" className="underline">{l?"圖片來源":"Image source"}</a></span>}</figcaption>
+        </figure>
         <div className="space-y-3 p-4 sm:p-5">
          <h2 className="text-lg font-semibold leading-snug">{c.title[l]}</h2>
          {c.paragraphs.map((p,i)=><p key={i} className="text-sm leading-relaxed text-gray-600">{p[l]}</p>)}
@@ -126,7 +128,6 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
      })}
     </ol>
    </div>
-   <div className="mt-10 space-y-4 border-t border-gray-200 pt-8"><h2 className="text-xl font-semibold">{l?"保留一張人物與出處小抄":"Keep a guide to people and attribution"}</h2><LessonSections sections={[{id:"people",title:["People","人物"]}]} l={l}/></div>
   </article>
  </div>;
 }

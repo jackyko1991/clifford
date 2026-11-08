@@ -16,7 +16,7 @@ export function parseRoute(hash: string): Route {
   // Retain bookmarks from both earlier Clifford layouts.
   const aliases:Record<string,string> = {laws:"physics",feynman:"learning",maths:"foundations",dataflow:"implementation",techniques:"implementation",loops:"implementation",blas:"performance",nvlink:"performance",cpuml:"applications"};
   const candidate = aliases[requested] || requested;
-  const historyAliases:Record<string,string>={"hamilton-grassmann":"hamilton","clifford-dirac":"clifford-product","modern-ga":"physics-textbook"};
+  const historyAliases:Record<string,string>={people:"grassmann","hamilton-grassmann":"hamilton","clifford-dirac":"clifford-product","modern-ga":"physics-textbook"};
   const target=candidate==="history"&&section?(historyAliases[section]||section):section;
   const moved = target && structure[page].find(t=>t.sections.some(s=>s.id===target));
   const tab = moved ? moved.id : structure[page].some(t=>t.id===candidate) ? candidate : structure[page][0].id;

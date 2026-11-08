@@ -28,7 +28,7 @@ test("the curriculum places every existing lesson exactly once and describes eve
  const pages=[...outline.concept,...outline.skills];
  const sections=pages.flatMap(p=>p.sections);
  assert.equal(new Set(sections.map(s=>s.id)).size,sections.length,"section anchors must be unique");
- for(const c of cards)assert.equal(sections.filter(s=>s.id===c.id).length,1,`missing or duplicate ${c.id}`);
+ for(const c of cards)assert.equal(sections.filter(s=>s.id===c.id).length,c.id==="people"?0:1,`missing or duplicate ${c.id}`);
  for(const p of pages){
   assert.ok(p.intro[0]&&p.intro[1],p.id);
   for(const s of p.sections)if(!cards.some(c=>c.id===s.id)&&!timeline.events.some(c=>c.id===s.id)){
@@ -58,5 +58,17 @@ test("history milestones have bilingual text, valid mathematics and source links
   const [page,tab,section]=c.related.split("/");
   const target=outline[page].find(p=>p.id===tab);
   assert.ok(target?.sections.some(s=>s.id===section),`broken history link ${c.id}`);
+ }
+});
+
+test("history photos are local, credited and use the recorded reuse terms",()=>{
+ const credits=readFileSync(new URL("../public/history/CREDITS.md",import.meta.url),"utf8");
+ assert.equal(timeline.events.filter(c=>c.photo).length,7);
+ for(const c of timeline.events)if(c.photo){
+  const p=c.photo;
+  assert.ok(readFileSync(new URL(`../public/history/${p.file}`,import.meta.url)).length>1000,p.file);
+  assert.ok(p.author&&p.source&&p.license&&p.licenseUrl,c.id);
+  assert.ok(credits.includes(p.file),p.file);
+  assert.ok(["Public domain","CC0 1.0"].includes(p.license),p.file);
  }
 });

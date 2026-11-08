@@ -11,7 +11,7 @@ A bilingual Clifford algebra learning site using Tensorizer's layout with a viol
 - **Extended Reading:** 14 grouped, two-column resource cards with metadata and source links. The four existing reading guides now live in their relevant learning, history, application and limitations pages.
 - **Global footer:** Buy Me a Coffee, Apache-2.0 and GitHub.
 
-All 23 existing bilingual lessons, diagrams, equations and code explanations are retained and placed once. The 31 remaining missing sections have explicit learning questions and visual plans, marked as planned lessons. The history page now adds 10 sourced, illustrated milestones in a three-part timeline, with sticky navigation and expandable notes. Existing lesson bookmarks continue to resolve after moves. No live coding service is included.
+All 23 original lesson records remain in the source; 22 are displayed. The people/attribution addendum was removed from the history page at the user’s request. Existing lesson diagrams, equations and code explanations are retained. The 31 remaining missing sections have explicit learning questions and visual plans, marked as planned lessons. The history page now adds 10 sourced milestones with portraits, relevant hardware photos and fallback illustrations in a three-part timeline, with sticky navigation and expandable notes. Existing lesson bookmarks continue to resolve after moves. No live coding service is included.
 
 See [the curriculum map](docs/curriculum.md) for the learning sequence and the relationship to Tensorizer's page roles.
 

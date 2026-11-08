@@ -50,6 +50,8 @@ test("restored Clifford lessons and the reading catalog render with one global f
       assert.ok(html.includes(`data-history-card="${section.id}"`));
       assert.ok(html.includes('data-testid="history"'));
       assert.ok(!html.includes('data-placeholder="true"'));
+      assert.ok(!html.includes('id="people"'));
+      assert.ok(!html.includes("Keep a guide to people and attribution"));
      }else{
       assert.ok(html.includes('data-placeholder="true"'));
       assert.ok(html.includes(section.summary[lang==="en"?0:1]));

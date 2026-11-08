@@ -59,8 +59,8 @@
       ],
       "drawing": "quaternion",
       "caption": [
-        "A turn followed by another turn; the order is part of the record.",
-        "先轉一次，再轉一次；順序也是紀錄的一部分。"
+        "William Rowan Hamilton, portrait from around 1860.",
+        "威廉・羅恩・哈密頓，約 1860 年的肖像。"
       ],
       "equation": "i^2=j^2=k^2=ijk=-1",
       "related": "concept/rotations/rotors",
@@ -73,7 +73,15 @@
       "note": [
         "The bridge story comes from Hamilton’s own letters: he recalled the discovery on 16 October 1843 while walking with his wife, and scratching the relation into the bridge stone.",
         "橋上的故事出自哈密頓自己的信：他回憶 1843 年 10 月 16 日與妻子散步時想到關係式，並把它刻在橋石上。"
-      ]
+      ],
+      "photo": {
+        "file": "hamilton.png",
+        "title": "William Rowan Hamilton portrait oval 2.png",
+        "source": "https://commons.wikimedia.org/wiki/File:William_Rowan_Hamilton_portrait_oval_2.png",
+        "author": "Unknown authorUnknown author",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+      }
     },
     {
       "id": "grassmann",
@@ -95,8 +103,8 @@
       ],
       "drawing": "wedge",
       "caption": [
-        "The same parallelogram, with its edge order reversed.",
-        "同一個平行四邊形，交換邊的順序就反轉定向。"
+        "Hermann Grassmann, portrait made before 1877.",
+        "赫爾曼・格拉斯曼，1877 年以前的肖像。"
       ],
       "equation": "a\\wedge b=-b\\wedge a",
       "related": "concept/foundations/orientation",
@@ -109,7 +117,15 @@
           "label": "Grassmann’s foreword · MacTutor transcription",
           "url": "https://mathshistory.st-andrews.ac.uk/Extras/Grassmann_1844/"
         }
-      ]
+      ],
+      "photo": {
+        "file": "grassmann.jpg",
+        "title": "Hermann Graßmann.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Hermann_Gra%C3%9Fmann.jpg",
+        "author": "Unknown authorUnknown author",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+      }
     },
     {
       "id": "clifford-space",
@@ -131,8 +147,8 @@
       ],
       "drawing": "curvature",
       "caption": [
-        "A drawn curvature ripple: an illustration of the proposal, not an experimental result.",
-        "畫出的曲率漣漪：示意當時的提案，不是實驗結果。"
+        "William Kingdon Clifford.",
+        "威廉・金頓・克利福德。"
       ],
       "equation": "",
       "related": "concept/limitations/frontiers",
@@ -145,7 +161,15 @@
       "note": [
         "At the end of the short text, Clifford explicitly says his attempted explanation of double refraction had not yet produced decisive results to report.",
         "短文最後，克利福德明確說，他嘗試以此解釋雙折射，但還沒有足夠確定的結果可以發表。"
-      ]
+      ],
+      "photo": {
+        "file": "clifford.jpg",
+        "title": "Clifford William Kingdon (cropped portrait).jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Clifford_William_Kingdon_(cropped_portrait).jpg",
+        "author": "Unknown photographer",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+      }
     },
     {
       "id": "clifford-product",
@@ -167,8 +191,8 @@
       ],
       "drawing": "product",
       "caption": [
-        "Alignment and oriented area stay in one geometric product.",
-        "平行程度與定向面積，保留在同一個幾何積裡。"
+        "William Kingdon Clifford, author of the 1878 paper.",
+        "威廉・金頓・克利福德，1878 年論文的作者。"
       ],
       "equation": "ab=a\\cdot b+a\\wedge b",
       "related": "concept/foundations/product",
@@ -177,7 +201,15 @@
           "label": "Original paper · American Journal of Mathematics",
           "url": "https://www.jstor.org/stable/2369379"
         }
-      ]
+      ],
+      "photo": {
+        "file": "clifford.jpg",
+        "title": "Clifford William Kingdon (cropped portrait).jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Clifford_William_Kingdon_(cropped_portrait).jpg",
+        "author": "Unknown photographer",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+      }
     },
     {
       "id": "dirac-history",
@@ -199,8 +231,8 @@
       ],
       "drawing": "dirac",
       "caption": [
-        "An algebraic rule is represented by matrices acting on a spinor.",
-        "代數規則以矩陣表示，再作用於旋量。"
+        "Paul Dirac in 1933, five years after the electron paper.",
+        "1933 年的保羅・狄拉克，距電子方程論文發表五年。"
       ],
       "equation": "\\gamma^\\mu\\gamma^\\nu+\\gamma^\\nu\\gamma^\\mu=2\\eta^{\\mu\\nu}\\mathbf 1",
       "related": "concept/physics/dirac",
@@ -217,7 +249,15 @@
           "label": "Original paper · university-hosted scan",
           "url": "https://mathweb.ucsd.edu/~nwallach/Dirac1928.pdf"
         }
-      ]
+      ],
+      "photo": {
+        "file": "dirac.jpg",
+        "title": "Paul Dirac, 1933.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Paul_Dirac,_1933.jpg",
+        "author": "Nobel Foundation",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+      }
     },
     {
       "id": "hestenes",
@@ -303,8 +343,8 @@
       ],
       "drawing": "graphics",
       "caption": [
-        "A geometric object, its coefficients and a computation describe the same task.",
-        "幾何物件、分量與計算，描述的是同一個任務。"
+        "NVIDIA GeForce 8800 GTX, an example of graphics hardware from that era.",
+        "NVIDIA GeForce 8800 GTX，作為當時圖形運算硬體的例子。"
       ],
       "equation": "",
       "related": "skills/implementation/basis-code",
@@ -317,7 +357,15 @@
           "label": "Publisher · first edition, 2007",
           "url": "https://www.educate.elsevier.com/book/details/9780123694652"
         }
-      ]
+      ],
+      "photo": {
+        "file": "graphics-gpu.webp",
+        "title": "NVIDIA GeForce 8800 GTX Board.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:NVIDIA_GeForce_8800_GTX_Board.jpg",
+        "author": "Hyins",
+        "license": "Public domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+      }
     },
     {
       "id": "pga-history",
@@ -371,8 +419,8 @@
       ],
       "drawing": "network",
       "caption": [
-        "Rotate the input and compare the two routes through an equivariant model.",
-        "轉動輸入，比較通過等變模型的兩條計算路線。"
+        "A Tesla P100 GPU, an example of parallel numerical computing hardware.",
+        "Tesla P100 GPU，作為平行數值運算硬體的例子。"
       ],
       "equation": "f(Rx)=Rf(x)",
       "related": "skills/applications/equivariance",
@@ -385,7 +433,15 @@
           "label": "Ruhe et al. · Clifford group networks",
           "url": "https://arxiv.org/abs/2305.11141"
         }
-      ]
+      ],
+      "photo": {
+        "file": "compute-gpu.webp",
+        "title": "Nvidia@16nm@Pascal@GP100@Tesla P100@T Taiwan 1912A1 PN9G70.S6W GP100-897-A1 DSC07141-DSC07141.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Nvidia%4016nm%40Pascal%40GP100%40Tesla_P100%40T_Taiwan_1912A1_PN9G70.S6W_GP100-897-A1_DSC07141-DSC07141.jpg",
+        "author": "Fritzchens Fritz",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+      }
     }
   ]
 }
