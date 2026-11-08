@@ -1,16 +1,12 @@
 import {useEffect,useState,type ReactNode} from "react";
 import Tex from "./components/Tex";
+import Arrow from "./components/GeometryArrow";
+import {GeometryRecordBuilder,DimensionQuestion,ThreeDRecordTable} from "./GeometryRecords";
 import CodeBlock from "./components/CodeBlock";
 import {HamiltonTool} from "./LearningSections";
 import {bladeSlots,gradeColors,gradeTex,numberText,productTex,projectGrade,vectorProduct2D} from "./foundationsModel";
 const btn="rounded-md border border-violet-200 bg-white px-3 py-1.5 text-xs text-violet-800 hover:bg-violet-50";
 const teal="#0f766e",purple="#7c3aed";
-function Arrow({a,b,color=purple}:{a:number[];b:number[];color?:string}){
- const dx=b[0]-a[0],dy=b[1]-a[1],len=Math.hypot(dx,dy);
- if(len<.5)return <circle cx={a[0]} cy={a[1]} r="2" fill={color}/>;
- const h=Math.min(9,len*.4),ux=dx/len,uy=dy/len,x=b[0]-ux*h,y=b[1]-uy*h;
- return <g fill={color}><path d={`M${a}L${x} ${y}`} stroke={color} strokeWidth="3" fill="none"/><polygon points={`${b} ${x-uy*h/2},${y+ux*h/2} ${x+uy*h/2},${y-ux*h/2}`}/></g>;
-}
 function Card({id,n,title,children}:{id:string;n:number;title:string;children:ReactNode}){
  return <section id={id} data-foundation-section={id} data-lesson={id} className="scroll-mt-20 rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
   <h2 className="flex items-baseline gap-3 text-lg font-semibold"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-600 text-sm text-white">{n}</span>{title}</h2>
@@ -115,12 +111,16 @@ export default function FoundationsSections({l}:{l:number}){
    <div className="grid gap-3 text-center sm:grid-cols-2"><div className="rounded-lg border border-teal-100 bg-teal-50/40 p-3"><Tex tex={"\\textcolor{#0f766e}{a\\cdot b=\\frac{ab+ba}{2}}"}/></div><div className="rounded-lg border border-violet-100 bg-violet-50/40 p-3"><Tex tex={"\\textcolor{#7c3aed}{a\\wedge b=\\frac{ab-ba}{2}}"}/></div></div>
    <p>{l?"若兩支箭頭平行，就圍不出面積；特別是向量乘自己時，只剩下長度平方。這也把幾何積接回最初的公設。":"Parallel arrows enclose no area. In particular, a vector multiplied by itself leaves only its squared length, returning us to the starting rule."}</p><Tex tex={"a\\wedge a=0,\\quad a^2=a\\cdot a=|a|^2"} display/>
   </Card>
-  <Card id="grades" n={3} title={l?"一份紀錄，裝下點數、箭頭、面與體":"One record for numbers, arrows, planes and volumes"}>
-   <p>{l?"裝箱清單可以同時記住件數、邊長、紙板面積和箱子體積，卻不會把平方公尺變成公尺。多重向量也保留不同種類的幾何資訊，各放在自己的位置。這裡的「階數」是幾何元素的維度，與張量的指標數不同。":"A packing list can keep counts, edge lengths, sheet areas and box volumes without turning square metres into metres. A multivector likewise keeps different geometric kinds in their own slots. Here grade counts geometric dimension; it is different from tensor rank."}</p>
-   <Example><p className="mb-3">{l?"改一個分量，再選「雙向量」。看看哪些位置留下、哪些被隱去；回到「完整紀錄」，其他資訊還在。":"Edit a coefficient, then select ‘Bivector’. Which slots remain? Return to ‘Whole record’: the other information is still there."}</p><GradeMixer l={l}/></Example>
-   <p>{l?"三個獨立方向有三種箭頭、三種平面，卻只有一種三維體積方向。再加上一個純量位置，共八個分量。選某一階，是取出那一類資訊，不是把它旋轉或改造成另一種。":"Three independent directions give three vector slots, three plane slots, one volume slot and one scalar slot: eight coefficients. Selecting a grade extracts one kind of information; it does not rotate it into another kind."}</p>
-   <Tex tex={"1+3+3+1=2^3=8"} display/>
-   <CodeBlock code={"# An explicit layout for a 3D multivector\nM = {\"1\": 2, \"e1\": 1, \"e2\": -1, \"e3\": 0,\n     \"e12\": 0.5, \"e13\": 0, \"e23\": 0, \"e123\": 1}\nbivector = {key: M[key] for key in (\"e12\", \"e13\", \"e23\")}"} title="multivector_slots.py"/>
+  <Card id="grades" n={3} title={l?"先記方向，再記面與體：多重向量怎麼來？":"From directions to patches and volumes: why multivectors?"}>
+   <p>{l?"先別急著數八個格子。想記住一支箭頭，需要一個方向；想記住一片面，需要兩個不平行的方向；想記住一塊體積，還要第三個不在面內的方向。多重向量把這些不同維度的幾何資訊，保留在同一份紀錄裡。":"Before counting eight slots, ask what you need to record. An arrow needs one direction. A patch needs two nonparallel directions. A volume needs a third direction outside that plane. A multivector keeps these different geometric dimensions in one record."}</p>
+   <Example><GeometryRecordBuilder l={l}/></Example>
+   <p>{l?"這裡的「階數」就在問：這一部分由幾個獨立方向張成？0 階沒有方向，1 階是箭頭，2 階是面，3 階是體。它不是張量的指標數，也不是說物體裡有幾個數字。":"Grade asks how many independent directions span this part. Grade 0 has no direction; grade 1 is an arrow, grade 2 a patch and grade 3 a volume. It is not tensor rank or the number of numerical entries."}</p>
+   <h3 className="font-semibold">{l?"現在只看三維：每一種幾何，各需要幾格？":"Now restrict to 3D: how many slots does each kind need?"}</h3>
+   <p>{l?"在三維，選定三個基底方向。箭頭可以沿其中任一個方向；面可以選任意一對方向。別把「一片面有兩個方向」和「三維裡有三種獨立平面基底」混在一起。":"Fix three basis directions. An arrow can use any one; a plane can use any pair. Distinguish ‘two directions span a plane’ from ‘three independent plane basis elements exist in 3D’."}</p>
+   <ThreeDRecordTable l={l}/>
+   <Tex tex={"1+3+3+1=8\\quad\\text{(3D)}"} display/>
+   <details className="rounded-lg border border-violet-100 bg-white p-3"><summary className="cursor-pointer font-medium text-violet-800">{l?"打開一份 3D 紀錄，試著改分量":"Open a 3D record and edit its coefficients"}</summary><div className="mt-4 space-y-3"><p>{l?"每個數字都放在一個基底位置前面。選「雙向量」，只讀出三個面積位置；其他資訊仍保留著。":"Each number belongs to a basis slot. Select ‘Bivector’ to read only the three plane slots; the other information stays stored."}</p><GradeMixer l={l}/><CodeBlock code={"# The eight slots below belong specifically to 3D\nM = {\"1\": 2, \"e1\": 1, \"e2\": -1, \"e3\": 0,\n     \"e12\": 0.5, \"e13\": 0, \"e23\": 0, \"e123\": 1}"} title="a_3d_record.py"/></div></details>
+   <DimensionQuestion l={l}/>
   </Card>
   <Card id="relations" n={4} title={l?"複數、四元數、張量，各自在記什麼？":"What do complex numbers, quaternions and tensors record?"}>
    <p>{l?"現在回頭看 i 與橋上的公式：它們不必孤立地背誦。選一種紀錄方式，檢查它保留哪些位置、怎樣相乘，以及它要解決什麼問題。":"Return to i and the bridge formula: they no longer need to be memorized in isolation. Choose a record and inspect which slots it keeps, how it multiplies and what problem it addresses."}</p>

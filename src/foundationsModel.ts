@@ -19,3 +19,8 @@ export function gradeTex(m:MV,k:number){
  });
  return terms.join("").replace(/^\+/,"")||"0";
 }
+
+export function dimensionCounts(n:number):number[]{
+ if(!Number.isInteger(n)||n<0||n>20)throw new Error("Dimension must be an integer from 0 to 20");
+ const counts=[1];for(let k=0;k<n;k++)counts.push(Math.round(counts[k]*(n-k)/(k+1)));return counts;
+}

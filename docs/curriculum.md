@@ -69,3 +69,8 @@ The learning page now has six implemented narrative cards: imaginary-turn, hamil
 ## Completed foundations page
 
 `FoundationsSections.tsx` now renders four implemented sections in the order product, orientation, grades, relations. Original lesson records remain in content.json. Interactive tools cover length/angle/order changes with a complete product readout, a two-edge orientation walk, all eight editable multivector coefficients and grade projections, and complex/quaternion/linear-map comparisons. The grade preview uses a responsive 2-by-2 layout on phones. `foundationsModel.ts` computes products using the existing Clifford multiplication kernel and extracts grades without altering the stored coefficients. All examples use Euclidean orthonormal bases.
+
+
+### Revised entry to multivectors
+
+The grades card now starts with `GeometryRecordBuilder` in `GeometryRecords.tsx`: no direction (scalar), one direction (arrow), two independent directions (area), and three independent directions (volume). The 3D 1/3/3/1 coefficient count comes afterwards, and the existing eight-coefficient editor is retained in a collapsible exercise. The card ends with `DimensionQuestion`, a revealable 1D–6D explorer that explains binomial grade counts, the total 2^n, and selection of basis directions, including the empty scalar selection. It explicitly distinguishes higher-dimensional sums of elements from a single simple element.
