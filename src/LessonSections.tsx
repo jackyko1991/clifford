@@ -1,6 +1,7 @@
 import {lessonById,type CurriculumSection} from "./curriculum";
 import {sources} from "./sources";
 import GeometryFigure from "./components/GeometryFigure";
+import CptMirror from "./components/CptMirror";
 import Tex from "./components/Tex";
 import CodeBlock from "./components/CodeBlock";
 export default function LessonSections({sections,l,startNumber=0}:{sections:CurriculumSection[];l:number;startNumber?:number}){
@@ -16,7 +17,7 @@ export default function LessonSections({sections,l,startNumber=0}:{sections:Curr
       <div className="mt-4 space-y-4 text-sm leading-relaxed text-gray-700">
        <p data-feynman="plain">{c.plain[l]}</p>
        <div className="space-y-3 rounded-lg border-l-4 border-emerald-300 bg-emerald-50/60 p-3 sm:p-4" data-testid="lesson-example">
-        {c.diagram&&<GeometryFigure key={c.id} kind={c.diagram} l={l}/>}
+        {c.id==="cpt"?<CptMirror l={l}/>:c.diagram&&<GeometryFigure key={c.id} kind={c.diagram} l={l}/>}
         <p data-feynman="analogy">{c.analogy[l]}</p>
         <p data-feynman="example">{c.example[l]}</p>
        </div>

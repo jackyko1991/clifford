@@ -59,7 +59,8 @@ test("restored Clifford lessons and the reading catalog render with one global f
      }else if(c){
       assert.ok(html.includes(`data-lesson="${c.id}"`),`missing existing lesson ${c.id}`);
       assert.ok(html.includes('data-feynman='));
-      if(c.diagram)assert.ok(html.includes(`data-diagram="${c.diagram}"`),`missing diagram ${c.id}`);
+      if(c.id==="cpt")assert.ok(html.includes('data-interactive="cpt-mirror"'));
+      else if(c.diagram)assert.ok(html.includes(`data-diagram="${c.diagram}"`),`missing diagram ${c.id}`);
      }else if(["rotations","models","calculus","limitations"].includes(tab)){
       assert.ok(html.includes(`data-extended-section="${section.id}"`));
       assert.ok(!html.includes('data-placeholder="true"'));
