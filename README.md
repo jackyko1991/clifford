@@ -11,7 +11,7 @@ A bilingual Clifford algebra learning site using Tensorizer's layout with a viol
 - **Extended Reading:** 14 grouped, two-column resource cards with metadata and source links. The four existing reading guides now live in their relevant learning, history, application and limitations pages.
 - **Global footer:** Buy Me a Coffee, Apache-2.0 and GitHub.
 
-All 23 existing bilingual lessons, diagrams, equations and code explanations are retained and placed once. The 34 missing sections have explicit learning questions and visual plans, marked as planned lessons. Existing lesson bookmarks continue to resolve after moves. No live coding service is included.
+All 23 existing bilingual lessons, diagrams, equations and code explanations are retained and placed once. The 31 remaining missing sections have explicit learning questions and visual plans, marked as planned lessons. The history page now adds 10 sourced, illustrated milestones in a three-part timeline, with sticky navigation and expandable notes. Existing lesson bookmarks continue to resolve after moves. No live coding service is included.
 
 See [the curriculum map](docs/curriculum.md) for the learning sequence and the relationship to Tensorizer's page roles.
 
@@ -34,6 +34,7 @@ Use `npm.cmd` in Windows PowerShell when script execution is restricted.
 - `src/structure.json`: curriculum order, topic introductions and planned lesson briefs.
 - `src/curriculum.ts`: typed curriculum and existing lesson lookup.
 - `src/content.json` and `src/LessonSections.tsx`: existing lessons and their renderer.
+- `src/history.json`, `src/HistoryPage.tsx`: sourced history timeline; original SVG illustrations in `src/components/HistoryDrawing.tsx`.
 - `src/reading.json`: resource-card metadata.
 - `src/ReadingPage.tsx`: Tensorizer-style reading layout.
 - `src/components/SiteFooter.tsx`: global footer.

@@ -1,6 +1,6 @@
 # Clifford Algebra curriculum
 
-The layout follows Tensorizer; the subject structure is specific to Clifford algebra. Preserve the 23 existing lessons. Fill a planned section in place when its explanation, diagram and worked example are ready.
+The layout follows Tensorizer; the subject structure is specific to Clifford algebra. Preserve the 23 existing lessons and the completed history timeline. Fill a planned section in place when its explanation, diagram and worked example are ready.
 
 ## Page roles
 
@@ -27,7 +27,7 @@ The layout follows Tensorizer; the subject structure is specific to Clifford alg
 | Spacetime & fields / 時空與場 | 4 | 0 |
 | Calculus & connections / 微積分與聯絡 | 1 | 3 |
 | Scope & open questions / 適用範圍與開放問題 | 2 | 2 |
-| People & history / 人物與歷史 | 1 | 3 |
+| Clifford history / 克利福德代數史 | 11 | 0 |
 | Represent & multiply / 表示與乘法 | 2 | 1 |
 | Transformation code / 變換程式 | 1 | 2 |
 | Geometry in code / 幾何程式 | 0 | 3 |
@@ -37,7 +37,7 @@ The layout follows Tensorizer; the subject structure is specific to Clifford alg
 
 ## Development rules
 
-- Existing content is looked up by section ID, not by its old group label. Every existing lesson appears once in the curriculum.
+- Existing content is looked up by section ID, not by its old group label. Every existing lesson appears once in the curriculum. History milestones are stored separately in `src/history.json` and are also complete sections.
 - Planned sections need a concrete learning question and a matching visual plan in both languages. They are visibly marked as planned; do not fill them with generic repeated text.
 - Keep examples inspectable through animation, diagrams, formulas and read-only code. No live coding backend.
 - Preserve legacy deep links when moving lessons.
@@ -49,3 +49,7 @@ The page coverage was checked against these teaching resources; they inform the 
 
 - [Gull, Lasenby and Doran: introductory geometric algebra and spacetime tutorial](https://lambda.gsfc.nasa.gov/product/websites/AMI/mrao.cam.ac.uk/~clifford/introduction/intro/intro.html)
 - [BiVector: teaching material on reflections, rotors, PGA, CGA and implementation](https://bivector.net/doc.html)
+
+## History page
+
+The history tab uses Tensorizer’s alternating timeline layout, with three eras, a sticky navigation, original SVG illustrations, side-note controls and per-card source links. Ten milestones cover 1843–2023. The original people/attribution lesson remains below the timeline. Dates identify selected publications or teaching events; the page does not claim a single continuous invention or an institutional suppression story.

@@ -11,6 +11,7 @@ test("reading metadata has valid external links and book ISBNs",()=>{
  }
 });
 
+const timeline=JSON.parse(readFileSync(new URL("../src/history.json",import.meta.url),"utf8"));
 const cards=JSON.parse(readFileSync(new URL("../src/content.json",import.meta.url),"utf8"));
 test("all 23 existing lessons retain bilingual explanations and valid equations",async()=>{
  const {default:katex}=await import("katex");
@@ -30,7 +31,7 @@ test("the curriculum places every existing lesson exactly once and describes eve
  for(const c of cards)assert.equal(sections.filter(s=>s.id===c.id).length,1,`missing or duplicate ${c.id}`);
  for(const p of pages){
   assert.ok(p.intro[0]&&p.intro[1],p.id);
-  for(const s of p.sections)if(!cards.some(c=>c.id===s.id)){
+  for(const s of p.sections)if(!cards.some(c=>c.id===s.id)&&!timeline.events.some(c=>c.id===s.id)){
    assert.ok(s.summary[0]&&s.summary[1],`${s.id}: learning question`);
    assert.ok(s.visual[0]&&s.visual[1],`${s.id}: visual plan`);
   }
@@ -38,5 +39,24 @@ test("the curriculum places every existing lesson exactly once and describes eve
  for(const b of books){
   const [page,tab]=b.related.split("/");
   assert.ok(outline[page].some(p=>p.id===tab),`broken reading link ${b.id}`);
+ }
+});
+
+test("history milestones have bilingual text, valid mathematics and source links",async()=>{
+ const {default:katex}=await import("katex");
+ const outline=JSON.parse(readFileSync(new URL("../src/structure.json",import.meta.url),"utf8"));
+ const history=outline.concept.find(p=>p.id==="history");
+ assert.equal(timeline.events.length,10);
+ assert.deepEqual(timeline.eras.map(e=>e.id),[1,2,3]);
+ for(const c of timeline.events){
+  assert.ok(c.title[0]&&c.title[1]&&c.caption[0]&&c.caption[1],c.id);
+  for(const p of c.paragraphs)assert.ok(p[0]&&p[1],c.id);
+  assert.ok(c.sources.length>0,c.id);
+  for(const s of c.sources)assert.equal(new URL(s.url).protocol,"https:",c.id);
+  if(c.equation)assert.doesNotThrow(()=>katex.renderToString(c.equation,{throwOnError:true}),c.id);
+  assert.equal(history.sections.filter(s=>s.id===c.id).length,1,c.id);
+  const [page,tab,section]=c.related.split("/");
+  const target=outline[page].find(p=>p.id===tab);
+  assert.ok(target?.sections.some(s=>s.id===section),`broken history link ${c.id}`);
  }
 });

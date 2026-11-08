@@ -1,0 +1,391 @@
+{
+  "intro": [
+    "Two nineteenth-century ideas meet in one product. Follow the algebra into electron theory, spacetime, graphics and geometric learning. Dates mark selected publications and teaching milestones, not a single uninterrupted invention.",
+    "兩條十九世紀的思想在同一個乘積相遇。沿著代數走向電子理論、時空、圖學與幾何學習。日期標記重要出版與教學節點，不把整段歷史說成一次連續的發明。"
+  ],
+  "eras": [
+    {
+      "id": 1,
+      "title": [
+        "I · Build the language",
+        "第一部 · 建立語言"
+      ],
+      "subtitle": [
+        "Rotations, extension and a metric product",
+        "旋轉、延伸量與度規乘積"
+      ]
+    },
+    {
+      "id": 2,
+      "title": [
+        "II · Meet the physics",
+        "第二部 · 走進物理"
+      ],
+      "subtitle": [
+        "From matrix representations to spacetime algebra",
+        "從矩陣表示走向時空代數"
+      ]
+    },
+    {
+      "id": 3,
+      "title": [
+        "III · Teach and compute",
+        "第三部 · 教學與計算"
+      ],
+      "subtitle": [
+        "Textbooks, graphics and geometric learning",
+        "教材、圖學與幾何學習"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "hamilton",
+      "year": "1843",
+      "part": 1,
+      "title": [
+        "Hamilton: multiply rotations",
+        "哈密頓：讓旋轉可以相乘"
+      ],
+      "paragraphs": [
+        [
+          "Hamilton’s quaternions gave multiplication an order: swapping two factors can change the result. The familiar imaginary number was no longer the only way to extend ordinary numbers.",
+          "哈密頓的四元數讓乘法有了順序：交換兩個因子，結果可能改變。熟悉的虛數不再是延伸普通數的唯一方式。"
+        ],
+        [
+          "Today we can connect unit quaternions with three-dimensional rotors. That is a useful mathematical bridge, not a claim that the later geometric-algebra notation already existed in 1843.",
+          "今天可以把單位四元數連到三維轉子。這是一座好用的數學橋梁，不代表 1843 年就已經有後來整套幾何代數記號。"
+        ]
+      ],
+      "drawing": "quaternion",
+      "caption": [
+        "A turn followed by another turn; the order is part of the record.",
+        "先轉一次，再轉一次；順序也是紀錄的一部分。"
+      ],
+      "equation": "i^2=j^2=k^2=ijk=-1",
+      "related": "concept/rotations/rotors",
+      "sources": [
+        {
+          "label": "Hamilton’s letters · Trinity College Dublin",
+          "url": "https://www.maths.tcd.ie/pub/HistMath/People/Hamilton/Quaternions.html"
+        }
+      ],
+      "note": [
+        "The bridge story comes from Hamilton’s own letters: he recalled the discovery on 16 October 1843 while walking with his wife, and scratching the relation into the bridge stone.",
+        "橋上的故事出自哈密頓自己的信：他回憶 1843 年 10 月 16 日與妻子散步時想到關係式，並把它刻在橋石上。"
+      ]
+    },
+    {
+      "id": "grassmann",
+      "year": "1844",
+      "part": 1,
+      "title": [
+        "Grassmann: let areas be objects",
+        "格拉斯曼：把面積當成物件"
+      ],
+      "paragraphs": [
+        [
+          "Grassmann’s Ausdehnungslehre developed a language of extension. Instead of keeping only arrows, it made room for oriented areas and higher-dimensional geometric quantities.",
+          "格拉斯曼的《延伸論》發展出描述延伸量的語言。不只記箭頭，也為定向面積與更高維的幾何量留下位置。"
+        ],
+        [
+          "The wedge used in this site is modern notation for that line of ideas. Swapping two vectors reverses the oriented area; repeating the same direction makes the area vanish.",
+          "本站使用的楔形外積，是這條思想脈絡的現代記號。交換兩個向量會反轉定向面積；重複同一方向則張不出面積。"
+        ]
+      ],
+      "drawing": "wedge",
+      "caption": [
+        "The same parallelogram, with its edge order reversed.",
+        "同一個平行四邊形，交換邊的順序就反轉定向。"
+      ],
+      "equation": "a\\wedge b=-b\\wedge a",
+      "related": "concept/foundations/orientation",
+      "sources": [
+        {
+          "label": "1844 edition · ETH-Bibliothek",
+          "url": "https://www.e-rara.ch/zut/content/titleinfo/1169335"
+        },
+        {
+          "label": "Grassmann’s foreword · MacTutor transcription",
+          "url": "https://mathshistory.st-andrews.ac.uk/Extras/Grassmann_1844/"
+        }
+      ]
+    },
+    {
+      "id": "clifford-space",
+      "year": "1870 / 1876",
+      "part": 1,
+      "title": [
+        "Clifford asks whether matter is geometry",
+        "克利福德問：物質能否來自幾何？"
+      ],
+      "paragraphs": [
+        [
+          "In an 1870 talk, published in 1876, Clifford proposed that small regions of space could be curved and that changes in curvature might describe the motion of matter.",
+          "克利福德在 1870 年的演講、1876 年出版的短文中，提出小區域空間可能彎曲，曲率的變化或許能描述物質的運動。"
+        ],
+        [
+          "This is an early geometric proposal about physics. It is not a derivation of Einstein’s field equations or a demonstration of gravitational waves. The distinction lets the original idea remain interesting without rewriting later history.",
+          "這是早期以幾何思考物理的提案，並不是愛因斯坦場方程的推導，也不是引力波的證明。分清這點，才能欣賞原本的想法，而不改寫後來的歷史。"
+        ]
+      ],
+      "drawing": "curvature",
+      "caption": [
+        "A drawn curvature ripple: an illustration of the proposal, not an experimental result.",
+        "畫出的曲率漣漪：示意當時的提案，不是實驗結果。"
+      ],
+      "equation": "",
+      "related": "concept/limitations/frontiers",
+      "sources": [
+        {
+          "label": "Clifford’s original text · Wikisource",
+          "url": "https://en.wikisource.org/wiki/On_the_Space-Theory_of_Matter"
+        }
+      ],
+      "note": [
+        "At the end of the short text, Clifford explicitly says his attempted explanation of double refraction had not yet produced decisive results to report.",
+        "短文最後，克利福德明確說，他嘗試以此解釋雙折射，但還沒有足夠確定的結果可以發表。"
+      ]
+    },
+    {
+      "id": "clifford-product",
+      "year": "1878",
+      "part": 1,
+      "title": [
+        "A metric product joins the picture",
+        "把度規帶進乘法"
+      ],
+      "paragraphs": [
+        [
+          "Clifford’s Applications of Grassmann’s Extensive Algebra connected extensive algebra with metric multiplication. It is a central historical source for what we now call Clifford algebra.",
+          "克利福德的〈格拉斯曼延伸代數的應用〉把延伸代數與度規乘法連起來，是今天所稱克利福德代數的重要歷史來源。"
+        ],
+        [
+          "In today’s notation, multiplying two vectors keeps both a scalar inner product and a bivector outer product. The scalar records alignment; the bivector records the oriented plane.",
+          "用今天的記號來看，兩向量相乘，同時保留純量內積與雙向量外積。前者記平行程度，後者記定向平面。"
+        ]
+      ],
+      "drawing": "product",
+      "caption": [
+        "Alignment and oriented area stay in one geometric product.",
+        "平行程度與定向面積，保留在同一個幾何積裡。"
+      ],
+      "equation": "ab=a\\cdot b+a\\wedge b",
+      "related": "concept/foundations/product",
+      "sources": [
+        {
+          "label": "Original paper · American Journal of Mathematics",
+          "url": "https://www.jstor.org/stable/2369379"
+        }
+      ]
+    },
+    {
+      "id": "dirac-history",
+      "year": "1928",
+      "part": 2,
+      "title": [
+        "Dirac: algebra inside the electron equation",
+        "狄拉克：電子方程裡的代數"
+      ],
+      "paragraphs": [
+        [
+          "Dirac’s relativistic electron equation uses matrices with anticommutation relations. These are a matrix representation of a Clifford algebra; the electron state is a spinor on which the matrices act.",
+          "狄拉克的相對論性電子方程使用滿足反對易關係的矩陣。它們給出克利福德代數的一種矩陣表示；電子狀態則是這些矩陣作用的旋量。"
+        ],
+        [
+          "The algebra, its representation and the quantum state have different jobs. Keeping them separate explains the connection without turning a useful mathematical structure into a complete physical theory by itself.",
+          "代數、它的表示，以及量子態，各有不同工作。分清三者，既能理解它們的連結，也不會把一種數學結構本身當成完整物理理論。"
+        ]
+      ],
+      "drawing": "dirac",
+      "caption": [
+        "An algebraic rule is represented by matrices acting on a spinor.",
+        "代數規則以矩陣表示，再作用於旋量。"
+      ],
+      "equation": "\\gamma^\\mu\\gamma^\\nu+\\gamma^\\nu\\gamma^\\mu=2\\eta^{\\mu\\nu}\\mathbf 1",
+      "related": "concept/physics/dirac",
+      "sources": [
+        {
+          "label": "Dirac, 1928 · original paper",
+          "url": "https://doi.org/10.1098/rspa.1928.0023"
+        },
+        {
+          "label": "David Tong · spinors and the Dirac equation",
+          "url": "https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S4.html"
+        },
+        {
+          "label": "Original paper · university-hosted scan",
+          "url": "https://mathweb.ucsd.edu/~nwallach/Dirac1928.pdf"
+        }
+      ]
+    },
+    {
+      "id": "hestenes",
+      "year": "1966",
+      "part": 2,
+      "title": [
+        "Hestenes builds spacetime algebra",
+        "赫斯特尼斯建立時空代數的教學路線"
+      ],
+      "paragraphs": [
+        [
+          "Hestenes’s Space-Time Algebra presents Clifford algebra as a geometric language for spacetime. Its contents connect electrodynamics, Dirac fields, Lorentz transformations and geometric calculus.",
+          "赫斯特尼斯的《時空代數》把克利福德代數當成描述時空的幾何語言。書中連起電動力學、狄拉克場、洛侖茲變換與幾何微積分。"
+        ],
+        [
+          "For this site, that gives a learning route: understand a plane and a rotor first, then revisit boosts, fields and spinors with a shared set of operations.",
+          "對本站而言，這提供一條學習路線：先理解平面與轉子，再用共同的運算工具回頭看雙曲旋轉、場與旋量。"
+        ]
+      ],
+      "drawing": "sta",
+      "caption": [
+        "Spatial turns and spacetime boosts appear in one geometric framework.",
+        "空間旋轉與時空雙曲旋轉，放進共同的幾何框架。"
+      ],
+      "equation": "\\gamma_0^2=1,\\qquad\\gamma_1^2=\\gamma_2^2=\\gamma_3^2=-1",
+      "related": "concept/physics/sta",
+      "sources": [
+        {
+          "label": "Hestenes · 1966 book and contents",
+          "url": "https://davidhestenes.net/geocalc/html/STA.html"
+        }
+      ]
+    },
+    {
+      "id": "physics-textbook",
+      "year": "2003",
+      "part": 3,
+      "title": [
+        "A textbook connects the physics tools",
+        "教材把物理工具連起來"
+      ],
+      "paragraphs": [
+        [
+          "Doran and Lasenby’s Geometric Algebra for Physicists gives a sustained route from the geometric product to rotations, spacetime and physical applications.",
+          "多蘭與拉森比的《物理學家的幾何代數》提供一條連貫路線，從幾何積走到旋轉、時空與物理應用。"
+        ],
+        [
+          "The role of a textbook is different from a discovery paper: it makes a toolkit learnable. Our foundations and physics pages follow that idea of building one geometric relation at a time.",
+          "教材與發現論文的工作不同：它讓一套工具變得可學。本站的基礎與物理頁也沿著這個方向，一次建立一個幾何關係。"
+        ]
+      ],
+      "drawing": "book",
+      "caption": [
+        "A learning route from products to rotations and fields.",
+        "從乘積走向旋轉與場的學習路線。"
+      ],
+      "equation": "",
+      "related": "concept/learning/learning",
+      "sources": [
+        {
+          "label": "Cambridge University Press · book record",
+          "url": "https://www.cambridge.org/core/books/geometric-algebra-for-physicists/FB8D3ACB76AB3AB10BA7F27505925091"
+        }
+      ]
+    },
+    {
+      "id": "graphics",
+      "year": "2007",
+      "part": 3,
+      "title": [
+        "Geometric algebra becomes inspectable code",
+        "讓幾何代數成為可檢查的程式"
+      ],
+      "paragraphs": [
+        [
+          "Dorst, Fontijne and Mann’s Geometric Algebra for Computer Science connects geometric objects with algorithms. The authors’ companion site includes interactive figures, exercises and source code.",
+          "多斯特、豐泰恩與曼恩的《電腦科學的幾何代數》把幾何物件連到演算法。作者的配套網站提供互動圖、練習與原始碼。"
+        ],
+        [
+          "This is the bridge to our programming pages: blade storage, products, transformations and numerical checks must all agree with the picture.",
+          "這也是本站程式頁的橋梁：基底儲存、乘積、變換與數值檢查，都必須和圖中的幾何一致。"
+        ]
+      ],
+      "drawing": "graphics",
+      "caption": [
+        "A geometric object, its coefficients and a computation describe the same task.",
+        "幾何物件、分量與計算，描述的是同一個任務。"
+      ],
+      "equation": "",
+      "related": "skills/implementation/basis-code",
+      "sources": [
+        {
+          "label": "Authors’ companion site",
+          "url": "https://geometricalgebra.org/"
+        },
+        {
+          "label": "Publisher · first edition, 2007",
+          "url": "https://www.educate.elsevier.com/book/details/9780123694652"
+        }
+      ]
+    },
+    {
+      "id": "pga-history",
+      "year": "2019 / 2020",
+      "part": 3,
+      "title": [
+        "PGA: one language for rigid geometry",
+        "PGA：用共同語言處理剛體幾何"
+      ],
+      "paragraphs": [
+        [
+          "Gunn’s SIGGRAPH 2019 course notes, posted to arXiv in 2020, introduce projective geometric algebra for computer graphics. Points, lines, planes and rigid motions are treated within one model.",
+          "岡恩的 SIGGRAPH 2019 課程講義於 2020 年上傳 arXiv，以電腦圖學介紹射影幾何代數，把點、線、面與剛體運動放進同一模型。"
+        ],
+        [
+          "The model choice matters: PGA is useful for Euclidean geometry and rigid motion, while other tasks may call for a conformal model or spacetime algebra. This date marks a teaching resource, not the invention of all projective geometry.",
+          "模型選擇仍然重要：PGA 適合歐氏幾何與剛體運動，其他任務可能需要共形模型或時空代數。這個日期標記的是教學資源，不是整個射影幾何的發明。"
+        ]
+      ],
+      "drawing": "pga",
+      "caption": [
+        "One rigid motion moves points, lines and the shape together.",
+        "同一個剛體運動，一致地移動點、線與形狀。"
+      ],
+      "equation": "",
+      "related": "concept/models/motors",
+      "sources": [
+        {
+          "label": "Gunn · course notes and publication history",
+          "url": "https://arxiv.org/abs/2002.04509"
+        }
+      ]
+    },
+    {
+      "id": "geometric-ai",
+      "year": "2023",
+      "part": 3,
+      "title": [
+        "Geometry enters neural architectures",
+        "把幾何放進神經網路架構"
+      ],
+      "paragraphs": [
+        [
+          "GATr uses projective geometric algebra to represent geometric data inside a transformer. Clifford Group Equivariant Neural Networks studies group actions and constructs equivariant layers using multivectors.",
+          "GATr 用射影幾何代數表示 Transformer 裡的幾何資料；克利福德群等變神經網路則研究群作用，並以多重向量建立等變層。"
+        ],
+        [
+          "These are concrete architectures and experiments, not proof that every Clifford-based model is faster or more accurate. Compare the symmetry, task, baseline and measured cost before choosing a representation.",
+          "這些是具體的架構與實驗，不是所有克利福德模型都更快、更準的證明。選擇表示方式前，仍要比較對稱性、任務、基線與實測成本。"
+        ]
+      ],
+      "drawing": "network",
+      "caption": [
+        "Rotate the input and compare the two routes through an equivariant model.",
+        "轉動輸入，比較通過等變模型的兩條計算路線。"
+      ],
+      "equation": "f(Rx)=Rf(x)",
+      "related": "skills/applications/equivariance",
+      "sources": [
+        {
+          "label": "Brehmer et al. · GATr",
+          "url": "https://arxiv.org/abs/2305.18415"
+        },
+        {
+          "label": "Ruhe et al. · Clifford group networks",
+          "url": "https://arxiv.org/abs/2305.11141"
+        }
+      ]
+    }
+  ]
+}

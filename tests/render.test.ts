@@ -13,6 +13,8 @@ test("restored Clifford lessons and the reading catalog render with one global f
  try{
   const {default:App}=await server.ssrLoadModule("/src/App.tsx");
   const {parseRoute}=await server.ssrLoadModule("/src/routes.ts");
+  assert.deepEqual(parseRoute("#/concept/history/hamilton-grassmann"),{page:"concept",tab:"history",section:"hamilton"});
+  assert.deepEqual(parseRoute("#/concept/history/clifford-dirac"),{page:"concept",tab:"history",section:"clifford-product"});
   assert.deepEqual(parseRoute("#/reading/reading/frontiers"),{page:"concept",tab:"limitations",section:"frontiers"});
   assert.deepEqual(parseRoute("#/concept/foundations/welcome"),{page:"concept",tab:"learning",section:"welcome"});
   assert.deepEqual(parseRoute("#/concept/rotations/motors"),{page:"concept",tab:"models",section:"motors"});
@@ -44,6 +46,10 @@ test("restored Clifford lessons and the reading catalog render with one global f
       assert.ok(html.includes(`data-lesson="${c.id}"`),`missing existing lesson ${c.id}`);
       assert.ok(html.includes('data-feynman='));
       if(c.diagram)assert.ok(html.includes(`data-diagram="${c.diagram}"`),`missing diagram ${c.id}`);
+     }else if(tab==="history"){
+      assert.ok(html.includes(`data-history-card="${section.id}"`));
+      assert.ok(html.includes('data-testid="history"'));
+      assert.ok(!html.includes('data-placeholder="true"'));
      }else{
       assert.ok(html.includes('data-placeholder="true"'));
       assert.ok(html.includes(section.summary[lang==="en"?0:1]));

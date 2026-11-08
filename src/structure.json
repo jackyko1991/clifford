@@ -482,64 +482,89 @@
     {
       "id": "history",
       "title": [
-        "People & history",
-        "人物與歷史"
+        "Clifford history",
+        "克利福德代數史"
       ],
       "intro": [
-        "Connect the contributions without turning historical analogies into physical proofs.",
-        "串起不同貢獻，同時不把歷史比喻當成物理證明。"
+        "Two nineteenth-century ideas meet in one product. Follow the algebra into electron theory, spacetime, graphics and geometric learning. Dates mark selected publications and teaching milestones, not a single uninterrupted invention.",
+        "兩條十九世紀的思想在同一個乘積相遇。沿著代數走向電子理論、時空、圖學與幾何學習。日期標記重要出版與教學節點，不把整段歷史說成一次連續的發明。"
       ],
       "sections": [
         {
+          "id": "hamilton",
+          "title": [
+            "Hamilton: multiply rotations",
+            "哈密頓：讓旋轉可以相乘"
+          ]
+        },
+        {
+          "id": "grassmann",
+          "title": [
+            "Grassmann: let areas be objects",
+            "格拉斯曼：把面積當成物件"
+          ]
+        },
+        {
+          "id": "clifford-space",
+          "title": [
+            "Clifford asks whether matter is geometry",
+            "克利福德問：物質能否來自幾何？"
+          ]
+        },
+        {
+          "id": "clifford-product",
+          "title": [
+            "A metric product joins the picture",
+            "把度規帶進乘法"
+          ]
+        },
+        {
+          "id": "dirac-history",
+          "title": [
+            "Dirac: algebra inside the electron equation",
+            "狄拉克：電子方程裡的代數"
+          ]
+        },
+        {
+          "id": "hestenes",
+          "title": [
+            "Hestenes builds spacetime algebra",
+            "赫斯特尼斯建立時空代數的教學路線"
+          ]
+        },
+        {
+          "id": "physics-textbook",
+          "title": [
+            "A textbook connects the physics tools",
+            "教材把物理工具連起來"
+          ]
+        },
+        {
+          "id": "graphics",
+          "title": [
+            "Geometric algebra becomes inspectable code",
+            "讓幾何代數成為可檢查的程式"
+          ]
+        },
+        {
+          "id": "pga-history",
+          "title": [
+            "PGA: one language for rigid geometry",
+            "PGA：用共同語言處理剛體幾何"
+          ]
+        },
+        {
+          "id": "geometric-ai",
+          "title": [
+            "Geometry enters neural architectures",
+            "把幾何放進神經網路架構"
+          ]
+        },
+        {
           "id": "people",
           "title": [
-            "The people behind the connections",
-            "把人物與貢獻放回正確位置"
-          ]
-        },
-        {
-          "id": "hamilton-grassmann",
-          "title": [
-            "Hamilton and Grassmann",
-            "哈密頓與格拉斯曼"
-          ],
-          "summary": [
-            "How did quaternions and exterior algebra supply different parts of the toolkit?",
-            "四元數與外代數，分別提供了這套工具的哪些部分？"
-          ],
-          "visual": [
-            "Two historical strands meeting at a geometric-product diagram.",
-            "把兩條歷史脈絡匯入同一張幾何積關係圖。"
-          ]
-        },
-        {
-          "id": "clifford-dirac",
-          "title": [
-            "Clifford, spinors and Dirac matrices",
-            "克利福德、旋量與狄拉克矩陣"
-          ],
-          "summary": [
-            "Trace the relation between an abstract algebra and later matrix representations, without treating them as identical discoveries.",
-            "追蹤抽象代數與後來矩陣表示的關係，同時分清各自的發現。"
-          ],
-          "visual": [
-            "A timeline separating algebraic definitions, representations and physical applications.",
-            "用時間軸分開代數定義、表示方法與物理應用。"
-          ]
-        },
-        {
-          "id": "modern-ga",
-          "title": [
-            "From geometric calculus to computing",
-            "從幾何微積分走向計算"
-          ],
-          "summary": [
-            "Where do spacetime algebra, computer graphics and geometric learning enter the modern story?",
-            "時空代數、電腦圖學與幾何學習，如何進入現代發展脈絡？"
-          ],
-          "visual": [
-            "A source-linked timeline with separate mathematics, physics and computing lanes.",
-            "附來源的時間軸，分開數學、物理與計算三條脈絡。"
+            "People and attribution",
+            "人物與出處小抄"
           ]
         }
       ]

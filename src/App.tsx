@@ -4,6 +4,7 @@ import ReadingPage,{READING_GROUPS} from "./ReadingPage";
 import PageToc from "./components/PageToc";
 import SiteFooter from "./components/SiteFooter";
 import LessonSections from "./LessonSections";
+import HistoryPage from "./HistoryPage";
 import {existingCount} from "./curriculum";
 const PAGE_TITLES:Record<Page,string[]>={concept:["Concepts","概念"],skills:["Coding Skills","程式技巧"],reading:["Extended Reading","延伸閱讀"]};
 export default function App(){
@@ -40,13 +41,13 @@ export default function App(){
         <div className="sticky top-0 z-20 bg-gray-50/95 backdrop-blur"><div className="mx-auto max-w-6xl px-5 pt-3"><nav aria-label={l?"主題":"Topics"} data-testid="page-tabs" className="flex gap-1 overflow-x-auto border-b border-gray-200">
           {tabs.map(tab=><a key={tab.id} href={`#/${route.page}/${tab.id}`} aria-current={route.tab===tab.id?"page":undefined} className={`shrink-0 whitespace-nowrap border-b-2 px-4 py-2 text-sm font-medium ${route.tab===tab.id?"border-violet-600 text-violet-800":"border-transparent text-gray-500 hover:text-gray-800"}`}>{tab.title[l]}{existingCount(tab.sections)===0?" (coming)":""}</a>)}
         </nav></div></div>
-        <div className="mx-auto flex max-w-6xl gap-8 px-5 pt-6 pb-10">
+        {selected.id==="history"?<HistoryPage l={l} section={route.section}/>:<div className="mx-auto flex max-w-6xl gap-8 px-5 pt-6 pb-10">
           <PageToc scrollRoot="concept-scroll" l={l} items={selected.sections.map((s,i)=>({id:s.id,mark:i+1,label:s.title[l]}))}/>
           <article id="main-content" tabIndex={-1} className="min-w-0 max-w-4xl flex-1 space-y-10" data-testid="lesson-page">
             <header><p className="text-sm font-medium text-violet-700">{PAGE_TITLES[route.page][l]}</p><h1 className="mt-1 text-3xl font-semibold tracking-tight">{selected.title[l]}</h1><p className="mt-3 text-gray-500">{selected.intro[l]}</p><p className="mt-3 text-xs text-gray-500">{l?`已有 ${existingCount(selected.sections)} 節內容 · ${selected.sections.length-existingCount(selected.sections)} 節待補`:`${existingCount(selected.sections)} existing lessons · ${selected.sections.length-existingCount(selected.sections)} planned`}</p></header>
             <LessonSections sections={selected.sections} l={l}/>
           </article>
-        </div>
+        </div>}
       </>}
     </main>
     <SiteFooter l={l}/>
