@@ -21,3 +21,22 @@ test("all 23 existing lessons retain bilingual explanations and valid equations"
   if(c.equation)assert.doesNotThrow(()=>katex.renderToString(c.equation,{throwOnError:true}),c.id);
  }
 });
+
+test("the curriculum places every existing lesson exactly once and describes every gap",()=>{
+ const outline=JSON.parse(readFileSync(new URL("../src/structure.json",import.meta.url),"utf8"));
+ const pages=[...outline.concept,...outline.skills];
+ const sections=pages.flatMap(p=>p.sections);
+ assert.equal(new Set(sections.map(s=>s.id)).size,sections.length,"section anchors must be unique");
+ for(const c of cards)assert.equal(sections.filter(s=>s.id===c.id).length,1,`missing or duplicate ${c.id}`);
+ for(const p of pages){
+  assert.ok(p.intro[0]&&p.intro[1],p.id);
+  for(const s of p.sections)if(!cards.some(c=>c.id===s.id)){
+   assert.ok(s.summary[0]&&s.summary[1],`${s.id}: learning question`);
+   assert.ok(s.visual[0]&&s.visual[1],`${s.id}: visual plan`);
+  }
+ }
+ for(const b of books){
+  const [page,tab]=b.related.split("/");
+  assert.ok(outline[page].some(p=>p.id===tab),`broken reading link ${b.id}`);
+ }
+});

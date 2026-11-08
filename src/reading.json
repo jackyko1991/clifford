@@ -30,7 +30,7 @@
       "用點、線、面與剛體運動進入射影幾何代數。"
     ],
     "href": "https://arxiv.org/abs/2002.04509",
-    "related": "concept/foundations"
+    "related": "concept/models"
   },
   {
     "id": "clifford",
@@ -160,7 +160,7 @@
       "直接閱讀克利福德的幾何推想，分清原文與後來的詮釋。"
     ],
     "href": "https://en.wikisource.org/wiki/On_the_Space-Theory_of_Matter",
-    "related": "concept/foundations"
+    "related": "concept/history"
   },
   {
     "id": "1878",
@@ -173,7 +173,7 @@
       "結合格拉斯曼代數與度規乘法的原始論文。"
     ],
     "href": "https://doi.org/10.2307/2369379",
-    "related": "concept/foundations",
+    "related": "concept/history",
     "freeLabel": [
       "Original paper",
       "原始論文"
@@ -190,6 +190,6 @@
       "用原書扉頁核對露西・克利福德的作者身分。"
     ],
     "href": "https://archive.org/details/anyhowstoriesmo00clifgoog",
-    "related": "concept/foundations"
+    "related": "concept/history"
   }
 ]

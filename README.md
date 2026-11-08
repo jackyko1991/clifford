@@ -6,12 +6,14 @@ A bilingual Clifford algebra learning site using Tensorizer's layout with a viol
 
 ## Current scope
 
-- **Concepts:** foundations, rotations and spinors, spacetime and fields.
-- **Coding Skills:** algebra implementation and geometric learning, including read-only code examples.
-- **Extended Reading:** four existing reading guides plus grouped, two-column resource cards with metadata and source links.
+- **Concepts (9 pages):** learn geometrically; geometric products; algebra toolkit; rotors and spinors; geometric models; spacetime and fields; calculus and connections; scope and open questions; people and history.
+- **Coding Skills (6 pages):** represent and multiply; transformation code; geometry in code; validation; geometric learning and applications; storage and performance.
+- **Extended Reading:** 14 grouped, two-column resource cards with metadata and source links. The four existing reading guides now live in their relevant learning, history, application and limitations pages.
 - **Global footer:** Buy Me a Coffee, Apache-2.0 and GitHub.
 
-All 23 existing bilingual lessons, diagrams, equations and code explanations are retained. Future placeholders should describe relevant Clifford material that is still missing; do not replace existing lessons or mirror Tensorizer's subject matter.
+All 23 existing bilingual lessons, diagrams, equations and code explanations are retained and placed once. The 34 missing sections have explicit learning questions and visual plans, marked as planned lessons. Existing lesson bookmarks continue to resolve after moves. No live coding service is included.
+
+See [the curriculum map](docs/curriculum.md) for the learning sequence and the relationship to Tensorizer's page roles.
 
 ## Development
 
@@ -29,7 +31,8 @@ Use `npm.cmd` in Windows PowerShell when script execution is restricted.
 
 ## Files
 
-- `src/structure.json`: Clifford topic tabs and lesson headings.
+- `src/structure.json`: curriculum order, topic introductions and planned lesson briefs.
+- `src/curriculum.ts`: typed curriculum and existing lesson lookup.
 - `src/content.json` and `src/LessonSections.tsx`: existing lessons and their renderer.
 - `src/reading.json`: resource-card metadata.
 - `src/ReadingPage.tsx`: Tensorizer-style reading layout.

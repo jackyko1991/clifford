@@ -1,5 +1,4 @@
 import resources from "./reading.json";
-import LessonSections from "./LessonSections";
 import {structure} from "./routes";
 import PageToc from "./components/PageToc";
 export const READING_GROUPS = [
@@ -21,8 +20,8 @@ export default function ReadingPage({l}:{l:number}) {
       <header><p className="text-sm font-medium text-violet-700">{l?"延伸閱讀":"Extended Reading"}</p>
         <h1 className="mt-1 text-3xl font-semibold tracking-tight">{l?"書籍、講義與原始論文":"Books, notes and original papers"}</h1>
         <p className="mt-3 text-gray-600">{l?"依主題整理的幾何代數資料：先看教材與導讀，再按需要閱讀物理、程式與原始文獻。":"Geometric algebra resources grouped by topic: begin with a textbook or introduction, then follow physics, coding and original sources as needed."}</p>
+        <a href="#/concept/learning/learning" className="mt-3 inline-block text-sm font-medium text-violet-700 hover:underline">{l?"先看學習路線 →":"Start with the learning path →"}</a>
       </header>
-      <section id="reading-guide" className="space-y-6"><LessonSections group="reading" l={l}/></section>
       {READING_GROUPS.map((g,i)=><section key={g.id} id={`reading-${g.id}`} className="scroll-mt-6">
         <h2 className="flex flex-wrap items-baseline gap-3 text-lg font-semibold"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-violet-600 text-sm text-white">{i+1}</span>{g.title[l]}</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-2">{(resources as Resource[]).filter(b=>b.group===g.id).map(b=><ResourceCard key={b.id} book={b} l={l}/>)}</div>

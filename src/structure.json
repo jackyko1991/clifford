@@ -1,10 +1,14 @@
 {
   "concept": [
     {
-      "id": "foundations",
+      "id": "learning",
       "title": [
-        "Foundations",
-        "基礎"
+        "Learn geometrically",
+        "用幾何學會學習"
+      ],
+      "intro": [
+        "Predict a picture, explain it in your own words, then check it with algebra.",
+        "先預測圖形，用自己的話說明，再用代數檢查。"
       ],
       "sections": [
         {
@@ -14,6 +18,56 @@
             "讓幾何關係回到同一種語言"
           ]
         },
+        {
+          "id": "learning",
+          "title": [
+            "A reading path, not another wall of prerequisites",
+            "一條閱讀路徑，不再堆一堵先修牆"
+          ]
+        },
+        {
+          "id": "predict-before-symbols",
+          "title": [
+            "Predict before using symbols",
+            "先預測，再寫符號"
+          ],
+          "summary": [
+            "What should happen when two arrows become parallel, perpendicular, or reversed?",
+            "兩支箭頭平行、垂直或反向時，結果應該怎麼變？"
+          ],
+          "visual": [
+            "A two-arrow prediction game with hidden alignment and area readouts.",
+            "兩支可轉動箭頭，先隱藏平行程度與面積，再揭示答案。"
+          ]
+        },
+        {
+          "id": "explain-and-check",
+          "title": [
+            "Explain, sketch, check",
+            "說清楚、畫出來、驗算"
+          ],
+          "summary": [
+            "Turn one geometric claim into a sketch, a small calculation, and a testable prediction.",
+            "把一個幾何主張拆成圖、小算例和可檢查的預測。"
+          ],
+          "visual": [
+            "Compare a verbal explanation, a sketch and one numerical counterexample.",
+            "對照一句解釋、一張草圖與一個數值反例。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "foundations",
+      "title": [
+        "Geometric products",
+        "幾何積與多重向量"
+      ],
+      "intro": [
+        "Build the language from arrows, oriented areas and volumes.",
+        "從箭頭、定向面積與體積建立語言。"
+      ],
+      "sections": [
         {
           "id": "product",
           "title": [
@@ -34,16 +88,138 @@
             "Complex numbers, quaternions and tensors",
             "複數、四元數與張量的關係"
           ]
+        },
+        {
+          "id": "orientation",
+          "title": [
+            "Why orientation matters",
+            "為什麼面積還有方向"
+          ],
+          "summary": [
+            "Why does swapping two arrows reverse their wedge product?",
+            "為什麼交換兩支箭頭，外積的符號會反轉？"
+          ],
+          "visual": [
+            "Swap the edges of the same parallelogram and reverse its orientation marker.",
+            "交換同一平行四邊形的兩條邊，觀察定向標記反轉。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "algebra",
+      "title": [
+        "The algebra toolkit",
+        "代數工具箱"
+      ],
+      "intro": [
+        "Separate the product, grade, metric and duality operations before combining them.",
+        "先分清乘積、階數、度規與對偶，再把工具接起來。"
+      ],
+      "sections": [
+        {
+          "id": "signature",
+          "title": [
+            "Choose a metric signature",
+            "先選度規符號"
+          ],
+          "summary": [
+            "How do positive, negative and null basis squares change the multiplication rules?",
+            "基底平方為正、負或零，會怎樣改變乘法規則？"
+          ],
+          "visual": [
+            "Switch between Euclidean, spacetime and projective multiplication tables.",
+            "切換歐氏、時空與射影模型的乘法表。"
+          ]
+        },
+        {
+          "id": "products-and-grades",
+          "title": [
+            "Read the grades of a product",
+            "從乘積讀出各階成分"
+          ],
+          "summary": [
+            "Distinguish geometric, inner and outer products, including which grades survive.",
+            "分清幾何積、內積與外積，以及各自留下哪些階數。"
+          ],
+          "visual": [
+            "Sort coloured product terms into scalar, vector, bivector and higher-grade bins.",
+            "把不同顏色的乘積項分類到純量、向量、雙向量與更高階。"
+          ]
+        },
+        {
+          "id": "reverse-and-inverse",
+          "title": [
+            "Reverse is not always inverse",
+            "反轉不一定是反元素"
+          ],
+          "summary": [
+            "When can reversing a product undo a transformation, and when is normalization needed?",
+            "什麼時候反轉乘積就能撤銷變換，什麼時候還要正規化？"
+          ],
+          "visual": [
+            "Reverse a chain of factors and compare its product with the identity.",
+            "把因子順序倒過來，檢查乘回去是否得到單位元素。"
+          ]
+        },
+        {
+          "id": "duality",
+          "title": [
+            "Duality, complements and cross products",
+            "對偶、補空間與叉積"
+          ],
+          "summary": [
+            "Relate the three-dimensional cross product to oriented planes without assuming every pseudoscalar is invertible.",
+            "把三維叉積連回定向平面，並分清偽純量不可逆時的情況。"
+          ],
+          "visual": [
+            "A plane-to-normal view alongside a degenerate-model exception.",
+            "對照平面與法向量，另標出退化模型需要不同處理。"
+          ]
+        },
+        {
+          "id": "tensor-bridge",
+          "title": [
+            "Where tensors still belong",
+            "張量仍然負責什麼"
+          ],
+          "summary": [
+            "Compare a multivector, a linear map on multivectors, and a tensor product of state spaces.",
+            "比較多重向量、作用於多重向量的線性映射，以及狀態空間的張量積。"
+          ],
+          "visual": [
+            "Show the same rotation as a rotor sandwich and as a matrix acting on coefficients.",
+            "把同一旋轉並排畫成轉子夾乘與作用在分量上的矩陣。"
+          ]
         }
       ]
     },
     {
       "id": "rotations",
       "title": [
-        "Rotations & spinors",
-        "旋轉與旋量"
+        "Rotors & spinors",
+        "轉子與旋量"
+      ],
+      "intro": [
+        "Build rotations from reflections and distinguish rotating an arrow from transforming a spinor.",
+        "從反射建立旋轉，分清箭頭與旋量的變換方式。"
       ],
       "sections": [
+        {
+          "id": "reflections",
+          "title": [
+            "Two reflections make a rotation",
+            "兩次反射拼成旋轉"
+          ],
+          "summary": [
+            "Why does the angle between two mirrors produce twice that rotation angle?",
+            "為什麼兩面鏡子的夾角，會產生兩倍角度的旋轉？"
+          ],
+          "visual": [
+            "An arrow reflected successively in two adjustable mirrors.",
+            "一支箭頭依序經過兩面可調角度的鏡子。"
+          ]
+        },
         {
           "id": "rotors",
           "title": [
@@ -59,10 +235,83 @@
           ]
         },
         {
+          "id": "compose-rotors",
+          "title": [
+            "Rotation order matters",
+            "旋轉順序有差別"
+          ],
+          "summary": [
+            "Why can two rotations in different planes produce different answers when swapped?",
+            "為什麼不同平面的兩次旋轉，交換順序後可能得到不同答案？"
+          ],
+          "visual": [
+            "Compare two ordered rotations of the same marked object.",
+            "把同一個帶標記物件依兩種順序旋轉並排比較。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "models",
+      "title": [
+        "Geometric models",
+        "幾何模型"
+      ],
+      "intro": [
+        "Choose a representation for directions, rigid motions, or circles and spheres.",
+        "依方向、剛體運動或圓與球的需求，選擇表示方式。"
+      ],
+      "sections": [
+        {
           "id": "motors",
           "title": [
             "Rigid motion: projective geometric algebra",
             "剛體運動：射影幾何代數"
+          ]
+        },
+        {
+          "id": "pga-incidence",
+          "title": [
+            "Points, lines and planes in PGA",
+            "PGA 中的點、線與面"
+          ],
+          "summary": [
+            "How do incidence, joining and intersecting objects work in a chosen PGA convention?",
+            "在選定的 PGA 慣例裡，如何表示相接、連接與相交？"
+          ],
+          "visual": [
+            "Move two lines and watch their intersection, including a parallel limit.",
+            "移動兩條直線並追蹤交點，包含接近平行的極限。"
+          ]
+        },
+        {
+          "id": "conformal",
+          "title": [
+            "Circles and spheres in CGA",
+            "CGA 中的圓與球"
+          ],
+          "summary": [
+            "Why embed ordinary points in a larger space to manipulate circles and spheres?",
+            "為什麼把普通點嵌入更大的空間，反而能方便處理圓與球？"
+          ],
+          "visual": [
+            "A point, circle and sphere transformed together in a conformal-model sketch.",
+            "在共形模型示意圖裡，同時變換點、圓與球。"
+          ]
+        },
+        {
+          "id": "choose-model",
+          "title": [
+            "Choose the smallest useful model",
+            "選擇夠用的模型"
+          ],
+          "summary": [
+            "Compare Euclidean GA, PGA, CGA and spacetime algebra by task, signature and storage.",
+            "依任務、符號與儲存量，比較歐氏 GA、PGA、CGA 與時空代數。"
+          ],
+          "visual": [
+            "A task-to-model comparison table with geometric examples.",
+            "用幾何例子配上任務與模型的比較表。"
           ]
         }
       ]
@@ -72,6 +321,10 @@
       "title": [
         "Spacetime & fields",
         "時空與場"
+      ],
+      "intro": [
+        "Follow the existing path from boosts to fermions, electromagnetism and light.",
+        "沿既有內容，從雙曲旋轉走向費米子、電磁場與光。"
       ],
       "sections": [
         {
@@ -101,6 +354,34 @@
             "A plane wave as a null bivector",
             "平面光波：零範雙向量"
           ]
+        }
+      ]
+    },
+    {
+      "id": "calculus",
+      "title": [
+        "Calculus & connections",
+        "微積分與聯絡"
+      ],
+      "intro": [
+        "Extend pointwise algebra to changing fields and comparisons between nearby points.",
+        "把單點代數延伸到變動的場，以及相鄰位置的比較。"
+      ],
+      "sections": [
+        {
+          "id": "vector-derivative",
+          "title": [
+            "A derivative that keeps geometric parts",
+            "保留幾何成分的微分"
+          ],
+          "summary": [
+            "How can a vector derivative organize divergence and curl without losing their different roles?",
+            "向量微分如何整理散度與旋度，又保留兩者不同的角色？"
+          ],
+          "visual": [
+            "Sample a field around a small region and separate outflow from circulation.",
+            "在小區域周圍取樣，把向外流出與環繞流動分開。"
+          ]
         },
         {
           "id": "connections",
@@ -110,10 +391,155 @@
           ]
         },
         {
+          "id": "curvature",
+          "title": [
+            "Compare two transport routes",
+            "比較兩條平移路徑"
+          ],
+          "summary": [
+            "What does a mismatch after transport around a small loop tell us about curvature?",
+            "沿小迴路平移一圈後的差異，告訴我們什麼曲率資訊？"
+          ],
+          "visual": [
+            "Transport an arrow around a loop on a curved surface.",
+            "讓箭頭沿彎曲表面上的小迴路移動。"
+          ]
+        },
+        {
+          "id": "integral-theorems",
+          "title": [
+            "A boundary and its interior",
+            "邊界與內部的關係"
+          ],
+          "summary": [
+            "Connect geometric integration with familiar divergence and Stokes theorems.",
+            "把幾何積分連回熟悉的散度定理與斯托克斯定理。"
+          ],
+          "visual": [
+            "Compare accumulated interior contributions with an oriented boundary sum.",
+            "比較內部累積貢獻與帶方向的邊界總和。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "limitations",
+      "title": [
+        "Scope & open questions",
+        "適用範圍與開放問題"
+      ],
+      "intro": [
+        "Separate established algebra, physical interpretation and proposals that need evidence.",
+        "分清確立的代數、物理解讀，以及仍需要證據的提案。"
+      ],
+      "sections": [
+        {
+          "id": "scope-of-ga",
+          "title": [
+            "A shared language is not every theory",
+            "共同語言不等於所有理論"
+          ],
+          "summary": [
+            "Which tasks need connections, topology, quantum state spaces or extra physical assumptions beyond a Clifford product?",
+            "哪些問題除了克利福德乘積，還需要聯絡、拓撲、量子狀態空間或額外物理假設？"
+          ],
+          "visual": [
+            "A map connecting each mathematical structure to the job it actually performs.",
+            "把各種數學結構連到它實際負責的工作。"
+          ]
+        },
+        {
           "id": "cpt",
           "title": [
             "CPT, chirality and the limits of geometric analogies",
             "CPT、手徵性與幾何比喻的邊界"
+          ]
+        },
+        {
+          "id": "frontiers",
+          "title": [
+            "A map of ideas and their status",
+            "觀念地圖與證據狀態"
+          ]
+        },
+        {
+          "id": "representation-limits",
+          "title": [
+            "Compact notation, real costs",
+            "記號精簡，成本仍在"
+          ],
+          "summary": [
+            "Why do shorter formulas not guarantee fewer coefficients, faster computation or a simpler physical model?",
+            "為什麼公式變短，不保證分量更少、計算更快，或物理模型更簡單？"
+          ],
+          "visual": [
+            "Compare symbolic expression length, coefficient count and measured work.",
+            "並排比較公式長度、分量數量與實際運算量。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "title": [
+        "People & history",
+        "人物與歷史"
+      ],
+      "intro": [
+        "Connect the contributions without turning historical analogies into physical proofs.",
+        "串起不同貢獻，同時不把歷史比喻當成物理證明。"
+      ],
+      "sections": [
+        {
+          "id": "people",
+          "title": [
+            "The people behind the connections",
+            "把人物與貢獻放回正確位置"
+          ]
+        },
+        {
+          "id": "hamilton-grassmann",
+          "title": [
+            "Hamilton and Grassmann",
+            "哈密頓與格拉斯曼"
+          ],
+          "summary": [
+            "How did quaternions and exterior algebra supply different parts of the toolkit?",
+            "四元數與外代數，分別提供了這套工具的哪些部分？"
+          ],
+          "visual": [
+            "Two historical strands meeting at a geometric-product diagram.",
+            "把兩條歷史脈絡匯入同一張幾何積關係圖。"
+          ]
+        },
+        {
+          "id": "clifford-dirac",
+          "title": [
+            "Clifford, spinors and Dirac matrices",
+            "克利福德、旋量與狄拉克矩陣"
+          ],
+          "summary": [
+            "Trace the relation between an abstract algebra and later matrix representations, without treating them as identical discoveries.",
+            "追蹤抽象代數與後來矩陣表示的關係，同時分清各自的發現。"
+          ],
+          "visual": [
+            "A timeline separating algebraic definitions, representations and physical applications.",
+            "用時間軸分開代數定義、表示方法與物理應用。"
+          ]
+        },
+        {
+          "id": "modern-ga",
+          "title": [
+            "From geometric calculus to computing",
+            "從幾何微積分走向計算"
+          ],
+          "summary": [
+            "Where do spacetime algebra, computer graphics and geometric learning enter the modern story?",
+            "時空代數、電腦圖學與幾何學習，如何進入現代發展脈絡？"
+          ],
+          "visual": [
+            "A source-linked timeline with separate mathematics, physics and computing lanes.",
+            "附來源的時間軸，分開數學、物理與計算三條脈絡。"
           ]
         }
       ]
@@ -123,8 +549,12 @@
     {
       "id": "implementation",
       "title": [
-        "Algebra in code",
-        "代數實作"
+        "Represent & multiply",
+        "表示與乘法"
+      ],
+      "intro": [
+        "Follow coefficients from a blade label through a geometric product.",
+        "從基底標記一路追蹤分量，直到算出幾何積。"
       ],
       "sections": [
         {
@@ -142,6 +572,34 @@
           ]
         },
         {
+          "id": "layout-signature",
+          "title": [
+            "Make conventions explicit",
+            "明確寫出實作慣例"
+          ],
+          "summary": [
+            "How do blade order, metric signature and coefficient layout affect interoperable code?",
+            "基底排序、度規符號與分量配置，會如何影響程式之間的相容性？"
+          ],
+          "visual": [
+            "Trace one blade pair through two layouts and an explicit conversion.",
+            "追蹤同一對基底在兩種配置中的位置，並顯示轉換。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transformations",
+      "title": [
+        "Transformation code",
+        "變換程式"
+      ],
+      "intro": [
+        "Turn rotor formulas into reusable, inspectable transformations.",
+        "把轉子公式寫成可重用、可檢查的變換。"
+      ],
+      "sections": [
+        {
           "id": "rotor-code",
           "title": [
             "Reverse, normalize, rotate",
@@ -149,10 +607,141 @@
           ]
         },
         {
+          "id": "rotor-composition-code",
+          "title": [
+            "Compose without losing the order",
+            "組合變換，保留順序"
+          ],
+          "summary": [
+            "How can code compose and undo rotations while keeping frame conventions explicit?",
+            "程式如何組合與撤銷旋轉，並清楚標明參考座標的慣例？"
+          ],
+          "visual": [
+            "A read-only trace of two rotor products and the resulting arrow.",
+            "逐步顯示兩個轉子的乘法，以及產生的箭頭。"
+          ]
+        },
+        {
+          "id": "interpolation-code",
+          "title": [
+            "Interpolate a rotation safely",
+            "穩定地插值旋轉"
+          ],
+          "summary": [
+            "How should normalization, sign choices and near-identical orientations be handled?",
+            "正規化、符號選擇與幾乎相同的姿態，應如何處理？"
+          ],
+          "visual": [
+            "Compare interpolated orientations, rotor norms and endpoint checks.",
+            "比較插值姿態、轉子範數與端點檢查。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "geometry-code",
+      "title": [
+        "Geometry in code",
+        "幾何程式"
+      ],
+      "intro": [
+        "Make points, lines and rigid motions concrete with read-only examples.",
+        "用可閱讀的範例，把點、線與剛體運動變成具體操作。"
+      ],
+      "sections": [
+        {
+          "id": "pga-code",
+          "title": [
+            "Build a small PGA scene",
+            "建立小型 PGA 場景"
+          ],
+          "summary": [
+            "Encode two lines and inspect their intersection using one documented convention.",
+            "依明確記錄的慣例編碼兩條直線，並檢查交點。"
+          ],
+          "visual": [
+            "A diagram synchronized with line coefficients and an intersection trace.",
+            "讓直線圖、係數與交點計算步驟同步顯示。"
+          ]
+        },
+        {
+          "id": "motor-code",
+          "title": [
+            "Apply a rigid motion",
+            "套用剛體運動"
+          ],
+          "summary": [
+            "How does a motor move a point, a line and a whole object consistently?",
+            "同一個馬達如何一致地移動點、直線與整個物件？"
+          ],
+          "visual": [
+            "Move a marked triangle and its supporting lines with the same motor.",
+            "用同一個馬達移動帶標記三角形與它的邊線。"
+          ]
+        },
+        {
+          "id": "cga-code",
+          "title": [
+            "Work with a conformal point",
+            "處理共形點"
+          ],
+          "summary": [
+            "Show embedding, transformation and extraction, including scale conventions.",
+            "展示嵌入、變換與取回座標，包含尺度慣例。"
+          ],
+          "visual": [
+            "A read-only pipeline linking Euclidean coordinates to a conformal representation.",
+            "以唯讀流程圖連接歐氏座標與共形表示。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "validation",
+      "title": [
+        "Test the geometry",
+        "檢查幾何是否正確"
+      ],
+      "intro": [
+        "Check identities and physical invariants before trusting a compact formula.",
+        "相信精簡公式之前，先檢查恆等式與物理不變量。"
+      ],
+      "sections": [
+        {
           "id": "null-code",
           "title": [
             "Check a null electromagnetic field",
             "檢查零範電磁場"
+          ]
+        },
+        {
+          "id": "identity-tests",
+          "title": [
+            "Test the algebraic promises",
+            "檢查代數承諾"
+          ],
+          "summary": [
+            "Which small tests catch incorrect signs, grade ordering and signature handling?",
+            "哪些小型檢查能抓出符號、階數排序與度規處理的錯誤？"
+          ],
+          "visual": [
+            "A failing blade product traced to its sign rule, then checked across signatures.",
+            "從失敗的基底乘積追到符號規則，再跨不同度規檢查。"
+          ]
+        },
+        {
+          "id": "reference-tests",
+          "title": [
+            "Compare against a second representation",
+            "用另一種表示交叉檢查"
+          ],
+          "summary": [
+            "How can matrix and coordinate calculations check a rotor result independently?",
+            "如何用矩陣與座標計算，獨立檢查轉子結果？"
+          ],
+          "visual": [
+            "Overlay two computed rotations and display their numerical error.",
+            "疊合兩種方法算出的旋轉，顯示數值誤差。"
           ]
         }
       ]
@@ -160,8 +749,12 @@
     {
       "id": "applications",
       "title": [
-        "Geometric learning",
-        "幾何學習"
+        "Geometric learning & applications",
+        "幾何學習與應用"
+      ],
+      "intro": [
+        "Start with symmetry requirements, then ask what the evidence shows.",
+        "先定義對稱性需求，再問實驗證據支持什麼。"
       ],
       "sections": [
         {
@@ -172,10 +765,105 @@
           ]
         },
         {
+          "id": "research",
+          "title": [
+            "Geometric learning: what the evidence supports",
+            "幾何學習：證據支持到哪裡"
+          ]
+        },
+        {
+          "id": "molecular-learning",
+          "title": [
+            "Molecules and geometric features",
+            "分子與幾何特徵"
+          ],
+          "summary": [
+            "Which molecular quantities should stay invariant, and which should rotate with the input?",
+            "哪些分子量應保持不變，哪些輸出應隨輸入一起旋轉？"
+          ],
+          "visual": [
+            "Rotate the same molecule and compare scalar predictions with directional outputs.",
+            "轉動同一個分子，比較純量預測與帶方向的輸出。"
+          ]
+        },
+        {
+          "id": "robotics",
+          "title": [
+            "Frames, robots and pose",
+            "座標框架、機器人與姿態"
+          ],
+          "summary": [
+            "How do frame conventions and rigid transformations enter a small kinematic chain?",
+            "座標框架的慣例與剛體變換，如何進入一個小型運動鏈？"
+          ],
+          "visual": [
+            "A two-link arm with local frames and a traced end-effector position.",
+            "兩節機械臂附上局部框架，並追蹤末端位置。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "performance",
+      "title": [
+        "Storage & performance",
+        "儲存與效能"
+      ],
+      "intro": [
+        "Keep geometric meaning while measuring the actual computational cost.",
+        "保留幾何意義，同時量測實際計算成本。"
+      ],
+      "sections": [
+        {
           "id": "performance",
           "title": [
             "Geometry, storage and computational cost",
             "幾何、儲存與計算成本"
+          ]
+        },
+        {
+          "id": "sparse-specialized",
+          "title": [
+            "Use the structure you know",
+            "利用已知的結構"
+          ],
+          "summary": [
+            "When can grade restrictions, sparsity or a fixed signature remove unnecessary work?",
+            "什麼時候可利用階數限制、稀疏性或固定度規，省下不必要的運算？"
+          ],
+          "visual": [
+            "Compare dense coefficient pairs with only the nonzero products needed by a rotor.",
+            "比較密集分量配對與轉子真正需要的非零乘積。"
+          ]
+        },
+        {
+          "id": "batch-autodiff",
+          "title": [
+            "Batching and differentiation",
+            "批次運算與微分"
+          ],
+          "summary": [
+            "How should blade axes, batch axes and gradients be kept distinct?",
+            "如何分清基底軸、批次軸與梯度？"
+          ],
+          "visual": [
+            "Trace a batch of multivectors through a product and a gradient check.",
+            "追蹤一批多重向量通過乘積，再檢查梯度。"
+          ]
+        },
+        {
+          "id": "fair-benchmarks",
+          "title": [
+            "Measure a fair comparison",
+            "量測公平的比較"
+          ],
+          "summary": [
+            "Compare equivalent tasks, precision and accuracy, including conversion overhead.",
+            "比較相同任務、精度與準確度，並納入表示轉換的開銷。"
+          ],
+          "visual": [
+            "A benchmark plan with matched inputs, outputs and correctness checks.",
+            "以配對的輸入、輸出與正確性檢查，畫出量測流程。"
           ]
         }
       ]
