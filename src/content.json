@@ -1,0 +1,536 @@
+[
+  {
+    "id": "welcome",
+    "group": "foundations",
+    "title": [
+      "One language for geometric relationships",
+      "讓幾何關係回到同一種語言"
+    ],
+    "paragraphs": [
+      [
+        "Learning vectors, complex numbers, quaternions, tensors and spinors separately can hide their connections. Geometric algebra starts with vectors and a metric, then lets multiplication encode lengths, oriented areas and rotations. Begin with a picture, inspect the equation, and connect it to a small piece of code.",
+        "This is a useful reorganization, not proof that other mathematics was mistaken or deliberately suppressed. Tensors and differential forms are already coordinate-independent objects. Geometric algebra can make some calculations clearer; the best representation still depends on the problem."
+      ],
+      [
+        "向量、複數、四元數、張量與旋量分開學，容易看不見它們的關係。幾何代數從向量與度規出發，讓乘法同時編碼長度、定向面積與旋轉。先看圖，再讀式子，最後對照一小段程式。",
+        "這是重新組織知識的方式，不表示其他數學錯了或遭到刻意封印。張量與微分形式本來就不依賴座標。幾何代數能讓部分計算更直觀，選擇哪種表示仍取決於問題。"
+      ]
+    ],
+    "equation": "ab=a\\cdot b+a\\wedge b",
+    "diagram": "product",
+    "code": "",
+    "sources": [
+      "ga"
+    ]
+  },
+  {
+    "id": "product",
+    "group": "foundations",
+    "title": [
+      "The geometric product: alignment plus oriented area",
+      "幾何積：平行程度，加上定向面積"
+    ],
+    "paragraphs": [
+      [
+        "For vectors, the symmetric part of the product is a scalar inner product. Its antisymmetric part is a bivector: the oriented plane element spanned by the vectors. Reversing their order leaves the scalar unchanged and flips the bivector.",
+        "In the diagram, a=e₁ and b=cos θ e₁+sin θ e₂. The product is cos θ+sin θ e₁₂. At 90°, the scalar vanishes and only the oriented area remains. A multivector is a direct sum of grades; adding its coefficients does not mix incompatible physical units. Applications must still assign consistent units."
+      ],
+      [
+        "兩向量乘積的對稱部分是純量內積，反對稱部分是雙向量：由兩個向量張成的定向面元。交換乘法順序，純量不變，雙向量變號。",
+        "圖中 a=e₁，b=cos θ e₁+sin θ e₂，所以 ab=cos θ+sin θ e₁₂。到 90° 時純量消失，只留下定向面積。多重向量是不同階數的直和；不是把不同物理單位亂加，應用時仍須保持量綱一致。"
+      ]
+    ],
+    "equation": "a\\cdot b=\\tfrac12(ab+ba),\\qquad a\\wedge b=\\tfrac12(ab-ba)",
+    "diagram": "product",
+    "code": "",
+    "sources": [
+      "ga"
+    ]
+  },
+  {
+    "id": "grades",
+    "group": "foundations",
+    "title": [
+      "Eight coefficients, four grades",
+      "八個分量，四種階數"
+    ],
+    "paragraphs": [
+      [
+        "In Euclidean three-space, three orthonormal basis vectors generate an eight-dimensional algebra: one scalar, three vectors, three bivectors and one trivector. This is the dimension of the algebra, not eight physical spatial dimensions. A homogeneous grade-k element is a k-vector; a blade is a decomposable wedge product, so these terms are not identical in all dimensions.",
+        "The pseudoscalar I=e₁e₂e₃ satisfies I²=−1 in Cl(3,0). A unit Euclidean plane bivector also squares to −1. These provide geometric models of complex multiplication; they do not make every occurrence of the quantum imaginary unit automatically a spatial volume."
+      ],
+      [
+        "三維歐氏空間的三個正交單位基向量，生成八維代數：一個純量、三個向量、三個雙向量、一個三向量。八維是代數維度，不是物理空間有八個方向。同階元素叫 k-vector，可分解成外積的才叫 blade，兩者在一般維度不能畫上等號。",
+        "Cl(3,0) 的偽純量 I=e₁e₂e₃ 滿足 I²=−1，歐氏單位平面雙向量也有此性質。它們能提供複數乘法的幾何模型，但不能據此把量子理論所有的 i 都直接解讀為空間體積。"
+      ]
+    ],
+    "equation": "\\dim\\mathrm{Cl}(3,0)=1+3+3+1=2^3",
+    "diagram": "grades",
+    "code": "",
+    "sources": [
+      "ga"
+    ]
+  },
+  {
+    "id": "relations",
+    "group": "foundations",
+    "title": [
+      "Complex numbers, quaternions and tensors",
+      "複數、四元數與張量的關係"
+    ],
+    "paragraphs": [
+      [
+        "The even subalgebra in two Euclidean dimensions is isomorphic to ℂ; in three dimensions it is isomorphic to the quaternions ℍ. Unit quaternions therefore describe the same rotations as three-dimensional rotors, with a choice of signs and basis.",
+        "More fundamentally, a Clifford algebra is a quotient of the tensor algebra by the relation v²=q(v). Exterior algebra records antisymmetry; the Clifford product additionally records a metric. These are related constructions, not a ladder in which Clifford algebra abolishes tensors. The familiar 3D cross product is the oriented-metric dual of a bivector; axial vectors have a consistent transformation law."
+      ],
+      [
+        "二維歐氏幾何代數的偶子代數同構於複數 ℂ；三維的偶子代數同構於四元數 ℍ。因此三維轉子與單位四元數描述同一套旋轉，只需留意基底與符號約定。",
+        "更根本地說，克利福德代數是張量代數在 v²=q(v) 關係下的商代數。外代數記錄反對稱性，克利福德積額外記錄度規。這是構造的關係，不是新工具消滅舊工具的階梯。三維叉積是雙向量依度規與定向得到的對偶；軸向量有自洽的變換規則。"
+      ]
+    ],
+    "equation": "\\mathrm{Cl}(V,q)=T(V)/\\langle v\\otimes v-q(v)1\\rangle,\\qquad\\mathrm{Cl}^+(2,0)\\cong\\mathbb C,\\quad\\mathrm{Cl}^+(3,0)\\cong\\mathbb H",
+    "diagram": "relations",
+    "code": "",
+    "sources": [
+      "ga"
+    ]
+  },
+  {
+    "id": "rotors",
+    "group": "rotations",
+    "title": [
+      "Rotate in a plane, not just around an axis",
+      "在平面中旋轉，不只繞軸想像"
+    ],
+    "paragraphs": [
+      [
+        "Two reflections compose to a rotation. In a unit Euclidean plane B with B²=−1, a rotor uses a half-angle. Sandwiching a vector between R and its reverse rotates it through the full angle. Here B=e₁e₂ and positive θ sends e₁ toward e₂.",
+        "Rotors avoid Euler-angle gimbal lock and extend naturally to higher dimensions. In four dimensions a general rotation can use two orthogonal planes, with independent angles; equal-angle isoclinic rotations are a special case. Numerical interpolation still needs normalization, sign choices and care near branch cuts."
+      ],
+      [
+        "兩次鏡射合成旋轉。若歐氏單位平面 B 滿足 B²=−1，轉子使用半角；把向量夾在 R 與反轉之間，就產生完整角度的旋轉。本例 B=e₁e₂，正角度把 e₁ 轉向 e₂。",
+        "轉子避免歐拉角的萬向節鎖，也自然延伸到高維。四維一般旋轉可在兩個正交平面中有不同角度，等角旋轉只是特例。數值插值仍需處理正規化、正負號選擇與對數分支。"
+      ]
+    ],
+    "equation": "R=e^{-B\\theta/2}=\\cos\\tfrac\\theta2-B\\sin\\tfrac\\theta2,\\qquad v^\\prime=Rv\\widetilde R",
+    "diagram": "rotor",
+    "code": "",
+    "sources": [
+      "ga"
+    ]
+  },
+  {
+    "id": "spinors",
+    "group": "rotations",
+    "title": [
+      "Why a spinor remembers a full turn",
+      "旋量為什麼記得轉過一圈"
+    ],
+    "paragraphs": [
+      [
+        "At 360°, R=−1, but (−1)v(−1)=v. At 720°, R=+1. This illustrates the double cover Spin(3)→SO(3). A spin-½ state transforms under the spin representation, rather than as an ordinary spatial tensor.",
+        "The phase dial depicts one spin eigencomponent, not an electron spinning like a ball. A global minus sign is unobservable by itself, while a relative sign can shift interference. Spinors are representation-space elements, often realized as modules or minimal left ideals of a suitable Clifford algebra; they are not all normalized rotors. Spin-statistics also requires quantum-field-theoretic assumptions, not merely this diagram."
+      ],
+      [
+        "轉到 360° 時 R=−1，但 (−1)v(−1)=v；到 720° 才有 R=+1。這示範 Spin(3)→SO(3) 的雙重覆蓋。自旋 ½ 的態依自旋表示變換，不是普通空間張量。",
+        "相位轉盤只示意一個自旋本徵分量，不是電子像小球自轉。整體負號本身不可觀測，相對負號才可能改變干涉。旋量是表示空間的元素，常以合適克利福德代數的模或極小左理想實現，並非全都是正規化轉子。自旋統計關係也需要量子場論假設，不能只靠這張圖推出。"
+      ]
+    ],
+    "equation": "R(2\\pi)=-1,\\quad R(4\\pi)=1,\\qquad\\mathrm{Spin}(3)\\cong\\mathrm{SU}(2)",
+    "diagram": "spinor",
+    "code": "",
+    "sources": [
+      "spinors"
+    ]
+  },
+  {
+    "id": "motors",
+    "group": "rotations",
+    "title": [
+      "Rigid motion: projective geometric algebra",
+      "剛體運動：射影幾何代數"
+    ],
+    "paragraphs": [
+      [
+        "Projective geometric algebra for 3D Euclidean geometry commonly uses a degenerate metric Cl(3,0,1), with a null basis direction. Its 16-dimensional coefficient space can encode planes, lines, points and rigid-motion motors. Rotations and translations then compose by multiplication.",
+        "This is a unified representation, not evidence that homogeneous matrices fail to form a group: rigid transformation matrices form SE(3). Unit dual quaternions and normalized PGA motors encode closely related structure. Motor logarithms, screw interpolation and point normalization still have special cases. The diagram shows the 2D slice of a rotation followed by a translation."
+      ],
+      [
+        "三維歐氏幾何的 PGA 常用退化度規 Cl(3,0,1)，包含一個平方為零的基方向。它的十六維分量空間能表示平面、直線、點與剛體運動的 motor，讓旋轉和平移用乘法合成。",
+        "這是統一表示，不表示齊次矩陣無法形成群：剛體變換矩陣本來就形成 SE(3)。單位雙四元數與正規化 PGA motor 編碼密切相關的結構。Motor 對數、螺旋插值與點的正規化仍有特殊情形。圖中畫的是先旋轉再平移的二維切片。"
+      ]
+    ],
+    "equation": "X^\\prime=M X\\widetilde M,\\qquad M_\\mathrm{total}=M_2M_1",
+    "diagram": "motor",
+    "code": "",
+    "sources": [
+      "gatr",
+      "pga"
+    ]
+  },
+  {
+    "id": "sta",
+    "group": "physics",
+    "title": [
+      "Spacetime algebra and hyperbolic rotations",
+      "時空代數與雙曲旋轉"
+    ],
+    "paragraphs": [
+      [
+        "Choose signature (+−−−), with c=1. The time basis squares to +1 and spatial bases square to −1. Gamma matrices are matrix representations of generators satisfying this Clifford relation; the abstract generators and their concrete matrices should be distinguished.",
+        "A spatial rotation has a bivector generator squaring to −1 and uses sin/cos. A time-space generator squares to +1 and gives a boost with sinh/cosh and rapidity η, where β=tanh η. Boosts relate inertial frames; this does not mean that velocity, translation and all physical motion literally are spatial rotations. Curved spacetime additionally needs frames, spin structures where applicable, and connections."
+      ],
+      [
+        "採用 (+−−−) 號差，令 c=1：時間基底平方為 +1，空間基底平方為 −1。γ 矩陣是滿足克利福德關係的生成元之矩陣表示；抽象生成元和具體矩陣要分開理解。",
+        "空間旋轉的雙向量生成元平方為 −1，所以出現 sin/cos；時空平面生成元平方為 +1，得到 sinh/cosh 與快度 η，β=tanh η。Boost 聯繫慣性系，不能因此說速度、平移與所有運動都只是空間旋轉。彎曲時空還需要標架、適用時的自旋結構及聯絡。"
+      ]
+    ],
+    "equation": "\\gamma_\\mu\\gamma_\\nu+\\gamma_\\nu\\gamma_\\mu=2\\eta_{\\mu\\nu},\\qquad\\beta=\\tanh\\eta",
+    "diagram": "boost",
+    "code": "",
+    "sources": [
+      "sta",
+      "spinors"
+    ]
+  },
+  {
+    "id": "maxwell",
+    "group": "physics",
+    "title": [
+      "One electromagnetic bivector, observer-dependent E and B",
+      "同一個電磁雙向量，不同觀測者的 E 與 B"
+    ],
+    "paragraphs": [
+      [
+        "The electromagnetic field is an antisymmetric spacetime tensor, equivalently a two-form or a bivector after using the metric. Choosing an observer splits its six independent components into electric and magnetic fields. Changing observer mixes these components without changing the underlying field.",
+        "In flat spacetime, natural units and consistent source conventions, Maxwell’s equations can be packaged as ∇F=J. The vector part is ∇·F=J; the trivector part is ∇∧F=0 when there are no magnetic monopoles. Compact notation reorganizes the same physics rather than replacing tensor electrodynamics. Source units and signs must be restored when comparing SI formulas."
+      ],
+      [
+        "電磁場是反對稱時空張量；使用度規後，也可等價表示為二形式或雙向量。選定觀測者，六個獨立分量分成電場與磁場。更換觀測者會混合這些分量，但底層電磁場沒有因此改變。",
+        "在平直時空、自然單位與一致的源項約定下，麥克斯韋方程可合寫為 ∇F=J：向量部分是 ∇·F=J，沒有磁單極時三向量部分是 ∇∧F=0。這是相同物理的重新編排，不是淘汰張量電動力學。比較 SI 公式時，必須補回源項單位與符號。"
+      ]
+    ],
+    "equation": "\\nabla F=\\nabla\\cdot F+\\nabla\\wedge F=J",
+    "diagram": "wave",
+    "code": "",
+    "sources": [
+      "sta"
+    ]
+  },
+  {
+    "id": "light",
+    "group": "physics",
+    "title": [
+      "A plane wave as a null bivector",
+      "平面光波：零範雙向量"
+    ],
+    "paragraphs": [
+      [
+        "For an ideal vacuum plane wave, E·B=0 and |E|=c|B|, so both electromagnetic invariants vanish. In c=1 units a real plane-wave field can be written F=k∧a, with nonzero null k, k·a=0 and a spacelike polarization-amplitude vector a. Then F²=0 although F itself is not zero.",
+        "Here null means zero Lorentz norm, not the zero vector. The propagation null line lies in the kernel of F; it need not be the entire kernel. Linear polarization is shown first, with circular polarization as a selectable transverse rotation. These are classical field diagrams, not a literal photon trajectory or a photon rest frame. A general superposition need not remain null."
+      ],
+      [
+        "理想真空平面波滿足 E·B=0、|E|=c|B|，所以兩個電磁不變量都為零。取 c=1，實平面波場可寫成 F=k∧a，其中 k 是非零零範向量，k·a=0，a 是類空的極化振幅向量。此時 F²=0，但 F 本身不是零。",
+        "Null 是洛侖茲範數為零，不是零向量。傳播的零範直線位於 F 的核中，不代表它就是整個核。圖先展示線偏振，也可切換成橫向旋轉的圓偏振。這是經典場示意，不是光子的實體軌跡，也不存在光子的靜止參考系。一般疊加場不一定仍是零範場。"
+      ]
+    ],
+    "equation": "F=k\\wedge a,\\quad k^2=0,\\quad k\\cdot a=0,\\qquad F^2=0",
+    "diagram": "wave",
+    "code": "",
+    "sources": [
+      "sta",
+      "null"
+    ]
+  },
+  {
+    "id": "connections",
+    "group": "physics",
+    "title": [
+      "Connections and geometric phase",
+      "聯絡與幾何相位"
+    ],
+    "paragraphs": [
+      [
+        "Rotors tell us how to transform a frame at one point. A connection tells us how to compare frames or internal phases at neighbouring points. Curvature measures the infinitesimal failure of parallel transport around a loop to return unchanged. Spin connections let us differentiate spinors on curved backgrounds.",
+        "Electromagnetic U(1) phase and spacetime Spin(1,3) rotations act on different structures. Both admit geometric language, but identifying them requires a specific additional model. In the Aharonov–Bohm experiment, loop holonomy can be nontrivial even where local field strength vanishes along both paths. Fixed-gauge Aμ is a spacetime one-form; gauge changes have the inhomogeneous term."
+      ],
+      [
+        "轉子說明一點上的標架如何變換，聯絡則說明相鄰位置的標架或內部相位如何比較。曲率描述繞微小迴路平行移動後，無法原樣返回的程度。自旋聯絡讓彎曲背景上的旋量能被微分。",
+        "電磁 U(1) 相位與時空 Spin(1,3) 旋轉作用在不同結構上。兩者都有幾何語言，但要把它們認定為同一件事，必須另加具體模型。AB 實驗中，即使兩條路徑的局域場強為零，迴路 holonomy 仍可能非平凡。固定規範下 Aμ 是時空一形式，非齊次項出現在規範變換中。"
+      ]
+    ],
+    "equation": "W(C)=\\exp\\!\\left(\\frac{iq}{\\hbar}\\oint_C A\\right)",
+    "diagram": "holonomy",
+    "code": "",
+    "sources": [
+      "gauge"
+    ]
+  },
+  {
+    "id": "cpt",
+    "group": "physics",
+    "title": [
+      "CPT, chirality and the limits of geometric analogies",
+      "CPT、手徵性與幾何比喻的邊界"
+    ],
+    "paragraphs": [
+      [
+        "Complexified Lorentz transformations appear in proofs of the CPT theorem, but CPT is not simply an ordinary 180° turn. The theorem relies on assumptions including locality, Lorentz covariance and the quantum-field-theoretic framework. Charge conjugation acts on fields and charges; time reversal is antiunitary.",
+        "Chiral projectors split left- and right-chiral components; they do not derive the Standard Model’s asymmetric weak couplings on their own. The weak interaction couples to left-chiral fermion doublets and their antiparticle counterparts. Kaluza–Klein charge-as-extra-dimensional-momentum and Spin(10) unification are model frameworks, not experimentally established explanations of every particle property."
+      ],
+      [
+        "CPT 定理的證明會使用複化洛侖茲變換，但 CPT 不能簡化成普通的 180° 轉身。它依賴局域性、洛侖茲協變性與量子場論框架等假設。電荷共軛作用在場與電荷上；時間反演是反酉操作。",
+        "手徵投影算子能分解左右手徵分量，但不會單獨推導出標準模型的不對稱弱耦合。弱作用耦合左手徵費米子雙重態及相應反粒子。Kaluza–Klein 的額外維動量詮釋電荷、Spin(10) 統一等都是模型框架，不是已由實驗確立的萬用解釋。"
+      ]
+    ],
+    "equation": "P_L=\\frac{1-\\gamma^5}{2},\\qquad P_R=\\frac{1+\\gamma^5}{2}",
+    "diagram": "relations",
+    "code": "",
+    "sources": [
+      "cpt"
+    ]
+  },
+  {
+    "id": "basis-code",
+    "group": "implementation",
+    "title": [
+      "Encode blades with bit masks",
+      "以位元遮罩編碼基底"
+    ],
+    "paragraphs": [
+      [
+        "A coefficient array becomes geometric only after we attach a basis, metric and transformation law. Bit masks make each basis blade explicit: 0 is the scalar, 1 is e₁, 2 is e₂ and 3 is e₁₂. XOR finds the output blade; swap parity and repeated basis vectors determine the sign and metric factor.",
+        "This educational kernel works for small diagonal signatures, including a zero metric entry. It is deliberately dense and not a production GPU implementation. Fix the convention before optimizing: lexicographic and bit-mask coefficient orderings are different."
+      ],
+      [
+        "數值陣列只有加上基底、度規與變換規則，才具有指定的幾何意義。位元遮罩讓基底清楚可見：0 是純量，1 是 e₁，2 是 e₂，3 是 e₁₂。XOR 決定輸出基底，交換次數與重複向量決定符號及度規因子。",
+        "這個教學核心適用小維度的對角號差，也接受零度規項。它刻意使用密集迴圈，不是生產環境的 GPU 實作。最佳化以前，先固定分量順序；字典序和位元遮罩序不同。"
+      ]
+    ],
+    "equation": "e_i e_j=-e_j e_i\\ (i\\ne j),\\qquad e_i^2=g_{ii}",
+    "diagram": "grades",
+    "code": "def blade_product(a, b, metric):\n    sign = 1\n    for i, square in enumerate(metric):\n        if a & (1 << i):\n            for j in range(i):\n                if b & (1 << j):\n                    sign = -sign\n            if b & (1 << i):\n                sign *= square\n    return a ^ b, sign\n",
+    "sources": []
+  },
+  {
+    "id": "gp-code",
+    "group": "implementation",
+    "title": [
+      "Implement the geometric product",
+      "實作幾何積"
+    ],
+    "paragraphs": [
+      [
+        "The bilinear product accumulates every pair of basis coefficients into its output blade. Changing the signature changes repeated-basis squares, not the anticommutation rule for distinct orthogonal vectors. Verify e₁e₂=−e₂e₁, e₁₂²=−1 and associativity on dense examples.",
+        "This JavaScript algebra also drives the rotor diagram on this site. The tests use Euclidean, Lorentzian and degenerate metrics, so an attractive animation cannot silently conceal an incorrect multiplication table."
+      ],
+      [
+        "雙線性乘法把每一對基底分量累加到輸出分量。改變號差會改變重複基底的平方，但不會改變不同正交基向量的反對易規則。先驗證 e₁e₂=−e₂e₁、e₁₂²=−1，再檢查密集多重向量的結合律。",
+        "網站上的轉子圖也使用同一套 JavaScript 代數。測試涵蓋歐氏、洛侖茲及退化度規，讓漂亮動畫背後的乘法表也能被檢驗。"
+      ]
+    ],
+    "equation": "",
+    "diagram": "product",
+    "code": "def gp(a, b, metric=(1, 1, 1)):\n    size = 1 << len(metric)\n    assert len(a) == len(b) == size\n    out = [0.0] * size\n    for i, ai in enumerate(a):\n        for j, bj in enumerate(b):\n            k, sign = blade_product(i, j, metric)\n            out[k] += sign * ai * bj\n    return out\n\n# Bit-mask order: 1, e1, e2, e12, e3, e13, e23, e123\n",
+    "sources": []
+  },
+  {
+    "id": "rotor-code",
+    "group": "implementation",
+    "title": [
+      "Reverse, normalize, rotate",
+      "反轉、正規化、旋轉"
+    ],
+    "paragraphs": [
+      [
+        "Reversion reverses the order of basis factors. On grade k its sign is (−1)^(k(k−1)/2). It is not an arbitrary inverse: for a unit rotor, R times its reverse equals one, so its reverse is its inverse.",
+        "Compare a rotated e₁ with e₂ at 90°, test length preservation at several angles, and check that R(2π)=−1 while the rotated vector returns. A general multivector may be noninvertible; in indefinite signatures even a nonzero vector can be null."
+      ],
+      [
+        "反轉把基向量乘法次序倒過來，第 k 階的符號是 (−1)^(k(k−1)/2)。反轉不是任意元素的反元素；對單位轉子，R 與其反轉的乘積為一，所以兩者才互為反元素。",
+        "先驗證 e₁ 轉 90° 得到 e₂，再檢查不同角度的長度保持，以及 R(2π)=−1 但向量返回原樣。一般多重向量不保證可逆；不定號差下，非零向量也可能是零範。"
+      ]
+    ],
+    "equation": "\\widetilde{\\langle A\\rangle_k}=(-1)^{k(k-1)/2}\\langle A\\rangle_k",
+    "diagram": "rotor",
+    "code": "from math import cos, sin, pi\n\ndef reverse(a):\n    return [x * (-1) ** (i.bit_count() * (i.bit_count()-1) // 2)\n            for i, x in enumerate(a)]\n\ndef rotor(theta):\n    return [cos(theta/2), 0, 0, -sin(theta/2), 0, 0, 0, 0]\n\nR = rotor(pi/2)\ne1 = [0, 1, 0, 0, 0, 0, 0, 0]\nv = gp(gp(R, e1), reverse(R))\n# v is e2, up to floating-point rounding\n",
+    "sources": []
+  },
+  {
+    "id": "null-code",
+    "group": "implementation",
+    "title": [
+      "Check a null electromagnetic field",
+      "檢查零範電磁場"
+    ],
+    "paragraphs": [
+      [
+        "Use signature (+−−−) and c=1. Let k=γ₀+γ₃ and a=γ₁. Their inner product vanishes, so their geometric product is their wedge product. The resulting nonzero bivector squares to zero.",
+        "This is an algebraic check of a plane-wave field at a point. It does not itself solve Maxwell’s differential equations: an appropriate amplitude and phase dependence must also satisfy the field equations."
+      ],
+      [
+        "採用 (+−−−) 與 c=1，令 k=γ₀+γ₃、a=γ₁。它們內積為零，因此幾何積就是外積，得到一個非零但平方為零的雙向量。",
+        "這是在一點上檢查平面波場的代數性質，並非已解出麥克斯韋微分方程；振幅與相位的時空依賴仍須滿足場方程。"
+      ]
+    ],
+    "equation": "F^2=(k\\cdot a)^2-k^2a^2=0",
+    "diagram": "wave",
+    "code": "metric = (1, -1, -1, -1)\nk, a = [0.0]*16, [0.0]*16\nk[1], k[8], a[2] = 1, 1, 1  # gamma0 + gamma3; gamma1\nF = gp(k, a, metric)\nassert any(abs(x) > 0 for x in F)\nassert all(abs(x) < 1e-12 for x in gp(F, F, metric))\n",
+    "sources": []
+  },
+  {
+    "id": "equivariance",
+    "group": "applications",
+    "title": [
+      "Equivariance is a design constraint",
+      "等變性是設計約束"
+    ],
+    "paragraphs": [
+      [
+        "A geometric representation does not automatically make a network equivariant. Every linear map, nonlinearity, normalization and attention operation must respect the chosen group action. Multiplying by a learned fixed vector W generally breaks rotation equivariance if W is not transformed appropriately.",
+        "For a simple equivariant vector map, scale by a learned function of the invariant squared norm. Test f(RxR̃)=Rf(x)R̃ on unseen rotations, rather than expecting an array type or a Clifford product alone to guarantee it. Lorentz-equivariant models require the same discipline with the appropriate signature and representation."
+      ],
+      [
+        "使用幾何表示，不會自動讓神經網絡等變。每個線性映射、非線性、正規化與注意力操作，都必須尊重選定的群作用。若學到的固定向量 W 沒有一起變換，單純左乘 W 通常會破壞旋轉等變性。",
+        "一個簡單的等變向量映射，是用長度平方這個不變量的函數來縮放向量。在未見過的旋轉上檢查 f(RxR̃)=Rf(x)R̃，不要期待陣列型別或幾何積本身保證一切。洛侖茲等變模型也要在正確號差及表示下逐層檢查。"
+      ]
+    ],
+    "equation": "f(\\rho(g)x)=\\rho(g)f(x)",
+    "diagram": "equivariance",
+    "code": "import torch\n\ndef equivariant_scale(x):\n    norm2 = (x * x).sum(dim=-1, keepdim=True)\n    return torch.sigmoid(norm2) * x\n\n# A 90-degree rotation, with vectors stored as rows.\nx = torch.tensor([[1., 2., 0.], [-3., 1., 2.]])\nQ = torch.tensor([[0., -1., 0.], [1., 0., 0.], [0., 0., 1.]])\ny1 = equivariant_scale(x @ Q.T)\ny2 = equivariant_scale(x) @ Q.T\nassert torch.allclose(y1, y2, atol=1e-5)\n",
+    "sources": [
+      "cgnn",
+      "gatr"
+    ]
+  },
+  {
+    "id": "performance",
+    "group": "applications",
+    "title": [
+      "Geometry, storage and computational cost",
+      "幾何、儲存與計算成本"
+    ],
+    "paragraphs": [
+      [
+        "A dense n-dimensional Clifford algebra has 2ⁿ coefficients, so the simple pairwise product costs O(4ⁿ). Low-dimensional structured kernels, sparse grades and matrix representations can reduce practical cost. Modern arrays and GPU matrix kernels can implement these computations; geometry does not require abandoning tensor libraries.",
+        "Benchmark wall time, memory, data efficiency and prediction quality on the same task and hardware. GATr and Clifford-equivariant architectures report benefits on specific benchmarks; that does not establish universal superiority to spherical harmonics, SE(3) models or conventional networks. Algebraic structure also does not automatically enforce conservation laws or solve a PDE."
+      ],
+      [
+        "n 維克利福德代數的密集表示有 2ⁿ 個分量，最直接的兩兩乘法成本為 O(4ⁿ)。低維結構化核心、稀疏階數及矩陣表示可降低實際成本。現代陣列與 GPU 矩陣核心也能實現這些運算，不需要為幾何放棄張量函式庫。",
+        "請在同一任務與硬體上比較時間、記憶體、資料效率及預測品質。GATr 與克利福德等變架構在特定基準有成果，不代表全面勝過球諧、SE(3) 或傳統網絡。代數結構也不會自動保證守恆律或解出偏微分方程。"
+      ]
+    ],
+    "equation": "\\dim\\mathrm{Cl}(p,q)=2^{p+q}",
+    "diagram": "grades",
+    "code": "",
+    "sources": [
+      "gatr",
+      "cgnn",
+      "choose"
+    ]
+  },
+  {
+    "id": "learning",
+    "group": "reading",
+    "title": [
+      "A reading path, not another wall of prerequisites",
+      "一條閱讀路徑，不再堆一堵先修牆"
+    ],
+    "paragraphs": [
+      [
+        "Start with the geometric-product picture, then grades, then a rotor applied to an ordinary vector. Reproduce the 90° example before studying spinors. Next compare circular rotations and boosts, then package Maxwell’s equations into a spacetime bivector.",
+        "For implementation, inspect the coefficient ordering and multiplication tests first. Then explore PGA motors, a geometric transformer, or a Lorentz-equivariant model according to your application. The code panels are read-only explanations; this site needs no Python server or live execution environment."
+      ],
+      [
+        "先看幾何積圖，再學階數，接著把轉子作用在普通向量上。重現 90° 例子以後，再進入旋量。下一步比較圓旋轉與 boost，再把麥克斯韋方程整理成時空雙向量。",
+        "實作時先檢查分量順序與乘法測試，再依應用選擇 PGA motor、幾何 Transformer 或洛侖茲等變模型。程式面板是唯讀解說，網站不需要 Python 伺服器或即時執行環境。"
+      ]
+    ],
+    "equation": "",
+    "diagram": "relations",
+    "code": "",
+    "sources": [
+      "ga",
+      "sta",
+      "pga",
+      "clifford"
+    ]
+  },
+  {
+    "id": "people",
+    "group": "reading",
+    "title": [
+      "The people behind the connections",
+      "把人物與貢獻放回正確位置"
+    ],
+    "paragraphs": [
+      [
+        "Hamilton developed quaternions; Grassmann developed extension and exterior algebra; Clifford combined metric and exterior ideas in his 1878 work. Marcel Grossmann, a different person from Hermann Grassmann, helped Einstein adopt the differential geometry used in relativity.",
+        "Clifford (1845–1879) proposed a geometric view of matter in his 1870 talk, later published as On the Space-Theory of Matter. This was a speculative precursor; it did not contain Einstein’s field equations or a quantitative prediction of gravitational waves. He died of tuberculosis at 33. The Anyhow Stories were written by Lucy Clifford, his wife."
+      ],
+      [
+        "哈密頓發展四元數，格拉斯曼發展擴張與外代數，克利福德在 1878 年的工作結合度規與外代數觀念。協助愛因斯坦採用微分幾何的馬塞爾・格羅斯曼，是另一位人物，不是赫爾曼・格拉斯曼。",
+        "克利福德（1845–1879）在 1870 年演講提出物質的幾何觀，後以《On the Space-Theory of Matter》刊行。這是富啟發性的先驅思考，尚未包含愛因斯坦場方程或引力波的定量預測。他因結核病於 33 歲逝世。《Anyhow Stories》的作者是他的妻子露西・克利福德。"
+      ]
+    ],
+    "equation": "",
+    "diagram": "relations",
+    "code": "",
+    "sources": [
+      "original",
+      "clifford1878",
+      "lucy"
+    ]
+  },
+  {
+    "id": "research",
+    "group": "reading",
+    "title": [
+      "Geometric learning: what the evidence supports",
+      "幾何學習：證據支持到哪裡"
+    ],
+    "paragraphs": [
+      [
+        "Clifford Group Equivariant Neural Networks constructs layers respecting the algebra’s group action. GATr uses a 16-dimensional projective geometric algebra representation inside a transformer. The follow-up comparison of Euclidean, projective and conformal algebras helps explain why the representation is a modeling choice.",
+        "Applications include geometric dynamics, scientific learning and spatial reasoning. Protein geometry, robotics and fluid prediction are promising areas, but specific performance, chirality handling and symmetry claims need a named architecture and benchmark. No reliable researcher head count or inevitable replacement of existing methods follows from these papers. Symbolic binding requires invertible elements and does not by itself establish human-like reasoning."
+      ],
+      [
+        "Clifford Group Equivariant Neural Networks 建構尊重代數群作用的網絡層；GATr 把十六維射影幾何代數表示放進 Transformer。後續比較歐氏、射影與共形代數的論文，說明表示本身也是模型選擇。",
+        "應用包含幾何動力學、科學學習與空間推理。蛋白質幾何、機器人與流體預測都是值得研究的方向，但效能、手性處理與對稱性主張必須對應特定架構和基準。這些論文不提供可靠的研究人數，也不證明既有方法必然被取代。符號綁定還需要可逆元素，單靠代數並不代表獲得人類推理能力。"
+      ]
+    ],
+    "equation": "f(g\\cdot x)=g\\cdot f(x)",
+    "diagram": "equivariance",
+    "code": "",
+    "sources": [
+      "cgnn",
+      "gatr",
+      "choose"
+    ]
+  },
+  {
+    "id": "frontiers",
+    "group": "reading",
+    "title": [
+      "A map of ideas and their status",
+      "觀念地圖與證據狀態"
+    ],
+    "paragraphs": [
+      [
+        "Established mathematics: geometric products, spin representations, the Clifford relation, bundle connections and quantum tensor products. Established physical frameworks: relativistic quantum field theory, electromagnetic gauge symmetry and the CPT theorem within its assumptions.",
+        "Active research: geometric neural architectures, PGA applications and efficient kernels. Model-dependent or speculative: extra dimensions, Kaluza–Klein unification, Spin(10) GUTs and nonassociative quantum-gravity backgrounds. These ideas are not nested supersets of one another. Geometric intuition can guide learning without turning a compelling picture into an experimental claim."
+      ],
+      [
+        "成熟數學：幾何積、自旋表示、克利福德關係、纖維叢聯絡及量子張量積。已建立的物理框架：相對論量子場論、電磁規範對稱與在適用假設下的 CPT 定理。",
+        "持續研究：幾何神經架構、PGA 應用與高效運算核心。依賴模型或仍屬推測：額外維度、Kaluza–Klein 統一、Spin(10) 大統一與非結合量子引力背景。這些不是互相包含的同心圈。幾何直覺可以引導學習，不必把動人的圖像當作已驗證的宇宙定論。"
+      ]
+    ],
+    "equation": "",
+    "diagram": "relations",
+    "code": "",
+    "sources": [
+      "cpt",
+      "gauge"
+    ]
+  }
+]

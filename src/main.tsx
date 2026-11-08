@@ -1,0 +1,10 @@
+import {StrictMode} from "react";
+import {createRoot} from "react-dom/client";
+import App from "./App";
+import "@fontsource/noto-sans/400.css";
+import "@fontsource/noto-sans/600.css";
+import "@fontsource/noto-sans-tc/400.css";
+import "@fontsource/noto-sans-tc/600.css";
+import "@fontsource/source-code-pro/400.css";
+import "./index.css";
+createRoot(document.getElementById("root")!).render(<StrictMode><App/></StrictMode>);
