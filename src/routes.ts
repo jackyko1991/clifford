@@ -10,7 +10,9 @@ export function parseRoute(hash: string): Route {
       const moved=structure[page].find(t=>t.sections.some(s=>s.id===section));
       if(moved)return {page,tab:moved.id,section};
     }
-    return {page:"reading",tab:requested || "",section:null};
+    // Further reading has three tabs; #/reading and the older #/reading/<group> links open Books & papers.
+    if(requested==="labs"||requested==="explorables")return {page:"reading",tab:requested,section:null};
+    return {page:"reading",tab:"books",section:(requested==="books"?section:requested)||null};
   }
   const page = p === "skills" ? "skills" : "concept";
   // Retain bookmarks from both earlier Clifford layouts.

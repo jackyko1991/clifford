@@ -8,7 +8,7 @@ const structure=JSON.parse(readFileSync(new URL("../src/structure.json",import.m
 test("restored Clifford lessons and the reading catalog render with one global footer",async()=>{
  assert.deepEqual(structure.concept.map(t=>t.id),["learning","foundations","algebra","rotations","models","physics","calculus","limitations","history"]);
  assert.deepEqual(structure.skills.map(t=>t.id),["implementation","transformations","geometry-code","validation","applications","performance"]);
- const routes=[...structure.concept.map(t=>`#/concept/${t.id}`),...structure.skills.map(t=>`#/skills/${t.id}`),"#/reading"];
+ const routes=[...structure.concept.map(t=>`#/concept/${t.id}`),...structure.skills.map(t=>`#/skills/${t.id}`),"#/reading","#/reading/books","#/reading/labs","#/reading/explorables"];
  const server=await createServer({server:{middlewareMode:true},appType:"custom"});
  try{
   const {default:App}=await server.ssrLoadModule("/src/App.tsx");
@@ -16,6 +16,11 @@ test("restored Clifford lessons and the reading catalog render with one global f
   assert.deepEqual(parseRoute("#/concept/history/hamilton-grassmann"),{page:"concept",tab:"history",section:"hamilton"});
   assert.deepEqual(parseRoute("#/concept/history/clifford-dirac"),{page:"concept",tab:"history",section:"clifford-product"});
   assert.deepEqual(parseRoute("#/reading/reading/frontiers"),{page:"concept",tab:"limitations",section:"frontiers"});
+  assert.deepEqual(parseRoute("#/reading"),{page:"reading",tab:"books",section:null});
+  assert.deepEqual(parseRoute("#/reading/spacetime"),{page:"reading",tab:"books",section:"spacetime"});
+  assert.deepEqual(parseRoute("#/reading/books/history"),{page:"reading",tab:"books",section:"history"});
+  assert.deepEqual(parseRoute("#/reading/labs"),{page:"reading",tab:"labs",section:null});
+  assert.deepEqual(parseRoute("#/reading/explorables"),{page:"reading",tab:"explorables",section:null});
   assert.deepEqual(parseRoute("#/concept/foundations/welcome"),{page:"concept",tab:"learning",section:"welcome"});
   assert.deepEqual(parseRoute("#/concept/rotations/motors"),{page:"concept",tab:"models",section:"motors"});
   assert.deepEqual(parseRoute("#/skills/implementation/rotor-code"),{page:"skills",tab:"transformations",section:"rotor-code"});
@@ -26,7 +31,12 @@ test("restored Clifford lessons and the reading catalog render with one global f
    assert.ok(html.indexOf('</main>')<html.indexOf('data-testid="site-footer"'),hash);
    assert.ok(html.includes('https://buymeacoffee.com/jackyko1991'),hash);
    assert.ok(html.includes('https://github.com/jackyko1991/clifford/blob/main/LICENSE'),hash);
-   if(hash==="#/reading"){
+   if(hash==="#/reading/labs"){
+    assert.equal([...html.matchAll(/data-testid="series-site"/g)].length,2);
+    assert.ok(html.includes('https://jackyko1991.github.io/formalizer/?lang='+encodeURIComponent(lang)));
+   }
+   if(hash==="#/reading/explorables")assert.ok(html.includes(lang==="en"?"You are here":"你在這裡"));
+   if(hash==="#/reading"||hash==="#/reading/books"){
     assert.ok(html.includes('md:grid-cols-2'));
     assert.equal([...html.matchAll(/data-testid="book-/g)].length,14);
     assert.ok(html.includes('sponsored noopener noreferrer'));
@@ -35,7 +45,7 @@ test("restored Clifford lessons and the reading catalog render with one global f
     assert.ok(html.includes('https://www.amazon.co.uk/s?k=Anyhow+Stories+Moral+and+Otherwise+Lucy+Clifford&amp;tag=tensorizer-21'));
     assert.ok(!html.includes('data-placeholder='));
    }
-   if(hash!=="#/reading"){
+   if(!hash.startsWith("#/reading")){
     const [,page,tab]=hash.split("/");
     const outline=structure[page].find(t=>t.id===tab);
     const cards=JSON.parse(readFileSync(new URL("../src/content.json",import.meta.url),"utf8"));
