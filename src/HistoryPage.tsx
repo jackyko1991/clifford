@@ -96,7 +96,7 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
  </>;
  const cardContent=(c:HistoryEvent,first=false)=>{
   const st=theme[c.part-1],era=historyEras.find(e=>e.id===c.part)!,picture=c.portraits??c.photo;
-  return <section id={c.id} className={`scroll-mt-24 overflow-hidden rounded-xl border bg-white shadow-sm ${active===c.id?"border-violet-300 ring-1 ring-violet-100":"border-gray-200"}`}>
+  return <section id={c.id} className={`scroll-mt-12 overflow-hidden rounded-xl border bg-white shadow-sm ${active===c.id?"border-violet-300 ring-1 ring-violet-100":"border-gray-200"}`}>
         {first&&<div className={`border-b px-4 py-3 ${st.band}`}><p className="text-sm font-semibold">{era.title[l]}</p><p className="mt-1 text-xs opacity-80">{era.subtitle[l]}</p></div>}
         <figure className="border-b border-gray-100 bg-gray-50">
          <div className="flex h-52 items-center justify-center p-3">{picture?<img src={`${import.meta.env.BASE_URL}history/${picture.file}`} alt={c.caption[l]} loading="lazy" decoding="async" className="max-h-full max-w-full rounded object-contain"/>:<HistoryDrawing kind={c.drawing} label={c.caption[l]} l={l}/>}</div>
@@ -120,10 +120,10 @@ export default function HistoryPage({l,section}:{l:number;section:string|null}){
        </section>;
  };
  return <div className="mx-auto flex max-w-6xl gap-8 px-5 pt-6 pb-12" data-testid="history">
-  <nav aria-label={l?"歷史時間軸":"History timeline"} className="sticky top-20 hidden max-h-[calc(100dvh-11rem)] w-60 shrink-0 self-start overflow-y-auto lg:block">{navigation}</nav>
+  <nav aria-label={l?"歷史時間軸":"History timeline"} className="sticky top-6 hidden max-h-[calc(100dvh-8rem)] w-60 shrink-0 self-start overflow-y-auto lg:block">{navigation}</nav>
   <article id="main-content" tabIndex={-1} className="min-w-0 flex-1">
    <header><h1 className="text-3xl font-semibold tracking-tight">{l?"克利福德代數史":"A history of Clifford algebra"}</h1><p className="mt-3 text-sm leading-relaxed text-gray-600">{historyIntro[l]}</p></header>
-   <div className="sticky top-12 z-20 -mx-5 mt-5 border-y border-gray-200 bg-white/95 px-5 py-2 backdrop-blur lg:hidden">
+   <div className="sticky top-0 z-20 -mx-5 mt-5 border-y border-gray-200 bg-white/95 px-5 py-2 backdrop-blur lg:hidden">
     <button aria-expanded={menu} className="flex w-full items-center gap-2 text-left text-sm" onClick={()=>setMenu(v=>!v)}><span className="h-2 w-2 rounded-full bg-violet-600"/><span className="min-w-0 flex-1 truncate">{historyEvents.find(c=>c.id===active)?.title[l]||(l?"歷史時間軸":"History timeline")}</span><span>{menu?"▴":"▾"}</span></button>
     {menu&&<div className="max-h-[60dvh] overflow-y-auto pt-4">{navigation}</div>}
    </div>

@@ -11,7 +11,12 @@ test("restored Clifford lessons and the reading catalog render with one global f
  const routes=[...structure.concept.map(t=>`#/concept/${t.id}`),...structure.skills.map(t=>`#/skills/${t.id}`),"#/reading","#/reading/books","#/reading/labs","#/reading/explorables"];
  const server=await createServer({server:{middlewareMode:true},appType:"custom"});
  try{
-  const {default:App}=await server.ssrLoadModule("/src/App.tsx");
+  const {default:App,subPages}=await server.ssrLoadModule("/src/App.tsx");
+  // No sub-tab row any more: every header page lists its sub-pages in the menu under its tab.
+  for(const page of ["concept","skills"])assert.deepEqual(subPages(page,"en").map(e=>e.id),structure[page].map(t=>t.id));
+  assert.deepEqual(subPages("reading","en").map(e=>e.id),["books","labs","explorables"]);
+  assert.ok(subPages("skills","en").some(e=>e.label.endsWith(" (coming)")),"empty topics keep (coming)");
+  assert.ok(!subPages("concept","en").find(e=>e.id==="algebra").label.endsWith("(coming)"));
   const {parseRoute}=await server.ssrLoadModule("/src/routes.ts");
   assert.deepEqual(parseRoute("#/concept/history/hamilton-grassmann"),{page:"concept",tab:"history",section:"hamilton"});
   assert.deepEqual(parseRoute("#/concept/history/clifford-dirac"),{page:"concept",tab:"history",section:"clifford-product"});
@@ -27,6 +32,8 @@ test("restored Clifford lessons and the reading catalog render with one global f
   for(const lang of ["en","zh-Hant"])for(const hash of routes){
    Object.defineProperty(globalThis,"location",{value:{hash,search:`?lang=${lang}`},configurable:true});
    const html=renderToStaticMarkup(createElement(App));
+   assert.ok(!html.includes('data-testid="page-tabs"'),hash);
+   assert.ok(html.includes(`aria-controls="${hash.split("/")[1]}-subpages"`),hash);
    assert.equal([...html.matchAll(/<footer\b/g)].length,1,hash);
    assert.ok(html.indexOf('</main>')<html.indexOf('data-testid="site-footer"'),hash);
    assert.ok(html.includes('https://buymeacoffee.com/jackyko1991'),hash);

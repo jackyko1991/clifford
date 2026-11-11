@@ -14,7 +14,7 @@ export default function LessonSections({sections,l,startNumber=0}:{sections:Curr
   <p className="mt-4 text-sm leading-relaxed text-gray-700">{section.summary?.[l]}</p>
   <p className="mt-3 text-sm leading-relaxed text-gray-500"><span className="font-medium text-gray-600">{l?"預計圖解：":"Planned visual: "}</span>{section.visual?.[l]}</p>
  </section>;
- return <section key={c.id} id={c.id} data-lesson={c.id} className="scroll-mt-20 rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
+ return <section key={c.id} id={c.id} data-lesson={c.id} className="scroll-mt-6 rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
       <h2 className="flex items-baseline gap-3 text-lg font-semibold"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-600 text-sm text-white">{i+1+startNumber}</span>{c.title[l]}</h2>
       <div className="mt-4 space-y-4 text-sm leading-relaxed text-gray-700">
        <p data-feynman="plain">{c.plain[l]}</p>

@@ -7,7 +7,7 @@ import CodeBlock from "./components/CodeBlock";
 import {geometricProductTex,quarterTurn,quaternionProduct,quaternionUnits,type QuaternionUnit} from "./learningModel";
 const button="rounded-md border border-violet-200 bg-white px-3 py-1.5 text-sm text-violet-800 hover:bg-violet-50 disabled:opacity-40";
 function Card({id,n,title,children}:{id:string;n:number;title:string;children:ReactNode}){
- return <section id={id} data-learning-section={id} data-lesson={id} className="scroll-mt-20 rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
+ return <section id={id} data-learning-section={id} data-lesson={id} className="scroll-mt-6 rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
   <h2 className="flex items-baseline gap-3 text-lg font-semibold"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-600 text-sm text-white">{n}</span>{title}</h2>
   <div className="mt-4 space-y-4 text-sm leading-relaxed text-gray-700">{children}</div>
  </section>;
