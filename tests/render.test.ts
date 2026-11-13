@@ -39,8 +39,9 @@ test("restored Clifford lessons and the reading catalog render with one global f
    assert.ok(html.includes('https://buymeacoffee.com/jackyko1991'),hash);
    assert.ok(html.includes('https://github.com/jackyko1991/clifford/blob/main/LICENSE'),hash);
    if(hash==="#/reading/labs"){
-    assert.equal([...html.matchAll(/data-testid="series-site"/g)].length,2);
+    assert.equal([...html.matchAll(/data-testid="series-site"/g)].length,3);
     assert.ok(html.includes('https://jackyko1991.github.io/formalizer/?lang='+encodeURIComponent(lang)));
+    assert.ok(html.includes('https://jackyko1991.github.io/polyphonizer/?lang='+encodeURIComponent(lang)));
    }
    if(hash==="#/reading/explorables")assert.ok(html.includes(lang==="en"?"You are here":"你在這裡"));
    if(hash==="#/reading"||hash==="#/reading/books"){
